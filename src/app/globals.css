@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-ibm-plex);
+  --font-ui: var(--font-plus-jakarta);
+  --font-logo: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --color-background: var(--dd-color-background);
+  --color-foreground: var(--dd-color-foreground);
+  --color-muted: var(--dd-color-muted);
+  --color-hairline: var(--dd-color-hairline);
+  --color-accent: var(--dd-color-accent);
+  --color-surface: var(--dd-color-surface);
+  --color-inverse: var(--dd-color-inverse);
+  --shadow-cta: var(--dd-shadow-cta);
+}
+
+body {
+  background: var(--dd-color-background);
+  color: var(--dd-color-foreground);
+  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+}
