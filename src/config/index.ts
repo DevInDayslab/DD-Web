@@ -1,5 +1,10 @@
 export { env } from "@/config/env";
-export { fontDisplay, fontSans, fontUi } from "@/config/fonts";
+export { headerLayoutTokens, layoutBaseline } from "@/config/layout";
+export { heroContentLayoutTokens } from "@/config/hero-content";
+export { heroContours } from "@/config/hero-contours";
+export { heroMarqueeLayout, heroMarqueeShadows } from "@/config/hero-marquee";
+export { heroFlanks } from "@/config/hero";
+export { fontDisplay, fontHeadline, fontSans, fontUi } from "@/config/fonts";
 export { navigation, routes } from "@/config/navigation";
 export { site } from "@/config/site";
 export { theme } from "@/config/theme";
