@@ -2,18 +2,20 @@ import Image from "next/image";
 import { heroMarqueeShadows } from "@/config/hero-marquee";
 import type {
   HeroMarqueeContent,
+  HeroMarqueeFlowTileLayout,
   HeroMarqueeLayoutConfig,
   HeroMarqueeTileLayout,
 } from "@/types/hero-marquee";
 
 type HeroLogoMarqueeTileProps = {
-  tile: HeroMarqueeTileLayout;
+  tile: HeroMarqueeTileLayout | HeroMarqueeFlowTileLayout;
   layout: HeroMarqueeLayoutConfig;
   content: HeroMarqueeContent;
+  layoutMode: "absolute" | "flow";
 };
 
 function imageSizePx(
-  tile: HeroMarqueeTileLayout,
+  tile: HeroMarqueeTileLayout | HeroMarqueeFlowTileLayout,
   layout: HeroMarqueeLayoutConfig,
 ): number {
   switch (tile.imageSize) {
@@ -26,23 +28,45 @@ function imageSizePx(
   }
 }
 
-export function HeroLogoMarqueeTile({ tile, layout, content }: HeroLogoMarqueeTileProps) {
+export function HeroLogoMarqueeTile({
+  tile,
+  layout,
+  content,
+  layoutMode,
+}: HeroLogoMarqueeTileProps) {
   const logo = content.logos[tile.logoKey];
   const shadow = heroMarqueeShadows[tile.shadow];
   const imagePx = imageSizePx(tile, layout);
-  const leftPercent = (tile.leftAtBaseline / layout.segmentWidthAtBaseline) * 100;
-  const offsetRatio = tile.offsetYAtBaseline / layout.trackHeightAtBaseline;
+  const isFlow = layoutMode === "flow";
+
+  const absoluteTile = !isFlow ? (tile as HeroMarqueeTileLayout) : null;
+  const leftPercent =
+    absoluteTile !== null
+      ? (absoluteTile.leftAtBaseline / layout.segmentWidthAtBaseline) * 100
+      : 0;
+  const offsetRatio =
+    absoluteTile !== null
+      ? absoluteTile.offsetYAtBaseline / layout.trackHeightAtBaseline
+      : 0;
 
   return (
     <div
-      className="hero-marquee-tile"
-      style={{
-        left: `${leftPercent}%`,
-        top: "50%",
-        width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-        height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-        transform: `translateY(calc(-50% + var(--dd-hero-marquee-track-height) * ${offsetRatio})) rotate(${tile.rotationDeg}deg)`,
-      }}
+      className={isFlow ? "hero-marquee-tile hero-marquee-tile--flow" : "hero-marquee-tile"}
+      style={
+        isFlow
+          ? {
+              width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
+              height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
+              transform: `rotate(${tile.rotationDeg}deg)`,
+            }
+          : {
+              left: `${leftPercent}%`,
+              top: "50%",
+              width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
+              height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
+              transform: `translateY(calc(-50% + var(--dd-hero-marquee-track-height) * ${offsetRatio})) rotate(${tile.rotationDeg}deg)`,
+            }
+      }
     >
       <div
         className="hero-marquee-tile-card"

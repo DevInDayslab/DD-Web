@@ -12,10 +12,17 @@ export type {
   HeroMarqueeLogoAsset,
   HeroMarqueeLogoKey,
   HeroMarqueeShadowVariant,
+  HeroMarqueeFlowTileLayout,
+  HeroMarqueeMobileConfig,
   HeroMarqueeTileLayout,
   HeroMarqueeTileSize,
 } from "@/types/hero-marquee";
 export type { HeroFlankPanel, HeroFlanksConfig } from "@/types/hero";
+export type {
+  ScalabilityLetterTile,
+  ScalabilitySectionContent,
+  ScalabilitySectionLayoutConfig,
+} from "@/types/scalability-section";
 export type { Theme, ThemeColors, ThemeShadows } from "@/types/theme";
 export type {
   AnalyticsConfig,

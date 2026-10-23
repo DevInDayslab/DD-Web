@@ -1,3 +1,4 @@
+import { heroMobileLayout } from "@/config/hero-mobile";
 import type { HeroMarqueeLayoutConfig } from "@/types/hero-marquee";
 
 export const heroMarqueeLayout = {
@@ -97,6 +98,42 @@ export const heroMarqueeLayout = {
       shadow: "featured",
     },
   ],
+  mobile: {
+    breakpointMaxPx: heroMobileLayout.breakpointMaxPx,
+    tileGapPx: heroMobileLayout.tokens.marqueeTileGapPx,
+    scrollSpeedPxPerSecond: heroMobileLayout.tokens.marqueeScrollSpeedPxPerSecond,
+    tiles: [
+      {
+        id: "mobile-entry",
+        logoKey: "entryTicket",
+        rotationDeg: -4,
+        tileSize: "standard",
+        shadow: "featured",
+      },
+      {
+        id: "mobile-myndfe",
+        logoKey: "myndfeLeaf",
+        rotationDeg: -2,
+        tileSize: "standard",
+        shadow: "standard",
+      },
+      {
+        id: "mobile-invigil",
+        logoKey: "invigil",
+        rotationDeg: 2,
+        tileSize: "standard",
+        shadow: "standard",
+      },
+      {
+        id: "mobile-intelligence",
+        logoKey: "intelligencePlatform",
+        rotationDeg: 4,
+        tileSize: "standard",
+        shadow: "standard",
+        imageSize: "intelligence",
+      },
+    ],
+  },
 } as const satisfies HeroMarqueeLayoutConfig;
 
 export const heroMarqueeShadows = {

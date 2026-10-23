@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useMotionValue } from "motion/react";
 import { HeroLogoMarqueeTile } from "@/components/hero-logo-marquee-tile";
 import { normalizeMarqueeMotionValue } from "@/lib/hero-marquee-motion";
+import { heroMobileLayoutMediaQuery } from "@/lib/hero-mobile-style";
+import { useMediaQuery } from "@/lib/use-media-query";
 import type { HeroMarqueeContent, HeroMarqueeLayoutConfig } from "@/types/hero-marquee";
 
 type HeroLogoMarqueeProps = {
@@ -18,6 +20,9 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   const pausedRef = useRef(false);
   const draggingRef = useRef(false);
   const hoverRef = useRef(false);
+  const isCompact = useMediaQuery(heroMobileLayoutMediaQuery());
+  const tiles = isCompact ? layout.mobile.tiles : layout.tiles;
+  const layoutMode = isCompact ? "flow" : "absolute";
 
   const measureSegment = useCallback(() => {
     const width = segmentRef.current?.getBoundingClientRect().width ?? 0;
@@ -31,7 +36,11 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
       observer.observe(segmentRef.current);
     }
     return () => observer.disconnect();
-  }, [measureSegment]);
+  }, [measureSegment, isCompact]);
+
+  useEffect(() => {
+    x.set(0);
+  }, [isCompact, x]);
 
   useEffect(() => {
     if (segmentWidth <= 0) {
@@ -46,9 +55,10 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
       last = now;
 
       if (!pausedRef.current && !draggingRef.current) {
-        const speedScale = segmentWidth / layout.segmentWidthAtBaseline;
-        const speed =
-          layout.scrollSpeedPxPerSecondAtBaseline * Math.max(speedScale, 0.35);
+        const speed = isCompact
+          ? layout.mobile.scrollSpeedPxPerSecond
+          : layout.scrollSpeedPxPerSecondAtBaseline *
+            (segmentWidth / layout.segmentWidthAtBaseline);
         let next = x.get() - speed * deltaSeconds;
 
         if (next <= -segmentWidth) {
@@ -63,7 +73,14 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [layout.segmentWidthAtBaseline, layout.scrollSpeedPxPerSecondAtBaseline, segmentWidth, x]);
+  }, [
+    isCompact,
+    layout.mobile.scrollSpeedPxPerSecond,
+    layout.scrollSpeedPxPerSecondAtBaseline,
+    layout.segmentWidthAtBaseline,
+    segmentWidth,
+    x,
+  ]);
 
   const handlePointerEnter = () => {
     hoverRef.current = true;
@@ -93,15 +110,18 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   const renderSegment = (keyPrefix: string) => (
     <div
       ref={keyPrefix === "a" ? segmentRef : undefined}
-      className="hero-marquee-segment"
+      className={
+        isCompact ? "hero-marquee-segment hero-marquee-segment--flow" : "hero-marquee-segment"
+      }
       aria-hidden={keyPrefix === "b" ? true : undefined}
     >
-      {layout.tiles.map((tile) => (
+      {tiles.map((tile) => (
         <HeroLogoMarqueeTile
           key={`${keyPrefix}-${tile.id}`}
           tile={tile}
           layout={layout}
           content={content}
+          layoutMode={layoutMode}
         />
       ))}
     </div>
@@ -128,8 +148,8 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
             {renderSegment("b")}
           </motion.div>
         </div>
-        <div className="hero-marquee-fade hero-marquee-fade-left" aria-hidden />
-        <div className="hero-marquee-fade hero-marquee-fade-right" aria-hidden />
+        <div className="hero-marquee-edge-soft hero-marquee-edge-soft-left" aria-hidden />
+        <div className="hero-marquee-edge-soft hero-marquee-edge-soft-right" aria-hidden />
       </div>
     </div>
   );

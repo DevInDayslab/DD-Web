@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { SiteLayoutStyle } from "@/components/site-layout-style";
 import { ThemeStyle } from "@/components/theme-style";
-import { fontDisplay, fontHeadline, fontSans, fontUi } from "@/config/fonts";
+import { fontDisplay, fontHeadline, fontLetterTiles, fontSans, fontUi } from "@/config/fonts";
 import { site } from "@/config/site";
 import { theme } from "@/config/theme";
 import { faqItems } from "@/content/faq";
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={site.locale}
-      className={`${fontDisplay.variable} ${fontHeadline.variable} ${fontSans.variable} ${fontUi.variable}`}
+      className={`${fontDisplay.variable} ${fontHeadline.variable} ${fontLetterTiles.variable} ${fontSans.variable} ${fontUi.variable}`}
     >
       <body className="bg-background font-sans text-foreground antialiased">
         <ThemeStyle theme={theme} />

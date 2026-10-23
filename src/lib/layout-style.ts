@@ -1,5 +1,6 @@
 import { heroContentLayoutTokens } from "@/config/hero-content";
 import { heroContours } from "@/config/hero-contours";
+import { heroEdgeFeather } from "@/config/hero-edge-feather";
 import { heroMarqueeLayout } from "@/config/hero-marquee";
 import { heroFlanks } from "@/config/hero";
 import { headerLayoutTokens, layoutBaseline } from "@/config/layout";
@@ -284,8 +285,19 @@ export function layoutToCssVars(): Record<string, string> {
     "--dd-hero-marquee-fade-color": heroMarqueeLayout.fadeColor,
     "--dd-hero-marquee-fade-blur": `${heroMarqueeLayout.fadeBlurPx}px`,
     "--dd-hero-marquee-opacity": String(heroMarqueeLayout.outerOpacity),
-    "--dd-hero-marquee-mask-opaque-start": `${heroMarqueeLayout.maskOpaqueStartPercent}%`,
-    "--dd-hero-marquee-mask-opaque-end": `${heroMarqueeLayout.maskOpaqueEndPercent}%`,
+    "--dd-hero-marquee-viewport-mask-fade-start": `${heroEdgeFeather.marquee.viewportMaskFadeStartPercent}%`,
+    "--dd-hero-marquee-viewport-mask-opaque-start": `${heroEdgeFeather.marquee.viewportMaskOpaqueStartPercent}%`,
+    "--dd-hero-marquee-viewport-mask-opaque-end": `${heroEdgeFeather.marquee.viewportMaskOpaqueEndPercent}%`,
+    "--dd-hero-marquee-viewport-mask-fade-end": `${heroEdgeFeather.marquee.viewportMaskFadeEndPercent}%`,
+    "--dd-hero-marquee-edge-feather-width": fluidLength(
+      heroEdgeFeather.marquee.edgeOverlayWidthAtBaseline,
+      referenceWidthPx,
+      { minPx: 64, maxPx: heroEdgeFeather.marquee.edgeOverlayWidthAtBaseline },
+    ),
+    "--dd-hero-marquee-edge-blur": `${heroEdgeFeather.marquee.edgeBlurPx}px`,
+    "--dd-hero-marquee-edge-tint-strength": String(
+      heroEdgeFeather.marquee.edgeTintStrength,
+    ),
     ...contourRadiusVars,
   };
 }

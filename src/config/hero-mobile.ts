@@ -1,0 +1,43 @@
+/**
+ * Hero layout overrides applied below `breakpointMaxPx` only.
+ * Desktop at 1280px baseline is unchanged (:root fluid vars).
+ */
+export const heroMobileLayout = {
+  breakpointMaxPx: 767,
+  tokens: {
+    stageInsetPx: 20,
+    stageHeightPx: 700,
+    headlineTopPx: 52,
+    headlineSizePx: 32,
+    headlineLineHeightPx: 38,
+    headlineLetterSpacingPx: -0.84,
+    headlineMaxWidthPx: 340,
+    subtitleTopPx: 212,
+    subtitleMaxWidthPx: 340,
+    subtitleSizePx: 15,
+    subtitleLineHeightPx: 24,
+    subtitlePaddingTopPx: 8,
+    actionsTopPx: 400,
+    actionsGapPx: 10,
+    actionsMaxWidthPx: 340,
+    actionPaddingXPx: 18,
+    actionPaddingYPx: 12,
+    actionFontSizePx: 11,
+    actionHeightPx: 42,
+    marqueeTopPx: 468,
+    marqueeHeightPx: 160,
+    marqueeViewportPaddingYPx: 28,
+    marqueeFadeWidthPx: 56,
+    marqueeMaskOpaqueStartPercent: 8,
+    marqueeMaskOpaqueEndPercent: 92,
+    marqueeTileSizeStandardPx: 64,
+    marqueeImageSizeStandardPx: 44,
+    marqueeImageSizeIntelligencePx: 40,
+    marqueeTilePaddingPx: 8,
+    marqueeTileGapPx: 8,
+    marqueeScrollSpeedPxPerSecond: 28,
+    contourWidthPx: 300,
+    contourHeightPx: 220,
+    contourTopPx: 24,
+  },
+} as const;

@@ -9,15 +9,27 @@ export type HeroMarqueeLogoKey =
   | "intelligencePlatform"
   | "dater";
 
-export type HeroMarqueeTileLayout = {
+export type HeroMarqueeTileBase = {
   id: string;
   logoKey: HeroMarqueeLogoKey;
-  leftAtBaseline: number;
-  offsetYAtBaseline: number;
   rotationDeg: number;
   tileSize: HeroMarqueeTileSize;
   shadow: HeroMarqueeShadowVariant;
   imageSize?: "standard" | "intelligence" | "dater";
+};
+
+export type HeroMarqueeTileLayout = HeroMarqueeTileBase & {
+  leftAtBaseline: number;
+  offsetYAtBaseline: number;
+};
+
+export type HeroMarqueeFlowTileLayout = HeroMarqueeTileBase;
+
+export type HeroMarqueeMobileConfig = {
+  breakpointMaxPx: number;
+  tileGapPx: number;
+  scrollSpeedPxPerSecond: number;
+  tiles: readonly HeroMarqueeFlowTileLayout[];
 };
 
 export type HeroMarqueeLayoutConfig = {
@@ -51,6 +63,7 @@ export type HeroMarqueeLayoutConfig = {
   imageSizeDaterAtBaseline: number;
   imageRadiusAtBaseline: number;
   tiles: readonly HeroMarqueeTileLayout[];
+  mobile: HeroMarqueeMobileConfig;
 };
 
 export type HeroMarqueeLogoAsset = {
