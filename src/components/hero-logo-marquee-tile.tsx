@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { heroMarqueeShadows } from "@/config/hero-marquee";
+import type { MarqueeTileEdgePresentation } from "@/lib/hero-marquee-edge-presentation";
 import type {
   HeroMarqueeContent,
   HeroMarqueeFlowTileLayout,
@@ -12,6 +13,8 @@ type HeroLogoMarqueeTileProps = {
   layout: HeroMarqueeLayoutConfig;
   content: HeroMarqueeContent;
   layoutMode: "absolute" | "flow";
+  presentationKey: string;
+  edgePresentation?: MarqueeTileEdgePresentation;
 };
 
 function imageSizePx(
@@ -33,6 +36,8 @@ export function HeroLogoMarqueeTile({
   layout,
   content,
   layoutMode,
+  presentationKey,
+  edgePresentation,
 }: HeroLogoMarqueeTileProps) {
   const logo = content.logos[tile.logoKey];
   const shadow = heroMarqueeShadows[tile.shadow];
@@ -48,23 +53,28 @@ export function HeroLogoMarqueeTile({
     absoluteTile !== null
       ? absoluteTile.offsetYAtBaseline / layout.trackHeightAtBaseline
       : 0;
+  const edgeScale = edgePresentation?.scale ?? 1;
+  const edgeOpacity = edgePresentation?.opacity ?? 1;
 
   return (
     <div
       className={isFlow ? "hero-marquee-tile hero-marquee-tile--flow" : "hero-marquee-tile"}
+      data-hero-marquee-tile={presentationKey}
       style={
         isFlow
           ? {
               width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
               height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-              transform: `rotate(${tile.rotationDeg}deg)`,
+              opacity: edgeOpacity,
+              transform: `rotate(${tile.rotationDeg}deg) scale(${edgeScale})`,
             }
           : {
               left: `${leftPercent}%`,
               top: "50%",
               width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
               height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-              transform: `translateY(calc(-50% + var(--dd-hero-marquee-track-height) * ${offsetRatio})) rotate(${tile.rotationDeg}deg)`,
+              opacity: edgeOpacity,
+              transform: `translateY(calc(-50% + var(--dd-hero-marquee-track-height) * ${offsetRatio})) rotate(${tile.rotationDeg}deg) scale(${edgeScale})`,
             }
       }
     >

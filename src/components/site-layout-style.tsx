@@ -4,13 +4,33 @@ import { heroMobileLayoutCssBlock } from "@/lib/hero-mobile-style";
 import { layoutToCssVars } from "@/lib/layout-style";
 import { scalabilityMobileLayoutCssBlock } from "@/lib/scalability-mobile-style";
 import { scalabilityLayoutToCssVars } from "@/lib/scalability-layout-style";
+import {
+  scalabilityPanelLayoutCssBlock,
+  scalabilityPanelLayoutToCssVars,
+} from "@/lib/scalability-panel-layout-style";
+import { chatgptCtaSectionLayoutToCssVars } from "@/lib/chatgpt-cta-section-layout-style";
+import { founderSectionLayoutToCssVars } from "@/lib/founder-section-layout-style";
+import { pricingSectionLayoutToCssVars } from "@/lib/pricing-section-layout-style";
+import { testimonialsSectionLayoutToCssVars } from "@/lib/testimonials-section-layout-style";
+import {
+  toolsSectionLayoutCssBlock,
+  toolsSectionLayoutToCssVars,
+} from "@/lib/tools-section-layout-style";
+import { workSectionLayoutToCssVars } from "@/lib/work-section-layout-style";
 
 export function SiteLayoutStyle() {
   const rootVars = serializeCssCustomProperties({
     ...layoutToCssVars(),
     ...scalabilityLayoutToCssVars(),
+    ...scalabilityPanelLayoutToCssVars(),
+    ...workSectionLayoutToCssVars(),
+    ...toolsSectionLayoutToCssVars(),
+    ...testimonialsSectionLayoutToCssVars(),
+    ...chatgptCtaSectionLayoutToCssVars(),
+    ...founderSectionLayoutToCssVars(),
+    ...pricingSectionLayoutToCssVars(),
   });
-  const css = `:root{${rootVars}}.hero-flank{background:${heroFlanks.panel.gradient}}${heroMobileLayoutCssBlock()}${scalabilityMobileLayoutCssBlock()}`;
+  const css = `:root{${rootVars}}.hero-flank{background:${heroFlanks.panel.gradient}}${heroMobileLayoutCssBlock()}${scalabilityMobileLayoutCssBlock()}${scalabilityPanelLayoutCssBlock()}${toolsSectionLayoutCssBlock()}`;
 
   return <style dangerouslySetInnerHTML={{ __html: css }} />;
 }

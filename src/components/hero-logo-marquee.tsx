@@ -3,10 +3,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useMotionValue } from "motion/react";
 import { HeroLogoMarqueeTile } from "@/components/hero-logo-marquee-tile";
+import { heroEdgeFeather } from "@/config/hero-edge-feather";
+import {
+  marqueeTileEdgePresentation,
+  type MarqueeTileEdgePresentation,
+} from "@/lib/hero-marquee-edge-presentation";
 import { normalizeMarqueeMotionValue } from "@/lib/hero-marquee-motion";
 import { heroMobileLayoutMediaQuery } from "@/lib/hero-mobile-style";
 import { useMediaQuery } from "@/lib/use-media-query";
 import type { HeroMarqueeContent, HeroMarqueeLayoutConfig } from "@/types/hero-marquee";
+
+const showHeroMarqueeEdgeOverlays =
+  heroEdgeFeather.marquee.edgeTintStrength > 0 && heroEdgeFeather.marquee.edgeBlurPx > 0;
 
 type HeroLogoMarqueeProps = {
   layout: HeroMarqueeLayoutConfig;
@@ -15,8 +23,12 @@ type HeroLogoMarqueeProps = {
 
 export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   const x = useMotionValue(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const segmentRef = useRef<HTMLDivElement>(null);
   const [segmentWidth, setSegmentWidth] = useState(0);
+  const [tilePresentations, setTilePresentations] = useState<
+    Record<string, MarqueeTileEdgePresentation>
+  >({});
   const pausedRef = useRef(false);
   const draggingRef = useRef(false);
   const hoverRef = useRef(false);
@@ -41,6 +53,37 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   useEffect(() => {
     x.set(0);
   }, [isCompact, x]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) {
+      return;
+    }
+
+    let frame = 0;
+
+    const updateTilePresentations = () => {
+      const viewportRect = viewport.getBoundingClientRect();
+      const next: Record<string, MarqueeTileEdgePresentation> = {};
+
+      viewport.querySelectorAll<HTMLElement>("[data-hero-marquee-tile]").forEach((element) => {
+        const key = element.dataset.heroMarqueeTile;
+        if (!key) {
+          return;
+        }
+
+        const tileRect = element.getBoundingClientRect();
+        const centerX = tileRect.left + tileRect.width / 2 - viewportRect.left;
+        next[key] = marqueeTileEdgePresentation(centerX, viewportRect.width);
+      });
+
+      setTilePresentations(next);
+      frame = requestAnimationFrame(updateTilePresentations);
+    };
+
+    frame = requestAnimationFrame(updateTilePresentations);
+    return () => cancelAnimationFrame(frame);
+  }, [isCompact, segmentWidth]);
 
   useEffect(() => {
     if (segmentWidth <= 0) {
@@ -115,15 +158,20 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
       }
       aria-hidden={keyPrefix === "b" ? true : undefined}
     >
-      {tiles.map((tile) => (
-        <HeroLogoMarqueeTile
-          key={`${keyPrefix}-${tile.id}`}
-          tile={tile}
-          layout={layout}
-          content={content}
-          layoutMode={layoutMode}
-        />
-      ))}
+      {tiles.map((tile) => {
+        const presentationKey = `${keyPrefix}-${tile.id}`;
+        return (
+          <HeroLogoMarqueeTile
+            key={presentationKey}
+            tile={tile}
+            layout={layout}
+            content={content}
+            layoutMode={layoutMode}
+            presentationKey={presentationKey}
+            edgePresentation={tilePresentations[presentationKey]}
+          />
+        );
+      })}
     </div>
   );
 
@@ -131,6 +179,7 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
     <div className="hero-marquee" aria-label={content.ariaLabel} role="region">
       <div className="hero-marquee-frame">
         <div
+          ref={viewportRef}
           className="hero-marquee-viewport"
           onPointerEnter={handlePointerEnter}
           onPointerLeave={handlePointerLeave}
@@ -148,8 +197,12 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
             {renderSegment("b")}
           </motion.div>
         </div>
-        <div className="hero-marquee-edge-soft hero-marquee-edge-soft-left" aria-hidden />
-        <div className="hero-marquee-edge-soft hero-marquee-edge-soft-right" aria-hidden />
+        {showHeroMarqueeEdgeOverlays ? (
+          <>
+            <div className="hero-marquee-edge-soft hero-marquee-edge-soft-left" aria-hidden />
+            <div className="hero-marquee-edge-soft hero-marquee-edge-soft-right" aria-hidden />
+          </>
+        ) : null}
       </div>
     </div>
   );

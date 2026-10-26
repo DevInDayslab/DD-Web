@@ -1,7 +1,9 @@
 import { scalabilitySectionLetterRotations } from "@/config/scalability-section";
+import { scalabilityPanelContent } from "@/content/scalability-panel";
 import type { ScalabilitySectionContent } from "@/types/scalability-section";
 
 export const scalabilitySectionContent = {
+  ...scalabilityPanelContent,
   eyebrow: "A QUESTION WE GET A LOT",
   headline: "“Will it be scalable?”",
   paragraphs: [

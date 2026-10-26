@@ -1,4 +1,4 @@
-import { ScalabilityLetterBar } from "@/components/scalability-letter-bar";
+import { ScalabilityPanel } from "@/components/scalability-panel";
 import type { ScalabilitySectionContent } from "@/types/scalability-section";
 
 type ScalabilitySectionProps = {
@@ -6,7 +6,7 @@ type ScalabilitySectionProps = {
 };
 
 export function ScalabilitySection({ content }: ScalabilitySectionProps) {
-  const { eyebrow, headline, paragraphs, emphasis, footer } = content;
+  const { eyebrow, headline, paragraphs, emphasis } = content;
 
   return (
     <section className="scalability-section" aria-labelledby="scalability-headline">
@@ -33,9 +33,7 @@ export function ScalabilitySection({ content }: ScalabilitySectionProps) {
           <p className="scalability-emphasis">{emphasis}</p>
         </div>
 
-        <ScalabilityLetterBar content={content} />
-
-        <p className="scalability-footer">{footer}</p>
+        <ScalabilityPanel content={content} />
       </div>
     </section>
   );

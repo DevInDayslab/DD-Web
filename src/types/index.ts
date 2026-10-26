@@ -23,6 +23,43 @@ export type {
   ScalabilitySectionContent,
   ScalabilitySectionLayoutConfig,
 } from "@/types/scalability-section";
+export type {
+  PricingSectionContent,
+  PricingSectionLayoutConfig,
+  PricingTier,
+  PricingTierId,
+} from "@/types/pricing-section";
+export type {
+  FounderSectionContent,
+  FounderSectionLayoutConfig,
+  FounderSectionPortrait,
+} from "@/types/founder-section";
+export type {
+  ChatGptCtaSectionContent,
+  ChatGptCtaSectionLayoutConfig,
+} from "@/types/chatgpt-cta-section";
+export type {
+  TestimonialCard,
+  TestimonialTextCard,
+  TestimonialVideoCard,
+  TestimonialsSectionContent,
+  TestimonialsSectionLayoutConfig,
+} from "@/types/testimonials-section";
+export type {
+  ToolsSectionContent,
+  ToolsSectionHeadline,
+  ToolsSectionLayoutConfig,
+  ToolsStackItem,
+  ToolsStackItemIcon,
+} from "@/types/tools-section";
+export type {
+  WorkFeaturedCaseStudy,
+  WorkMarqueeLogoAsset,
+  WorkMarqueeTileConfig,
+  WorkSectionContent,
+  WorkSectionHeadline,
+  WorkSectionLayoutConfig,
+} from "@/types/work-section";
 export type { Theme, ThemeColors, ThemeShadows } from "@/types/theme";
 export type {
   AnalyticsConfig,

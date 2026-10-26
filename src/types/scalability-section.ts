@@ -3,7 +3,9 @@ export type ScalabilityLetterTile = {
   rotationDeg: number;
 };
 
-export type ScalabilitySectionContent = {
+import type { ScalabilityPanelContent } from "@/types/scalability-panel";
+
+export type ScalabilitySectionContent = ScalabilityPanelContent & {
   eyebrow: string;
   headline: string;
   paragraphs: readonly string[];

@@ -2,18 +2,18 @@
 export const scalabilityMobileLayout = {
   breakpointMaxPx: 767,
   tokens: {
-    letterBarPaddingXPx: 12,
+    letterBarPaddingXPx: 8,    // was 12
     letterBarPaddingYPx: 8,
-    letterBarGapPx: 8,
-    letterBarMinWidthBeyondBodyPx: 0,
-    letterTileWidthPx: 26,
-    letterTileHeightPx: 30,
-    letterTileGapPx: 5,
-    letterFontSizePx: 14,
-    letterLineHeightPx: 18,
-    letterTileRadiusPx: 8,
-    chevronWidthPx: 14,
-    chevronHeightPx: 9,
-    chevronStrokeWidthPx: 2.5,
+    letterBarGapPx: 6,         // was 10
+    letterTileWidthPx: 22,     // was 24
+    letterTileHeightPx: 28,    // was 30
+    letterTileGapPx: 3,        // was 4
+    letterFontSizePx: 13,      // was 14
+    letterLineHeightPx: 16,    // was 18
+    letterTileRadiusPx: 7,     // was 8
+    chevronWidthPx: 10,        // was 12
+    chevronHeightPx: 5,        // was 6
+    chevronStrokeWidthPx: 3,
+    letterBarMinWidthBeyondBodyPx: 16,
   },
 } as const;
