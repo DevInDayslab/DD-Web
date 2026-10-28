@@ -1,5 +1,6 @@
 "use client";
 
+import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
 import { isExternalHref } from "@/lib/links";
 import type { NavItem } from "@/types";
 import Link from "next/link";
@@ -54,20 +55,10 @@ function TextLink({
 }
 
 function CtaLink({ cta, className }: { cta: Cta; className: string }) {
-  const external = isExternalHref(cta.href);
-
-  if (external) {
-    return (
-      <a href={cta.href} className={className} target="_blank" rel="noreferrer">
-        {cta.label}
-      </a>
-    );
-  }
-
   return (
-    <Link href={cta.href} className={className}>
+    <QualifierCta href={cta.href} label={cta.label} className={className}>
       {cta.label}
-    </Link>
+    </QualifierCta>
   );
 }
 

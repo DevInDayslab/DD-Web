@@ -1,6 +1,7 @@
-import { isExternalHref } from "@/lib/links";
+"use client";
+
+import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
 import type { HeroActionCopy } from "@/types/hero-content";
-import Link from "next/link";
 
 type HeroActionLinkProps = {
   action: HeroActionCopy;
@@ -8,19 +9,10 @@ type HeroActionLinkProps = {
 
 export function HeroActionLink({ action }: HeroActionLinkProps) {
   const className = `hero-action hero-action-${action.variant}`;
-  const external = isExternalHref(action.href);
-
-  if (external) {
-    return (
-      <a href={action.href} className={className} target="_blank" rel="noreferrer">
-        {action.label}
-      </a>
-    );
-  }
 
   return (
-    <Link href={action.href} className={className}>
+    <QualifierCta href={action.href} label={action.label} className={className}>
       {action.label}
-    </Link>
+    </QualifierCta>
   );
 }
