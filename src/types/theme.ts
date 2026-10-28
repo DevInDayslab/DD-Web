@@ -6,10 +6,12 @@ export type ThemeColors = {
   accent: string;
   surface: string;
   inverse: string;
+  ctaSecondaryBorder: string;
 };
 
 export type ThemeShadows = {
   cta: string;
+  ctaSecondary: string;
 };
 
 export type Theme = {
