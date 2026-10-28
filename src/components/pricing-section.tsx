@@ -7,7 +7,7 @@ type PricingSectionProps = {
 
 export function PricingSection({ content }: PricingSectionProps) {
   return (
-    <section className="pricing-section" aria-labelledby="pricing-section-title">
+    <section id="pricing" className="pricing-section" aria-labelledby="pricing-section-title">
       <div className="pricing-section-inner">
         <header className="pricing-section-header">
           <h2 id="pricing-section-title" className="pricing-section-title">

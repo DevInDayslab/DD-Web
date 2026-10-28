@@ -83,33 +83,28 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background backdrop-blur-[12px]">
-      <div className="site-header-bar flex w-full items-center">
+      <div className="site-header-bar flex w-full items-center md:grid md:grid-cols-[1fr_auto_1fr]">
         <Link
           href={brand.href}
-          className="shrink-0 font-logo text-[clamp(1.125rem,1.71875vw,1.375rem)] font-semibold leading-7 tracking-[-0.55px] text-foreground"
+          className="shrink-0 font-logo text-[clamp(1.125rem,1.71875vw,1.375rem)] font-semibold leading-7 tracking-[-0.55px] text-foreground md:justify-self-start"
         >
           {brand.name}
         </Link>
 
-        <div className="min-w-0 flex-1" aria-hidden />
+        <nav
+          className="hidden shrink-0 items-center gap-1 rounded-full bg-surface p-1 md:flex md:justify-self-center"
+          aria-label="Primary"
+        >
+          {items.map((item) => (
+            <TextLink key={item.id} item={item} className={navItemClassName} />
+          ))}
+        </nav>
 
-        <div className="site-header-desktop hidden shrink-0 items-center md:flex">
-          <nav
-            className="flex items-center gap-1 rounded-full bg-surface p-1"
-            aria-label="Primary"
-          >
-            {items.map((item) => (
-              <TextLink key={item.id} item={item} className={navItemClassName} />
-            ))}
-          </nav>
-          <CtaLink cta={cta} className={ctaClassName} />
-        </div>
-
-        <div className="flex shrink-0 items-center gap-3 md:hidden">
+        <div className="ml-auto flex shrink-0 items-center gap-3 md:justify-self-end">
           <CtaLink cta={cta} className={`${ctaClassName} hidden sm:inline-flex`} />
           <button
             type="button"
-            className="inline-flex h-[var(--dd-header-height)] max-h-11 min-h-11 w-11 items-center justify-center rounded-full text-foreground"
+            className="inline-flex h-[var(--dd-header-height)] max-h-11 min-h-11 w-11 items-center justify-center rounded-full text-foreground md:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuLabel}

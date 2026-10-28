@@ -5,6 +5,7 @@ type WorkCaseMarqueeTileProps = {
   tile: WorkMarqueeTileConfig;
   logo: WorkMarqueeLogoAsset;
   isActive: boolean;
+  isGenieSource?: boolean;
   onSelect: (caseStudyId: string, element: HTMLElement) => void;
 };
 
@@ -12,6 +13,7 @@ export function WorkCaseMarqueeTile({
   tile,
   logo,
   isActive,
+  isGenieSource = false,
   onSelect,
 }: WorkCaseMarqueeTileProps) {
   const pending = logo.pending === true || !logo.src;
@@ -22,7 +24,9 @@ export function WorkCaseMarqueeTile({
       className={
         isActive
           ? "work-marquee-tile work-marquee-tile--active"
-          : "work-marquee-tile"
+          : isGenieSource
+            ? "work-marquee-tile work-marquee-tile--genie-source"
+            : "work-marquee-tile"
       }
       aria-pressed={isActive}
       aria-label={`Show ${logo.alt} case study`}

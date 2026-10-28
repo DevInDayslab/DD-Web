@@ -1,5 +1,6 @@
 import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteLayoutStyle } from "@/components/site-layout-style";
 import { ThemeStyle } from "@/components/theme-style";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {faqItems.length > 0 ? <JsonLd data={faqPageJsonLd(faqItems)} /> : null}
         <SiteHeader />
         {children}
+        <SiteFooter />
         <Analytics {...site.analytics} />
       </body>
     </html>

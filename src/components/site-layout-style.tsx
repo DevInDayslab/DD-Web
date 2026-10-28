@@ -10,6 +10,8 @@ import {
 } from "@/lib/scalability-panel-layout-style";
 import { chatgptCtaSectionLayoutToCssVars } from "@/lib/chatgpt-cta-section-layout-style";
 import { founderSectionLayoutToCssVars } from "@/lib/founder-section-layout-style";
+import { faqSectionLayoutToCssVars } from "@/lib/faq-section-layout-style";
+import { siteFooterLayoutToCssVars } from "@/lib/site-footer-layout-style";
 import { pricingSectionLayoutToCssVars } from "@/lib/pricing-section-layout-style";
 import { testimonialsSectionLayoutToCssVars } from "@/lib/testimonials-section-layout-style";
 import {
@@ -29,6 +31,8 @@ export function SiteLayoutStyle() {
     ...chatgptCtaSectionLayoutToCssVars(),
     ...founderSectionLayoutToCssVars(),
     ...pricingSectionLayoutToCssVars(),
+    ...faqSectionLayoutToCssVars(),
+    ...siteFooterLayoutToCssVars(),
   });
   const css = `:root{${rootVars}}.hero-flank{background:${heroFlanks.panel.gradient}}${heroMobileLayoutCssBlock()}${scalabilityMobileLayoutCssBlock()}${scalabilityPanelLayoutCssBlock()}${toolsSectionLayoutCssBlock()}`;
 

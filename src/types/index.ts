@@ -24,6 +24,20 @@ export type {
   ScalabilitySectionLayoutConfig,
 } from "@/types/scalability-section";
 export type {
+  SiteFooterBrand,
+  SiteFooterContent,
+  SiteFooterCta,
+  SiteFooterLayoutConfig,
+  SiteFooterNavLink,
+  SiteFooterSocialLink,
+} from "@/types/site-footer";
+export type {
+  FaqSectionContent,
+  FaqSectionItem,
+  FaqSectionLayoutConfig,
+  FaqSectionSeeAllLink,
+} from "@/types/faq-section";
+export type {
   PricingSectionContent,
   PricingSectionLayoutConfig,
   PricingTier,

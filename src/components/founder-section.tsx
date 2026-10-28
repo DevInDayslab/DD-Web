@@ -10,7 +10,7 @@ export function FounderSection({ content }: FounderSectionProps) {
   const { signoff } = content;
 
   return (
-    <section className="founder-section" aria-labelledby="founder-section-title">
+    <section id="about" className="founder-section" aria-labelledby="founder-section-title">
       <div className="founder-section-inner">
         <div className="founder-section-grid">
           <div className="founder-section-letter">

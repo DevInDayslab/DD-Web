@@ -10,7 +10,7 @@ export function WorkSection({ content, phonePlaceholderLabel }: WorkSectionProps
   const { headline, subtitle } = content;
 
   return (
-    <section className="work-section" aria-labelledby="work-section-headline">
+    <section id="case-studies" className="work-section" aria-labelledby="work-section-headline">
       <div className="work-section-inner">
         <header className="work-section-header">
           <h2 id="work-section-headline" className="work-section-headline">
