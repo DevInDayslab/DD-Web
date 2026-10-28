@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
 import { AnimatePresence, motion } from "motion/react";
 import { PricingCheckIcon } from "@/components/pricing-check-icon";
 import type { PricingSectionContent, PricingTier, PricingTierId } from "@/types/pricing-section";
@@ -178,10 +179,11 @@ function PricingTierPanel({ tier }: { tier: PricingTier }) {
         {tier.priceSubtitle ? (
           <p className="pricing-price-subtitle">{tier.priceSubtitle}</p>
         ) : null}
-        <a
+        <QualifierCta
           className="pricing-cta"
           href={tier.ctaHref}
-          aria-label={tier.ctaAriaLabel}
+          label={tier.ctaLabel}
+          ariaLabel={tier.ctaAriaLabel}
         >
           <span>{tier.ctaLabel}</span>
           <span className="pricing-cta-icon" aria-hidden>
@@ -195,7 +197,7 @@ function PricingTierPanel({ tier }: { tier: PricingTier }) {
               />
             </svg>
           </span>
-        </a>
+        </QualifierCta>
       </motion.div>
     </motion.div>
   );

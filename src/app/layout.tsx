@@ -1,5 +1,6 @@
 import { Analytics } from "@/components/analytics";
 import { JsonLd } from "@/components/json-ld";
+import { ProjectQualifierRoot } from "@/components/project-qualifier/project-qualifier-root";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteLayoutStyle } from "@/components/site-layout-style";
@@ -22,14 +23,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fontDisplay.variable} ${fontHeadline.variable} ${fontLetterTiles.variable} ${fontSans.variable} ${fontUi.variable}`}
     >
       <body className="bg-background font-sans text-foreground antialiased">
-        <ThemeStyle theme={theme} />
-        <SiteLayoutStyle />
-        <JsonLd data={organizationJsonLd(site)} />
-        {faqItems.length > 0 ? <JsonLd data={faqPageJsonLd(faqItems)} /> : null}
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <Analytics {...site.analytics} />
+        <ProjectQualifierRoot>
+          <ThemeStyle theme={theme} />
+          <SiteLayoutStyle />
+          <JsonLd data={organizationJsonLd(site)} />
+          {faqItems.length > 0 ? <JsonLd data={faqPageJsonLd(faqItems)} /> : null}
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <Analytics {...site.analytics} />
+        </ProjectQualifierRoot>
       </body>
     </html>
   );

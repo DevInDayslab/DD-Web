@@ -1,4 +1,5 @@
 import { SiteFooterLink } from "@/components/site-footer-link";
+import { SiteFooterCtaButton } from "@/components/site-footer-cta-button";
 import { siteFooterContent } from "@/content/site-footer";
 
 export function SiteFooter() {
@@ -17,20 +18,11 @@ export function SiteFooter() {
       <div className="site-footer-cta">
         <h2 className="site-footer-headline">{cta.headline}</h2>
         <p className="site-footer-subtext">{cta.subtext}</p>
-        <a className="site-footer-cta-button" href={cta.buttonHref} aria-label={cta.buttonAriaLabel}>
-          <span>{cta.buttonLabel}</span>
-          <span className="site-footer-cta-button-arrow" aria-hidden>
-            <svg viewBox="0 0 10 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M0 2H8M8 2L6 0.2M8 2L6 3.8"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </a>
+        <SiteFooterCtaButton
+          href={cta.buttonHref}
+          label={cta.buttonLabel}
+          ariaLabel={cta.buttonAriaLabel}
+        />
       </div>
 
       <div className="site-footer-bar">
