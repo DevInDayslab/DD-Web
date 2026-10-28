@@ -19,6 +19,7 @@ export const workSectionContent = {
       body: daterBody,
       tags: ["iOS + Android", "Custom Backend", "Admin Platform"],
       ctaLabel: "View case study",
+      ctaHref: "/case-studies/dater",
       slug: "dater",
       materialPath: "src/content/material/case-studies/devindays-case-study-dater.md",
     },

@@ -1,5 +1,13 @@
 export type { CaseStudy, CaseStudyVideo, FaqItem, PageCopy } from "@/types/content";
 export type {
+  PortfolioGridItem,
+  PortfolioGridItemKind,
+  PortfolioPageContent,
+  PortfolioPageHero,
+  PortfolioPageLabels,
+  PortfolioPageLayoutConfig,
+} from "@/types/portfolio-page";
+export type {
   HeroActionCopy,
   HeroActionVariant,
   HeroContentCopy,

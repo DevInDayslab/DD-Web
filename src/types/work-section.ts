@@ -10,7 +10,7 @@ export type WorkFeaturedCaseStudy = {
   body: string;
   tags: readonly string[];
   ctaLabel: string;
-  /** Slug for future case-study route; CTA not wired yet. */
+  ctaHref?: string;
   slug: string;
   /** Path to extended copy under src/content/material/case-studies */
   materialPath: string;

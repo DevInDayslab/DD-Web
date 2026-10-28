@@ -1,0 +1,27 @@
+import type { PortfolioPageLayoutConfig } from "@/types/portfolio-page";
+
+export const portfolioPageLayout = {
+  pageMaxWidthAtBaseline: 1280,
+  heroPaddingTopAtBaseline: 160,
+  heroPaddingBottomAtBaseline: 64,
+  heroContentMaxWidthAtBaseline: 640,
+  heroTitleMaxWidthAtBaseline: 720,
+  heroEyebrowFontSizeAtBaseline: 12,
+  heroTitleFontSizeAtBaseline: 64,
+  heroTitleLineHeightAtBaseline: 71,
+  heroSubtitleFontSizeAtBaseline: 16,
+  heroSubtitleLineHeightAtBaseline: 29,
+  heroSubtitleMaxWidthAtBaseline: 418,
+  gridSectionPaddingTopAtBaseline: 32,
+  gridSectionPaddingInlineAtBaseline: 64,
+  gridSectionPaddingBottomAtBaseline: 112,
+  gridMaxWidthAtBaseline: 1152,
+  gridColumnsAtBaseline: 3,
+  cellMinHeightAtBaseline: 190,
+  cellPaddingBlockAtBaseline: 56,
+  cellPaddingInlineAtBaseline: 32,
+  cellTitleFontSizeAtBaseline: 36,
+  cellTitleLineHeightAtBaseline: 54,
+  cellLabelFontSizeAtBaseline: 12,
+  cellLabelMarginTopAtBaseline: 12,
+} as const satisfies PortfolioPageLayoutConfig;
