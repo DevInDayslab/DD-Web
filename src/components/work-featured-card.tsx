@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { WorkFeaturedCaseStudy } from "@/types/work-section";
 
 type WorkFeaturedCardProps = {
@@ -6,6 +7,23 @@ type WorkFeaturedCardProps = {
 };
 
 export function WorkFeaturedCard({ caseStudy, phonePlaceholderLabel }: WorkFeaturedCardProps) {
+  const ctaInner = (
+    <>
+      <span>{caseStudy.ctaLabel}</span>
+      <span className="work-featured-cta-icon" aria-hidden>
+        <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1 7L7 1M7 1H2.5M7 1V5.5"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </>
+  );
+
   return (
     <article className="work-featured-card" aria-labelledby={`work-featured-title-${caseStudy.id}`}>
       <div className="work-featured-card-main">
@@ -26,20 +44,15 @@ export function WorkFeaturedCard({ caseStudy, phonePlaceholderLabel }: WorkFeatu
             </ul>
           </div>
 
-          <button type="button" className="work-featured-cta">
-            <span>{caseStudy.ctaLabel}</span>
-            <span className="work-featured-cta-icon" aria-hidden>
-              <svg viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M1 7L7 1M7 1H2.5M7 1V5.5"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </button>
+          {caseStudy.ctaHref ? (
+            <Link href={caseStudy.ctaHref} className="work-featured-cta">
+              {ctaInner}
+            </Link>
+          ) : (
+            <button type="button" className="work-featured-cta">
+              {ctaInner}
+            </button>
+          )}
         </div>
 
         <div

@@ -7,10 +7,16 @@ export const routes = [
     changeFrequency: "weekly",
     priority: 1,
   },
+  {
+    id: "case-studies",
+    path: "/case-studies",
+    changeFrequency: "weekly",
+    priority: 0.9,
+  },
 ] as const satisfies readonly RouteDefinition[];
 
 export const navigation: NavItem[] = [
-  { id: "case-studies", label: "Case Studies", href: "/#case-studies" },
+  { id: "case-studies", label: "Case Studies", href: "/case-studies" },
   { id: "faqs", label: "FAQs", href: "/#faq" },
   { id: "about", label: "About", href: "/#about" },
   { id: "contact", label: "Contact", href: "/#contact" },

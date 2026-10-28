@@ -20,6 +20,7 @@ import {
   toolsSectionLayoutToCssVars,
 } from "@/lib/tools-section-layout-style";
 import { workSectionLayoutToCssVars } from "@/lib/work-section-layout-style";
+import { portfolioPageLayoutToCssVars } from "@/lib/portfolio-page-layout-style";
 
 export function SiteLayoutStyle() {
   const rootVars = serializeCssCustomProperties({
@@ -35,6 +36,7 @@ export function SiteLayoutStyle() {
     ...faqSectionLayoutToCssVars(),
     ...siteFooterLayoutToCssVars(),
     ...projectQualifierLayoutToCssVars(),
+    ...portfolioPageLayoutToCssVars(),
   });
   const css = `:root{${rootVars}}.hero-flank{background:${heroFlanks.panel.gradient}}${heroMobileLayoutCssBlock()}${scalabilityMobileLayoutCssBlock()}${scalabilityPanelLayoutCssBlock()}${toolsSectionLayoutCssBlock()}`;
 

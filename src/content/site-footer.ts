@@ -17,7 +17,7 @@ export const siteFooterContent = {
   },
   navLinks: [
     { id: "home", label: "Home", href: "/" },
-    { id: "case-studies", label: "Case Studies", href: "/#case-studies" },
+    { id: "case-studies", label: "Case Studies", href: "/case-studies" },
     { id: "pricing", label: "Pricing", href: "/#pricing" },
     { id: "faq", label: "FAQ", href: "/#faq" },
     { id: "about", label: "About", href: "/#about" },
