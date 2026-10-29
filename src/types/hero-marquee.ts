@@ -20,7 +20,6 @@ export type HeroMarqueeTileBase = {
 
 export type HeroMarqueeTileLayout = HeroMarqueeTileBase & {
   leftAtBaseline: number;
-  offsetYAtBaseline: number;
 };
 
 export type HeroMarqueeFlowTileLayout = HeroMarqueeTileBase;
@@ -36,11 +35,14 @@ export type HeroMarqueeLayoutConfig = {
   outerWidthAtBaseline: number;
   outerHeightAtBaseline: number;
   topAtBaseline: number;
+  marqueeVerticalNudgeUpAtBaseline: number;
   outerOpacity: number;
   outerPaddingXAtBaseline: number;
   frameMaxWidthAtBaseline: number;
   viewportHeightAtBaseline: number;
   viewportPaddingYAtBaseline: number;
+  /** Space below the track for tile shadows and slight rotation bleed. */
+  viewportBottomBleedAtBaseline: number;
   segmentWidthAtBaseline: number;
   trackHeightAtBaseline: number;
   fadeWidthAtBaseline: number;
@@ -62,6 +64,8 @@ export type HeroMarqueeLayoutConfig = {
   imageSizeIntelligenceAtBaseline: number;
   imageSizeDaterAtBaseline: number;
   imageRadiusAtBaseline: number;
+  outerTileLiftAtBaseline: number;
+  outerLiftZoneFractionAtBaseline: number;
   tiles: readonly HeroMarqueeTileLayout[];
   mobile: HeroMarqueeMobileConfig;
 };

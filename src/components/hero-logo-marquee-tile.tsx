@@ -14,6 +14,7 @@ type HeroLogoMarqueeTileProps = {
   content: HeroMarqueeContent;
   layoutMode: "absolute" | "flow";
   presentationKey: string;
+  liftFactor: number;
   edgePresentation?: MarqueeTileEdgePresentation;
 };
 
@@ -31,30 +32,57 @@ function imageSizePx(
   }
 }
 
+function marqueeTileTransform(
+  liftFactor: number,
+  rotationDeg: number,
+  edgeScale: number,
+  layoutMode: "absolute" | "flow",
+): string {
+  const rotation = rotationDeg * liftFactor;
+  const rotateScale = `rotate(${rotation}deg) scale(${edgeScale})`;
+  const lift = "calc(var(--dd-hero-marquee-outer-lift-max) * var(--hero-marquee-lift-factor, 0))";
+
+  if (layoutMode === "absolute") {
+    return `translateY(calc(-50% - ${lift})) ${rotateScale}`;
+  }
+
+  return `translateY(calc(-1 * ${lift})) ${rotateScale}`;
+}
+
 export function HeroLogoMarqueeTile({
   tile,
   layout,
   content,
   layoutMode,
   presentationKey,
+  liftFactor,
   edgePresentation,
 }: HeroLogoMarqueeTileProps) {
   const logo = content.logos[tile.logoKey];
   const shadow = heroMarqueeShadows[tile.shadow];
   const imagePx = imageSizePx(tile, layout);
   const isFlow = layoutMode === "flow";
+  const edgeScale = edgePresentation?.scale ?? 1;
+  const edgeOpacity = edgePresentation?.opacity ?? 1;
 
   const absoluteTile = !isFlow ? (tile as HeroMarqueeTileLayout) : null;
   const leftPercent =
     absoluteTile !== null
       ? (absoluteTile.leftAtBaseline / layout.segmentWidthAtBaseline) * 100
       : 0;
-  const offsetRatio =
-    absoluteTile !== null
-      ? absoluteTile.offsetYAtBaseline / layout.trackHeightAtBaseline
-      : 0;
-  const edgeScale = edgePresentation?.scale ?? 1;
-  const edgeOpacity = edgePresentation?.opacity ?? 1;
+
+  const transform = marqueeTileTransform(
+    liftFactor,
+    tile.rotationDeg,
+    edgeScale,
+    layoutMode,
+  );
+
+  const tileStyle = {
+    ["--hero-marquee-lift-factor" as string]: String(liftFactor),
+    opacity: edgeOpacity,
+    transform,
+  };
 
   return (
     <div
@@ -63,18 +91,16 @@ export function HeroLogoMarqueeTile({
       style={
         isFlow
           ? {
+              ...tileStyle,
               width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
               height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-              opacity: edgeOpacity,
-              transform: `rotate(${tile.rotationDeg}deg) scale(${edgeScale})`,
             }
           : {
+              ...tileStyle,
               left: `${leftPercent}%`,
               top: "50%",
               width: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
               height: `var(--dd-hero-marquee-tile-size-${tile.tileSize})`,
-              opacity: edgeOpacity,
-              transform: `translateY(calc(-50% + var(--dd-hero-marquee-track-height) * ${offsetRatio})) rotate(${tile.rotationDeg}deg) scale(${edgeScale})`,
             }
       }
     >

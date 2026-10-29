@@ -96,7 +96,6 @@ export const workSectionContent = {
     { id: "entry-ticket", logoKey: "entryTicket", caseStudyId: "entry-ticket" },
     { id: "turbo-supply", logoKey: "turboSupply", caseStudyId: "turbo-supply" },
     { id: "myndfe", logoKey: "myndfe", caseStudyId: "myndfe" },
-    { id: "invigil", logoKey: "invigil", caseStudyId: "invigil" },
   ],
 } as const satisfies WorkSectionContent;
 

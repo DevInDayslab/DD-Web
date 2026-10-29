@@ -10,6 +10,7 @@ export function scalabilityMobileLayoutCssVars(): Record<string, string> {
     "--dd-scalability-letter-tile-width": `${tokens.letterTileWidthPx}px`,
     "--dd-scalability-letter-tile-height": `${tokens.letterTileHeightPx}px`,
     "--dd-scalability-letter-tile-gap": `${tokens.letterTileGapPx}px`,
+    "--dd-scalability-letter-tile-gap-hover": `${tokens.letterTileGapHoverPx}px`,
     "--dd-scalability-letter-size": `${tokens.letterFontSizePx}px`,
     "--dd-scalability-letter-line-height": `${tokens.letterLineHeightPx}px`,
     "--dd-scalability-letter-tile-radius": `${tokens.letterTileRadiusPx}px`,

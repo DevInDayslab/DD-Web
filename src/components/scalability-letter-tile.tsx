@@ -22,10 +22,6 @@ export function ScalabilityLetterTileView({
     untiltStaggerSeconds,
     alignSpring,
     untiltSpring,
-    alignScaleKeyframes,
-    alignScaleTimes,
-    alignLiftPx,
-    alignMotionDurationSeconds,
   } = scalabilityLetterBarInteraction;
 
   const alignDelay = index * alignStaggerSeconds;
@@ -39,22 +35,9 @@ export function ScalabilityLetterTileView({
       initial={false}
       animate={{
         rotate: hovered ? 0 : tile.rotationDeg,
-        y: hovered ? [0, -alignLiftPx, 0] : 0,
-        scale: hovered ? [...alignScaleKeyframes] : 1,
       }}
       transition={{
         rotate: { type: "spring", ...spring, delay },
-        y: {
-          duration: alignMotionDurationSeconds,
-          ease: [0.22, 1, 0.36, 1],
-          delay,
-        },
-        scale: {
-          duration: alignMotionDurationSeconds,
-          times: [...alignScaleTimes],
-          ease: [0.22, 1, 0.36, 1],
-          delay,
-        },
       }}
       aria-hidden
     >

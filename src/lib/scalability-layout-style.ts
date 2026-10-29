@@ -1,4 +1,5 @@
 import { layoutBaseline } from "@/config/layout";
+import { scalabilityLetterBarInteraction } from "@/config/scalability-interaction";
 import { scalabilitySectionLayout } from "@/config/scalability-section";
 import { scalabilityThemeColors } from "@/config/scalability-theme";
 import { fluidLength } from "@/lib/fluid";
@@ -136,6 +137,10 @@ export function scalabilityLayoutToCssVars(): Record<string, string> {
       minPx: 6,
       maxPx: layout.letterTileGapAtBaseline,
     }),
+    "--dd-scalability-letter-tile-gap-hover": fluid(
+      scalabilityLetterBarInteraction.hoverLetterTileGapAtBaseline,
+      { minPx: 4, maxPx: scalabilityLetterBarInteraction.hoverLetterTileGapAtBaseline },
+    ),
     "--dd-scalability-letter-tile-width": fluid(layout.letterTileWidthAtBaseline, {
       minPx: 32,
       maxPx: layout.letterTileWidthAtBaseline,

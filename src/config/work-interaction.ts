@@ -1,6 +1,6 @@
 export const workCaseStudyGenieInteraction = {
   /** Lerp factors per frame (Framer GenieCarousel defaults × speed). */
-  animationSpeed: 0.6,
+  animationSpeed: 0.4,
   openLerp: 0.08,
   closeLerp: 0.1,
   /** During open genie, real card fades in from this progress (0–1) through 1. */

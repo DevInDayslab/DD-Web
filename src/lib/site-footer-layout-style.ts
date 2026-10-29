@@ -115,10 +115,16 @@ export function siteFooterLayoutToCssVars(): Record<string, string> {
       minPx: 32,
       maxPx: layout.barPaddingBottomAtBaseline,
     }),
-    "--dd-footer-bar-padding-inline": fluid(layout.barPaddingInlineAtBaseline, {
-      minPx: 16,
-      maxPx: layout.barPaddingInlineAtBaseline,
+    "--dd-footer-bar-padding-inline-start": fluid(layout.barPaddingInlineStartAtBaseline, {
+      minPx: 0,
+      maxPx: layout.barPaddingInlineStartAtBaseline,
     }),
+    "--dd-footer-bar-padding-inline-end": fluid(layout.barPaddingInlineEndAtBaseline, {
+      minPx: 0,
+      maxPx: layout.barPaddingInlineEndAtBaseline,
+    }),
+    "--dd-footer-bar-brand-shift-inline-start": `${layout.barBrandShiftInlineStartAtBaseline}px`,
+    "--dd-footer-bar-meta-shift-inline-end": `${layout.barMetaShiftInlineEndAtBaseline}px`,
     "--dd-footer-brand-name-size": fluid(layout.brandNameFontSizeAtBaseline, {
       minPx: 15,
       maxPx: layout.brandNameFontSizeAtBaseline,

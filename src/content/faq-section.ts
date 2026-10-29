@@ -2,7 +2,6 @@ import type { FaqSectionContent } from "@/types/faq-section";
 
 export const faqSectionContent = {
   title: "Clear the air before we talk.",
-  defaultOpenItemId: "source-code",
   items: [
     {
       id: "source-code",

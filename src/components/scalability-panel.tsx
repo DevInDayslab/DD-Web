@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { ScalabilityLetterChevron } from "@/components/scalability-letter-chevron";
 import { ScalabilityLetterTileView } from "@/components/scalability-letter-tile";
 import { ScalabilityPillarCard } from "@/components/scalability-pillar-card";
-import { scalabilityLetterBarInteraction } from "@/config/scalability-interaction";
 import type { ScalabilitySectionContent } from "@/types/scalability-section";
 
 type ScalabilityPanelProps = {
@@ -27,14 +26,6 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
   const [expanded, setExpanded] = useState(false);
   const [hovered, setHovered] = useState(false);
   const lettersAligned = expanded || hovered;
-  const {
-    barHoverScale,
-    barHoverSpring,
-    chevronRotateSpring,
-    panelExpandSpring,
-    panelContentFadeSeconds,
-    panelContentStaggerSeconds,
-  } = scalabilityLetterBarInteraction;
   const tiles = content.letterTiles;
 
   const toggleExpanded = () => setExpanded((value) => !value);
@@ -54,19 +45,13 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
           : "scalability-panel-wrap"
       }
     >
-      <motion.div
-        className={panelClassName}
-        aria-label={content.letterBarAriaLabel}
-        initial={false}
-        animate={{ scale: !expanded && hovered ? barHoverScale : 1 }}
-        transition={{ type: "spring", ...barHoverSpring }}
-      >
-        <div className="scalability-panel-header">
-          <div
-            className="scalability-letter-tiles scalability-letter-tiles-wrap"
-            onPointerEnter={() => !expanded && setHovered(true)}
-            onPointerLeave={() => setHovered(false)}
-          >
+      <div className={panelClassName} aria-label={content.letterBarAriaLabel}>
+        <div
+          className="scalability-panel-header"
+          onPointerEnter={() => !expanded && setHovered(true)}
+          onPointerLeave={() => !expanded && setHovered(false)}
+        >
+          <div className="scalability-letter-tiles scalability-letter-tiles-wrap">
             {tiles.map((tile, index) => (
               <ScalabilityLetterTileView
                 key={`${tile.letter}-${index}`}
@@ -77,7 +62,7 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
               />
             ))}
           </div>
-          <motion.button
+          <button
             type="button"
             className="scalability-letter-chevron-button"
             onClick={toggleExpanded}
@@ -85,80 +70,29 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
             aria-label={
               expanded ? content.chevronCollapseAriaLabel : content.chevronExpandAriaLabel
             }
-            initial={false}
-            animate={{ rotate: expanded ? 180 : 0 }}
-            transition={{ type: "spring", ...chevronRotateSpring }}
           >
             <ScalabilityLetterChevron />
-          </motion.button>
+          </button>
         </div>
 
-        <AnimatePresence initial={false}>
-          {expanded ? (
-            <motion.div
-              key="scalability-panel-body"
-              className="scalability-panel-body"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{
-                height: { type: "spring", ...panelExpandSpring },
-                opacity: { duration: panelContentFadeSeconds },
-              }}
-            >
-              <motion.p
-                className="scalability-panel-tagline"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: panelContentStaggerSeconds,
-                  duration: panelContentFadeSeconds,
-                }}
-              >
-                {content.panelTagline}
-              </motion.p>
+        <div
+          className="scalability-panel-body-wrap"
+          data-expanded={expanded ? "true" : "false"}
+          aria-hidden={!expanded}
+        >
+          <div className="scalability-panel-body-inner">
+            <div className="scalability-panel-body">
+              <p className="scalability-panel-tagline">{content.panelTagline}</p>
 
-              <motion.ul
-                className="scalability-panel-pillars"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      staggerChildren: panelContentStaggerSeconds,
-                      delayChildren: panelContentStaggerSeconds * 1.5,
-                    },
-                  },
-                }}
-              >
+              <ul className="scalability-panel-pillars">
                 {content.pillars.map((pillar) => (
-                  <motion.li
-                    key={pillar.id}
-                    className="scalability-panel-pillar-item"
-                    variants={{
-                      hidden: { opacity: 0, y: 16 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { type: "spring", ...panelExpandSpring },
-                      },
-                    }}
-                  >
+                  <li key={pillar.id} className="scalability-panel-pillar-item">
                     <ScalabilityPillarCard pillar={pillar} />
-                  </motion.li>
+                  </li>
                 ))}
-              </motion.ul>
+              </ul>
 
-              <motion.div
-                className="scalability-panel-closing"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: panelContentStaggerSeconds * 4,
-                  duration: panelContentFadeSeconds,
-                }}
-              >
+              <div className="scalability-panel-closing">
                 <p className="scalability-panel-closing-lead">{content.closingLead}</p>
                 <div className="scalability-panel-closing-body">
                   {content.closingBodyLines.map((line, index) => (
@@ -167,11 +101,11 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
                     </p>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
-      </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <AnimatePresence initial={false}>
         {!expanded ? (
@@ -181,7 +115,7 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: panelContentFadeSeconds }}
+            transition={{ duration: 0.2 }}
           >
             {content.footer}
           </motion.p>

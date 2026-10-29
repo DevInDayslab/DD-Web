@@ -1,15 +1,17 @@
 import { heroMobileLayout } from "@/config/hero-mobile";
+import { heroMarqueeViewportOuterHeightAtBaseline } from "@/lib/hero-marquee-viewport-height";
 import type { HeroMarqueeLayoutConfig } from "@/types/hero-marquee";
 
-export const heroMarqueeLayout = {
+const heroMarqueeLayoutBase = {
   outerWidthAtBaseline: 1184,
-  outerHeightAtBaseline: 208,
   topAtBaseline: 455,
+  /** Moves the entire logo marquee up (px). Increase to lift higher / fix bottom clipping. */
+  marqueeVerticalNudgeUpAtBaseline: 80,
   outerOpacity: 0.7,
   outerPaddingXAtBaseline: 16,
   frameMaxWidthAtBaseline: 1152,
-  viewportHeightAtBaseline: 208,
   viewportPaddingYAtBaseline: 48,
+  viewportBottomBleedAtBaseline: 32,
   segmentWidthAtBaseline: 960,
   trackHeightAtBaseline: 112,
   fadeWidthAtBaseline: 176,
@@ -31,12 +33,13 @@ export const heroMarqueeLayout = {
   imageSizeIntelligenceAtBaseline: 70,
   imageSizeDaterAtBaseline: 82,
   imageRadiusAtBaseline: 48,
+  outerTileLiftAtBaseline: 100,
+  outerLiftZoneFractionAtBaseline: 1 / 3,
   tiles: [
     {
       id: "entry-left",
       logoKey: "entryTicket",
       leftAtBaseline: 10.85,
-      offsetYAtBaseline: -39.15,
       rotationDeg: -6,
       tileSize: "standard",
       shadow: "featured",
@@ -45,7 +48,6 @@ export const heroMarqueeLayout = {
       id: "myndfe-left",
       logoKey: "myndfeLeaf",
       leftAtBaseline: 148.92,
-      offsetYAtBaseline: -19.08,
       rotationDeg: -3.5,
       tileSize: "standard",
       shadow: "standard",
@@ -54,7 +56,6 @@ export const heroMarqueeLayout = {
       id: "invigil",
       logoKey: "invigil",
       leftAtBaseline: 286.66,
-      offsetYAtBaseline: -5.34,
       rotationDeg: -1.5,
       tileSize: "standard",
       shadow: "standard",
@@ -63,7 +64,6 @@ export const heroMarqueeLayout = {
       id: "dater",
       logoKey: "dater",
       leftAtBaseline: 424,
-      offsetYAtBaseline: 4,
       rotationDeg: 0,
       tileSize: "featured",
       shadow: "featured",
@@ -73,7 +73,6 @@ export const heroMarqueeLayout = {
       id: "intelligence",
       logoKey: "intelligencePlatform",
       leftAtBaseline: 566.66,
-      offsetYAtBaseline: -5.34,
       rotationDeg: 1.5,
       tileSize: "standard",
       shadow: "standard",
@@ -83,7 +82,6 @@ export const heroMarqueeLayout = {
       id: "myndfe-right",
       logoKey: "myndfeLeaf",
       leftAtBaseline: 700.92,
-      offsetYAtBaseline: -19.08,
       rotationDeg: 3.5,
       tileSize: "standard",
       shadow: "standard",
@@ -92,7 +90,6 @@ export const heroMarqueeLayout = {
       id: "entry-right",
       logoKey: "entryTicket",
       leftAtBaseline: 834.85,
-      offsetYAtBaseline: -39.15,
       rotationDeg: 6,
       tileSize: "standard",
       shadow: "featured",
@@ -134,6 +131,12 @@ export const heroMarqueeLayout = {
       },
     ],
   },
+} as const;
+
+export const heroMarqueeLayout = {
+  ...heroMarqueeLayoutBase,
+  outerHeightAtBaseline: heroMarqueeViewportOuterHeightAtBaseline(heroMarqueeLayoutBase),
+  viewportHeightAtBaseline: heroMarqueeViewportOuterHeightAtBaseline(heroMarqueeLayoutBase),
 } as const satisfies HeroMarqueeLayoutConfig;
 
 export const heroMarqueeShadows = {

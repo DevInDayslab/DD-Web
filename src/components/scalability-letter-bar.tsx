@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
 import { ScalabilityLetterChevron } from "@/components/scalability-letter-chevron";
 import { ScalabilityLetterTileView } from "@/components/scalability-letter-tile";
-import { scalabilityLetterBarInteraction } from "@/config/scalability-interaction";
 import type { ScalabilitySectionContent } from "@/types/scalability-section";
 
 type ScalabilityLetterBarProps = {
@@ -13,11 +11,10 @@ type ScalabilityLetterBarProps = {
 
 export function ScalabilityLetterBar({ content }: ScalabilityLetterBarProps) {
   const [hovered, setHovered] = useState(false);
-  const { barHoverScale, barHoverSpring } = scalabilityLetterBarInteraction;
   const tiles = content.letterTiles;
 
   return (
-    <motion.div
+    <div
       className={
         hovered
           ? "scalability-letter-bar scalability-letter-bar--aligned"
@@ -26,9 +23,6 @@ export function ScalabilityLetterBar({ content }: ScalabilityLetterBarProps) {
       aria-label={content.letterBarAriaLabel}
       onPointerEnter={() => setHovered(true)}
       onPointerLeave={() => setHovered(false)}
-      initial={false}
-      animate={{ scale: hovered ? barHoverScale : 1 }}
-      transition={{ type: "spring", ...barHoverSpring }}
     >
       <div className="scalability-letter-tiles">
         {tiles.map((tile, index) => (
@@ -42,6 +36,6 @@ export function ScalabilityLetterBar({ content }: ScalabilityLetterBarProps) {
         ))}
       </div>
       <ScalabilityLetterChevron />
-    </motion.div>
+    </div>
   );
 }

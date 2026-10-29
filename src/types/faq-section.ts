@@ -12,7 +12,8 @@ export type FaqSectionSeeAllLink = {
 
 export type FaqSectionContent = {
   title: string;
-  defaultOpenItemId: string;
+  /** Item id to expand on first paint; omit or null for all closed. */
+  defaultOpenItemId?: string | null;
   items: readonly FaqSectionItem[];
   seeAll: FaqSectionSeeAllLink;
 };

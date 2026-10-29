@@ -8,6 +8,7 @@ export const scalabilityMobileLayout = {
     letterTileWidthPx: 22,     // was 24
     letterTileHeightPx: 28,    // was 30
     letterTileGapPx: 3,        // was 4
+    letterTileGapHoverPx: 2,
     letterFontSizePx: 13,      // was 14
     letterLineHeightPx: 16,    // was 18
     letterTileRadiusPx: 7,     // was 8

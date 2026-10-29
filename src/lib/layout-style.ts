@@ -1,7 +1,10 @@
 import { heroContentLayoutTokens } from "@/config/hero-content";
 import { heroContours } from "@/config/hero-contours";
 import { heroEdgeFeather } from "@/config/hero-edge-feather";
-import { heroMarqueeLayout } from "@/config/hero-marquee";
+import {
+  heroMarqueeLayout,
+} from "@/config/hero-marquee";
+import { heroMarqueeViewportOuterHeightAtBaseline } from "@/lib/hero-marquee-viewport-height";
 import { heroFlanks } from "@/config/hero";
 import { headerLayoutTokens, layoutBaseline } from "@/config/layout";
 import { fluidLength, fluidNegativeInset } from "@/lib/fluid";
@@ -195,12 +198,25 @@ export function layoutToCssVars(): Record<string, string> {
     "--dd-hero-marquee-height": fluidLength(
       heroMarqueeLayout.outerHeightAtBaseline,
       referenceWidthPx,
-      { minPx: 140, maxPx: heroMarqueeLayout.outerHeightAtBaseline },
+      {
+        minPx: heroMarqueeViewportOuterHeightAtBaseline({
+          viewportPaddingYAtBaseline: 24,
+          outerTileLiftAtBaseline: 22,
+          trackHeightAtBaseline: 72,
+          viewportBottomBleedAtBaseline: heroMarqueeLayout.viewportBottomBleedAtBaseline,
+        }),
+        maxPx: heroMarqueeLayout.outerHeightAtBaseline,
+      },
     ),
     "--dd-hero-marquee-top": fluidLength(
       heroMarqueeLayout.topAtBaseline,
       referenceWidthPx,
       { minPx: 360, maxPx: heroMarqueeLayout.topAtBaseline },
+    ),
+    "--dd-hero-marquee-nudge-up": fluidLength(
+      heroMarqueeLayout.marqueeVerticalNudgeUpAtBaseline,
+      referenceWidthPx,
+      { minPx: 16, maxPx: heroMarqueeLayout.marqueeVerticalNudgeUpAtBaseline },
     ),
     "--dd-hero-marquee-padding-x": fluidLength(
       heroMarqueeLayout.outerPaddingXAtBaseline,
@@ -221,6 +237,11 @@ export function layoutToCssVars(): Record<string, string> {
       heroMarqueeLayout.viewportPaddingYAtBaseline,
       referenceWidthPx,
       { minPx: 24, maxPx: heroMarqueeLayout.viewportPaddingYAtBaseline },
+    ),
+    "--dd-hero-marquee-viewport-bottom-bleed": fluidLength(
+      heroMarqueeLayout.viewportBottomBleedAtBaseline,
+      referenceWidthPx,
+      { minPx: 24, maxPx: heroMarqueeLayout.viewportBottomBleedAtBaseline },
     ),
     "--dd-hero-marquee-segment-width": fluidLength(
       heroMarqueeLayout.segmentWidthAtBaseline,
@@ -281,6 +302,14 @@ export function layoutToCssVars(): Record<string, string> {
       heroMarqueeLayout.imageRadiusAtBaseline,
       referenceWidthPx,
       { minPx: 32, maxPx: heroMarqueeLayout.imageRadiusAtBaseline },
+    ),
+    "--dd-hero-marquee-outer-lift-max": fluidLength(
+      heroMarqueeLayout.outerTileLiftAtBaseline,
+      referenceWidthPx,
+      { minPx: 14, maxPx: heroMarqueeLayout.outerTileLiftAtBaseline },
+    ),
+    "--dd-hero-marquee-outer-lift-zone": String(
+      heroMarqueeLayout.outerLiftZoneFractionAtBaseline,
     ),
     "--dd-hero-marquee-fade-color": heroMarqueeLayout.fadeColor,
     "--dd-hero-marquee-fade-blur": `${heroMarqueeLayout.fadeBlurPx}px`,

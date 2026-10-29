@@ -23,7 +23,20 @@ export const siteFooterLayout = {
   barMaxWidthAtBaseline: 1280,
   barPaddingTopAtBaseline: 40,
   barPaddingBottomAtBaseline: 48,
-  barPaddingInlineAtBaseline: 32,
+  /**
+   * Distance from the **viewport** left edge to the brand block (1280px baseline).
+   * Smaller = DevInDays further left. Match header: see `edgePaddingAtBaseline` in `config/layout.ts`.
+   */
+  barPaddingInlineStartAtBaseline: 60,
+  /**
+   * Distance from the **viewport** right edge to social / copyright.
+   * Smaller = meta block further right.
+   */
+  barPaddingInlineEndAtBaseline: 60,
+  /** Nudge brand horizontally: negative = further left, positive = toward center. */
+  barBrandShiftInlineStartAtBaseline: 0,
+  /** Nudge meta horizontally: negative = further right, positive = toward center. */
+  barMetaShiftInlineEndAtBaseline: 0,
   brandNameFontSizeAtBaseline: 16,
   brandNameLineHeightAtBaseline: 24,
   brandNameLetterSpacingAtBaseline: -0.4,
