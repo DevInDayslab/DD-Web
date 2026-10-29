@@ -3,6 +3,7 @@ import {
   IBM_Plex_Mono,
   IBM_Plex_Sans,
   Instrument_Serif,
+  Newsreader,
   Plus_Jakarta_Sans,
   Space_Grotesk,
 } from "next/font/google";
@@ -38,6 +39,14 @@ export const fontHeadline = Instrument_Serif({
   weight: ["400"],
   style: ["normal", "italic"],
   variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+export const fontFaqHeadline = Newsreader({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-faq-headline",
   display: "swap",
 });
 
