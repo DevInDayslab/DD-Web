@@ -13,3 +13,9 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
 export function getCaseStudySlugs(): string[] {
   return caseStudies.map((study) => study.slug);
 }
+
+export {
+  getAllCaseStudyPages,
+  getCaseStudyPageBySlug,
+  publishedCaseStudySlugs,
+} from "@/content/case-studies/pages-registry";

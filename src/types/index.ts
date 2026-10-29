@@ -8,6 +8,22 @@ export type {
   PortfolioPageLayoutConfig,
 } from "@/types/portfolio-page";
 export type {
+  CaseStudyNarrativeBlock,
+  CaseStudyNarrativeContent,
+  CaseStudyNarrativeLayoutConfig,
+} from "@/types/case-study-narrative";
+export type {
+  CaseStudyBreadcrumb,
+  CaseStudyPageBrief,
+  CaseStudyPageContent,
+  CaseStudyPageHero,
+  CaseStudyPageIntro,
+  CaseStudyPageLayoutConfig,
+  CaseStudySpecRow,
+  CaseStudyStoreLink,
+  CaseStudyVideoAsset,
+} from "@/types/case-study-page";
+export type {
   HeroActionCopy,
   HeroActionVariant,
   HeroContentCopy,
