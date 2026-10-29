@@ -11,17 +11,27 @@ type FaqAccordionProps = {
 
 export function FaqAccordion({ content }: FaqAccordionProps) {
   const listId = useId();
-  const [openItemId, setOpenItemId] = useState<string | null>(content.defaultOpenItemId);
+  const [openItemIds, setOpenItemIds] = useState<ReadonlySet<string>>(() =>
+    content.defaultOpenItemId ? new Set([content.defaultOpenItemId]) : new Set(),
+  );
 
   const toggleItem = (itemId: string) => {
-    setOpenItemId((current) => (current === itemId ? null : itemId));
+    setOpenItemIds((current) => {
+      const next = new Set(current);
+      if (next.has(itemId)) {
+        next.delete(itemId);
+      } else {
+        next.add(itemId);
+      }
+      return next;
+    });
   };
 
   return (
     <div className="faq-section-body">
       <div className="faq-accordion" role="presentation">
         {content.items.map((item) => {
-          const isOpen = openItemId === item.id;
+          const isOpen = openItemIds.has(item.id);
           const panelId = `${listId}-${item.id}-panel`;
           const triggerId = `${listId}-${item.id}-trigger`;
 

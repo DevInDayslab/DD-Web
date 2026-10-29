@@ -11,6 +11,7 @@ import {
 import { chatgptCtaSectionLayoutToCssVars } from "@/lib/chatgpt-cta-section-layout-style";
 import { founderSectionLayoutToCssVars } from "@/lib/founder-section-layout-style";
 import { faqSectionLayoutToCssVars } from "@/lib/faq-section-layout-style";
+import { faqPageLayoutToCssVars } from "@/lib/faq-page-layout-style";
 import { siteFooterLayoutToCssVars } from "@/lib/site-footer-layout-style";
 import { projectQualifierLayoutToCssVars } from "@/lib/project-qualifier-layout-style";
 import { pricingSectionLayoutToCssVars } from "@/lib/pricing-section-layout-style";
@@ -36,6 +37,7 @@ export function SiteLayoutStyle() {
     ...founderSectionLayoutToCssVars(),
     ...pricingSectionLayoutToCssVars(),
     ...faqSectionLayoutToCssVars(),
+    ...faqPageLayoutToCssVars(),
     ...siteFooterLayoutToCssVars(),
     ...projectQualifierLayoutToCssVars(),
     ...portfolioPageLayoutToCssVars(),
