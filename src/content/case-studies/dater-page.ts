@@ -1,0 +1,79 @@
+import { daterCaseStudyNarrative } from "@/content/case-studies/dater-narrative";
+import { site } from "@/config/site";
+import type { CaseStudyPageContent } from "@/types/case-study-page";
+
+const materialPath = "src/content/material/case-studies/devindays-case-study-dater.md";
+const bookingHref = site.booking.embedUrl || "/#book";
+
+export const daterCaseStudyPage = {
+  slug: "dater",
+  materialPath,
+  meta: {
+    title: `Dater · Case Study · ${site.name}`,
+    description:
+      "A dating app built around a feed, not a swipe. Native iOS and Android, built end-to-end, from matchmaking logic to trust and safety.",
+    path: "/case-studies/dater",
+  },
+  intro: {
+    breadcrumb: {
+      projectName: "Dater",
+      industry: "Dating / Social",
+    },
+    headlineLines: ["A dating app built around a feed,", "not a swipe."],
+    subhead:
+      "Native iOS and Android, built end-to-end, from matchmaking logic to trust and safety.",
+  },
+  brief: {
+    storeLinks: [],
+    specRows: [
+      {
+        id: "client",
+        label: "Client",
+        value: "Datify Network Private Limited",
+      },
+      {
+        id: "industry",
+        label: "Industry",
+        value: "Dating / Social",
+      },
+      {
+        id: "services",
+        label: "Services",
+        value:
+          "Product design, iOS development (Swift/SwiftUI), Android development (Kotlin), backend development (Node.js), trust & safety integration",
+      },
+      {
+        id: "timeline",
+        label: "Timeline",
+        value: "~2.5 months for v1, plus a focused 1-month v2 pass",
+      },
+      {
+        id: "team",
+        label: "Team",
+        value: "Founder-led, with a team of 4 engineers",
+      },
+      {
+        id: "live",
+        label: "Live",
+        value: "dater.social",
+        href: "https://dater.social",
+      },
+    ],
+    portraitVideo: {},
+  },
+  placeholders: {
+    portraitVideo: "Dater walkthrough video — phone preview",
+  },
+  narrative: daterCaseStudyNarrative,
+  footer: {
+    archiveEyebrow: "Project archive",
+    liveLabel: "Live at dater.social ↗",
+    liveHref: "https://dater.social",
+    liveExternal: true,
+    bookCallLabel: site.booking.label,
+    bookCallHref: bookingHref,
+    bookCallAriaLabel: "Book a call with DevInDays",
+    previous: { slug: "invigil", label: "Invigil" },
+    next: { slug: "myndfe", label: "Myndfe" },
+  },
+} as const satisfies CaseStudyPageContent;

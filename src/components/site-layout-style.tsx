@@ -21,6 +21,8 @@ import {
 } from "@/lib/tools-section-layout-style";
 import { workSectionLayoutToCssVars } from "@/lib/work-section-layout-style";
 import { portfolioPageLayoutToCssVars } from "@/lib/portfolio-page-layout-style";
+import { caseStudyPageLayoutToCssVars } from "@/lib/case-study-page-layout-style";
+import { caseStudyNarrativeLayoutToCssVars } from "@/lib/case-study-narrative-layout-style";
 
 export function SiteLayoutStyle() {
   const rootVars = serializeCssCustomProperties({
@@ -37,6 +39,8 @@ export function SiteLayoutStyle() {
     ...siteFooterLayoutToCssVars(),
     ...projectQualifierLayoutToCssVars(),
     ...portfolioPageLayoutToCssVars(),
+    ...caseStudyPageLayoutToCssVars(),
+    ...caseStudyNarrativeLayoutToCssVars(),
   });
   const css = `:root{${rootVars}}.hero-flank{background:${heroFlanks.panel.gradient}}${heroMobileLayoutCssBlock()}${scalabilityMobileLayoutCssBlock()}${scalabilityPanelLayoutCssBlock()}${toolsSectionLayoutCssBlock()}`;
 

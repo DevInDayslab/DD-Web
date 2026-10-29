@@ -1,0 +1,18 @@
+export const caseStudyPageThemeColors = {
+  pageBackground: "#F2F3F5",
+  breadcrumb: "#44474A",
+  breadcrumbDot: "#C5C6CA",
+  headline: "#000000",
+  subhead: "#44474A",
+  previewBackground: "#0E1013",
+  previewBorder: "#E4E2DD",
+  previewPlaceholder: "rgba(255, 255, 255, 0.35)",
+  briefDivider: "#EAEAEA",
+  specLabel: "#A0A0A0",
+  specValue: "#14181C",
+  phoneShell: "#0E1013",
+  footerNavLink: "#44474A",
+  footerNavDivider: "#E4E2DD",
+  footerCtaBackground: "#436084",
+  footerCtaText: "#FFFFFF",
+} as const;
