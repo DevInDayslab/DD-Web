@@ -57,7 +57,10 @@ export type SiteFooterLayoutConfig = {
   barMaxWidthAtBaseline: number;
   barPaddingTopAtBaseline: number;
   barPaddingBottomAtBaseline: number;
-  barPaddingInlineAtBaseline: number;
+  barPaddingInlineStartAtBaseline: number;
+  barPaddingInlineEndAtBaseline: number;
+  barBrandShiftInlineStartAtBaseline: number;
+  barMetaShiftInlineEndAtBaseline: number;
   brandNameFontSizeAtBaseline: number;
   brandNameLineHeightAtBaseline: number;
   brandNameLetterSpacingAtBaseline: number;

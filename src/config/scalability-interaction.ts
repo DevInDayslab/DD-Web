@@ -11,25 +11,14 @@ export const scalabilityLetterBarInteraction = {
     damping: 26,
     mass: 0.88,
   },
-  alignScaleKeyframes: [1, 1.14, 0.96, 1] as const,
-  alignScaleTimes: [0, 0.32, 0.68, 1] as const,
-  alignLiftPx: 6,
-  alignMotionDurationSeconds: 0.58,
-  barHoverScale: 1.012,
-  barHoverSpring: {
-    stiffness: 400,
-    damping: 28,
-  },
+  /** Tile gap when hovered or expanded (baseline px). Default tile gap is layout `letterTileGapAtBaseline`. */
+  hoverLetterTileGapAtBaseline: 20,
   chevronRotateSpring: {
     stiffness: 420,
     damping: 26,
     mass: 0.8,
   },
-  panelExpandSpring: {
-    stiffness: 260,
-    damping: 32,
-    mass: 0.95,
-  },
-  panelContentFadeSeconds: 0.35,
-  panelContentStaggerSeconds: 0.07,
+  panelExpandDurationSeconds: 0.28,
+  panelContentFadeSeconds: 0.2,
+  panelContentStaggerSeconds: 0,
 } as const;

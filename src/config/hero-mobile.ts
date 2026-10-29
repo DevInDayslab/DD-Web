@@ -1,3 +1,5 @@
+import { heroMarqueeViewportOuterHeightAtBaseline } from "@/lib/hero-marquee-viewport-height";
+
 /**
  * Hero layout overrides applied below `breakpointMaxPx` only.
  * Desktop at 1280px baseline is unchanged (:root fluid vars).
@@ -25,8 +27,16 @@ export const heroMobileLayout = {
     actionFontSizePx: 11,
     actionHeightPx: 42,
     marqueeTopPx: 468,
-    marqueeHeightPx: 160,
+    marqueeVerticalNudgeUpPx: 56,
     marqueeViewportPaddingYPx: 28,
+    marqueeViewportBottomBleedPx: 32,
+    marqueeTrackHeightPx: 72,
+    marqueeHeightPx: heroMarqueeViewportOuterHeightAtBaseline({
+      viewportPaddingYAtBaseline: 28,
+      outerTileLiftAtBaseline: 22,
+      trackHeightAtBaseline: 72,
+      viewportBottomBleedAtBaseline: 32,
+    }),
     marqueeFadeWidthPx: 56,
     marqueeMaskOpaqueStartPercent: 8,
     marqueeMaskOpaqueEndPercent: 92,
@@ -36,6 +46,7 @@ export const heroMobileLayout = {
     marqueeTilePaddingPx: 8,
     marqueeTileGapPx: 8,
     marqueeScrollSpeedPxPerSecond: 28,
+    marqueeOuterLiftPx: 22,
     contourWidthPx: 300,
     contourHeightPx: 220,
     contourTopPx: 24,

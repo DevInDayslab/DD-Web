@@ -12,7 +12,6 @@ import { workCaseStudyGenieInteraction } from "@/config/work-interaction";
 import { workSectionLayout } from "@/config/work-section";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { genieOriginFromRects } from "@/lib/work-genie-origin";
-import { openRevealAmount } from "@/lib/work-genie-reveal";
 import type { WorkFeaturedCaseStudy, WorkSectionContent } from "@/types/work-section";
 
 type WorkSectionShowcaseProps = {
@@ -79,8 +78,9 @@ function measureGenieRects(
 
 export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSectionShowcaseProps) {
   const [activeCaseStudyId, setActiveCaseStudyId] = useState(content.defaultCaseStudyId);
+  const [displayedCaseStudyId, setDisplayedCaseStudyId] = useState(content.defaultCaseStudyId);
   const [genieActive, setGenieActive] = useState(false);
-  const [genieCardOpacity, setGenieCardOpacity] = useState(0);
+  const [genieCardOpacity, setGenieCardOpacity] = useState(1);
   const [genieSourceTileId, setGenieSourceTileId] = useState<string | null>(null);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const genieRef = useRef<WorkGenieCanvasHandle>(null);
@@ -96,11 +96,11 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
     return map;
   }, [content.caseStudies]);
 
-  const activeCaseStudy =
-    caseStudyById.get(activeCaseStudyId) ?? content.caseStudies[0];
+  const displayedCaseStudy =
+    caseStudyById.get(displayedCaseStudyId) ?? content.caseStudies[0];
 
-  const syncOpenCrossfade = useCallback((progress: number) => {
-    setGenieCardOpacity(openRevealAmount(progress));
+  const swapDisplayedCaseStudy = useCallback((caseStudyId: string) => {
+    setDisplayedCaseStudyId((current) => (current === caseStudyId ? current : caseStudyId));
   }, []);
 
   const runCssGenieFallback = useCallback(
@@ -117,12 +117,9 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
       cardHost.style.transformOrigin = `${origin.xPercent}% ${origin.yPercent}%`;
 
       const {
-        minimizeDurationSeconds,
         expandDurationSeconds,
         minimizeScaleX,
         minimizeScaleY,
-        minimizeOpacity,
-        minimizeSkewYDeg,
         expandSkewYDeg,
         minimizeEase,
         expandEase,
@@ -133,13 +130,13 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
         {
           scaleX: minimizeScaleX,
           scaleY: minimizeScaleY,
-          opacity: minimizeOpacity,
-          skewY: minimizeSkewYDeg,
+          opacity: 1,
+          skewY: expandSkewYDeg,
         },
-        { duration: minimizeDurationSeconds, ease: minimizeEase },
+        { duration: 0 },
       );
 
-      setActiveCaseStudyId(caseStudyId);
+      swapDisplayedCaseStudy(caseStudyId);
       await waitForLayout();
 
       await animateCard(
@@ -159,7 +156,7 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
         { duration: expandDurationSeconds * 0.65, ease: expandEase },
       );
     },
-    [animateCard, cardHostRef],
+    [animateCard, cardHostRef, swapDisplayedCaseStudy],
   );
 
   const handleCaseStudySelect = useCallback(
@@ -174,17 +171,28 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
       }
 
       transitioningRef.current = true;
+      setActiveCaseStudyId(caseStudyId);
       const tileConfig = content.marqueeTiles.find((tile) => tile.caseStudyId === caseStudyId);
       setGenieSourceTileId(tileConfig?.id ?? null);
       setGenieActive(true);
-      setGenieCardOpacity(0);
+      setGenieCardOpacity(1);
 
       const cardHost = cardHostRef.current;
-      let { tileRect, cardRect, iconRadius, expandedRadius } = measureGenieRects(
+      const { tileRect, cardRect, iconRadius, expandedRadius } = measureGenieRects(
         tileElement,
         cardHost,
       );
       const imageSrc = logoSrcForCaseStudy(content, caseStudyId);
+      const { openCardRevealStartProgress } = workCaseStudyGenieInteraction;
+      let didSwapDisplayed = false;
+
+      const maybeSwapDisplayed = (progress: number) => {
+        if (didSwapDisplayed || progress < openCardRevealStartProgress) {
+          return;
+        }
+        didSwapDisplayed = true;
+        swapDisplayedCaseStudy(caseStudyId);
+      };
 
       const canUseWebGl =
         !prefersReducedMotion &&
@@ -199,31 +207,12 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
             cardRect,
             iconRadius,
             expandedRadius,
-            imageSrc: null,
-            phase: "toTile",
-          });
-
-          setActiveCaseStudyId(caseStudyId);
-          await waitForLayout();
-
-          ({ tileRect, cardRect, iconRadius, expandedRadius } = measureGenieRects(
-            tileElement,
-            cardHost,
-          ));
-
-          await genieRef.current.runPhase({
-            tileRect,
-            cardRect,
-            iconRadius,
-            expandedRadius,
             imageSrc,
             phase: "toCard",
-            onProgress: (progress) => {
-              syncOpenCrossfade(progress);
-            },
+            onProgress: maybeSwapDisplayed,
           });
 
-          setGenieCardOpacity(1);
+          swapDisplayedCaseStudy(caseStudyId);
         } catch {
           setGenieActive(false);
           setGenieCardOpacity(1);
@@ -249,7 +238,7 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
       content,
       prefersReducedMotion,
       runCssGenieFallback,
-      syncOpenCrossfade,
+      swapDisplayedCaseStudy,
     ],
   );
 
@@ -279,7 +268,7 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
         }
       >
         <WorkFeaturedCard
-          caseStudy={activeCaseStudy}
+          caseStudy={displayedCaseStudy}
           phonePlaceholderLabel={phonePlaceholderLabel}
         />
       </div>

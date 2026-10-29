@@ -1,4 +1,5 @@
 import { layoutBaseline } from "@/config/layout";
+import { scalabilityLetterBarInteraction } from "@/config/scalability-interaction";
 import { scalabilityPanelLayout } from "@/config/scalability-panel";
 import { scalabilityThemeColors } from "@/config/scalability-theme";
 import { fluidLength } from "@/lib/fluid";
@@ -18,6 +19,7 @@ function fluid(
 
 export function scalabilityPanelLayoutToCssVars(): Record<string, string> {
   return {
+    "--dd-scalability-panel-expand-duration": `${scalabilityLetterBarInteraction.panelExpandDurationSeconds}s`,
     "--dd-scalability-panel-backdrop-padding-y": fluid(layout.panelBackdropPaddingYAtBaseline, {
       minPx: 32,
       maxPx: layout.panelBackdropPaddingYAtBaseline,
