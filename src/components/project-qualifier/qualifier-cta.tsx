@@ -34,7 +34,7 @@ export function QualifierCta({ href, label, className, ariaLabel, children }: Qu
       type="button"
       className={className}
       aria-label={ariaLabel ?? label}
-      onClick={open}
+      onClick={() => open()}
     >
       {children}
     </button>

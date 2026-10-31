@@ -9,9 +9,15 @@ import {
   type ReactNode,
 } from "react";
 
+type OpenOptions = {
+  /** ISO time picked elsewhere (for example on the contact page) to carry into the booking step. */
+  slot?: string;
+};
+
 type ProjectQualifierContextValue = {
   isOpen: boolean;
-  open: () => void;
+  initialSlot: string | null;
+  open: (options?: OpenOptions) => void;
   close: () => void;
 };
 
@@ -19,8 +25,10 @@ const ProjectQualifierContext = createContext<ProjectQualifierContextValue | nul
 
 export function ProjectQualifierProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [initialSlot, setInitialSlot] = useState<string | null>(null);
 
-  const open = useCallback(() => {
+  const open = useCallback((options?: OpenOptions) => {
+    setInitialSlot(options?.slot ?? null);
     setIsOpen(true);
   }, []);
 
@@ -29,12 +37,8 @@ export function ProjectQualifierProvider({ children }: { children: ReactNode }) 
   }, []);
 
   const value = useMemo(
-    () => ({
-      isOpen,
-      open,
-      close,
-    }),
-    [close, isOpen, open],
+    () => ({ isOpen, initialSlot, open, close }),
+    [close, initialSlot, isOpen, open],
   );
 
   return (

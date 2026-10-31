@@ -1,16 +1,23 @@
 "use client";
 
-import { ProjectQualifierBudgetSlider } from "@/components/project-qualifier/project-qualifier-budget-slider";
+import { BookingPicker } from "@/components/booking-picker";
+import {
+  ProjectQualifierRangeSlider,
+  formatBudgetRange,
+} from "@/components/project-qualifier/project-qualifier-range-slider";
 import { useProjectQualifier } from "@/components/project-qualifier/project-qualifier-provider";
 import { RevealText } from "@/components/reveal-text";
 import { site } from "@/config/site";
 import { projectQualifierSettings } from "@/config/project-qualifier";
 import { projectQualifierContent } from "@/content/project-qualifier";
+import { formatSlotDay, formatSlotTime } from "@/lib/booking-slots";
 import type {
   ProjectQualifierFormValues,
   ProjectQualifierStep,
+  ProjectQualifierStepId,
 } from "@/types/project-qualifier";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -19,6 +26,7 @@ const steps = content.steps;
 const totalSteps = projectQualifierSettings.totalSteps;
 
 type Phase = "welcome" | "steps" | "success";
+type ShellMode = "welcome" | "normal" | "wide";
 
 const emptyFormValues = (): ProjectQualifierFormValues => ({
   fullName: "",
@@ -39,6 +47,11 @@ function formatStepBadge(current: number, total: number): string {
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function formatBookedTime(iso: string): string {
+  const date = new Date(iso);
+  return `${formatSlotDay(date)} · ${formatSlotTime(date)}`;
 }
 
 function EnterKey() {
@@ -63,11 +76,45 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   );
 }
 
+const STEP_ICON_PATHS: Record<ProjectQualifierStepId, string[]> = {
+  fullName: ["M12 12a4 4 0 100-8 4 4 0 000 8z", "M4.5 20c.8-3.4 3.8-5.5 7.5-5.5s6.7 2.1 7.5 5.5"],
+  workEmail: ["M4 6.5h16v11H4z", "M4.5 7l7.5 6 7.5-6"],
+  book: ["M5 6.5h14v13H5z", "M5 10.5h14", "M8.5 4v4M15.5 4v4"],
+  companyName: ["M5 20V5.5h9V20", "M14 10h5v10", "M8 9h3M8 12.5h3M8 16h3", "M3.5 20h17"],
+  websiteOrFigma: [
+    "M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1",
+    "M14 10a4 4 0 00-5.7 0l-3 3A4 4 0 0011 18.7l1-1",
+  ],
+  projectStage: ["M6 20V4.5", "M6 5h11l-2.5 3.5L17 12H6"],
+  budget: [
+    "M12 3.5v17",
+    "M16 7.5c-.7-1.3-2.2-2-4-2-2.4 0-4 1.1-4 2.9 0 4 8.2 1.7 8.2 5.7 0 1.9-1.7 3.1-4.2 3.1-2 0-3.6-.8-4.3-2.2",
+  ],
+  timeline: ["M12 20a8 8 0 100-16 8 8 0 000 16z", "M12 7.5V12l3 2"],
+};
+
+function StepIcon({ id }: { id: ProjectQualifierStepId }) {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden>
+      {STEP_ICON_PATHS[id].map((d) => (
+        <path
+          key={d}
+          d={d}
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ))}
+    </svg>
+  );
+}
+
 export function ProjectQualifierModal() {
-  const { isOpen, close } = useProjectQualifier();
+  const { isOpen, close, initialSlot } = useProjectQualifier();
   const reducedMotion = useReducedMotion();
   const dialogTitleId = useId();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<Phase>("welcome");
@@ -78,13 +125,19 @@ export function ProjectQualifierModal() {
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [cardHeight, setCardHeight] = useState<number | null>(null);
-  const [bookingLoaded, setBookingLoaded] = useState(false);
   // While one screen is leaving, the card keeps its size; it resizes as the next screen arrives.
   const [holdLayout, setHoldLayout] = useState(false);
-  const [shellWide, setShellWide] = useState(false);
+  const [shellMode, setShellMode] = useState<ShellMode>("welcome");
   const firstScreenRef = useRef(true);
 
-  // Focus a text field the moment it appears (screens now mount after the previous one has left).
+  const budgetStep = useMemo(() => steps.find((entry) => entry.kind === "budget"), []);
+  const [budgetRange, setBudgetRange] = useState<[number, number]>(() =>
+    budgetStep && budgetStep.kind === "budget"
+      ? [budgetStep.defaultLow, budgetStep.defaultHigh]
+      : [0, 0],
+  );
+
+  // Focus a text field the moment it appears (screens mount after the previous one has left).
   const setInputRef = useCallback((element: HTMLInputElement | null) => {
     inputRef.current = element;
     if (element) {
@@ -102,15 +155,6 @@ export function ProjectQualifierModal() {
     ? { duration: 0 }
     : { type: "spring" as const, stiffness: 340, damping: 32, mass: 0.9 };
 
-  const budgetIndex = useMemo(() => {
-    const step = steps.find((entry) => entry.id === "budget");
-    if (!step || step.kind !== "budget") {
-      return 0;
-    }
-    const index = step.options.findIndex((option) => option.id === values.budget);
-    return index >= 0 ? index : 0;
-  }, [values.budget]);
-
   const reset = useCallback(() => {
     setPhase("welcome");
     setStepIndex(0);
@@ -119,8 +163,10 @@ export function ProjectQualifierModal() {
     setValues(emptyFormValues());
     setError(null);
     setSubmitting(false);
-    setBookingLoaded(false);
-  }, []);
+    if (budgetStep && budgetStep.kind === "budget") {
+      setBudgetRange([budgetStep.defaultLow, budgetStep.defaultHigh]);
+    }
+  }, [budgetStep]);
 
   const handleClose = useCallback(() => {
     close();
@@ -132,15 +178,23 @@ export function ProjectQualifierModal() {
     setMounted(true);
   }, []);
 
-  // Budget starts on its first option so the slider always has a value.
+  // A time picked elsewhere (the contact page calendar) arrives preselected.
   useEffect(() => {
-    if (!isOpen || phase !== "steps") {
+    if (isOpen && initialSlot) {
+      setValues((prev) => ({ ...prev, book: initialSlot }));
+    }
+  }, [initialSlot, isOpen]);
+
+  // The budget range always has a value once its step is reached.
+  useEffect(() => {
+    if (phase !== "steps" || currentStep?.kind !== "budget") {
       return;
     }
-    if (currentStep?.kind === "budget" && !values.budget && currentStep.options[0]) {
-      setValues((prev) => ({ ...prev, budget: currentStep.options[0].id }));
-    }
-  }, [currentStep, isOpen, phase, values.budget]);
+    const max = currentStep.max;
+    setValues((prev) =>
+      prev.budget ? prev : { ...prev, budget: formatBudgetRange(budgetRange[0], budgetRange[1], max) },
+    );
+  }, [budgetRange, currentStep, phase]);
 
   // Lock page scroll while the flow is open.
   useEffect(() => {
@@ -178,10 +232,16 @@ export function ProjectQualifierModal() {
     return () => window.clearTimeout(safety);
   }, [screenKey]);
 
-  // The shell widens for the calendar only once the calendar is the thing on screen.
+  // The shell changes width only once the screen that needs it is the one on show.
   useEffect(() => {
     if (!holdLayout) {
-      setShellWide(phase === "steps" && currentStep?.kind === "booking");
+      setShellMode(
+        phase === "welcome"
+          ? "welcome"
+          : phase === "steps" && currentStep?.kind === "booking"
+            ? "wide"
+            : "normal",
+      );
     }
   }, [currentStep, holdLayout, phase]);
 
@@ -190,6 +250,14 @@ export function ProjectQualifierModal() {
       return false;
     }
     if (currentStep.kind === "booking") {
+      if (!values.book) {
+        setError(content.booking.missingTime);
+        return false;
+      }
+      setError(null);
+      return true;
+    }
+    if (currentStep.kind === "budget") {
       setError(null);
       return true;
     }
@@ -272,7 +340,11 @@ export function ProjectQualifierModal() {
         const response = await fetch(endpoint, {
           method: "POST",
           headers: { Accept: "application/json", "Content-Type": "application/json" },
-          body: JSON.stringify({ ...values, _subject: "DevInDays project qualifier" }),
+          body: JSON.stringify({
+            ...values,
+            bookingLabel: values.book ? formatBookedTime(values.book) : "",
+            _subject: "DevInDays project qualifier",
+          }),
         });
         if (!response.ok) {
           throw new Error("Submit failed");
@@ -290,13 +362,10 @@ export function ProjectQualifierModal() {
     }
   }, [goToStep, phase, start, stepIndex, submitting, validateStep, values]);
 
-  const selectChoice = useCallback(
-    (step: ProjectQualifierStep, optionId: string) => {
-      setValues((prev) => ({ ...prev, [step.id]: optionId }));
-      setError(null);
-    },
-    [],
-  );
+  const setValue = useCallback((id: ProjectQualifierStepId, value: string) => {
+    setValues((prev) => ({ ...prev, [id]: value }));
+    setError(null);
+  }, []);
 
   // Keyboard: Enter continues, Escape closes, 1-9 and arrows pick options.
   useEffect(() => {
@@ -328,44 +397,38 @@ export function ProjectQualifierModal() {
           handleClose();
           return;
         }
-        // Booking happens inside the calendar, so moving on is always a deliberate click.
-        if (phase === "steps" && currentStep?.kind === "booking") {
-          return;
-        }
         void goNext();
         return;
       }
 
-      if (phase !== "steps" || !currentStep || typing) {
+      if (phase !== "steps" || !currentStep || typing || currentStep.kind !== "choice") {
         return;
       }
 
-      if (currentStep.kind === "choice") {
-        const options = currentStep.options;
-        const currentIndex = options.findIndex((option) => option.id === values[currentStep.id]);
-        if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-          event.preventDefault();
-          const delta = event.key === "ArrowDown" ? 1 : -1;
-          const next =
-            currentIndex < 0
-              ? delta > 0
-                ? 0
-                : options.length - 1
-              : (currentIndex + delta + options.length) % options.length;
-          selectChoice(currentStep, options[next].id);
-          return;
-        }
-        const digit = Number.parseInt(event.key, 10);
-        if (digit >= 1 && digit <= options.length) {
-          event.preventDefault();
-          selectChoice(currentStep, options[digit - 1].id);
-        }
+      const options = currentStep.options;
+      const currentIndex = options.findIndex((option) => option.id === values[currentStep.id]);
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        const delta = event.key === "ArrowDown" ? 1 : -1;
+        const next =
+          currentIndex < 0
+            ? delta > 0
+              ? 0
+              : options.length - 1
+            : (currentIndex + delta + options.length) % options.length;
+        setValue(currentStep.id, options[next].id);
+        return;
+      }
+      const digit = Number.parseInt(event.key, 10);
+      if (digit >= 1 && digit <= options.length) {
+        event.preventDefault();
+        setValue(currentStep.id, options[digit - 1].id);
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [currentStep, goNext, handleClose, isOpen, phase, selectChoice, values]);
+  }, [currentStep, goNext, handleClose, isOpen, phase, setValue, values]);
 
   const stepVariants = {
     enter: (dir: number) => ({
@@ -394,11 +457,16 @@ export function ProjectQualifierModal() {
   }
 
   const isLast = stepIndex >= steps.length - 1;
+  const bookedLabel = values.book ? formatBookedTime(values.book) : "";
   const primaryLabel = submitting
     ? content.submittingLabel
-    : isLast
-      ? content.submitLabel
-      : content.continueLabel;
+    : currentStep?.kind === "booking"
+      ? bookedLabel
+        ? content.booking.confirmWithTimeTemplate.replace("{time}", bookedLabel)
+        : content.booking.confirmLabel
+      : isLast
+        ? content.submitLabel
+        : content.continueLabel;
 
   return createPortal(
     <AnimatePresence>
@@ -428,7 +496,7 @@ export function ProjectQualifierModal() {
             </svg>
           </button>
 
-          <div className={`qf-shell${shellWide ? " qf-shell--wide" : ""}`}>
+          <div className={`qf-shell qf-shell--${shellMode}`}>
             <motion.p
               className="qf-brand"
               initial={{ opacity: 0, y: -8 }}
@@ -517,9 +585,9 @@ export function ProjectQualifierModal() {
                     >
                       {phase === "welcome" ? (
                         <div className="qf-welcome">
-                          <p className="qf-eyebrow">
-                            <span className="qf-eyebrow-marker" aria-hidden />
-                            <span className="qf-eyebrow-text">{content.welcome.eyebrow}</span>
+                          <p className="qf-chip">
+                            <span className="qf-chip-dot" aria-hidden />
+                            {content.welcome.chip}
                           </p>
                           <RevealText
                             as="h2"
@@ -536,15 +604,65 @@ export function ProjectQualifierModal() {
                           >
                             {content.welcome.body}
                           </motion.p>
+
+                          <ol className="qf-journey">
+                            {content.welcome.journey.map((item, index) => (
+                              <motion.li
+                                key={item.title}
+                                className="qf-journey-item"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ ...spring, delay: reducedMotion ? 0 : 0.45 + index * 0.07 }}
+                              >
+                                <span className="qf-journey-number" aria-hidden>
+                                  {index + 1}
+                                </span>
+                                <span className="qf-journey-title">{item.title}</span>
+                                <span className="qf-journey-body">{item.body}</span>
+                              </motion.li>
+                            ))}
+                          </ol>
+
                           <motion.div
+                            className="qf-welcome-cta"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.45 }}
+                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.7 }}
                           >
                             <button type="button" className="qf-primary" onClick={start}>
                               <span>{content.welcome.startLabel}</span>
                               <EnterKey />
                             </button>
+                            <div className="qf-welcome-foot">
+                              <span className="qf-team">
+                                <span className="qf-avatars" aria-hidden>
+                                  {content.welcome.team.initials.map((initials, index) => (
+                                    <span key={initials} className={`qf-avatar qf-avatar--${index}`}>
+                                      {initials}
+                                    </span>
+                                  ))}
+                                </span>
+                                {content.welcome.team.label}
+                              </span>
+                              <span className="qf-duration">
+                                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden>
+                                  <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
+                                  <path
+                                    d="M8 4.8V8l2.2 1.4"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                  />
+                                </svg>
+                                {content.welcome.duration}
+                              </span>
+                            </div>
+                            <p className="qf-alternate">
+                              {content.welcome.alternate.text}{" "}
+                              <Link href={content.welcome.alternate.href} onClick={handleClose}>
+                                {content.welcome.alternate.linkLabel}
+                              </Link>
+                            </p>
                           </motion.div>
                         </div>
                       ) : null}
@@ -553,7 +671,7 @@ export function ProjectQualifierModal() {
                         <div className="qf-step">
                           <div className="qf-step-meta">
                             <span className="qf-mark" aria-hidden>
-                              D
+                              <StepIcon id={currentStep.id} />
                             </span>
                             <span className="qf-counter">{formatStepBadge(stepIndex + 1, totalSteps)}</span>
                           </div>
@@ -566,20 +684,7 @@ export function ProjectQualifierModal() {
                           <div className="qf-field">
                             {currentStep.kind === "booking" ? (
                               <div className="qf-booking">
-                                <div className="qf-booking-frame">
-                                  {!bookingLoaded ? (
-                                    <div className="qf-booking-loading" aria-live="polite">
-                                      <span className="qf-spinner qf-spinner--dark" aria-hidden />
-                                      {content.booking.loadingLabel}
-                                    </div>
-                                  ) : null}
-                                  <iframe
-                                    className="qf-booking-embed"
-                                    title={currentStep.question}
-                                    src={site.booking.scheduleEmbedUrl}
-                                    onLoad={() => setBookingLoaded(true)}
-                                  />
-                                </div>
+                                <BookingPicker value={values.book} onChange={(iso) => setValue("book", iso)} />
                                 <p className="qf-booking-fallback">
                                   {content.booking.fallbackText}{" "}
                                   <a href={site.booking.scheduleUrl} target="_blank" rel="noopener noreferrer">
@@ -616,13 +721,7 @@ export function ProjectQualifierModal() {
                                   placeholder={currentStep.placeholder}
                                   value={values[currentStep.id]}
                                   aria-invalid={Boolean(error)}
-                                  onChange={(event) => {
-                                    setValues((prev) => ({
-                                      ...prev,
-                                      [currentStep.id]: event.target.value,
-                                    }));
-                                    setError(null);
-                                  }}
+                                  onChange={(event) => setValue(currentStep.id, event.target.value)}
                                 />
                               </label>
                             ) : null}
@@ -639,7 +738,7 @@ export function ProjectQualifierModal() {
                                       aria-checked={selected}
                                       className={`qf-option${selected ? " qf-option--active" : ""}`}
                                       whileTap={reducedMotion ? undefined : { scale: 0.985 }}
-                                      onClick={() => selectChoice(currentStep, option.id)}
+                                      onClick={() => setValue(currentStep.id, option.id)}
                                     >
                                       <span className="qf-option-key" aria-hidden>
                                         {index + 1}
@@ -668,15 +767,16 @@ export function ProjectQualifierModal() {
                             ) : null}
 
                             {currentStep.kind === "budget" ? (
-                              <ProjectQualifierBudgetSlider
-                                options={currentStep.options}
-                                valueIndex={budgetIndex}
+                              <ProjectQualifierRangeSlider
+                                min={currentStep.min}
+                                max={currentStep.max}
+                                step={currentStep.step}
+                                low={budgetRange[0]}
+                                high={budgetRange[1]}
                                 ariaLabel={currentStep.question}
-                                onChange={(index) => {
-                                  const option = currentStep.options[index];
-                                  if (option) {
-                                    selectChoice(currentStep, option.id);
-                                  }
+                                onChange={(low, high) => {
+                                  setBudgetRange([low, high]);
+                                  setValue("budget", formatBudgetRange(low, high, currentStep.max));
                                 }}
                               />
                             ) : null}
@@ -707,46 +807,47 @@ export function ProjectQualifierModal() {
                               type="button"
                               className="qf-primary"
                               disabled={submitting}
-                              onClick={() => {
-                                if (currentStep.kind === "booking") {
-                                  setValues((prev) => ({ ...prev, book: "booked" }));
-                                }
-                                void goNext();
-                              }}
+                              onClick={() => void goNext()}
                             >
-                              <span>
-                                {currentStep.kind === "booking" ? content.booking.doneLabel : primaryLabel}
-                              </span>
-                              {submitting ? (
-                                <span className="qf-spinner" aria-hidden />
-                              ) : currentStep.kind === "booking" ? null : (
-                                <EnterKey />
-                              )}
+                              <span>{primaryLabel}</span>
+                              {submitting ? <span className="qf-spinner" aria-hidden /> : <EnterKey />}
                             </button>
-                            {currentStep.kind === "booking" ? (
-                              <button
-                                type="button"
-                                className="qf-skip"
-                                onClick={() => {
-                                  setValues((prev) => ({ ...prev, book: "skipped" }));
-                                  goToStep(stepIndex + 1, 1);
-                                }}
-                              >
-                                {content.booking.laterLabel}
-                              </button>
-                            ) : null}
                             {"optional" in currentStep && currentStep.optional ? (
                               <button
                                 type="button"
                                 className="qf-skip"
                                 onClick={() => {
-                                  setValues((prev) => ({ ...prev, [currentStep.id]: "" }));
+                                  setValue(currentStep.id, "");
                                   goToStep(stepIndex + 1, 1);
                                 }}
                               >
                                 {content.skipLabel}
                               </button>
                             ) : null}
+                          </div>
+
+                          <div className="qf-hints">
+                            {stepIndex > 0 ? (
+                              <button type="button" className="qf-hint-back" onClick={goBack}>
+                                ← {content.hints.back}
+                              </button>
+                            ) : (
+                              <span />
+                            )}
+                            <span className="qf-hint-keys" aria-hidden>
+                              {currentStep.kind === "choice" ? (
+                                <span>
+                                  <kbd>1</kbd>
+                                  <kbd>{currentStep.options.length}</kbd> {content.hints.pick}
+                                </span>
+                              ) : null}
+                              <span>
+                                <kbd>↵</kbd> {content.hints.continue}
+                              </span>
+                              <span>
+                                <kbd>esc</kbd> {content.hints.close}
+                              </span>
+                            </span>
                           </div>
                         </div>
                       ) : null}
@@ -780,6 +881,17 @@ export function ProjectQualifierModal() {
                             text={content.successTitle}
                             delay={0.25}
                           />
+                          {bookedLabel ? (
+                            <motion.p
+                              className="qf-booked"
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ ...spring, delay: reducedMotion ? 0 : 0.5 }}
+                            >
+                              <span>{content.booking.summaryLabel}</span>
+                              {bookedLabel}
+                            </motion.p>
+                          ) : null}
                           <motion.p
                             className="qf-description"
                             initial={{ opacity: 0, y: 8 }}

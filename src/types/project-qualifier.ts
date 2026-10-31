@@ -33,7 +33,12 @@ export type ProjectQualifierChoiceStep = ProjectQualifierStepBase & {
 
 export type ProjectQualifierBudgetStep = ProjectQualifierStepBase & {
   kind: "budget";
-  options: readonly ProjectQualifierChoiceOption[];
+  /** Slider bounds in dollars; the top of the track means "and up". */
+  min: number;
+  max: number;
+  step: number;
+  defaultLow: number;
+  defaultHigh: number;
 };
 
 export type ProjectQualifierBookingStep = ProjectQualifierStepBase & {
@@ -69,17 +74,28 @@ export type ProjectQualifierContent = {
   nextLabel: string;
   closeLabel: string;
   booking: {
-    doneLabel: string;
-    laterLabel: string;
+    confirmLabel: string;
+    confirmWithTimeTemplate: string;
     fallbackText: string;
     fallbackLinkLabel: string;
-    loadingLabel: string;
+    missingTime: string;
+    summaryLabel: string;
   };
   welcome: {
-    eyebrow: string;
+    chip: string;
     title: string;
     body: string;
     startLabel: string;
+    duration: string;
+    journey: readonly { title: string; body: string }[];
+    team: { initials: readonly string[]; label: string };
+    alternate: { text: string; linkLabel: string; href: string };
+  };
+  hints: {
+    continue: string;
+    close: string;
+    pick: string;
+    back: string;
   };
   errors: {
     required: string;
