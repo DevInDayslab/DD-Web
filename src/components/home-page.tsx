@@ -1,4 +1,6 @@
 import { HomeHero } from "@/components/home-hero";
+import { JsonLd } from "@/components/json-ld";
+import { site } from "@/config/site";
 import { ScalabilitySection } from "@/components/scalability-section";
 import { ChatGptCtaSection } from "@/components/chatgpt-cta-section";
 import { FounderSection } from "@/components/founder-section";
@@ -15,10 +17,12 @@ import { pricingSectionContent } from "@/content/pricing-section";
 import { testimonialsSectionContent } from "@/content/testimonials-section";
 import { toolsSectionContent } from "@/content/tools-section";
 import { workSectionContent, workSectionUiCopy } from "@/content/work-section";
+import { faqPageJsonLd } from "@/lib/schema";
 
 export function HomePage() {
   return (
     <div className="home-page">
+      <JsonLd data={faqPageJsonLd(site, faqSectionContent.items)} />
       <HomeHero />
       <ScalabilitySection content={scalabilitySectionContent} />
       <WorkSection

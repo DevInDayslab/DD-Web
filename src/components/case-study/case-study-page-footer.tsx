@@ -49,9 +49,13 @@ export function CaseStudyPageFooterSection({ footer }: CaseStudyPageFooterSectio
       <div className="case-study-page-footer-archive">
         <div className="case-study-page-footer-live">
           <p className="case-study-page-footer-archive-eyebrow">{footer.archiveEyebrow}</p>
-          <a href={footer.liveHref} className="case-study-page-footer-live-link" {...liveLinkProps}>
-            {footer.liveLabel}
-          </a>
+          {footer.liveHref ? (
+            <a href={footer.liveHref} className="case-study-page-footer-live-link" {...liveLinkProps}>
+              {footer.liveLabel}
+            </a>
+          ) : (
+            <p className="case-study-page-footer-live-link">{footer.liveLabel}</p>
+          )}
         </div>
         <QualifierCta
           href={footer.bookCallHref}

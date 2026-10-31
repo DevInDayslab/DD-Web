@@ -34,5 +34,5 @@ export const projectQualifierLayout = {
 
 export const projectQualifierSettings = {
   enabled: true,
-  totalSteps: 7,
+  totalSteps: 8,
 } as const;

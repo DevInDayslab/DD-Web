@@ -10,6 +10,10 @@ export type ThemeColors = {
 };
 
 export type ThemeShadows = {
+  /** Elevation scale: xs = chips/tiles, sm = cards, md = raised/floating. Light from above, no x-offset. */
+  xs: string;
+  sm: string;
+  md: string;
   cta: string;
   ctaSecondary: string;
 };

@@ -1,6 +1,7 @@
 export type ProjectQualifierStepId =
   | "fullName"
   | "workEmail"
+  | "book"
   | "companyName"
   | "websiteOrFigma"
   | "projectStage"
@@ -35,7 +36,12 @@ export type ProjectQualifierBudgetStep = ProjectQualifierStepBase & {
   options: readonly ProjectQualifierChoiceOption[];
 };
 
+export type ProjectQualifierBookingStep = ProjectQualifierStepBase & {
+  kind: "booking";
+};
+
 export type ProjectQualifierStep =
+  | ProjectQualifierBookingStep
   | ProjectQualifierTextStep
   | ProjectQualifierChoiceStep
   | ProjectQualifierBudgetStep;
@@ -43,6 +49,8 @@ export type ProjectQualifierStep =
 export type ProjectQualifierFormValues = {
   fullName: string;
   workEmail: string;
+  /** "booked" or "skipped" once the booking step has been answered. */
+  book: string;
   companyName: string;
   websiteOrFigma: string;
   projectStage: string;
@@ -55,11 +63,29 @@ export type ProjectQualifierContent = {
   stepBadgeTemplate: string;
   continueLabel: string;
   submitLabel: string;
+  submittingLabel: string;
+  skipLabel: string;
+  backLabel: string;
+  nextLabel: string;
   closeLabel: string;
-  keyboardHint: {
-    press: string;
-    enter: string;
-    orClickContinue: string;
+  booking: {
+    doneLabel: string;
+    laterLabel: string;
+    fallbackText: string;
+    fallbackLinkLabel: string;
+    loadingLabel: string;
+  };
+  welcome: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    startLabel: string;
+  };
+  errors: {
+    required: string;
+    email: string;
+    choice: string;
+    submit: string;
   };
   successTitle: string;
   successBody: string;

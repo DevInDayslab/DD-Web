@@ -51,7 +51,8 @@ export type CaseStudyPageFooterNavLink = {
 export type CaseStudyPageFooter = {
   archiveEyebrow: string;
   liveLabel: string;
-  liveHref: string;
+  /** Omit until the product has a public link; the label renders as plain text. */
+  liveHref?: string;
   liveExternal?: boolean;
   bookCallLabel: string;
   bookCallHref: string;

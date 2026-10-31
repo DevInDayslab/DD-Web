@@ -4,7 +4,7 @@ export const siteFooterThemeColors = {
   headlineTextShadow: "0 1px 1px rgba(0, 0, 0, 0.08), 0 12px 40px rgba(0, 0, 0, 0.35)",
   ctaBackground: "#FFFFFF",
   ctaText: "#14181C",
-  ctaShadow: "0px 8px 30px rgba(0, 0, 0, 0.25)",
+  ctaShadow: "var(--dd-shadow-md)",
   barBorder: "rgba(255, 255, 255, 0.1)",
   brandName: "#FFFFFF",
   brandTagline: "rgba(255, 255, 255, 0.5)",

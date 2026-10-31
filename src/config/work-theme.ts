@@ -4,8 +4,8 @@ export const workThemeColors = {
   badge: "rgba(110, 114, 118, 0.8)",
   featuredCardBackground: "#FFFFFF",
   featuredCardBorder: "#EAEAEA",
-  featuredCardShadow: "2px 1px 4px rgba(0, 0, 0, 0.05)",
-  showcaseShadow: "2px 4px 10px rgba(0, 0, 0, 0.25)",
+  featuredCardShadow: "var(--dd-shadow-sm)",
+  showcaseShadow: "0px 12px 28px rgba(17, 22, 27, 0.12)",
   tagsDivider: "#F0ECE1",
   tagBackground: "#FAF9F5",
   tagBorder: "#EAE7DF",
@@ -15,5 +15,5 @@ export const workThemeColors = {
   phoneBackground: "#000000",
   marqueeTileBackground: "#FFFFFF",
   marqueeTileBorder: "#868686",
-  marqueeTileShadow: "0px 6px 14px rgba(20, 24, 28, 0.1)",
+  marqueeTileShadow: "var(--dd-shadow-sm)",
 } as const;

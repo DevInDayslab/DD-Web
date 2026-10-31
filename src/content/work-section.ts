@@ -1,8 +1,5 @@
 import type { WorkSectionContent } from "@/types/work-section";
 
-const daterBody =
-  "A social discovery platform built around people, not swipes. A social discovery platform built around people, not swipes. A social discovery platform built around people, not swipes.";
-
 export const workSectionContent = {
   headline: {
     before: "Built for the ",
@@ -16,8 +13,9 @@ export const workSectionContent = {
       id: "dater",
       category: "SOCIAL DISCOVERY PLATFORM",
       title: "Dater",
-      body: daterBody,
-      tags: ["iOS + Android", "Custom Backend", "Admin Platform"],
+      body:
+        "A dating app built around a feed, not a swipe. Native iOS and Android with a custom matchmaking engine, AI-backed verification, and subscriptions live from day one.",
+      tags: ["Native iOS + Android", "Matchmaking Engine", "Trust & Safety"],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/dater",
       slug: "dater",
@@ -28,9 +26,10 @@ export const workSectionContent = {
       category: "EVENT TICKETING",
       title: "EntryTicket",
       body:
-        "A native app for a platform that already worked, built to fit it exactly. iOS and Android on top of an existing PHP backend, kept in sync with a live website the whole way through.",
+        "A native app for a platform that already worked. Built on the live PHP backend in three weeks, so a seat booked on mobile is gone on web instantly.",
       tags: ["Flutter", "iOS + Android", "PHP Integration"],
       ctaLabel: "View case study",
+      ctaHref: "/case-studies/entryticket",
       slug: "entryticket",
       materialPath: "src/content/material/case-studies/devindays-case-study-entryticket.md",
     },
@@ -39,31 +38,34 @@ export const workSectionContent = {
       category: "QUICK COMMERCE",
       title: "Turbo Supply",
       body:
-        "30-minute delivery for the hardware businesses actually run on. Android and iOS so a tradesperson can order exactly what the job needs, when it needs it, instead of stocking a warehouse.",
+        "30-minute hardware delivery for the trades. Order exactly what the job needs instead of stocking a warehouse. Live on Android and iOS, built in four weeks.",
       tags: ["Flutter", "iOS + Android", "Node.js Backend"],
       ctaLabel: "View case study",
+      ctaHref: "/case-studies/turbosupply",
       slug: "turbosupply",
       materialPath: "src/content/material/case-studies/devindays-case-study-turbosupply.md",
     },
     {
-      id: "myndfe",
-      category: "WELLNESS PLATFORM",
-      title: "Myndfe",
+      id: "billing-baba",
+      category: "BILLING PLATFORM",
+      title: "Billing Baba",
       body:
-        "An AI companion product built for thoughtful daily use, with native mobile experiences and a public waitlist while the platform scales.",
-      tags: ["iOS + Android", "AI Companion", "Product Design"],
+        "A billing platform rebuilt from zero after the first build never got finished. One Flutter codebase, running natively on Android, iOS, macOS and Windows.",
+      tags: ["Flutter", "iOS + Android", "macOS + Windows"],
       ctaLabel: "View case study",
-      slug: "myndfe",
-      materialPath: "src/content/material/case-studies/",
+      ctaHref: "/case-studies/billing-baba",
+      slug: "billing-baba",
+      materialPath: "src/content/material/case-studies/devindays-case-study-billingbaba.md",
     },
     {
       id: "invigil",
       category: "CIVIC MEDIA",
       title: "InViGiL",
       body:
-        "A civic media platform that had to be six products at once without feeling like six products stapled together — news, social, live TV, and an AI newsroom on one coherent backend.",
-      tags: ["Web + Mobile", "FastAPI Backend", "Android TV"],
+        "Six products on one backend: news, social, live TV, an AI newsroom and an investigation portal. Shipped across mobile, TV and web in about three months.",
+      tags: ["Web + Mobile + TV", "FastAPI Backend", "AI Layer"],
       ctaLabel: "View case study",
+      ctaHref: "/case-studies/invigil",
       slug: "invigil",
       materialPath: "src/content/material/case-studies/devindays-case-study-invigil.md",
     },
@@ -71,23 +73,25 @@ export const workSectionContent = {
   marqueeAriaLabel: "Case study highlights",
   marqueeLogos: {
     dater: {
-      src: "/logos/dater.png",
+      src: "/logos/marks/dater.png",
       alt: "Dater",
     },
     entryTicket: {
-      src: "/logos/entry-ticket.png",
+      src: "/logos/marks/entry-ticket.png",
+      fill: true,
       alt: "EntryTicket",
     },
     turboSupply: {
+      src: "/logos/marks/turbosupply.png",
       alt: "TurboSupply",
-      pending: true,
     },
-    myndfe: {
-      src: "/logos/myndfe-leaf.png",
-      alt: "Myndfe",
+    billingBaba: {
+      src: "/logos/marks/billing-baba.png",
+      alt: "Billing Baba",
     },
     invigil: {
-      src: "/logos/invigil.png",
+      src: "/logos/marks/invigil.png",
+      fill: true,
       alt: "InViGiL",
     },
   },
@@ -95,7 +99,7 @@ export const workSectionContent = {
     { id: "dater", logoKey: "dater", caseStudyId: "dater" },
     { id: "entry-ticket", logoKey: "entryTicket", caseStudyId: "entry-ticket" },
     { id: "turbo-supply", logoKey: "turboSupply", caseStudyId: "turbo-supply" },
-    { id: "myndfe", logoKey: "myndfe", caseStudyId: "myndfe" },
+    { id: "billing-baba", logoKey: "billingBaba", caseStudyId: "billing-baba" },
   ],
 } as const satisfies WorkSectionContent;
 

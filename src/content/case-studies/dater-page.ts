@@ -1,4 +1,4 @@
-import { daterCaseStudyNarrative } from "@/content/case-studies/dater-narrative";
+import { daterCaseStudyNarrative } from "@/content/case-studies/dater-narrative-full";
 import { site } from "@/config/site";
 import type { CaseStudyPageContent } from "@/types/case-study-page";
 
@@ -9,7 +9,7 @@ export const daterCaseStudyPage = {
   slug: "dater",
   materialPath,
   meta: {
-    title: `Dater · Case Study · ${site.name}`,
+    title: "Dater · Case Study",
     description:
       "A dating app built around a feed, not a swipe. Native iOS and Android, built end-to-end, from matchmaking logic to trust and safety.",
     path: "/case-studies/dater",
@@ -73,7 +73,6 @@ export const daterCaseStudyPage = {
     bookCallLabel: site.booking.label,
     bookCallHref: bookingHref,
     bookCallAriaLabel: "Book a call with DevInDays",
-    previous: { slug: "invigil", label: "Invigil" },
-    next: { slug: "myndfe", label: "Myndfe" },
+    next: { slug: "invigil", label: "Invigil" },
   },
 } as const satisfies CaseStudyPageContent;

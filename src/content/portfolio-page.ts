@@ -15,10 +15,10 @@ export const portfolioPageContent = {
   items: [
     { id: "dater", kind: "case-study", title: "Dater", href: "/case-studies/dater" },
     { id: "invigil", kind: "case-study", title: "Invigil", href: "/case-studies/invigil" },
-    { id: "billing-baba", kind: "case-study", title: "Billing Baba", href: "/case-studies/billingbaba" },
+    { id: "billing-baba", kind: "case-study", title: "Billing Baba", href: "/case-studies/billing-baba" },
     { id: "entry-ticket", kind: "case-study", title: "EntryTicket", href: "/case-studies/entryticket" },
     { id: "turbo-supply", kind: "case-study", title: "TurboSupply", href: "/case-studies/turbosupply" },
-    { id: "myndfe", kind: "case-study", title: "Myndfe", href: "/case-studies/myndfe" },
+    { id: "myndfe", kind: "coming-soon", title: "Myndfe" },
     { id: "homeyfixit", kind: "coming-soon", title: "HomeyFixit" },
     { id: "sailor", kind: "coming-soon", title: "Sailor" },
     { id: "gloxal", kind: "coming-soon", title: "Gloxal" },

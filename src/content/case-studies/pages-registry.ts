@@ -1,9 +1,22 @@
+import { billingBabaCaseStudyPage } from "@/content/case-studies/billing-baba-page";
 import { daterCaseStudyPage } from "@/content/case-studies/dater-page";
+import { entryTicketCaseStudyPage } from "@/content/case-studies/entryticket-page";
+import { invigilCaseStudyPage } from "@/content/case-studies/invigil-page";
+import { turboSupplyCaseStudyPage } from "@/content/case-studies/turbosupply-page";
 import type { CaseStudyPageContent } from "@/types/case-study-page";
 
-const caseStudyPagesBySlug: Record<string, CaseStudyPageContent> = {
-  [daterCaseStudyPage.slug]: daterCaseStudyPage,
-};
+/** Order here is the order of the sitemap and the previous/next links. */
+const caseStudyPages: readonly CaseStudyPageContent[] = [
+  daterCaseStudyPage,
+  invigilCaseStudyPage,
+  billingBabaCaseStudyPage,
+  entryTicketCaseStudyPage,
+  turboSupplyCaseStudyPage,
+];
+
+const caseStudyPagesBySlug: Record<string, CaseStudyPageContent> = Object.fromEntries(
+  caseStudyPages.map((page) => [page.slug, page]),
+);
 
 export const publishedCaseStudySlugs = Object.keys(caseStudyPagesBySlug);
 
@@ -12,5 +25,5 @@ export function getCaseStudyPageBySlug(slug: string): CaseStudyPageContent | und
 }
 
 export function getAllCaseStudyPages(): CaseStudyPageContent[] {
-  return Object.values(caseStudyPagesBySlug);
+  return [...caseStudyPages];
 }

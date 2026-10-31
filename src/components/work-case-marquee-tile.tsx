@@ -5,15 +5,13 @@ type WorkCaseMarqueeTileProps = {
   tile: WorkMarqueeTileConfig;
   logo: WorkMarqueeLogoAsset;
   isActive: boolean;
-  isGenieSource?: boolean;
-  onSelect: (caseStudyId: string, element: HTMLElement) => void;
+  onSelect: (caseStudyId: string) => void;
 };
 
 export function WorkCaseMarqueeTile({
   tile,
   logo,
   isActive,
-  isGenieSource = false,
   onSelect,
 }: WorkCaseMarqueeTileProps) {
   const pending = logo.pending === true || !logo.src;
@@ -21,13 +19,13 @@ export function WorkCaseMarqueeTile({
   return (
     <button
       type="button"
-      className={
-        isActive
-          ? "work-marquee-tile work-marquee-tile--active"
-          : isGenieSource
-            ? "work-marquee-tile work-marquee-tile--genie-source"
-            : "work-marquee-tile"
-      }
+      className={[
+        "work-marquee-tile",
+        isActive ? "work-marquee-tile--active" : "",
+        logo.fill ? "work-marquee-tile--fill" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
       aria-pressed={isActive}
       aria-label={`Show ${logo.alt} case study`}
       onPointerDown={(event) => {
@@ -35,14 +33,14 @@ export function WorkCaseMarqueeTile({
       }}
       onClick={(event) => {
         event.stopPropagation();
-        onSelect(tile.caseStudyId, event.currentTarget);
+        onSelect(tile.caseStudyId);
       }}
     >
       {pending || !logo.src ? (
         <span className="work-marquee-tile-pending" aria-hidden />
       ) : (
         <Image
-          className="work-marquee-tile-logo"
+          className={logo.fill ? "work-marquee-tile-logo work-marquee-tile-logo--fill" : "work-marquee-tile-logo"}
           src={logo.src}
           alt=""
           width={62}

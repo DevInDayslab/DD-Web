@@ -4,6 +4,30 @@ export type ContactPageHeroContent = {
   subhead: string;
 };
 
+export type ContactPageDetail = {
+  id: string;
+  label: string;
+  value: string;
+  href?: string;
+  /** Adds a copy-to-clipboard button for this value. */
+  copyable?: boolean;
+};
+
+export type ContactPageTrustContent = {
+  label: string;
+  logos: readonly { src: string; alt: string }[];
+};
+
+export type ContactPageNextStep = {
+  title: string;
+  body: string;
+};
+
+export type ContactPageNextStepsContent = {
+  heading: string;
+  steps: readonly ContactPageNextStep[];
+};
+
 export type ContactPageFormField = {
   id: string;
   label: string;
@@ -39,11 +63,25 @@ export type ContactPageBookCallContent = ContactPageSplitColumnContent & {
 
 export type ContactPageMessageContent = ContactPageSplitColumnContent & {
   fields: readonly ContactPageFormField[];
+  /** Optional "what are you after?" chips, sent with the message. */
+  projectTypes: {
+    label: string;
+    optionalSuffix: string;
+    options: readonly string[];
+  };
   submitLabel: string;
   submitAriaLabel: string;
   footerNote: string;
   formSubject: string;
   successMessage: string;
+  /** Shown in place of the form once a message has been sent. */
+  success: {
+    title: string;
+    body: string;
+    resetLabel: string;
+    linkLabel: string;
+    linkHref: string;
+  };
   errorMessage: string;
   missingRequiredMessage: string;
 };
@@ -104,7 +142,9 @@ export type ContactPageContent = {
   };
   hero: ContactPageHeroContent;
   split: ContactPageSplitContent;
-  ledger: ContactPageLedgerContent;
+  details: readonly ContactPageDetail[];
+  trust: ContactPageTrustContent;
+  nextSteps: ContactPageNextStepsContent;
   crosslink: ContactPageCrosslinkContent;
 };
 

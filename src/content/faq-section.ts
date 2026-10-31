@@ -1,4 +1,14 @@
+import { faqPageItems } from "@/content/faq-page";
 import type { FaqSectionContent } from "@/types/faq-section";
+
+/** Homepage answers come from the full FAQ so the two can never disagree. */
+function faqAnswer(id: string): string {
+  const item = faqPageItems.find((entry) => entry.id === id);
+  if (!item) {
+    throw new Error(`Unknown FAQ item: ${id}`);
+  }
+  return item.answer;
+}
 
 export const faqSectionContent = {
   title: "Clear the air before we talk.",
@@ -13,19 +23,19 @@ export const faqSectionContent = {
       id: "communication",
       question: "Who will I actually be communicating with?",
       answer:
-        "Placeholder — you'll replace this with final copy when the full FAQ material is ready.",
+        faqAnswer("who-actually-works-on-my-project"),
     },
     {
       id: "scope-changes",
       question: "What if we need to change the scope halfway through?",
       answer:
-        "Placeholder — you'll replace this with final copy when the full FAQ material is ready.",
+        faqAnswer("what-happens-if-the-project-needs-to-change-scope-halfway-through"),
     },
     {
       id: "after-launch",
       question: "What happens after launch day?",
       answer:
-        "Placeholder — you'll replace this with final copy when the full FAQ material is ready.",
+        faqAnswer("what-happens-after-the-app-launches"),
     },
   ],
   seeAll: {

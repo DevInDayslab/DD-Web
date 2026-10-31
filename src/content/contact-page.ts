@@ -3,25 +3,56 @@ import type { ContactPageContent } from "@/types/contact-page";
 
 export const contactPageContent = {
   meta: {
-    title: `Contact · ${site.name}`,
+    title: "Contact",
     description: "Book a call or send a message. Tell us what you're building.",
     path: "/contact",
   },
   hero: {
     eyebrow: "Contact",
     headline: "Tell us what you're building.",
-    subhead: "Book a call or send a message.",
+    subhead:
+      "A founder replies within 48 hours. No sales reps, no pitch deck, just an honest read on whether we're the right team for it.",
+  },
+  details: [
+    {
+      id: "email",
+      label: "Email",
+      value: "contact@devindays.com",
+      href: "mailto:contact@devindays.com",
+      copyable: true,
+    },
+    {
+      id: "call",
+      label: "Intro call",
+      value: "30 minutes, with a founder",
+    },
+    {
+      id: "studio",
+      label: "Studio",
+      value: "Delhi, India. Working with founders worldwide.",
+    },
+  ],
+  trust: {
+    label: "Products we've shipped",
+    logos: [
+      { src: "/logos/marks/dater.png", alt: "Dater" },
+      { src: "/logos/marks/invigil.png", alt: "InViGiL" },
+      { src: "/logos/marks/billing-baba.png", alt: "Billing Baba" },
+      { src: "/logos/marks/entry-ticket.png", alt: "EntryTicket" },
+      { src: "/logos/marks/turbosupply.png", alt: "Turbo Supply" },
+      { src: "/logos/marks/homeyfixit.png", alt: "HomeyFixIt" },
+    ],
   },
   split: {
     bookCall: {
-      title: "Book a Call",
+      title: "Book a call",
       description:
-        "30 minutes with Raghav. Tell us what you're trying to build, and we'll tell you honestly whether we're the right fit for it.",
+        "Thirty minutes with a founder. Tell us what you're building and we'll give you an honest answer on fit, scope and rough timeline.",
       widget: {
-        eyebrow: "Direct intake",
-        title: "Discovery & Architecture Session",
-        durationLabel: "30 Mins",
-        slotsHeadingPrefix: "Available slots for",
+        eyebrow: "Intro call",
+        title: "30-minute intro call",
+        durationLabel: "30 min",
+        slotsHeadingPrefix: "Times for",
         timeSlots: [
           { id: "930", label: "09:30 AM EST" },
           { id: "1100", label: "11:00 AM EST" },
@@ -31,14 +62,14 @@ export const contactPageContent = {
       },
     },
     message: {
-      title: "Send a Message",
+      title: "Send a message",
       description:
-        "Prefer writing asynchronous specifications? Drop us your product parameters and we will follow up with notes.",
+        "Share the basics and we'll reply with a few questions and a first read on your idea.",
       fields: [
         {
           id: "name",
-          label: "Full name",
-          placeholder: "e.g., Alex Vance",
+          label: "Your name",
+          placeholder: "Alex Vance",
           required: true,
           type: "text",
           autoComplete: "name",
@@ -46,91 +77,91 @@ export const contactPageContent = {
         {
           id: "email",
           label: "Work email",
-          placeholder: "alex@company.com",
+          placeholder: "you@company.com",
           required: true,
           type: "email",
           autoComplete: "email",
         },
         {
           id: "company",
-          label: "Company / project name",
+          label: "Company or project",
           optionalSuffix: "(optional)",
-          placeholder: "e.g., Acme Labs",
+          placeholder: "Acme Labs",
           required: false,
           type: "text",
           autoComplete: "organization",
         },
         {
           id: "message",
-          label: "What are you building?",
+          label: "About the project",
           placeholder:
-            "Briefly describe the product, platform architecture, or system requirements...",
+            "What are you building, who is it for, and when would you like to launch?",
           required: true,
           type: "textarea",
         },
       ],
-      submitLabel: "Submit Message",
+      projectTypes: {
+        label: "What do you need?",
+        optionalSuffix: "(optional)",
+        options: ["Mobile app", "Web platform", "New MVP", "Rebuild or takeover", "Not sure yet"],
+      },
+      submitLabel: "Send message",
       submitAriaLabel: "Submit contact message",
-      footerNote: "We reply within 24 hours.",
+      footerNote: "We reply within 48 hours, usually sooner.",
       formSubject: "DevInDays contact form",
-      successMessage: "Message sent. We'll follow up within 24 hours.",
-      errorMessage: "Something went wrong. Please try again.",
-      missingRequiredMessage: "Please fill in all required fields.",
+      successMessage: "Thanks, we've got your message. We'll reply within 48 hours.",
+      success: {
+        title: "Thanks, we've got your message.",
+        body: "We'll reply within 48 hours, usually sooner. In the meantime, take a look at what we've shipped.",
+        resetLabel: "Send another message",
+        linkLabel: "See our work",
+        linkHref: "/case-studies",
+      },
+      errorMessage: "That didn't send. Please check your connection and try again.",
+      missingRequiredMessage: "Please add your name, email and a few words about the project.",
     },
   },
-  ledger: {
-    architects: {
-      heading: "No account managers. No junior hand-offs.",
-      body:
-        "When you reach out, you speak directly with the people building your system. Raghav (Founder) leads project scope, technical schema, and engineering velocity, while Ishu (Technical Lead) oversees mobile systems and AI pipelines. You are collaborating with principals from day one.",
-      avatars: [
-        { initials: "RK", variant: "primary" },
-        { initials: "IS", variant: "secondary" },
-      ],
-      footerLabel: "Raghav & Ishu • Active Founders",
-    },
-    logistics: {
-      heading: "Headquartered in Delhi. Operating globally.",
-      body:
-        "We partner with fast-moving founders and engineering leadership across San Francisco, London, Berlin, and Singapore. All standard product pricing, deliverables, sprints, and contracts are transparently billed in USD.",
-      metaRows: [
-        {
-          label: "General Inquiries",
-          value: "contact@devindays.com",
-          href: "mailto:contact@devindays.com",
-        },
-        {
-          label: "Typical Sprint Velocity",
-          value: "21–30 calendar days",
-        },
-      ],
-    },
+  nextSteps: {
+    heading: "What happens next",
+    steps: [
+      {
+        title: "Tell us about the project",
+        body: "Book a time or send a note. We reply within 48 hours.",
+      },
+      {
+        title: "Talk to a founder",
+        body: "A 30-minute conversation, not a sales pitch. We work out what you need and whether we're a fit.",
+      },
+      {
+        title: "Get a clear proposal",
+        body: "A feature list, a realistic timeline and a fixed quote, shortly after the call.",
+      },
+    ],
   },
   crosslink: {
-    introText: "Rather review past architecture before reaching out?",
-    linkLabel: "Browse verified case studies →",
+    introText: "Want to see our work first?",
+    linkLabel: "Browse case studies →",
     linkHref: "/case-studies",
     metrics: [
       {
-        id: "metric-01",
-        label: "METRIC 01",
-        title: "100% On-Time Delivery",
+        id: "scope",
+        label: "",
+        title: "Fixed scope, fixed price",
         description:
-          "Fixed scopes, explicit day-by-day Gantt charts, zero feature creep without mutual sign-off.",
+          "A written scope and a day-by-day timeline. Anything new is added only when we both sign off.",
       },
       {
-        id: "metric-02",
-        label: "METRIC 02",
-        title: "Full IP Transfer",
+        id: "ownership",
+        label: "",
+        title: "You own everything",
         description:
-          "All git commits, Figma schemas, and cloud deployment pipelines belong 100% to you.",
+          "Source code, designs and infrastructure are yours from final payment, written into the contract.",
       },
       {
-        id: "metric-03",
-        label: "METRIC 03",
-        title: "Direct Founder Access",
-        description:
-          "Dedicated Slack channel with Raghav and Ishu for the duration of the engagement.",
+        id: "founders",
+        label: "",
+        title: "Founders on every project",
+        description: "A direct line to Raghav and Ishu for the whole engagement, not an account manager.",
       },
     ],
   },

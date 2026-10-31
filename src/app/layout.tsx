@@ -4,13 +4,13 @@ import { ProjectQualifierRoot } from "@/components/project-qualifier/project-qua
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SiteLayoutStyle } from "@/components/site-layout-style";
+import { SiteMotion } from "@/components/site-motion";
 import { ThemeStyle } from "@/components/theme-style";
 import { fontHeadline, fontMono, fontUi } from "@/config/fonts";
 import { site } from "@/config/site";
 import { theme } from "@/config/theme";
-import { faqItems } from "@/content/faq";
 import { buildRootMetadata } from "@/lib/metadata";
-import { faqPageJsonLd, organizationJsonLd } from "@/lib/schema";
+import { organizationJsonLd } from "@/lib/schema";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -26,8 +26,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ProjectQualifierRoot>
           <ThemeStyle theme={theme} />
           <SiteLayoutStyle />
+          <SiteMotion />
           <JsonLd data={organizationJsonLd(site)} />
-          {faqItems.length > 0 ? <JsonLd data={faqPageJsonLd(faqItems)} /> : null}
           <SiteHeader />
           {children}
           <SiteFooter />

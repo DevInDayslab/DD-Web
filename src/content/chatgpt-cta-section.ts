@@ -11,5 +11,5 @@ export const chatgptCtaSectionContent = {
   ctaLabel: "Ask ChatGPT",
   ctaAriaLabel: "Ask ChatGPT if DevInDays is a fit for your project",
   chatGptPrompt:
-    "Is DevInDays a good fit for my software project? Summarize what they do, who they work best with, and what I should know before booking a call.",
+    "Look up DevInDays (devindays.com), a custom app and software development studio. Is it a good fit for my software project? Summarize what they do, who they work best with, their pricing, and what I should know before booking a call.",
 } as const satisfies ChatGptCtaSectionContent;

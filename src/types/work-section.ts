@@ -21,6 +21,8 @@ export type WorkMarqueeLogoAsset = {
   alt: string;
   /** Asset not provided yet — renders an empty placeholder tile. */
   pending?: boolean;
+  /** Full-bleed app icon: fills the tile instead of sitting inside it. */
+  fill?: boolean;
 };
 
 export type WorkMarqueeTileConfig = {

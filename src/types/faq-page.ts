@@ -15,6 +15,18 @@ export type FaqPageSection = {
   items: readonly FaqPageItem[];
 };
 
+/** One of the four top-level FAQ categories, with its items resolved from one or more raw sections. */
+export type FaqPageCategorySection = {
+  id: string;
+  /** Tab label. */
+  label: string;
+  /** Small uppercase line above the tagline, e.g. "01 — FIT & COMMERCIALS". */
+  eyebrow: string;
+  /** Italic serif line under the eyebrow. */
+  tagline: string;
+  items: readonly FaqPageItem[];
+};
+
 export type FaqPageHeroContent = {
   eyebrow: string;
   headline: string;
@@ -30,7 +42,7 @@ export type FaqPageContent = {
     path: string;
   };
   hero: FaqPageHeroContent;
-  sections: readonly FaqPageSection[];
+  sections: readonly FaqPageCategorySection[];
   defaultSectionId: string;
 };
 

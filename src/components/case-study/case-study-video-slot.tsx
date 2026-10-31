@@ -40,7 +40,12 @@ export function CaseStudyVideoSlot({
 
   return (
     <div className={rootClass} role="img" aria-label={placeholderLabel}>
-      <span className="case-study-video-slot-placeholder">{placeholderLabel}</span>
+      <span className="case-study-video-slot-placeholder" aria-hidden>
+        <span className="work-featured-phone-badge">
+          <span className="work-featured-phone-play" />
+        </span>
+        <span className="case-study-video-slot-placeholder-label">Walkthrough coming soon</span>
+      </span>
     </div>
   );
 }

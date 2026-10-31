@@ -1,0 +1,22 @@
+# DevInDays
+
+> DevInDays is a custom software development studio based in Delhi, India, building mobile and web products for founders and businesses. MVP Build from $3,950, Full Product from $13,900, custom builds scoped individually. Full IP and source code ownership on every project. 30-day minimum post-launch support included.
+
+## Services
+- MVP Build: a complete, working product, end-to-end UI/UX design and development, one integrated payment/subscription setup, production-grade authentication, App Store/Google Play submission, full IP ownership, 30 days of post-launch support.
+- Full Product: everything in MVP Build, plus a full admin dashboard, infrastructure stress-tested under load, CI/CD pipeline, active monitoring, and deeper third-party integrations.
+- Custom: dedicated engineering team integration, complex ML/AI pipelines, enterprise-grade security and compliance, high-concurrency infrastructure, custom SLAs.
+
+## Case Studies
+- [Dater](https://www.devindays.com/case-studies/dater/): A native iOS and Android dating app built around a feed-based matching system instead of swiping, with custom matchmaking logic, PostGIS-based location matching, and AWS Rekognition-based trust and safety.
+- [Invigil](https://www.devindays.com/case-studies/invigil/): A civic media platform combining news, social feed, live TV, an AI layer (ViERA), and a public investigation portal into one coherent product across Android, iOS, Android TV, and web.
+- [Billing Baba](https://www.devindays.com/case-studies/billing-baba/): A full billing and invoicing platform rebuilt from scratch across Android, iOS, macOS, and Windows after a previous development attempt went unfinished.
+- [EntryTicket](https://www.devindays.com/case-studies/entryticket/): A native mobile app built on top of an existing ticket-booking platform's live PHP backend, built in collaboration with the client's in-house development team.
+- [TurboSupply](https://www.devindays.com/case-studies/turbosupply/): A quick-commerce app delivering general hardware supplies in 30 minutes, letting trade businesses order what they need instead of holding inventory.
+- [All case studies](https://www.devindays.com/case-studies/): Full portfolio index.
+
+## FAQ
+- [Frequently Asked Questions](https://www.devindays.com/faq/): 63 questions covering fit and scope, technical capabilities, process, pricing, launch, and ownership. Organized under four sections: Fit & Proof, Capabilities & Process, Pricing & Engagement, and Launch & Ownership.
+
+## Contact
+- [Contact DevInDays](https://www.devindays.com/contact/): Book a 30-minute call directly with the founder, or send a message.

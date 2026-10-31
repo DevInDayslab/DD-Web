@@ -6,14 +6,12 @@ import type { WorkSectionContent } from "@/types/work-section";
 type WorkCaseMarqueeProps = {
   content: Pick<WorkSectionContent, "marqueeAriaLabel" | "marqueeTiles" | "marqueeLogos">;
   activeCaseStudyId: string;
-  genieSourceTileId?: string | null;
-  onCaseStudySelect: (caseStudyId: string, tileElement: HTMLElement) => void;
+  onCaseStudySelect: (caseStudyId: string) => void;
 };
 
 export function WorkCaseMarquee({
   content,
   activeCaseStudyId,
-  genieSourceTileId = null,
   onCaseStudySelect,
 }: WorkCaseMarqueeProps) {
   return (
@@ -32,7 +30,6 @@ export function WorkCaseMarquee({
                 tile={tile}
                 logo={logo}
                 isActive={tile.caseStudyId === activeCaseStudyId}
-                isGenieSource={tile.id === genieSourceTileId}
                 onSelect={onCaseStudySelect}
               />
             );

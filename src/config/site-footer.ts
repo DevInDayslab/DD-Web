@@ -1,7 +1,7 @@
 import type { SiteFooterLayoutConfig } from "@/types/site-footer";
 
 export const siteFooterLayout = {
-  backgroundImageSrc: "/assets/dd-web-bottom-original.svg",
+  backgroundImageSrc: "/assets/dd-web-bottom.webp",
   minHeightAtBaseline: 541,
   minHeightMobileAtBaseline: 620,
   ctaMaxWidthAtBaseline: 896,

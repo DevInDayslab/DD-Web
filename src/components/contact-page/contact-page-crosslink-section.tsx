@@ -19,7 +19,9 @@ export function ContactPageCrosslinkSection({ crosslink }: ContactPageCrosslinkS
         <ul className="contact-page-crosslink-grid">
           {crosslink.metrics.map((metric) => (
             <li key={metric.id} className="contact-page-crosslink-card">
-              <p className="contact-page-crosslink-metric-label">{metric.label}</p>
+              {metric.label ? (
+                <p className="contact-page-crosslink-metric-label">{metric.label}</p>
+              ) : null}
               <h3 className="contact-page-crosslink-metric-title">{metric.title}</h3>
               <p className="contact-page-crosslink-metric-body">{metric.description}</p>
             </li>

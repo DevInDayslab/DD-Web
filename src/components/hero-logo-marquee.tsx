@@ -29,12 +29,18 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const segmentRef = useRef<HTMLDivElement>(null);
   const [segmentWidth, setSegmentWidth] = useState(0);
+  // How far through one segment the track has travelled (0 to 1). Kept outside the effect so a
+  // re-measure, resize or hot reload continues from the same spot instead of snapping back to the start.
+  const phaseRef = useRef(0);
   const isCompact = useMediaQuery(heroMobileLayoutMediaQuery());
   const tiles = isCompact ? layout.mobile.tiles : layout.tiles;
   const layoutMode = isCompact ? "flow" : "absolute";
 
   const measureSegment = useCallback(() => {
-    setSegmentWidth(segmentRef.current?.getBoundingClientRect().width ?? 0);
+    // Layout width, not getBoundingClientRect: an animated or scaled ancestor must not change the loop length.
+    const element = segmentRef.current;
+    const width = element ? Number.parseFloat(getComputedStyle(element).width) : 0;
+    setSegmentWidth(Number.isFinite(width) ? width : 0);
   }, []);
 
   useEffect(() => {
@@ -56,7 +62,7 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
     }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let offset = 0;
+    let offset = -phaseRef.current * segmentWidth;
     let viewportWidth = 0;
     let metrics: TileMetric[] = [];
     let visible = true;
@@ -116,6 +122,7 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
         if (offset <= -segmentWidth) {
           offset += segmentWidth;
         }
+        phaseRef.current = -offset / segmentWidth;
         paint();
       }
 

@@ -74,14 +74,15 @@ export function HeroLogoMarqueeTile({
       }
     >
       <div
-        className="hero-marquee-tile-card"
+        className={
+          logo.fill
+            ? "hero-marquee-tile-card hero-marquee-tile-card--fill"
+            : "hero-marquee-tile-card"
+        }
         style={{
           borderColor: shadow.border,
           boxShadow: shadow.boxShadow,
-          padding:
-            tile.imageSize === "intelligence"
-              ? "var(--dd-hero-marquee-tile-padding-intelligence)"
-              : "var(--dd-hero-marquee-tile-padding-standard)",
+          padding: logo.fill ? 0 : "var(--dd-hero-marquee-tile-padding-standard)",
         }}
       >
         <Image
@@ -90,10 +91,14 @@ export function HeroLogoMarqueeTile({
           width={imagePx}
           height={imagePx}
           className="hero-marquee-tile-image"
-          style={{
-            width: `var(--dd-hero-marquee-image-size-${tile.imageSize ?? "standard"})`,
-            height: `var(--dd-hero-marquee-image-size-${tile.imageSize ?? "standard"})`,
-          }}
+          style={
+            logo.fill
+              ? { width: "100%", height: "100%" }
+              : {
+                  width: "var(--dd-hero-marquee-image-size-standard)",
+                  height: "var(--dd-hero-marquee-image-size-standard)",
+                }
+          }
           draggable={false}
         />
       </div>

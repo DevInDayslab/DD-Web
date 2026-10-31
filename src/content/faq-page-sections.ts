@@ -136,7 +136,7 @@ export const faqPageSections = [
         id: "who-is-behind-devindays",
         question: "Who is behind DevInDays?",
         answer:
-          "Our founder, Raghav. You can read more about his background and how projects actually get staffed on the [About](/about) page.",
+          "Our founder, Raghav. You can read more about his background and how projects actually get staffed on the [About](/#about) section.",
       },
       {
         id: "can-i-speak-to-someone-who-actually-builds-the-product",

@@ -3,11 +3,19 @@ export type HeroMarqueeShadowVariant = "featured" | "standard";
 export type HeroMarqueeTileSize = "standard" | "featured";
 
 export type HeroMarqueeLogoKey =
-  | "entryTicket"
-  | "myndfeLeaf"
+  | "dater"
   | "invigil"
-  | "intelligencePlatform"
-  | "dater";
+  | "billingBaba"
+  | "entryTicket"
+  | "turboSupply"
+  | "navNirvana"
+  | "myndfe"
+  | "homeyFixIt"
+  | "makeMyJodi"
+  | "sailor"
+  | "krexhe"
+  | "tecxi"
+  | "trustAi";
 
 export type HeroMarqueeTileBase = {
   id: string;
@@ -73,6 +81,8 @@ export type HeroMarqueeLayoutConfig = {
 export type HeroMarqueeLogoAsset = {
   src: string;
   alt: string;
+  /** The image is a full-bleed app icon: it fills the tile instead of sitting inside a padded white card. */
+  fill?: boolean;
 };
 
 export type HeroMarqueeContent = {

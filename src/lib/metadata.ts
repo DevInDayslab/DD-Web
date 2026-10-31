@@ -8,12 +8,13 @@ function absoluteUrl(path: string): string {
 
 export function buildPageMetadata(meta: PageMeta): Metadata {
   const title = meta.title || site.metadata.title;
+  const pageTitle = meta.path === "/" ? { absolute: title } : title;
   const description = meta.description || site.metadata.description;
   const ogImage = meta.ogImage || site.defaultOgImage;
   const url = absoluteUrl(meta.path);
 
   return {
-    title,
+    title: pageTitle,
     description,
     keywords: site.keywords,
     alternates: {

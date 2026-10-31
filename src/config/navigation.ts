@@ -17,13 +17,13 @@ export const routes = [
     id: "faq",
     path: "/faq",
     changeFrequency: "monthly",
-    priority: 0.85,
+    priority: 0.9,
   },
   {
     id: "contact",
     path: "/contact",
-    changeFrequency: "monthly",
-    priority: 0.85,
+    changeFrequency: "yearly",
+    priority: 0.6,
   },
 ] as const satisfies readonly RouteDefinition[];
 

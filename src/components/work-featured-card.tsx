@@ -1,12 +1,16 @@
 import Link from "next/link";
 import type { WorkFeaturedCaseStudy } from "@/types/work-section";
 
-type WorkFeaturedCardProps = {
+type WorkFeaturedCardContentProps = {
   caseStudy: WorkFeaturedCaseStudy;
   phonePlaceholderLabel: string;
 };
 
-export function WorkFeaturedCard({ caseStudy, phonePlaceholderLabel }: WorkFeaturedCardProps) {
+/** Card body only: the shell (border, background, radius) lives in the showcase so it stays put while content swaps. */
+export function WorkFeaturedCardContent({
+  caseStudy,
+  phonePlaceholderLabel,
+}: WorkFeaturedCardContentProps) {
   const ctaInner = (
     <>
       <span>{caseStudy.ctaLabel}</span>
@@ -25,42 +29,47 @@ export function WorkFeaturedCard({ caseStudy, phonePlaceholderLabel }: WorkFeatu
   );
 
   return (
-    <article className="work-featured-card" aria-labelledby={`work-featured-title-${caseStudy.id}`}>
-      <div className="work-featured-card-main">
-        <div className="work-featured-card-copy">
-          <p className="work-featured-badge">{caseStudy.category}</p>
-          <h3 id={`work-featured-title-${caseStudy.id}`} className="work-featured-title">
-            {caseStudy.title}
-          </h3>
-          <p className="work-featured-body">{caseStudy.body}</p>
+    <div className="work-featured-card-main">
+      <div className="work-featured-card-copy">
+        <p className="work-featured-badge">{caseStudy.category}</p>
+        <h3 id={`work-featured-title-${caseStudy.id}`} className="work-featured-title">
+          {caseStudy.title}
+        </h3>
+        <p className="work-featured-body">{caseStudy.body}</p>
 
-          <div className="work-featured-tags-block">
-            <ul className="work-featured-tags">
-              {caseStudy.tags.map((tag) => (
-                <li key={tag}>
-                  <span className="work-featured-tag">{tag}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {caseStudy.ctaHref ? (
-            <Link href={caseStudy.ctaHref} className="work-featured-cta">
-              {ctaInner}
-            </Link>
-          ) : (
-            <button type="button" className="work-featured-cta">
-              {ctaInner}
-            </button>
-          )}
+        <div className="work-featured-tags-block">
+          <ul className="work-featured-tags">
+            {caseStudy.tags.map((tag) => (
+              <li key={tag}>
+                <span className="work-featured-tag">{tag}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div
-          className="work-featured-phone"
-          role="img"
-          aria-label={phonePlaceholderLabel}
-        />
+        {caseStudy.ctaHref ? (
+          <Link href={caseStudy.ctaHref} className="work-featured-cta">
+            {ctaInner}
+          </Link>
+        ) : (
+          <button type="button" className="work-featured-cta">
+            {ctaInner}
+          </button>
+        )}
       </div>
-    </article>
+
+      <div
+        className="work-featured-phone"
+        role="img"
+        aria-label={phonePlaceholderLabel}
+      >
+        <span className="work-featured-phone-badge" aria-hidden>
+          <span className="work-featured-phone-play" />
+        </span>
+        <span className="work-featured-phone-label" aria-hidden>
+          Walkthrough coming soon
+        </span>
+      </div>
+  </div>
   );
 }

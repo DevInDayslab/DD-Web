@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
+import { useOptionalProjectQualifier } from "@/components/project-qualifier/project-qualifier-provider";
 import { site } from "@/config/site";
 import {
   addMonths,
@@ -46,6 +47,7 @@ function initialSelectedDate(today: Date): Date | null {
 
 export function ContactPageBookingWidget({ content }: ContactPageBookingWidgetProps) {
   const bookingUrl = site.booking.embedUrl;
+  const qualifier = useOptionalProjectQualifier();
 
   const [today] = useState(() => new Date());
   const [viewMonth, setViewMonth] = useState(() => initialViewMonth(today));
@@ -220,7 +222,13 @@ export function ContactPageBookingWidget({ content }: ContactPageBookingWidgetPr
                 }`}
                 aria-pressed={isSelected}
                 disabled={slotsDisabled}
-                onClick={() => setSelectedSlotId(slot.id)}
+                onClick={() => {
+                  setSelectedSlotId(slot.id);
+                  // Picking a time hands off to the full-screen booking flow, after a beat so the pick registers.
+                  if (qualifier) {
+                    window.setTimeout(qualifier.open, 260);
+                  }
+                }}
               >
                 {isSelected ? `${slot.label} (Selected)` : slot.label}
               </button>

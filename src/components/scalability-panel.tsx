@@ -29,6 +29,14 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
 
   const toggleExpanded = () => setExpanded((value) => !value);
 
+  // The whole card toggles; keep text selection usable by ignoring a click that ended a selection.
+  const handleCardClick = () => {
+    if (window.getSelection()?.toString()) {
+      return;
+    }
+    toggleExpanded();
+  };
+
   const alignmentClass = lettersAligned
     ? "scalability-letter-bar--aligned"
     : "scalability-letter-bar--tilted";
@@ -43,6 +51,7 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
           ? "scalability-panel-wrap scalability-panel-wrap--expanded"
           : "scalability-panel-wrap"
       }
+      onClick={handleCardClick}
     >
       <div className={panelClassName} aria-label={content.letterBarAriaLabel}>
         <div
@@ -64,7 +73,6 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
           <button
             type="button"
             className="scalability-letter-chevron-button"
-            onClick={toggleExpanded}
             aria-expanded={expanded}
             aria-label={
               expanded ? content.chevronCollapseAriaLabel : content.chevronExpandAriaLabel

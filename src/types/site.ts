@@ -45,7 +45,12 @@ export type ContactConfig = {
 export type BookingConfig = {
   provider: "cal" | "calendly";
   label: string;
+  /** Replaces the custom calendar on the contact page with an iframe when set. Leave empty to keep the custom UI. */
   embedUrl: string;
+  /** Public short link to the Google appointment schedule (opens in a new tab). */
+  scheduleUrl: string;
+  /** The same schedule in its embeddable form, shown inside the project flow. */
+  scheduleEmbedUrl: string;
 };
 
 export type ChatGptConfig = {

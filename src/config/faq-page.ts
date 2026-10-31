@@ -3,7 +3,7 @@ import type { FaqPageLayoutConfig } from "@/types/faq-page";
 export const faqPageLayout = {
   pageMaxWidthAtBaseline: 1280,
   heroPaddingTopAtBaseline: 160,
-  heroPaddingBottomAtBaseline: 64,
+  heroPaddingBottomAtBaseline: 40,
   heroPaddingInlineAtBaseline: 48,
   heroCopyMaxWidthAtBaseline: 896,
   heroNavMaxWidthAtBaseline: 1120,
