@@ -6,7 +6,7 @@ const heroMarqueeLayoutBase = {
   outerWidthAtBaseline: 1184,
   topAtBaseline: 455,
   /** Moves the entire logo marquee up (px). Increase to lift higher / fix bottom clipping. */
-  marqueeVerticalNudgeUpAtBaseline: 80,
+  marqueeVerticalNudgeUpAtBaseline: 52,
   outerOpacity: 0.7,
   outerPaddingXAtBaseline: 16,
   frameMaxWidthAtBaseline: 1152,

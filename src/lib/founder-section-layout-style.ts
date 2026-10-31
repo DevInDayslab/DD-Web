@@ -51,7 +51,7 @@ export function founderSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.signoffMarginTopAtBaseline,
     }),
     "--dd-founder-title-size": fluid(layout.titleFontSizeAtBaseline, {
-      minPx: 28,
+      minPx: 30,
       maxPx: layout.titleFontSizeAtBaseline,
     }),
     "--dd-founder-title-line-height": fluid(layout.titleLineHeightAtBaseline, {

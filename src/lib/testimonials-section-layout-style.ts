@@ -40,7 +40,7 @@ export function testimonialsSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.headerGapAtBaseline,
     }),
     "--dd-testimonials-title-size": fluid(layout.titleFontSizeAtBaseline, {
-      minPx: 20,
+      minPx: 30,
       maxPx: layout.titleFontSizeAtBaseline,
     }),
     "--dd-testimonials-title-line-height": fluid(layout.titleLineHeightAtBaseline, {

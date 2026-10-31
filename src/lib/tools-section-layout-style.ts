@@ -52,7 +52,7 @@ export function toolsSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.headlineMaxWidthAtBaseline,
     }),
     "--dd-tools-headline-size": fluid(layout.headlineFontSizeAtBaseline, {
-      minPx: 28,
+      minPx: 30,
       maxPx: layout.headlineFontSizeAtBaseline,
     }),
     "--dd-tools-headline-line-height": fluid(layout.headlineLineHeightAtBaseline, {

@@ -39,7 +39,7 @@ export function pricingSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.headerMaxWidthAtBaseline,
     }),
     "--dd-pricing-title-size": fluid(layout.titleFontSizeAtBaseline, {
-      minPx: 32,
+      minPx: 30,
       maxPx: layout.titleFontSizeAtBaseline,
     }),
     "--dd-pricing-title-line-height": fluid(layout.titleLineHeightAtBaseline, {
@@ -96,7 +96,7 @@ export function pricingSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.surfaceInnerGapAtBaseline,
     }),
     "--dd-pricing-tier-title-size": fluid(layout.tierTitleFontSizeAtBaseline, {
-      minPx: 28,
+      minPx: 30,
       maxPx: layout.tierTitleFontSizeAtBaseline,
     }),
     "--dd-pricing-tier-title-line-height": fluid(layout.tierTitleLineHeightAtBaseline, {

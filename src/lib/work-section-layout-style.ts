@@ -36,7 +36,7 @@ export function workSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.headerGapAtBaseline,
     }),
     "--dd-work-headline-size": fluid(layout.headlineFontSizeAtBaseline, {
-      minPx: 32,
+      minPx: 30,
       maxPx: layout.headlineFontSizeAtBaseline,
     }),
     "--dd-work-headline-line-height": fluid(layout.headlineLineHeightAtBaseline, {

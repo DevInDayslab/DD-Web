@@ -35,7 +35,7 @@ export function faqSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.titleMaxWidthAtBaseline,
     }),
     "--dd-faq-title-size": fluid(layout.titleFontSizeAtBaseline, {
-      minPx: 28,
+      minPx: 30,
       maxPx: layout.titleFontSizeAtBaseline,
     }),
     "--dd-faq-title-line-height": fluid(layout.titleLineHeightAtBaseline, {
