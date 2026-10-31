@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { PricingCheckIcon } from "@/components/pricing-check-icon";
 import { pricingSurfaceInteraction } from "@/config/pricing-interaction";
 import type { PricingSectionContent, PricingTier, PricingTierId } from "@/types/pricing-section";
 
+const surfaceBorderPx = 2;
 const surfaceLayoutEase = [0.22, 1, 0.36, 1] as const;
 
 type PricingTierShowcaseProps = {
@@ -25,14 +26,29 @@ export function PricingTierShowcase({ content }: PricingTierShowcaseProps) {
     [activeTierId, content.tiers],
   );
 
-  const surfaceLayoutTransition = reducedMotion
-    ? { layout: { duration: 0 } }
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [surfaceHeight, setSurfaceHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = measureRef.current;
+    if (!el) {
+      return;
+    }
+    const update = () => setSurfaceHeight(el.offsetHeight + surfaceBorderPx);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const heightTransition = reducedMotion
+    ? { duration: 0 }
     : {
-        layout: {
-          duration: pricingSurfaceInteraction.surfaceLayoutDurationSeconds,
-          ease: surfaceLayoutEase,
-        },
+        duration: pricingSurfaceInteraction.surfaceLayoutDurationSeconds,
+        ease: surfaceLayoutEase,
       };
+
+  const fadeDuration = pricingSurfaceInteraction.contentFadeDurationSeconds;
 
   return (
     <>
@@ -79,17 +95,27 @@ export function PricingTierShowcase({ content }: PricingTierShowcaseProps) {
 
       <motion.div
         className="pricing-surface"
-        layout="size"
-        transition={surfaceLayoutTransition}
         data-tier={activeTier.id}
+        initial={false}
+        animate={surfaceHeight === null ? undefined : { height: surfaceHeight }}
+        transition={heightTransition}
       >
-        <div
-          id={`pricing-panel-${activeTier.id}`}
-          role="tabpanel"
-          aria-labelledby={`pricing-tab-${activeTier.id}`}
-          className="pricing-surface-panel"
-        >
-          <PricingTierPanel tier={activeTier} />
+        <div ref={measureRef} className="pricing-surface-measure">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={activeTier.id}
+              id={`pricing-panel-${activeTier.id}`}
+              role="tabpanel"
+              aria-labelledby={`pricing-tab-${activeTier.id}`}
+              className="pricing-surface-panel"
+              initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
+              transition={{ duration: reducedMotion ? 0 : fadeDuration, ease: "easeInOut" }}
+            >
+              <PricingTierPanel tier={activeTier} />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </motion.div>
     </>

@@ -1,8 +1,8 @@
 import type { TestimonialsSectionLayoutConfig } from "@/types/testimonials-section";
 
 export const testimonialsSectionLayout = {
-  widthAtBaseline: 1280,
-  maxWidthAtBaseline: 1360,
+  widthAtBaseline: 1560,
+  maxWidthAtBaseline: 1560,
   marginTopAtBaseline: 120,
   paddingInlineAtBaseline: 40,
   headerGapAtBaseline: 64,
@@ -31,6 +31,4 @@ export const testimonialsSectionLayout = {
   roleLineHeightAtBaseline: 22,
   videoBadgeFontSizeAtBaseline: 11,
   playButtonSizeAtBaseline: 64,
-  marqueeScrollSpeedPxPerSecondAtBaseline: 40,
-  marqueeSegmentWidthAtBaseline: 2400,
 } as const satisfies TestimonialsSectionLayoutConfig;

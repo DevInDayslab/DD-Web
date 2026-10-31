@@ -1420,13 +1420,18 @@ body {
 }
 
 .testimonials-carousel {
+  position: relative;
   width: 100%;
 }
 
 .testimonials-carousel-viewport {
-  overflow: hidden;
-  cursor: grab;
-  touch-action: pan-x;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 12px 24px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
   -webkit-mask-image: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0) var(--dd-testimonials-mask-fade-start),
@@ -1447,28 +1452,89 @@ body {
   mask-repeat: no-repeat;
 }
 
-.testimonials-carousel-viewport:active {
-  cursor: grabbing;
-}
-
-.testimonials-carousel-track {
-  display: flex;
-  width: max-content;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  padding-block: 12px 24px;
+.testimonials-carousel-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .testimonials-carousel-segment {
   display: flex;
+  width: max-content;
   flex: none;
   align-items: stretch;
   gap: var(--dd-testimonials-carousel-gap);
-  padding-right: var(--dd-testimonials-carousel-gap);
+  padding-inline: 15%;
 }
 
 .testimonials-carousel-item {
   flex: none;
+  scroll-snap-align: center;
+}
+
+.testimonials-carousel-button {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(25, 28, 29, 0.08);
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #191c1d;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testimonials-carousel-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.testimonials-carousel-button:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.06);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.testimonials-carousel-button:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.testimonials-carousel-button-prev {
+  left: 4%;
+}
+
+.testimonials-carousel-button-next {
+  right: 4%;
+}
+
+@media (max-width: 640px) {
+  .testimonials-carousel-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonials-carousel-button-prev {
+    left: 8px;
+  }
+
+  .testimonials-carousel-button-next {
+    right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-carousel-viewport {
+    scroll-behavior: auto;
+  }
 }
 
 .testimonial-card {
@@ -2218,7 +2284,6 @@ body {
 .pricing-surface {
   box-sizing: border-box;
   width: 100%;
-  padding: var(--dd-pricing-surface-padding);
   border: 1px solid var(--dd-pricing-color-surface-border);
   border-radius: var(--dd-pricing-surface-radius);
   background: var(--dd-pricing-color-surface-bg);
@@ -2247,8 +2312,14 @@ body {
     0 0 0 1px rgba(25, 28, 29, 0.025);
 }
 
+.pricing-surface-measure {
+  box-sizing: border-box;
+  padding: var(--dd-pricing-surface-padding);
+}
+
 .pricing-surface-panel {
   width: 100%;
+  will-change: opacity, filter;
 }
 
 .pricing-tier-layout {
@@ -2530,7 +2601,7 @@ body {
 .faq-item-panel {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .faq-item-open .faq-item-panel {
@@ -2543,12 +2614,23 @@ body {
 
 .faq-item-answer {
   margin: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   padding: 0 var(--dd-faq-answer-padding-right) 4px 0;
   font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: var(--dd-faq-answer-size);
   font-weight: 400;
   line-height: var(--dd-faq-answer-line-height);
   color: var(--dd-faq-color-answer);
+}
+
+.faq-item-open .faq-item-answer {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.08s;
 }
 
 .faq-inline-link {
@@ -2596,6 +2678,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .faq-item-panel,
+  .faq-item-answer,
   .faq-item-chevron {
     transition: none;
   }

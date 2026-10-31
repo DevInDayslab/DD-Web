@@ -61,6 +61,4 @@ export type TestimonialsSectionLayoutConfig = {
   roleLineHeightAtBaseline: number;
   videoBadgeFontSizeAtBaseline: number;
   playButtonSizeAtBaseline: number;
-  marqueeScrollSpeedPxPerSecondAtBaseline: number;
-  marqueeSegmentWidthAtBaseline: number;
 };
