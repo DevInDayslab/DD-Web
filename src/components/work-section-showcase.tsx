@@ -1,10 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { useCallback, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useAnimate } from "motion/react";
 import { WorkCaseMarquee } from "@/components/work-case-marquee";
 import { WorkFeaturedCard } from "@/components/work-featured-card";
+import {
+  WorkGenieCanvas,
+  type WorkGenieCanvasHandle,
+} from "@/components/work-genie-canvas";
+import { workCaseStudyGenieInteraction } from "@/config/work-interaction";
+import { workSectionLayout } from "@/config/work-section";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
+import { genieOriginFromRects } from "@/lib/work-genie-origin";
 import type { WorkFeaturedCaseStudy, WorkSectionContent } from "@/types/work-section";
 
 type WorkSectionShowcaseProps = {
@@ -19,10 +26,66 @@ type WorkSectionShowcaseProps = {
   phonePlaceholderLabel: string;
 };
 
-const swapEase = [0.22, 1, 0.36, 1] as const;
+function logoSrcForCaseStudy(
+  content: WorkSectionShowcaseProps["content"],
+  caseStudyId: string,
+): string | null {
+  const tile = content.marqueeTiles.find((entry) => entry.caseStudyId === caseStudyId);
+  if (!tile) {
+    return null;
+  }
+  const logo = content.marqueeLogos[tile.logoKey];
+  if (!logo || logo.pending || !logo.src) {
+    return null;
+  }
+  return logo.src;
+}
+
+function readRadiusPx(element: HTMLElement, fallback: number): number {
+  const value = getComputedStyle(element).borderRadius;
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function waitForLayout(): Promise<void> {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => resolve());
+    });
+  });
+}
+
+function measureGenieRects(
+  tileElement: HTMLElement,
+  cardHost: HTMLDivElement,
+): {
+  tileRect: DOMRect;
+  cardRect: DOMRect;
+  iconRadius: number;
+  expandedRadius: number;
+} {
+  const cardSurface = cardHost.querySelector(".work-featured-card") as HTMLElement | null;
+  return {
+    tileRect: tileElement.getBoundingClientRect(),
+    cardRect: cardHost.getBoundingClientRect(),
+    iconRadius: readRadiusPx(tileElement, workSectionLayout.marqueeTileRadiusAtBaseline),
+    expandedRadius: readRadiusPx(
+      cardSurface ?? cardHost,
+      workSectionLayout.featuredCardRadiusAtBaseline,
+    ),
+  };
+}
 
 export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSectionShowcaseProps) {
   const [activeCaseStudyId, setActiveCaseStudyId] = useState(content.defaultCaseStudyId);
+  const [displayedCaseStudyId, setDisplayedCaseStudyId] = useState(content.defaultCaseStudyId);
+  const [genieActive, setGenieActive] = useState(false);
+  const [genieCardOpacity, setGenieCardOpacity] = useState(1);
+  const [genieSourceTileId, setGenieSourceTileId] = useState<string | null>(null);
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const genieRef = useRef<WorkGenieCanvasHandle>(null);
+  const [cardHostRef, animateCard] = useAnimate<HTMLDivElement>();
+  const transitioningRef = useRef(false);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const caseStudyById = useMemo(() => {
@@ -33,35 +96,187 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
     return map;
   }, [content.caseStudies]);
 
-  const activeCaseStudy = caseStudyById.get(activeCaseStudyId) ?? content.caseStudies[0];
+  const displayedCaseStudy =
+    caseStudyById.get(displayedCaseStudyId) ?? content.caseStudies[0];
+
+  const swapDisplayedCaseStudy = useCallback((caseStudyId: string) => {
+    setDisplayedCaseStudyId((current) => (current === caseStudyId ? current : caseStudyId));
+  }, []);
+
+  const runCssGenieFallback = useCallback(
+    async (caseStudyId: string, tileElement: HTMLElement) => {
+      if (!cardHostRef.current) {
+        return;
+      }
+
+      const cardHost = cardHostRef.current;
+      const tileRect = tileElement.getBoundingClientRect();
+      const cardRect = cardHost.getBoundingClientRect();
+      const origin = genieOriginFromRects(tileRect, cardRect);
+
+      cardHost.style.transformOrigin = `${origin.xPercent}% ${origin.yPercent}%`;
+
+      const {
+        expandDurationSeconds,
+        minimizeScaleX,
+        minimizeScaleY,
+        expandSkewYDeg,
+        minimizeEase,
+        expandEase,
+      } = workCaseStudyGenieInteraction;
+
+      await animateCard(
+        cardHost,
+        {
+          scaleX: minimizeScaleX,
+          scaleY: minimizeScaleY,
+          opacity: 1,
+          skewY: expandSkewYDeg,
+        },
+        { duration: 0 },
+      );
+
+      swapDisplayedCaseStudy(caseStudyId);
+      await waitForLayout();
+
+      await animateCard(
+        cardHost,
+        {
+          scaleX: 1,
+          scaleY: 1,
+          opacity: 1,
+          skewY: expandSkewYDeg,
+        },
+        { duration: expandDurationSeconds * 0.35, ease: minimizeEase },
+      );
+
+      await animateCard(
+        cardHost,
+        { skewY: 0 },
+        { duration: expandDurationSeconds * 0.65, ease: expandEase },
+      );
+    },
+    [animateCard, cardHostRef, swapDisplayedCaseStudy],
+  );
+
+  const handleCaseStudySelect = useCallback(
+    async (caseStudyId: string, tileElement: HTMLElement) => {
+      if (caseStudyId === activeCaseStudyId || transitioningRef.current) {
+        return;
+      }
+
+      const nextCaseStudy = caseStudyById.get(caseStudyId);
+      if (!nextCaseStudy || !cardHostRef.current || !showcaseRef.current) {
+        return;
+      }
+
+      transitioningRef.current = true;
+      setActiveCaseStudyId(caseStudyId);
+      const tileConfig = content.marqueeTiles.find((tile) => tile.caseStudyId === caseStudyId);
+      setGenieSourceTileId(tileConfig?.id ?? null);
+      setGenieActive(true);
+      setGenieCardOpacity(1);
+
+      const cardHost = cardHostRef.current;
+      const { tileRect, cardRect, iconRadius, expandedRadius } = measureGenieRects(
+        tileElement,
+        cardHost,
+      );
+      const imageSrc = logoSrcForCaseStudy(content, caseStudyId);
+      const { openCardRevealStartProgress } = workCaseStudyGenieInteraction;
+      let didSwapDisplayed = false;
+
+      const maybeSwapDisplayed = (progress: number) => {
+        if (didSwapDisplayed || progress < openCardRevealStartProgress) {
+          return;
+        }
+        didSwapDisplayed = true;
+        swapDisplayedCaseStudy(caseStudyId);
+      };
+
+      const canUseWebGl =
+        !prefersReducedMotion &&
+        genieRef.current?.isSupported() &&
+        cardRect.width > 0 &&
+        tileRect.width > 0;
+
+      if (canUseWebGl && genieRef.current) {
+        try {
+          await genieRef.current.runPhase({
+            tileRect,
+            cardRect,
+            iconRadius,
+            expandedRadius,
+            imageSrc,
+            phase: "toCard",
+            onProgress: maybeSwapDisplayed,
+          });
+
+          swapDisplayedCaseStudy(caseStudyId);
+        } catch {
+          setGenieActive(false);
+          setGenieCardOpacity(1);
+          await runCssGenieFallback(caseStudyId, tileElement);
+        } finally {
+          setGenieActive(false);
+          setGenieCardOpacity(1);
+          setGenieSourceTileId(null);
+        }
+      } else {
+        setGenieActive(false);
+        setGenieCardOpacity(1);
+        await runCssGenieFallback(caseStudyId, tileElement);
+        setGenieSourceTileId(null);
+      }
+
+      transitioningRef.current = false;
+    },
+    [
+      activeCaseStudyId,
+      cardHostRef,
+      caseStudyById,
+      content,
+      prefersReducedMotion,
+      runCssGenieFallback,
+      swapDisplayedCaseStudy,
+    ],
+  );
+
+  const cardHostClassName = genieActive
+    ? "work-featured-card-host work-featured-card-host--genie-transition"
+    : "work-featured-card-host";
 
   return (
-    <div className="work-section-showcase">
-      <div className="work-featured-card-host">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={activeCaseStudy.id}
-            className="work-featured-card-swap"
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 14, scale: 0.985, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={
-              prefersReducedMotion
-                ? undefined
-                : { opacity: 0, y: -10, scale: 0.99, filter: "blur(6px)" }
-            }
-            transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: swapEase }}
-          >
-            <WorkFeaturedCard
-              caseStudy={activeCaseStudy}
-              phonePlaceholderLabel={phonePlaceholderLabel}
-            />
-          </motion.div>
-        </AnimatePresence>
+    <div ref={showcaseRef} className="work-section-showcase">
+      <WorkGenieCanvas
+        ref={genieRef}
+        className={
+          genieActive
+            ? "work-genie-canvas work-genie-canvas--active"
+            : "work-genie-canvas"
+        }
+      />
+      <div
+        ref={cardHostRef}
+        className={cardHostClassName}
+        style={
+          genieActive
+            ? ({
+                "--dd-work-genie-card-opacity": genieCardOpacity,
+              } as CSSProperties)
+            : undefined
+        }
+      >
+        <WorkFeaturedCard
+          caseStudy={displayedCaseStudy}
+          phonePlaceholderLabel={phonePlaceholderLabel}
+        />
       </div>
       <WorkCaseMarquee
         content={content}
         activeCaseStudyId={activeCaseStudyId}
-        onCaseStudySelect={(caseStudyId) => setActiveCaseStudyId(caseStudyId)}
+        genieSourceTileId={genieSourceTileId}
+        onCaseStudySelect={handleCaseStudySelect}
       />
     </div>
   );

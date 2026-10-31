@@ -934,13 +934,10 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
-}
-
-.work-featured-card-swap {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  will-change: opacity, transform, filter;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: opacity 0.2s ease;
 }
 
 .work-featured-card-host--genie-hidden {
@@ -2413,7 +2410,7 @@ body {
 .pricing-tier-scope-slot {
   position: relative;
   min-width: 0;
-  align-self: center;
+  align-self: start;
 }
 
 .pricing-price-card {
