@@ -10,7 +10,7 @@ export const founderSectionLayout = {
   bodyGapAtBaseline: 15,
   signoffMarginTopAtBaseline: 56,
   titleFontSizeAtBaseline: 36,
-  titleLineHeightAtBaseline: 54,
+  titleLineHeightAtBaseline: 46,
   titleLetterSpacingAtBaseline: -0.72,
   introFontSizeAtBaseline: 18,
   introLineHeightAtBaseline: 25,

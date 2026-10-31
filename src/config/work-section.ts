@@ -7,7 +7,7 @@ export const workSectionLayout = {
   headerGapAtBaseline: 8,
   headlineFontSizeAtBaseline: 48,
   headlineLineHeightAtBaseline: 54,
-  headlineLetterSpacingAtBaseline: -1.35,
+  headlineLetterSpacingAtBaseline: -0.96,
   subtitleFontSizeAtBaseline: 14,
   subtitleLineHeightAtBaseline: 22,
   subtitleMaxWidthAtBaseline: 544,

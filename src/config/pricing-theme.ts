@@ -1,6 +1,6 @@
 export const pricingThemeColors = {
   title: "#14181C",
-  subtitle: "#6B7280",
+  subtitle: "#5C6370",
   tabTrackBackground: "rgba(255, 255, 255, 0.6)",
   tabTrackShadow: "inset 0px 1px 2px rgba(0, 0, 0, 0.03)",
   tabActiveBackground: "#191C1D",

@@ -39,7 +39,7 @@ export function scalabilityLayoutToCssVars(): Record<string, string> {
       maxPx: layout.eyebrowPillPaddingXAtBaseline,
     }),
     "--dd-scalability-eyebrow-font-size": fluid(layout.eyebrowFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.eyebrowFontSizeAtBaseline,
     }),
     "--dd-scalability-eyebrow-line-height": fluid(layout.eyebrowLineHeightAtBaseline, {

@@ -102,7 +102,7 @@ export function testimonialsSectionLayoutToCssVars(): Record<string, string> {
     "--dd-testimonials-mask-opaque-end": `${testimonialsEdgeFeather.viewportMaskOpaqueEndPercent}%`,
     "--dd-testimonials-mask-fade-end": `${testimonialsEdgeFeather.viewportMaskFadeEndPercent}%`,
     "--dd-testimonials-rating-size": fluid(layout.ratingSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.ratingSizeAtBaseline,
     }),
     "--dd-testimonials-avatar-size": fluid(layout.avatarSizeAtBaseline, {
@@ -118,7 +118,7 @@ export function testimonialsSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.nameFontSizeAtBaseline,
     }),
     "--dd-testimonials-role-size": fluid(layout.roleFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.roleFontSizeAtBaseline,
     }),
     "--dd-testimonials-role-line-height": fluid(layout.roleLineHeightAtBaseline, {
@@ -126,7 +126,7 @@ export function testimonialsSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.roleLineHeightAtBaseline,
     }),
     "--dd-testimonials-video-badge-size": fluid(layout.videoBadgeFontSizeAtBaseline, {
-      minPx: 10,
+      minPx: 12,
       maxPx: layout.videoBadgeFontSizeAtBaseline,
     }),
     "--dd-testimonials-play-size": fluid(layout.playButtonSizeAtBaseline, {

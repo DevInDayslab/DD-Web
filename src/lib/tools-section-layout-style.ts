@@ -35,7 +35,7 @@ export function toolsSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.eyebrowMaxWidthAtBaseline,
     }),
     "--dd-tools-eyebrow-size": fluid(layout.eyebrowFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.eyebrowFontSizeAtBaseline,
     }),
     "--dd-tools-eyebrow-line-height": fluid(layout.eyebrowLineHeightAtBaseline, {

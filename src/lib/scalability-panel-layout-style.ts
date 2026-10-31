@@ -106,7 +106,7 @@ export function scalabilityPanelLayoutToCssVars(): Record<string, string> {
       maxPx: layout.pillarContentMaxWidthAtBaseline,
     }),
     "--dd-scalability-pillar-label-size": fluid(layout.pillarLabelFontSizeAtBaseline, {
-      minPx: 10,
+      minPx: 12,
       maxPx: layout.pillarLabelFontSizeAtBaseline,
     }),
     "--dd-scalability-pillar-label-line-height": fluid(layout.pillarLabelLineHeightAtBaseline, {
@@ -123,7 +123,7 @@ export function scalabilityPanelLayoutToCssVars(): Record<string, string> {
       maxPx: layout.pillarTitleLineHeightAtBaseline,
     }),
     "--dd-scalability-pillar-body-size": fluid(layout.pillarBodyFontSizeAtBaseline, {
-      minPx: 13,
+      minPx: 14,
       maxPx: layout.pillarBodyFontSizeAtBaseline,
     }),
     "--dd-scalability-pillar-body-line-height": fluid(layout.pillarBodyLineHeightAtBaseline, {
@@ -147,7 +147,7 @@ export function scalabilityPanelLayoutToCssVars(): Record<string, string> {
       maxPx: layout.closingLeadFontSizeAtBaseline,
     }),
     "--dd-scalability-panel-closing-body-size": fluid(layout.closingBodyFontSizeAtBaseline, {
-      minPx: 13,
+      minPx: 14,
       maxPx: layout.closingBodyFontSizeAtBaseline,
     }),
     "--dd-scalability-panel-closing-line-height": fluid(layout.closingLineHeightAtBaseline, {

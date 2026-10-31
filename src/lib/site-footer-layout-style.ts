@@ -135,7 +135,7 @@ export function siteFooterLayoutToCssVars(): Record<string, string> {
     }),
     "--dd-footer-brand-name-letter-spacing": `${layout.brandNameLetterSpacingAtBaseline}px`,
     "--dd-footer-brand-tagline-size": fluid(layout.brandTaglineFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.brandTaglineFontSizeAtBaseline,
     }),
     "--dd-footer-brand-tagline-line-height": fluid(layout.brandTaglineLineHeightAtBaseline, {
@@ -155,7 +155,7 @@ export function siteFooterLayoutToCssVars(): Record<string, string> {
       maxPx: layout.navGapAtBaseline,
     }),
     "--dd-footer-social-size": fluid(layout.socialFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.socialFontSizeAtBaseline,
     }),
     "--dd-footer-social-line-height": fluid(layout.socialLineHeightAtBaseline, {

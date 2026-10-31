@@ -11,7 +11,7 @@ export const toolsSectionLayout = {
   headlineMaxWidthAtBaseline: 619,
   headlineFontSizeAtBaseline: 36,
   headlineLineHeightAtBaseline: 43,
-  headlineLetterSpacingAtBaseline: -1.2,
+  headlineLetterSpacingAtBaseline: -0.72,
   headlineMarginTopAtBaseline: 12,
   pillInsetInlineAtBaseline: 170,
   pillHeightAtBaseline: 78,

@@ -1493,9 +1493,11 @@ body {
   height: 18px;
 }
 
-.testimonials-carousel-button:hover:not(:disabled) {
-  transform: translateY(-50%) scale(1.06);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+@media (hover: hover) {
+  .testimonials-carousel-button:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.06);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .testimonials-carousel-button:disabled {
@@ -2460,6 +2462,7 @@ body {
 }
 
 .pricing-price {
+  font-variant-numeric: tabular-nums;
   position: relative;
   z-index: 1;
   margin: var(--dd-pricing-price-margin-top) 0 0;
@@ -2664,8 +2667,10 @@ body {
   text-underline-offset: 2px;
 }
 
-.faq-inline-link:hover {
-  opacity: 0.85;
+@media (hover: hover) {
+  .faq-inline-link:hover {
+    opacity: 0.85;
+  }
 }
 
 .faq-see-all-wrap {
@@ -3553,8 +3558,10 @@ body {
   color: var(--dd-contact-page-color-headline);
 }
 
-.contact-page-ledger-meta-link:hover {
-  text-decoration-thickness: 2px;
+@media (hover: hover) {
+  .contact-page-ledger-meta-link:hover {
+    text-decoration-thickness: 2px;
+  }
 }
 
 .contact-page-crosslink {
@@ -3597,8 +3604,10 @@ body {
   color: var(--dd-contact-page-color-headline);
 }
 
-.contact-page-crosslink-link:hover {
-  text-decoration-thickness: 2px;
+@media (hover: hover) {
+  .contact-page-crosslink-link:hover {
+    text-decoration-thickness: 2px;
+  }
 }
 
 .contact-page-crosslink-grid {
@@ -3874,8 +3883,10 @@ body {
   color: var(--dd-footer-color-nav-link);
 }
 
-.site-footer-nav-link:hover {
-  color: var(--dd-footer-color-headline);
+@media (hover: hover) {
+  .site-footer-nav-link:hover {
+    color: var(--dd-footer-color-headline);
+  }
 }
 
 .site-footer-meta {
@@ -3919,8 +3930,10 @@ body {
   color: var(--dd-footer-color-social-link);
 }
 
-.site-footer-social-link:hover {
-  color: var(--dd-footer-color-headline);
+@media (hover: hover) {
+  .site-footer-social-link:hover {
+    color: var(--dd-footer-color-headline);
+  }
 }
 
 .site-footer-copyright {
@@ -6426,3 +6439,20 @@ button.site-footer-cta-button {
   min-width: 4rem;
 }
 
+
+/* Hit areas: extend small controls to a 40px target without changing their look */
+.site-footer-nav-link,
+.site-footer-social-link,
+.faq-see-all-link,
+.scalability-letter-chevron-button {
+  position: relative;
+}
+
+.site-footer-nav-link::after,
+.site-footer-social-link::after,
+.faq-see-all-link::after,
+.scalability-letter-chevron-button::after {
+  content: "";
+  position: absolute;
+  inset: -12px -8px;
+}

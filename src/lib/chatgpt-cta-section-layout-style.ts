@@ -47,7 +47,7 @@ export function chatgptCtaSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.borderRadiusAtBaseline,
     }),
     "--dd-chatgpt-cta-badge-size": fluid(layout.badgeFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.badgeFontSizeAtBaseline,
     }),
     "--dd-chatgpt-cta-badge-letter-spacing": `${layout.badgeLetterSpacingAtBaseline}px`,

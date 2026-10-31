@@ -97,7 +97,7 @@ export function workSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.featuredContentMaxWidthAtBaseline,
     }),
     "--dd-work-badge-size": fluid(layout.featuredBadgeFontSizeAtBaseline, {
-      minPx: 9,
+      minPx: 12,
       maxPx: layout.featuredBadgeFontSizeAtBaseline,
     }),
     "--dd-work-badge-letter-spacing": `${layout.featuredBadgeLetterSpacingAtBaseline}px`,
@@ -111,7 +111,7 @@ export function workSectionLayoutToCssVars(): Record<string, string> {
     }),
     "--dd-work-featured-title-letter-spacing": `${layout.featuredTitleLetterSpacingAtBaseline}px`,
     "--dd-work-featured-body-size": fluid(layout.featuredBodyFontSizeAtBaseline, {
-      minPx: 13,
+      minPx: 14,
       maxPx: layout.featuredBodyFontSizeAtBaseline,
     }),
     "--dd-work-featured-body-line-height": fluid(layout.featuredBodyLineHeightAtBaseline, {
@@ -123,7 +123,7 @@ export function workSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.featuredTagsGapAtBaseline,
     }),
     "--dd-work-tag-size": fluid(layout.featuredTagFontSizeAtBaseline, {
-      minPx: 10,
+      minPx: 12,
       maxPx: layout.featuredTagFontSizeAtBaseline,
     }),
     "--dd-work-tag-line-height": fluid(layout.featuredTagLineHeightAtBaseline, {
@@ -151,7 +151,7 @@ export function workSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.featuredCtaPaddingXAtBaseline,
     }),
     "--dd-work-cta-size": fluid(layout.featuredCtaFontSizeAtBaseline, {
-      minPx: 11,
+      minPx: 12,
       maxPx: layout.featuredCtaFontSizeAtBaseline,
     }),
     "--dd-work-cta-line-height": fluid(layout.featuredCtaLineHeightAtBaseline, {

@@ -85,7 +85,7 @@ export function founderSectionLayoutToCssVars(): Record<string, string> {
     }),
     "--dd-founder-signoff-name-letter-spacing": `${layout.signoffNameLetterSpacingAtBaseline}px`,
     "--dd-founder-signoff-role-size": fluid(layout.signoffRoleFontSizeAtBaseline, {
-      minPx: 13,
+      minPx: 14,
       maxPx: layout.signoffRoleFontSizeAtBaseline,
     }),
     "--dd-founder-signoff-role-line-height": fluid(layout.signoffRoleLineHeightAtBaseline, {

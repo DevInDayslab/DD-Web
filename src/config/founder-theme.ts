@@ -4,9 +4,9 @@ export const founderThemeColors = {
   intro: "#14181C",
   body: "#4B525D",
   signoffName: "#14181C",
-  signoffRole: "#717882",
+  signoffRole: "#5F6670",
   portraitOverlay:
     "linear-gradient(180deg, rgba(20, 24, 28, 0) 45%, rgba(20, 24, 28, 0.35) 100%)",
   portraitPlaceholderBackground: "#E8EAED",
-  portraitPlaceholderText: "#717882",
+  portraitPlaceholderText: "#5F6670",
 } as const;

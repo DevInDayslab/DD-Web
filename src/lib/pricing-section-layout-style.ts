@@ -144,7 +144,7 @@ export function pricingSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.priceCardHeightAtBaseline,
     }),
     "--dd-pricing-investment-size": fluid(layout.investmentFontSizeAtBaseline, {
-      minPx: 10,
+      minPx: 12,
       maxPx: layout.investmentFontSizeAtBaseline,
     }),
     "--dd-pricing-investment-letter-spacing": `${layout.investmentLetterSpacingAtBaseline}px`,

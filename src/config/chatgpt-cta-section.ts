@@ -13,7 +13,7 @@ export const chatgptCtaSectionLayout = {
   badgePaddingYAtBaseline: 6,
   badgePaddingXAtBaseline: 16,
   headlineFontSizeAtBaseline: 52,
-  headlineLineHeightAtBaseline: 52,
+  headlineLineHeightAtBaseline: 60,
   headlineMaxWidthAtBaseline: 512,
   headlineMarginBottomAtBaseline: 32,
   badgeMarginBottomAtBaseline: 20,

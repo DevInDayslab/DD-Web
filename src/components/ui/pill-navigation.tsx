@@ -144,7 +144,7 @@ export const PillNavigation: React.FC<PillNavigationProps> = ({
               whileTap={reducedMotion ? undefined : { scale: 0.96 }}
               onClick={() => selectMain(item.id)}
               className={cn(
-                'focus-ring relative flex min-h-8 items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-medium transition-colors cursor-pointer',
+                'focus-ring relative flex min-h-8 items-center gap-1.5 rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors cursor-pointer',
                 active ? 'text-[#050505] font-semibold' : 'text-[#A1A1A1] hover:text-[#FAFAFA]'
               )}
             >
@@ -201,7 +201,7 @@ export const PillNavigation: React.FC<PillNavigationProps> = ({
                   whileTap={reducedMotion ? undefined : { scale: 0.95 }}
                   onClick={() => selectSub(subItem.id)}
                   className={cn(
-                    'focus-ring relative flex min-h-7 items-center rounded-full px-3 py-1 text-[11px] font-medium transition-colors cursor-pointer',
+                    'focus-ring relative flex min-h-7 items-center rounded-full px-3 py-1 text-xs font-medium transition-colors cursor-pointer',
                     isSubActive ? 'text-[#FAFAFA] font-semibold' : 'text-[#525252] hover:text-[#D4D4D4]'
                   )}
                 >

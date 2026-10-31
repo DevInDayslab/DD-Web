@@ -8,7 +8,7 @@ export const pricingSectionLayout = {
   headerMaxWidthAtBaseline: 576,
   titleFontSizeAtBaseline: 46,
   titleLineHeightAtBaseline: 51,
-  titleLetterSpacingAtBaseline: -1.15,
+  titleLetterSpacingAtBaseline: -0.92,
   titleMarginBottomAtBaseline: 12,
   subtitleFontSizeAtBaseline: 16,
   subtitleLineHeightAtBaseline: 26,
