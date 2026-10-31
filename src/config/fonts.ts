@@ -1,39 +1,13 @@
-import {
-  Fraunces,
-  IBM_Plex_Mono,
-  IBM_Plex_Sans,
-  Instrument_Serif,
-  Newsreader,
-  Plus_Jakarta_Sans,
-  Space_Grotesk,
-} from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Serif, Plus_Jakarta_Sans } from "next/font/google";
 
-export const fontDisplay = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
-export const fontSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-ibm-plex",
-  display: "swap",
-});
-
-export const fontMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ibm-plex-mono",
-  display: "swap",
-});
-
+/** Sans: all UI and body copy. */
 export const fontUi = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta",
   display: "swap",
 });
 
+/** Serif: display headlines only. */
 export const fontHeadline = Instrument_Serif({
   subsets: ["latin"],
   weight: ["400"],
@@ -42,17 +16,10 @@ export const fontHeadline = Instrument_Serif({
   display: "swap",
 });
 
-export const fontFaqHeadline = Newsreader({
+/** Mono: small technical labels (eyebrows, specs, tags). */
+export const fontMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["italic"],
-  variable: "--font-faq-headline",
-  display: "swap",
-});
-
-export const fontLetterTiles = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-space-grotesk",
+  weight: ["400", "500"],
+  variable: "--font-ibm-plex-mono",
   display: "swap",
 });

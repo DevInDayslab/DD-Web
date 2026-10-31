@@ -4,7 +4,7 @@ import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
 import { isExternalHref } from "@/lib/links";
 import type { NavItem } from "@/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Brand = {
   name: string;
@@ -68,29 +68,67 @@ const navItemClassName =
 const ctaClassName =
   "site-header-cta inline-flex h-[var(--dd-header-height)] max-h-11 min-h-11 shrink-0 items-center justify-center rounded-full bg-accent px-[clamp(1.25rem,2.8125vw,2.25rem)] font-ui text-[clamp(0.75rem,1.015625vw,0.8125rem)] font-medium leading-4 tracking-[0.13px] text-inverse";
 
-const SCROLL_THRESHOLD_PX = 48;
+// Different on/off thresholds so scrolling near the edge can never flip the state back and forth.
+const SCROLL_ON_PX = 64;
+const SCROLL_OFF_PX = 16;
+const PILL_MAX_WIDTH_PX = 920;
+const PILL_SIDE_GUTTER_PX = 12;
 
 export function Header({ brand, items, cta, copy }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuLabel = menuOpen ? copy.menuCloseLabel : copy.menuOpenLabel;
 
+  const headerRef = useRef<HTMLElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > SCROLL_THRESHOLD_PX);
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      setScrolled((current) => (current ? y > SCROLL_OFF_PX : y > SCROLL_ON_PX));
+    };
+    const onScroll = () => {
+      if (!frame) {
+        frame = requestAnimationFrame(update);
+      }
+    };
     update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
+  // Both states use pixel widths, which transition reliably; percentage-to-min() does not.
+  useEffect(() => {
+    const element = headerRef.current;
+    if (!element) {
+      return;
+    }
+    const measure = () => setContainerWidth(element.getBoundingClientRect().width);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const shellWidth =
+    containerWidth === null
+      ? undefined
+      : scrolled
+        ? Math.min(containerWidth - PILL_SIDE_GUTTER_PX * 2, PILL_MAX_WIDTH_PX)
+        : containerWidth;
+
   return (
-    <header
-      className="site-header pointer-events-none sticky top-0 z-50 w-full"
-      data-scrolled={scrolled ? "true" : "false"}
-    >
+    <header ref={headerRef} className="site-header pointer-events-none sticky top-0 z-50 w-full">
       <div
         className="site-header-shell pointer-events-auto"
         data-scrolled={scrolled ? "true" : "false"}
         data-menu-open={menuOpen ? "true" : "false"}
+        style={shellWidth === undefined ? undefined : { width: shellWidth }}
       >
         <div className="site-header-bar flex w-full items-center md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link

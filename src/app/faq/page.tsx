@@ -1,6 +1,5 @@
 import { FaqPageView } from "@/components/faq-page/faq-page-view";
 import { JsonLd } from "@/components/json-ld";
-import { fontFaqHeadline } from "@/config/fonts";
 import { faqPageContent, faqPageItems } from "@/content/faq-page";
 import { buildPageMetadata } from "@/lib/metadata";
 import { faqPageJsonLd } from "@/lib/schema";
@@ -10,7 +9,7 @@ export const metadata: Metadata = buildPageMetadata(faqPageContent.meta);
 
 export default function FaqPage() {
   return (
-    <main className={`faq-page-main ${fontFaqHeadline.variable}`}>
+    <main className="faq-page-main">
       <JsonLd data={faqPageJsonLd(faqPageItems)} />
       <FaqPageView content={faqPageContent} />
     </main>

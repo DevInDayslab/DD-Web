@@ -15,7 +15,7 @@ export { workThemeColors } from "@/config/work-theme";
 export { heroMobileLayout } from "@/config/hero-mobile";
 export { heroMarqueeLayout, heroMarqueeShadows } from "@/config/hero-marquee";
 export { heroFlanks } from "@/config/hero";
-export { fontDisplay, fontHeadline, fontSans, fontUi } from "@/config/fonts";
+export { fontHeadline, fontMono, fontUi } from "@/config/fonts";
 export { navigation, routes } from "@/config/navigation";
 export { site } from "@/config/site";
 export { theme } from "@/config/theme";

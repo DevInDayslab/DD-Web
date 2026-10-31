@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-fraunces);
   --font-headline: var(--font-instrument-serif);
-  --font-sans: var(--font-ibm-plex);
+  --font-sans: var(--font-plus-jakarta);
   --font-ui: var(--font-plus-jakarta);
   --font-logo: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
@@ -22,7 +21,7 @@
 body {
   background: var(--dd-color-background);
   color: var(--dd-color-foreground);
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 .site-header-bar {
@@ -36,44 +35,49 @@ body {
 
 /* Header: flat bar at the top of the page, floating blurred pill once scrolled. */
 .site-header {
-  padding-top: 0;
-  transition: padding-top 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.site-header[data-scrolled="true"] {
-  padding-top: 12px;
+  /* Reserves the bar's height so the shell can resize without moving the page. */
+  height: var(--dd-header-height);
 }
 
 .site-header-shell {
   --dd-header-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   box-sizing: border-box;
   width: 100%;
   margin-inline: auto;
   border: 1px solid transparent;
   border-radius: 0;
   background: var(--dd-color-background);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+  transform: translate3d(0, 0, 0);
+  will-change: width, transform;
   transition:
-    width 0.5s var(--dd-header-ease),
-    border-radius 0.5s var(--dd-header-ease),
-    background-color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.5s var(--dd-header-ease);
+    width 0.45s var(--dd-header-ease),
+    transform 0.45s var(--dd-header-ease),
+    border-radius 0.45s var(--dd-header-ease),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.45s var(--dd-header-ease);
 }
 
 .site-header-shell[data-scrolled="true"] {
-  width: min(calc(100% - 24px), 920px);
   border-color: rgba(25, 28, 29, 0.08);
-  border-radius: 9999px;
+  border-radius: 28px;
   background: rgba(255, 255, 255, 0.72);
   box-shadow:
     0 8px 32px rgba(25, 28, 29, 0.08),
     0 1px 2px rgba(25, 28, 29, 0.04);
-  -webkit-backdrop-filter: saturate(180%) blur(18px);
-  backdrop-filter: saturate(180%) blur(18px);
+  transform: translate3d(0, 12px, 0);
 }
 
-.site-header-shell[data-scrolled="true"][data-menu-open="true"] {
-  border-radius: 28px;
+.site-header-bar {
+  transition:
+    padding-inline 0.45s var(--dd-header-ease),
+    min-height 0.45s var(--dd-header-ease);
 }
 
 .site-header-shell[data-scrolled="true"] .site-header-bar {
@@ -647,7 +651,7 @@ body {
 }
 
 .scalability-letter-tile-char {
-  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: var(--dd-scalability-letter-size);
   font-weight: 500;
   line-height: var(--dd-scalability-letter-line-height);
@@ -2865,7 +2869,7 @@ body {
 
 .faq-page-hero-headline {
   margin: 0;
-  font-family: var(--font-faq-headline), var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
   font-size: var(--dd-faq-page-hero-headline-size);
   font-style: italic;
   font-weight: 400;
@@ -4361,7 +4365,7 @@ button.site-footer-cta-button {
 
 .project-qualifier-description {
   margin: 0 0 8px;
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
@@ -4382,7 +4386,7 @@ button.site-footer-cta-button {
   border-radius: 16px;
   background: var(--dd-qualifier-color-input-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: clamp(1rem, 1.4vw, 1.125rem);
   font-weight: 500;
   line-height: 22px;
@@ -4434,7 +4438,7 @@ button.site-footer-cta-button {
   border-radius: 14px;
   background: #ffffff;
   text-align: left;
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
   line-height: 22px;
   color: var(--dd-qualifier-color-headline);
@@ -4497,7 +4501,7 @@ button.site-footer-cta-button {
   border: none;
   background: transparent;
   padding: 0;
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: 11px;
   line-height: 16px;
   text-align: center;
@@ -4532,7 +4536,7 @@ button.site-footer-cta-button {
   border-radius: 16px;
   background: var(--dd-qualifier-color-cta-bg);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
@@ -6593,4 +6597,55 @@ button.site-footer-cta-button {
   .hero-actions {
     animation-delay: 0.24s;
   }
+}
+
+/*
+ * Heading hierarchy.
+ * Tier 1 (serif, larger): the sections that carry the pitch: hero, work, founder, pricing, closing CTA.
+ * Tier 2 (sans, semibold, smaller): supporting sections, so they don't compete with tier 1.
+ */
+.work-section-headline,
+.founder-section-title,
+.pricing-section-title {
+  font-size: calc(var(--dd-work-headline-size) * 1.2);
+  line-height: 1.08;
+}
+
+.founder-section-title {
+  font-size: calc(var(--dd-founder-title-size) * 1.2);
+}
+
+.pricing-section-title {
+  font-size: calc(var(--dd-pricing-title-size) * 1.2);
+}
+
+.scalability-headline,
+.tools-section-headline,
+.testimonials-section-title,
+.chatgpt-cta-headline,
+.faq-section-title {
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+}
+
+.scalability-headline {
+  font-size: calc(var(--dd-scalability-headline-size) * 0.74);
+}
+
+.tools-section-headline {
+  font-size: calc(var(--dd-tools-headline-size) * 0.74);
+}
+
+.testimonials-section-title {
+  font-size: calc(var(--dd-testimonials-title-size) * 0.74);
+}
+
+.chatgpt-cta-headline {
+  font-size: calc(var(--dd-chatgpt-cta-headline-size) * 0.74);
+}
+
+.faq-section-title {
+  font-size: calc(var(--dd-faq-title-size) * 0.74);
 }
