@@ -64,7 +64,7 @@ export function chatgptCtaSectionLayoutToCssVars(): Record<string, string> {
       maxPx: layout.badgeMarginBottomAtBaseline,
     }),
     "--dd-chatgpt-cta-headline-size": fluid(layout.headlineFontSizeAtBaseline, {
-      minPx: 30,
+      minPx: 26,
       maxPx: layout.headlineFontSizeAtBaseline,
     }),
     "--dd-chatgpt-cta-headline-line-height": fluid(layout.headlineLineHeightAtBaseline, {

@@ -20,7 +20,7 @@ function fluid(
 export function workSectionLayoutToCssVars(): Record<string, string> {
   return {
     "--dd-work-margin-top": fluid(layout.marginTopAtBaseline, {
-      minPx: 48,
+      minPx: 64,
       maxPx: layout.marginTopAtBaseline,
     }),
     "--dd-work-width": fluid(layout.widthAtBaseline, {

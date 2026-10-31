@@ -71,7 +71,7 @@ const ctaClassName =
 // Different on/off thresholds so scrolling near the edge can never flip the state back and forth.
 const SCROLL_ON_PX = 64;
 const SCROLL_OFF_PX = 16;
-const PILL_MAX_WIDTH_PX = 920;
+const PILL_MAX_WIDTH_PX = 1120;
 const PILL_SIDE_GUTTER_PX = 12;
 
 export function Header({ brand, items, cta, copy }: HeaderProps) {
@@ -133,7 +133,7 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
         <div className="site-header-bar flex w-full items-center md:grid md:grid-cols-[1fr_auto_1fr]">
           <Link
             href={brand.href}
-            className="shrink-0 font-logo text-[clamp(1.125rem,1.71875vw,1.375rem)] font-semibold leading-7 tracking-[-0.55px] text-foreground md:justify-self-start"
+            className="site-header-brand shrink-0 font-logo text-[clamp(1.125rem,1.71875vw,1.375rem)] font-semibold leading-7 tracking-[-0.55px] text-foreground md:justify-self-start"
           >
             {brand.name}
           </Link>
@@ -147,7 +147,7 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
             ))}
           </nav>
 
-          <div className="ml-auto flex shrink-0 items-center gap-3 md:justify-self-end">
+          <div className="site-header-actions ml-auto flex shrink-0 items-center gap-3 md:justify-self-end">
             <CtaLink cta={cta} className={`${ctaClassName} hidden sm:inline-flex`} />
             <button
               type="button"

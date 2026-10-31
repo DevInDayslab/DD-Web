@@ -65,12 +65,10 @@ body {
 }
 
 .site-header-shell[data-scrolled="true"] {
-  border-color: rgba(25, 28, 29, 0.08);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow:
-    0 8px 32px rgba(25, 28, 29, 0.08),
-    0 1px 2px rgba(25, 28, 29, 0.04);
+  border-color: transparent;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   transform: translate3d(0, 12px, 0);
 }
 
@@ -80,22 +78,69 @@ body {
     min-height 0.45s var(--dd-header-ease);
 }
 
+/* Scrolled: the bar splits into three floating pills (brand, navigation, actions). */
+.site-header-brand,
+.site-header-nav,
+.site-header-actions {
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.45s var(--dd-header-ease),
+    padding 0.45s var(--dd-header-ease),
+    min-height 0.45s var(--dd-header-ease);
+}
+
+.site-header-brand {
+  display: flex;
+  align-items: center;
+}
+
 .site-header-shell[data-scrolled="true"] .site-header-bar {
-  min-height: 56px;
-  padding-inline: 20px 8px;
+  min-height: 0;
+  padding-inline: 0;
+  gap: 12px;
+}
+
+.site-header-shell[data-scrolled="true"] .site-header-brand,
+.site-header-shell[data-scrolled="true"] .site-header-nav,
+.site-header-shell[data-scrolled="true"] .site-header-actions {
+  min-height: 52px;
+  border-color: rgba(25, 28, 29, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 8px 28px rgba(25, 28, 29, 0.08),
+    0 1px 2px rgba(25, 28, 29, 0.04);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+}
+
+.site-header-shell[data-scrolled="true"] .site-header-brand {
+  padding-inline: 22px;
+}
+
+.site-header-shell[data-scrolled="true"] .site-header-nav {
+  padding: 6px;
+}
+
+.site-header-shell[data-scrolled="true"] .site-header-actions {
+  padding: 3px;
 }
 
 .site-header-shell[data-scrolled="true"] .site-header-mobile {
-  padding-inline: 12px;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid rgba(25, 28, 29, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 28px rgba(25, 28, 29, 0.08);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
 }
 
 .site-header-nav {
   background: var(--dd-color-surface);
-  transition: background-color 0.35s ease;
-}
-
-.site-header-shell[data-scrolled="true"] .site-header-nav {
-  background: transparent;
 }
 
 .site-header-cta {
@@ -1515,6 +1560,7 @@ body {
 }
 
 .testimonials-section {
+  overflow-x: clip;
   position: relative;
   z-index: 2;
   margin-top: var(--dd-testimonials-margin-top);
@@ -1544,8 +1590,15 @@ body {
 }
 
 .testimonials-carousel {
+  /* Full-bleed: cards start on the content column and run off the right edge of the screen. */
+  --dd-testimonials-start: max(
+    var(--dd-testimonials-padding-inline),
+    calc((100vw - 1120px) / 2)
+  );
   position: relative;
-  width: 100%;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-bottom: 72px;
 }
 
 .testimonials-carousel-viewport {
@@ -1554,7 +1607,11 @@ body {
   padding-block: 12px 24px;
   scroll-behavior: smooth;
   scroll-snap-type: x proximity;
+  scroll-padding-inline-start: var(--dd-testimonials-start);
   scrollbar-width: none;
+  /* Very subtle fade where cards run off the right edge. */
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 40px), rgba(0, 0, 0, 0.55) 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 40px), rgba(0, 0, 0, 0.55) 100%);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1568,17 +1625,17 @@ body {
   flex: none;
   align-items: stretch;
   gap: var(--dd-testimonials-carousel-gap);
-  padding-inline: 15%;
+  padding-inline: var(--dd-testimonials-start) 48px;
 }
 
 .testimonials-carousel-item {
   flex: none;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 
 .testimonials-carousel-button {
   position: absolute;
-  top: 50%;
+  bottom: 0;
   z-index: 3;
   display: inline-flex;
   width: 48px;
@@ -1592,7 +1649,6 @@ body {
   color: #191c1d;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transform: translateY(-50%);
   transition:
     opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
@@ -1606,22 +1662,22 @@ body {
 
 @media (hover: hover) {
   .testimonials-carousel-button:hover:not(:disabled) {
-    transform: translateY(-50%) scale(1.06);
+    transform: scale(1.06);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   }
 }
 
 .testimonials-carousel-button:disabled {
-  opacity: 0;
+  opacity: 0.35;
   pointer-events: none;
 }
 
 .testimonials-carousel-button-prev {
-  left: 4%;
+  left: var(--dd-testimonials-start);
 }
 
 .testimonials-carousel-button-next {
-  right: 4%;
+  left: calc(var(--dd-testimonials-start) + 60px);
 }
 
 @media (max-width: 640px) {
@@ -1630,12 +1686,8 @@ body {
     height: 40px;
   }
 
-  .testimonials-carousel-button-prev {
-    left: 8px;
-  }
-
   .testimonials-carousel-button-next {
-    right: 8px;
+    left: calc(var(--dd-testimonials-start) + 52px);
   }
 }
 
@@ -6600,52 +6652,42 @@ button.site-footer-cta-button {
 }
 
 /*
- * Heading hierarchy.
- * Tier 1 (serif, larger): the sections that carry the pitch: hero, work, founder, pricing, closing CTA.
- * Tier 2 (sans, semibold, smaller): supporting sections, so they don't compete with tier 1.
+ * Heading hierarchy (sizes come from the section configs in src/config).
+ * Serif: hero, work, pricing, "Ask ChatGPT" and the closing CTA, the sections that carry the pitch.
+ * Sans (semibold): supporting sections, so they don't compete.
  */
 .work-section-headline,
-.founder-section-title,
 .pricing-section-title {
-  font-size: calc(var(--dd-work-headline-size) * 1.2);
-  line-height: 1.08;
+  line-height: 1.1;
 }
 
-.founder-section-title {
-  font-size: calc(var(--dd-founder-title-size) * 1.2);
-}
-
-.pricing-section-title {
-  font-size: calc(var(--dd-pricing-title-size) * 1.2);
+.chatgpt-cta-headline {
+  line-height: 1.12;
 }
 
 .scalability-headline,
 .tools-section-headline,
 .testimonials-section-title,
-.chatgpt-cta-headline,
+.founder-section-title,
 .faq-section-title {
   font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.2;
   letter-spacing: -0.022em;
 }
 
-.scalability-headline {
-  font-size: calc(var(--dd-scalability-headline-size) * 0.74);
+/* Avoid orphaned last words in headings and short copy. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
 }
 
-.tools-section-headline {
-  font-size: calc(var(--dd-tools-headline-size) * 0.74);
+p {
+  text-wrap: pretty;
 }
 
-.testimonials-section-title {
-  font-size: calc(var(--dd-testimonials-title-size) * 0.74);
-}
-
-.chatgpt-cta-headline {
-  font-size: calc(var(--dd-chatgpt-cta-headline-size) * 0.74);
-}
-
-.faq-section-title {
-  font-size: calc(var(--dd-faq-title-size) * 0.74);
+.scalability-footer-text,
+.scalability-footer {
+  text-wrap: balance;
 }

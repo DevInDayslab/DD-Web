@@ -52,7 +52,7 @@ export function scalabilityLayoutToCssVars(): Record<string, string> {
       maxPx: layout.eyebrowMarginBottomAtBaseline,
     }),
     "--dd-scalability-headline-size": fluid(layout.headlineFontSizeAtBaseline, {
-      minPx: 30,
+      minPx: 26,
       maxPx: layout.headlineFontSizeAtBaseline,
     }),
     "--dd-scalability-headline-line-height": fluid(layout.headlineLineHeightAtBaseline, {
