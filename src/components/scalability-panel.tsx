@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import { ScalabilityLetterChevron } from "@/components/scalability-letter-chevron";
 import { ScalabilityLetterTileView } from "@/components/scalability-letter-tile";
 import { ScalabilityPillarCard } from "@/components/scalability-pillar-card";
@@ -34,8 +33,8 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
     ? "scalability-letter-bar--aligned"
     : "scalability-letter-bar--tilted";
   const panelClassName = expanded
-    ? `scalability-panel scalability-panel--expanded scalability-letter-bar ${alignmentClass}`
-    : `scalability-panel scalability-panel--collapsed scalability-letter-bar ${alignmentClass}`;
+    ? `scalability-panel scalability-panel--expanded ${alignmentClass}`
+    : `scalability-panel scalability-panel--collapsed ${alignmentClass}`;
 
   return (
     <div
@@ -107,20 +106,14 @@ export function ScalabilityPanel({ content }: ScalabilityPanelProps) {
         </div>
       </div>
 
-      <AnimatePresence initial={false}>
-        {!expanded ? (
-          <motion.p
-            key="scalability-collapsed-footer"
-            className="scalability-footer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            {content.footer}
-          </motion.p>
-        ) : null}
-      </AnimatePresence>
+      <div
+        className={`scalability-footer-wrap${expanded ? " scalability-footer-wrap--hidden" : ""}`}
+        aria-hidden={expanded}
+      >
+        <div className="scalability-footer-clip">
+          <p className="scalability-footer">{content.footer}</p>
+        </div>
+      </div>
     </div>
   );
 }

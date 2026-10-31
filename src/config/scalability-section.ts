@@ -40,7 +40,7 @@ export const scalabilitySectionLayout = {
   letterTileHeightAtBaseline: 44,
   letterTileRadiusAtBaseline: 10,
   letterTileBorderWidthAtBaseline: 1.2,
-  letterFontSizeAtBaseline: 22,
+  letterFontSizeAtBaseline: 20,
   letterLineHeightAtBaseline: 28,
   letterLetterSpacingAtBaseline: -0.33,
   chevronWidthAtBaseline: 16,

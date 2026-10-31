@@ -18,7 +18,7 @@ export const scalabilityLetterBarInteraction = {
     damping: 26,
     mass: 0.8,
   },
-  panelExpandDurationSeconds: 0.28,
+  panelExpandDurationSeconds: 0.6,
   panelContentFadeSeconds: 0.2,
   panelContentStaggerSeconds: 0,
 } as const;
