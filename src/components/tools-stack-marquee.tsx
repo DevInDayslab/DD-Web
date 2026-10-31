@@ -5,7 +5,6 @@ import { motion, useMotionValue } from "motion/react";
 import { ToolsStackMarqueeItem } from "@/components/tools-stack-marquee-item";
 import { toolsSectionLayout } from "@/config/tools-section";
 import { toolsEdgeFeather } from "@/config/tools-edge-feather";
-import { normalizeMarqueeMotionValue } from "@/lib/hero-marquee-motion";
 import {
   marqueeEntryEdgePresentation,
   type MarqueeEntryEdgePresentation,
@@ -24,9 +23,6 @@ export function ToolsStackMarquee({ content }: ToolsStackMarqueeProps) {
   const [entryPresentations, setEntryPresentations] = useState<
     Record<string, MarqueeEntryEdgePresentation>
   >({});
-  const pausedRef = useRef(false);
-  const draggingRef = useRef(false);
-  const hoverRef = useRef(false);
   const layout = toolsSectionLayout;
   const edgeFade = toolsEdgeFeather.entryEdgeFade;
 
@@ -87,7 +83,7 @@ export function ToolsStackMarquee({ content }: ToolsStackMarqueeProps) {
       const deltaSeconds = (now - last) / 1000;
       last = now;
 
-      if (!pausedRef.current && !draggingRef.current) {
+      {
         const speed =
           layout.marqueeScrollSpeedPxPerSecondAtBaseline *
           (segmentWidth / layout.marqueeSegmentWidthAtBaseline);
@@ -111,31 +107,6 @@ export function ToolsStackMarquee({ content }: ToolsStackMarqueeProps) {
     segmentWidth,
     x,
   ]);
-
-  const handlePointerEnter = () => {
-    hoverRef.current = true;
-    pausedRef.current = true;
-  };
-
-  const handlePointerLeave = () => {
-    hoverRef.current = false;
-    if (!draggingRef.current) {
-      pausedRef.current = false;
-    }
-  };
-
-  const handleDragStart = () => {
-    draggingRef.current = true;
-    pausedRef.current = true;
-  };
-
-  const handleDragEnd = () => {
-    draggingRef.current = false;
-    if (segmentWidth > 0) {
-      normalizeMarqueeMotionValue(x, segmentWidth);
-    }
-    pausedRef.current = hoverRef.current;
-  };
 
   const renderSegment = (keyPrefix: string) => (
     <div
@@ -164,17 +135,10 @@ export function ToolsStackMarquee({ content }: ToolsStackMarqueeProps) {
         <div
           ref={viewportRef}
           className="tools-stack-pill-viewport"
-          onPointerEnter={handlePointerEnter}
-          onPointerLeave={handlePointerLeave}
         >
           <motion.div
             className="tools-stack-marquee-track"
             style={{ x }}
-            drag="x"
-            dragElastic={0.06}
-            dragMomentum={false}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
           >
             {renderSegment("a")}
             {renderSegment("b")}

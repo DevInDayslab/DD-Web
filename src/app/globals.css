@@ -934,10 +934,13 @@ body {
   display: flex;
   width: 100%;
   justify-content: center;
-  perspective: 1400px;
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: opacity 0.2s ease;
+}
+
+.work-featured-card-swap {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  will-change: opacity, transform, filter;
 }
 
 .work-featured-card-host--genie-hidden {
@@ -2405,6 +2408,36 @@ body {
   border-radius: var(--dd-pricing-price-card-radius);
   background: var(--dd-pricing-price-card-bg);
   box-shadow: var(--dd-pricing-shadow-price-card);
+}
+
+.pricing-tier-scope-slot {
+  position: relative;
+  min-width: 0;
+  align-self: center;
+}
+
+.pricing-price-card {
+  overflow: hidden;
+}
+
+.pricing-price-card-shine {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  z-index: 2;
+  width: 55%;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.18) 45%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.18) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-12deg);
+  mix-blend-mode: screen;
 }
 
 .pricing-price-card-glow {

@@ -101,72 +101,106 @@ export function PricingTierShowcase({ content }: PricingTierShowcaseProps) {
         transition={heightTransition}
       >
         <div ref={measureRef} className="pricing-surface-measure">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={activeTier.id}
-              id={`pricing-panel-${activeTier.id}`}
-              role="tabpanel"
-              aria-labelledby={`pricing-tab-${activeTier.id}`}
-              className="pricing-surface-panel"
-              initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
-              transition={{ duration: reducedMotion ? 0 : fadeDuration, ease: "easeInOut" }}
-            >
-              <PricingTierPanel tier={activeTier} />
-            </motion.div>
-          </AnimatePresence>
+          <div className="pricing-tier-layout">
+            <div className="pricing-tier-scope-slot">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={activeTier.id}
+                  id={`pricing-panel-${activeTier.id}`}
+                  role="tabpanel"
+                  aria-labelledby={`pricing-tab-${activeTier.id}`}
+                  className="pricing-surface-panel"
+                  initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, filter: "blur(0px)" }}
+                  exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
+                  transition={{ duration: reducedMotion ? 0 : fadeDuration, ease: "easeInOut" }}
+                >
+                  <PricingTierScope tier={activeTier} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            <PricingPriceCard tier={activeTier} reducedMotion={Boolean(reducedMotion)} />
+          </div>
         </div>
       </motion.div>
     </>
   );
 }
 
-function PricingTierPanel({ tier }: { tier: PricingTier }) {
+function PricingTierScope({ tier }: { tier: PricingTier }) {
   return (
-    <div className="pricing-tier-layout">
-      <div className="pricing-tier-scope">
-        <div className="pricing-tier-header">
-          <h3 className="pricing-tier-title">{tier.title}</h3>
-          <span className="pricing-tier-duration">{tier.durationBadge}</span>
-        </div>
-        <ul className="pricing-feature-list">
-          {tier.features.map((feature) => (
-            <li key={feature} className="pricing-feature-item">
-              <PricingCheckIcon />
-              <span>{feature}</span>
-            </li>
-          ))}
-        </ul>
+    <div className="pricing-tier-scope">
+      <div className="pricing-tier-header">
+        <h3 className="pricing-tier-title">{tier.title}</h3>
+        <span className="pricing-tier-duration">{tier.durationBadge}</span>
       </div>
+      <ul className="pricing-feature-list">
+        {tier.features.map((feature) => (
+          <li key={feature} className="pricing-feature-item">
+            <PricingCheckIcon />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-      <div className="pricing-price-card">
-        <div className="pricing-price-card-glow" aria-hidden />
-        <p className="pricing-investment-label">{tier.investmentLabel}</p>
-        <p className="pricing-price">{tier.price}</p>
-        {tier.priceSubtitle ? (
-          <p className="pricing-price-subtitle">{tier.priceSubtitle}</p>
-        ) : null}
-        <QualifierCta
-          className="pricing-cta"
-          href={tier.ctaHref}
-          label={tier.ctaLabel}
-          ariaLabel={tier.ctaAriaLabel}
+function PricingPriceCard({ tier, reducedMotion }: { tier: PricingTier; reducedMotion: boolean }) {
+  const textTransition = { duration: reducedMotion ? 0 : 0.45, ease: surfaceLayoutEase };
+  return (
+    <div className="pricing-price-card">
+      <div className="pricing-price-card-glow" aria-hidden />
+      {reducedMotion ? null : (
+        <motion.span
+          key={tier.id}
+          className="pricing-price-card-shine"
+          aria-hidden
+          initial={{ x: "-120%", opacity: 0 }}
+          animate={{ x: "120%", opacity: [0, 1, 1, 0] }}
+          transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
+        />
+      )}
+      <p className="pricing-investment-label">{tier.investmentLabel}</p>
+      <motion.p
+        key={`price-${tier.id}`}
+        className="pricing-price"
+        initial={reducedMotion ? false : { opacity: 0, y: 8, filter: "blur(6px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={textTransition}
+      >
+        {tier.price}
+      </motion.p>
+      {tier.priceSubtitle ? (
+        <motion.p
+          key={`sub-${tier.id}`}
+          className="pricing-price-subtitle"
+          initial={reducedMotion ? false : { opacity: 0, filter: "blur(4px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ ...textTransition, delay: reducedMotion ? 0 : 0.06 }}
         >
-          <span>{tier.ctaLabel}</span>
-          <span className="pricing-cta-icon" aria-hidden>
-            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M3 8H13M13 8L9 4M13 8L9 12"
-                stroke="currentColor"
-                strokeWidth="1.33333"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </QualifierCta>
-      </div>
+          {tier.priceSubtitle}
+        </motion.p>
+      ) : null}
+      <QualifierCta
+        className="pricing-cta"
+        href={tier.ctaHref}
+        label={tier.ctaLabel}
+        ariaLabel={tier.ctaAriaLabel}
+      >
+        <span>{tier.ctaLabel}</span>
+        <span className="pricing-cta-icon" aria-hidden>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 8H13M13 8L9 4M13 8L9 12"
+              stroke="currentColor"
+              strokeWidth="1.33333"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </QualifierCta>
     </div>
   );
 }
