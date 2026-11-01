@@ -20,7 +20,7 @@ export const siteFooterContent = {
     { id: "case-studies", label: "Case Studies", href: "/case-studies" },
     { id: "pricing", label: "Pricing", href: "/#pricing" },
     { id: "faq", label: "FAQ", href: "/#faq" },
-    { id: "about", label: "About", href: "/#about" },
+    { id: "about", label: "About", href: "/about" },
     {
       id: "book",
       label: site.booking.label,
@@ -30,7 +30,7 @@ export const siteFooterContent = {
   ],
   navSeparator: "·",
   socialLinks: [
-    { id: "linkedin", label: "LinkedIn", href: "https://linkedin.com" },
+    { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/raghav-kaushik-718058301/" },
     { id: "instagram", label: "Instagram", href: "https://instagram.com" },
     { id: "github", label: "GitHub", href: "https://github.com" },
   ],

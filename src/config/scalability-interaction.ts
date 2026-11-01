@@ -1,18 +1,18 @@
 export const scalabilityLetterBarInteraction = {
-  alignStaggerSeconds: 0.045,
-  untiltStaggerSeconds: 0.032,
+  alignStaggerSeconds: 0.035,
+  untiltStaggerSeconds: 0.03,
   alignSpring: {
-    stiffness: 560,
-    damping: 19,
-    mass: 0.72,
+    stiffness: 190,
+    damping: 24,
+    mass: 0.9,
   },
   untiltSpring: {
-    stiffness: 320,
+    stiffness: 170,
     damping: 26,
-    mass: 0.88,
+    mass: 0.9,
   },
   /** Tile gap when hovered or expanded (baseline px). Default tile gap is layout `letterTileGapAtBaseline`. */
-  hoverLetterTileGapAtBaseline: 20,
+  hoverLetterTileGapAtBaseline: 6,
   chevronRotateSpring: {
     stiffness: 420,
     damping: 26,

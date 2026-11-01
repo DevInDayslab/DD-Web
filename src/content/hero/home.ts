@@ -8,6 +8,8 @@ export const homeHeroContent = {
   },
   subtitle:
     "We design and engineer mobile and web products end to end from the first architecture decision to production and beyond. One team. One accountable partner.",
+  subtitleShort:
+    "Mobile and web products, designed and engineered end to end by one accountable team.",
   actions: [
     {
       id: "book-call",

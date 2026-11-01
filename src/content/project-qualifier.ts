@@ -10,6 +10,12 @@ export const projectQualifierContent = {
   backLabel: "Previous question",
   nextLabel: "Next question",
   closeLabel: "Close",
+  exit: {
+    title: "Leave without finishing?",
+    body: "Your answers won't be saved, and you'll need to start over.",
+    stayLabel: "Keep going",
+    leaveLabel: "Leave",
+  },
   booking: {
     confirmLabel: "Confirm time",
     confirmWithTimeTemplate: "Confirm {time}",
@@ -19,22 +25,10 @@ export const projectQualifierContent = {
     summaryLabel: "Your call",
   },
   welcome: {
-    chip: "Open for new projects",
     title: "Let's talk about your product.",
-    body: "A few quick questions, then a time with a founder. By the end we'll know how to help, and you'll know exactly what happens next.",
+    body: "A few quick questions, then a time with the founder.",
     startLabel: "Start",
     duration: "Takes about 2 minutes",
-    journey: [
-      { title: "Tell us the basics", body: "Who you are and what you're building." },
-      { title: "Pick a time", body: "30 minutes with a founder." },
-      { title: "Shape the brief", body: "Stage, budget and timeline." },
-    ],
-    team: { initials: ["RK", "IS"], label: "Raghav & Ishu reply within 48 hours" },
-    alternate: {
-      text: "Rather write it down?",
-      linkLabel: "Send a message",
-      href: "/contact#message",
-    },
   },
   hints: {
     continue: "to continue",
@@ -50,7 +44,7 @@ export const projectQualifierContent = {
   },
   successTitle: "Thanks, we've got your details.",
   successBody:
-    "A founder will read this and confirm your call by email within 48 hours, usually sooner.",
+    "The founder will read this and confirm your call by email within 48 hours, usually sooner.",
   successCloseLabel: "Back to the site",
   steps: [
     {
@@ -74,7 +68,7 @@ export const projectQualifierContent = {
       kind: "booking",
       question: "Pick a time for your call",
       description:
-        "Choose a 30-minute slot with a founder. Once it's booked, a few more questions and you're done.",
+        "Choose a 30-minute slot with the founder. Once it's booked, a few more questions and you're done.",
     },
     {
       id: "companyName",

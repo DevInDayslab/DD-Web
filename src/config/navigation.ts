@@ -20,6 +20,12 @@ export const routes = [
     priority: 0.9,
   },
   {
+    id: "about",
+    path: "/about",
+    changeFrequency: "monthly",
+    priority: 0.7,
+  },
+  {
     id: "contact",
     path: "/contact",
     changeFrequency: "yearly",
@@ -30,6 +36,6 @@ export const routes = [
 export const navigation: NavItem[] = [
   { id: "case-studies", label: "Case Studies", href: "/case-studies" },
   { id: "faqs", label: "FAQs", href: "/faq" },
-  { id: "about", label: "About", href: "/#about" },
+  { id: "about", label: "About", href: "/about" },
   { id: "contact", label: "Contact", href: "/contact" },
 ];

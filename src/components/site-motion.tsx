@@ -28,6 +28,7 @@ const REVEAL_SELECTOR = [
   ".contact-page-crosslink-card",
   ".cp2-bottom",
   ".case-study-narrative-section",
+  ".ab-reveal",
 ].join(",");
 
 const HEADING_SELECTOR = "h1,h2,h3";

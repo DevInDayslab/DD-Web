@@ -11,7 +11,7 @@ export const contactPageContent = {
     eyebrow: "Contact",
     headline: "Tell us what you're building.",
     subhead:
-      "A founder replies within 48 hours. No sales reps, no pitch deck, just an honest read on whether we're the right team for it.",
+      "The founder replies within 48 hours. No sales reps, no pitch deck, just an honest read on whether we're the right team for it.",
   },
   details: [
     {
@@ -24,7 +24,7 @@ export const contactPageContent = {
     {
       id: "call",
       label: "Intro call",
-      value: "30 minutes, with a founder",
+      value: "30 minutes, with the founder",
     },
     {
       id: "studio",
@@ -47,7 +47,7 @@ export const contactPageContent = {
     bookCall: {
       title: "Book a call",
       description:
-        "Thirty minutes with a founder. Tell us what you're building and we'll give you an honest answer on fit, scope and rough timeline.",
+        "Thirty minutes with the founder. Tell us what you're building and we'll give you an honest answer on fit, scope and rough timeline.",
       widget: {
         eyebrow: "Intro call",
         title: "30-minute intro call",
@@ -129,7 +129,7 @@ export const contactPageContent = {
         body: "Book a time or send a note. We reply within 48 hours.",
       },
       {
-        title: "Talk to a founder",
+        title: "Talk to the founder",
         body: "A 30-minute conversation, not a sales pitch. We work out what you need and whether we're a fit.",
       },
       {

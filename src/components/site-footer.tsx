@@ -33,6 +33,9 @@ export function SiteFooter() {
           </div>
 
           <nav className="site-footer-nav" aria-label="Footer">
+            <p className="site-footer-col-label" aria-hidden>
+              Explore
+            </p>
             <ul className="site-footer-nav-list">
               {navLinks.map((link, index) => (
                 <li key={link.id} className="site-footer-nav-item">
@@ -48,7 +51,11 @@ export function SiteFooter() {
           </nav>
 
           <div className="site-footer-meta">
-            <div className="site-footer-social">
+            <div className="site-footer-social-block">
+              <p className="site-footer-col-label" aria-hidden>
+                Follow
+              </p>
+              <div className="site-footer-social">
               {socialLinks.map((link, index) => (
                 <span key={link.id} className="site-footer-social-item">
                   {index > 0 ? (
@@ -59,6 +66,7 @@ export function SiteFooter() {
                   <SiteFooterLink link={link} className="site-footer-social-link" />
                 </span>
               ))}
+              </div>
             </div>
             <p className="site-footer-copyright">{content.copyright}</p>
           </div>

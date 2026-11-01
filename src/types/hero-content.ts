@@ -15,5 +15,7 @@ export type HeroActionCopy = {
 export type HeroContentCopy = {
   headline: HeroHeadlineCopy;
   subtitle: string;
+  /** Shorter line shown on phones, where the full subtitle reads as a wall of text. */
+  subtitleShort?: string;
   actions: readonly HeroActionCopy[];
 };

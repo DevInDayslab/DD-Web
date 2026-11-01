@@ -17,7 +17,6 @@ import type {
   ProjectQualifierStepId,
 } from "@/types/project-qualifier";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -127,6 +126,7 @@ export function ProjectQualifierModal() {
   const [cardHeight, setCardHeight] = useState<number | null>(null);
   // While one screen is leaving, the card keeps its size; it resizes as the next screen arrives.
   const [holdLayout, setHoldLayout] = useState(false);
+  const [confirmingExit, setConfirmingExit] = useState(false);
   const [shellMode, setShellMode] = useState<ShellMode>("welcome");
   const firstScreenRef = useRef(true);
 
@@ -169,10 +169,20 @@ export function ProjectQualifierModal() {
   }, [budgetStep]);
 
   const handleClose = useCallback(() => {
+    setConfirmingExit(false);
     close();
     // Let the exit animation play before the state is wiped.
     window.setTimeout(reset, 400);
   }, [close, reset]);
+
+  // Closing mid-flow asks first; the welcome and success screens close straight away.
+  const requestClose = useCallback(() => {
+    if (phase === "steps" && !submitting) {
+      setConfirmingExit(true);
+      return;
+    }
+    handleClose();
+  }, [handleClose, phase, submitting]);
 
   useEffect(() => {
     setMounted(true);
@@ -374,8 +384,14 @@ export function ProjectQualifierModal() {
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
+      if (confirmingExit) {
+        if (event.key === "Escape") {
+          setConfirmingExit(false);
+        }
+        return;
+      }
       if (event.key === "Escape") {
-        handleClose();
+        requestClose();
         return;
       }
       if (event.isComposing || event.metaKey || event.ctrlKey || event.altKey) {
@@ -428,7 +444,7 @@ export function ProjectQualifierModal() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [currentStep, goNext, handleClose, isOpen, phase, setValue, values]);
+  }, [confirmingExit, currentStep, goNext, handleClose, isOpen, phase, requestClose, setValue, values]);
 
   const stepVariants = {
     enter: (dir: number) => ({
@@ -490,11 +506,54 @@ export function ProjectQualifierModal() {
           />
           <div className="qf-wash" aria-hidden />
 
-          <button type="button" className="qf-close" aria-label={content.closeLabel} onClick={handleClose}>
+          <button type="button" className="qf-close" aria-label={content.closeLabel} onClick={requestClose}>
             <svg viewBox="0 0 12 12" width="12" height="12" fill="none" aria-hidden>
               <path d="M2 2L10 10M10 2L2 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </button>
+
+          <AnimatePresence>
+            {confirmingExit ? (
+              <motion.div
+                className="qf-exit-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.2 }}
+                onClick={() => setConfirmingExit(false)}
+              >
+                <motion.div
+                  className="qf-exit"
+                  role="alertdialog"
+                  aria-modal="true"
+                  aria-labelledby={`${dialogTitleId}-exit`}
+                  initial={{ opacity: 0, scale: reducedMotion ? 1 : 0.94, y: reducedMotion ? 0 : 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: reducedMotion ? 1 : 0.97 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <h2 id={`${dialogTitleId}-exit`} className="qf-exit-title">
+                    {content.exit.title}
+                  </h2>
+                  <p className="qf-exit-body">{content.exit.body}</p>
+                  <div className="qf-exit-actions">
+                    <button type="button" className="qf-exit-leave" onClick={handleClose}>
+                      {content.exit.leaveLabel}
+                    </button>
+                    <button
+                      type="button"
+                      className="qf-exit-stay"
+                      autoFocus
+                      onClick={() => setConfirmingExit(false)}
+                    >
+                      {content.exit.stayLabel}
+                    </button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
           <div className={`qf-shell qf-shell--${shellMode}`}>
             <motion.p
@@ -585,10 +644,6 @@ export function ProjectQualifierModal() {
                     >
                       {phase === "welcome" ? (
                         <div className="qf-welcome">
-                          <p className="qf-chip">
-                            <span className="qf-chip-dot" aria-hidden />
-                            {content.welcome.chip}
-                          </p>
                           <RevealText
                             as="h2"
                             id={dialogTitleId}
@@ -600,69 +655,21 @@ export function ProjectQualifierModal() {
                             className="qf-body"
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.35 }}
+                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.3 }}
                           >
                             {content.welcome.body}
                           </motion.p>
-
-                          <ol className="qf-journey">
-                            {content.welcome.journey.map((item, index) => (
-                              <motion.li
-                                key={item.title}
-                                className="qf-journey-item"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ ...spring, delay: reducedMotion ? 0 : 0.45 + index * 0.07 }}
-                              >
-                                <span className="qf-journey-number" aria-hidden>
-                                  {index + 1}
-                                </span>
-                                <span className="qf-journey-title">{item.title}</span>
-                                <span className="qf-journey-body">{item.body}</span>
-                              </motion.li>
-                            ))}
-                          </ol>
-
                           <motion.div
                             className="qf-welcome-cta"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.7 }}
+                            transition={{ ...spring, delay: reducedMotion ? 0 : 0.42 }}
                           >
                             <button type="button" className="qf-primary" onClick={start}>
                               <span>{content.welcome.startLabel}</span>
                               <EnterKey />
                             </button>
-                            <div className="qf-welcome-foot">
-                              <span className="qf-team">
-                                <span className="qf-avatars" aria-hidden>
-                                  {content.welcome.team.initials.map((initials, index) => (
-                                    <span key={initials} className={`qf-avatar qf-avatar--${index}`}>
-                                      {initials}
-                                    </span>
-                                  ))}
-                                </span>
-                                {content.welcome.team.label}
-                              </span>
-                              <span className="qf-duration">
-                                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden>
-                                  <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" />
-                                  <path
-                                    d="M8 4.8V8l2.2 1.4"
-                                    stroke="currentColor"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                  />
-                                </svg>
-                                {content.welcome.duration}
-                              </span>
-                            </div>
-                            <p className="qf-alternate">
-                              {content.welcome.alternate.text}{" "}
-                              <Link href={content.welcome.alternate.href} onClick={handleClose}>
-                                {content.welcome.alternate.linkLabel}
-                              </Link>
-                            </p>
+                            <p className="qf-duration">{content.welcome.duration}</p>
                           </motion.div>
                         </div>
                       ) : null}

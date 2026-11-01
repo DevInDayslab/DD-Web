@@ -3,6 +3,7 @@
 import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
 import { isExternalHref } from "@/lib/links";
 import type { NavItem } from "@/types";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -76,6 +77,10 @@ const PILL_SIDE_GUTTER_PX = 12;
 
 export function Header({ brand, items, cta, copy }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const menuSpring = reducedMotion
+    ? { duration: 0 }
+    : { type: "spring" as const, stiffness: 420, damping: 34, mass: 0.9 };
   const [scrolled, setScrolled] = useState(false);
   const menuLabel = menuOpen ? copy.menuCloseLabel : copy.menuOpenLabel;
 
@@ -148,7 +153,7 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
           </nav>
 
           <div className="site-header-actions ml-auto flex shrink-0 items-center gap-3 md:justify-self-end">
-            <CtaLink cta={cta} className={`${ctaClassName} hidden sm:inline-flex`} />
+            <CtaLink cta={cta} className={`${ctaClassName} site-header-bar-cta`} />
             <button
               type="button"
               className="inline-flex h-[var(--dd-header-height)] max-h-11 min-h-11 w-11 items-center justify-center rounded-full text-foreground md:hidden"
@@ -158,30 +163,54 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
               onClick={() => setMenuOpen((open) => !open)}
             >
               <span className="flex flex-col gap-1.5" aria-hidden>
-                <span className="block h-px w-4 bg-foreground" />
-                <span className="block h-px w-4 bg-foreground" />
+                <motion.span
+                  className="block h-px w-4 bg-foreground"
+                  animate={menuOpen ? { y: 3.5, rotate: 45 } : { y: 0, rotate: 0 }}
+                  transition={menuSpring}
+                />
+                <motion.span
+                  className="block h-px w-4 bg-foreground"
+                  animate={menuOpen ? { y: -3.5, rotate: -45 } : { y: 0, rotate: 0 }}
+                  transition={menuSpring}
+                />
               </span>
             </button>
           </div>
         </div>
 
-        {menuOpen ? (
-          <nav
-            id="mobile-nav"
-            className="site-header-mobile flex flex-col gap-1 border-t border-hairline py-4 md:hidden"
-            aria-label="Primary"
-          >
-            {items.map((item) => (
-              <TextLink
-                key={item.id}
-                item={item}
-                className={`${navItemClassName} w-full`}
-                onClick={() => setMenuOpen(false)}
-              />
-            ))}
-            <CtaLink cta={cta} className={`${ctaClassName} mt-2 w-full sm:hidden`} />
-          </nav>
-        ) : null}
+        <AnimatePresence>
+          {menuOpen ? (
+            <motion.nav
+              id="mobile-nav"
+              className="site-header-mobile flex flex-col gap-1 border-t border-hairline py-4 md:hidden"
+              aria-label="Primary"
+              style={{ transformOrigin: "top center" }}
+              initial={{ opacity: 0, y: -10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1, transition: menuSpring }}
+              exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: reducedMotion ? 0 : 0.14, ease: "easeOut" } }}
+            >
+              {items.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0, transition: { ...menuSpring, delay: reducedMotion ? 0 : 0.04 + index * 0.035 } }}
+                >
+                  <TextLink
+                    item={item}
+                    className={`${navItemClassName} w-full`}
+                    onClick={() => setMenuOpen(false)}
+                  />
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0, transition: { ...menuSpring, delay: reducedMotion ? 0 : 0.04 + items.length * 0.035 } }}
+              >
+                <CtaLink cta={cta} className={`${ctaClassName} site-header-menu-cta`} />
+              </motion.div>
+            </motion.nav>
+          ) : null}
+        </AnimatePresence>
       </div>
     </header>
   );

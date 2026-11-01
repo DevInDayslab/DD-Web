@@ -73,6 +73,12 @@ export type ProjectQualifierContent = {
   backLabel: string;
   nextLabel: string;
   closeLabel: string;
+  exit: {
+    title: string;
+    body: string;
+    stayLabel: string;
+    leaveLabel: string;
+  };
   booking: {
     confirmLabel: string;
     confirmWithTimeTemplate: string;
@@ -82,14 +88,10 @@ export type ProjectQualifierContent = {
     summaryLabel: string;
   };
   welcome: {
-    chip: string;
     title: string;
     body: string;
     startLabel: string;
     duration: string;
-    journey: readonly { title: string; body: string }[];
-    team: { initials: readonly string[]; label: string };
-    alternate: { text: string; linkLabel: string; href: string };
   };
   hints: {
     continue: string;
