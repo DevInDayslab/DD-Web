@@ -96,6 +96,11 @@ export type CaseStudyPageLayoutConfig = {
   briefPaddingBottomAtBaseline: number;
   briefGapAtBaseline: number;
   briefCopyMaxWidthAtBaseline: number;
+  briefCopyMaxWidthMobileAtBaseline: number;
+  briefSpecRowGapMobileAtBaseline: number;
+  briefSpecRowPaddingBlockMobileAtBaseline: number;
+  briefPhoneMaxWidthAtBaseline: number;
+  briefPhonePaddingInlineAtBaseline: number;
   briefSpecLabelFontSizeAtBaseline: number;
   briefSpecValueFontSizeAtBaseline: number;
   phoneWidthAtBaseline: number;

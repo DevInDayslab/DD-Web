@@ -101,9 +101,9 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
             aria-label={menuLabel}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span className="flex flex-col gap-1.5" aria-hidden>
-              <span className="block h-px w-4 bg-foreground" />
-              <span className="block h-px w-4 bg-foreground" />
+            <span className="site-header-menu-icon" aria-hidden>
+              <span className="site-header-menu-icon-line" />
+              <span className="site-header-menu-icon-line" />
             </span>
           </button>
         </div>

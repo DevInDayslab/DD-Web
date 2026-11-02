@@ -7,6 +7,10 @@ type CaseStudyBriefSectionProps = {
   portraitPlaceholderLabel: string;
 };
 
+function isExternalCaseStudyHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}
+
 export function CaseStudyBriefSection({
   brief,
   portraitPlaceholderLabel,
@@ -37,9 +41,20 @@ export function CaseStudyBriefSection({
               <dt className="case-study-spec-label">{row.label}</dt>
               <dd className="case-study-spec-value">
                 {row.href ? (
-                  <Link href={row.href} className="case-study-spec-link">
-                    {row.value}
-                  </Link>
+                  isExternalCaseStudyHref(row.href) ? (
+                    <a
+                      href={row.href}
+                      className="case-study-spec-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {row.value}
+                    </a>
+                  ) : (
+                    <Link href={row.href} className="case-study-spec-link">
+                      {row.value}
+                    </Link>
+                  )
                 ) : (
                   row.value
                 )}
