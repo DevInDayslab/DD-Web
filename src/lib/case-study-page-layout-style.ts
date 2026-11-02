@@ -95,6 +95,27 @@ export function caseStudyPageLayoutToCssVars(): Record<string, string> {
       minPx: 320,
       maxPx: layout.briefCopyMaxWidthAtBaseline,
     }),
+    "--dd-case-study-brief-copy-max-width-mobile": fluid(
+      layout.briefCopyMaxWidthMobileAtBaseline,
+      { minPx: 320, maxPx: layout.briefCopyMaxWidthMobileAtBaseline },
+    ),
+    "--dd-case-study-brief-spec-row-gap-mobile": fluid(layout.briefSpecRowGapMobileAtBaseline, {
+      minPx: 6,
+      maxPx: layout.briefSpecRowGapMobileAtBaseline,
+    }),
+    "--dd-case-study-brief-spec-row-padding-block-mobile": fluid(
+      layout.briefSpecRowPaddingBlockMobileAtBaseline,
+      { minPx: 10, maxPx: layout.briefSpecRowPaddingBlockMobileAtBaseline },
+    ),
+    "--dd-case-study-brief-phone-max-width": fluid(layout.briefPhoneMaxWidthAtBaseline, {
+      minPx: 200,
+      maxPx: layout.briefPhoneMaxWidthAtBaseline,
+    }),
+    "--dd-case-study-brief-phone-padding-inline": fluid(
+      layout.briefPhonePaddingInlineAtBaseline,
+      { minPx: 16, maxPx: layout.briefPhonePaddingInlineAtBaseline },
+    ),
+    "--dd-case-study-phone-aspect-ratio": `${layout.phoneWidthAtBaseline} / ${layout.phoneHeightAtBaseline}`,
     "--dd-case-study-brief-spec-label-size": fluid(layout.briefSpecLabelFontSizeAtBaseline, {
       minPx: 10,
       maxPx: layout.briefSpecLabelFontSizeAtBaseline,

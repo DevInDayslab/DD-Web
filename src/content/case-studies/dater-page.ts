@@ -19,7 +19,7 @@ export const daterCaseStudyPage = {
       projectName: "Dater",
       industry: "Dating / Social",
     },
-    headlineLines: ["A dating app built around a feed,", "not a swipe."],
+    headlineLines: ["A dating app built around a feed", "not a swipe."],
     subhead:
       "Native iOS and Android, built end-to-end, from matchmaking logic to trust and safety.",
   },

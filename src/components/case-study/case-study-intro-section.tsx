@@ -18,14 +18,7 @@ export function CaseStudyIntroSection({ intro }: CaseStudyIntroSectionProps) {
         <h1 id="case-study-page-title" className="case-study-intro-title">
           {intro.headlineLines.map((line, index) => (
             <span key={index} className="case-study-intro-title-line">
-              {index > 0 ? (
-                <>
-                  <br />
-                  {line}
-                </>
-              ) : (
-                line
-              )}
+              {line}
             </span>
           ))}
         </h1>

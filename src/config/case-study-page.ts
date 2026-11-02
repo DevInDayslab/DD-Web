@@ -21,6 +21,12 @@ export const caseStudyPageLayout = {
   briefPaddingBottomAtBaseline: 96,
   briefGapAtBaseline: 48,
   briefCopyMaxWidthAtBaseline: 520,
+  /** Full page content width on mobile/tablet single-column brief. */
+  briefCopyMaxWidthMobileAtBaseline: 1184,
+  briefSpecRowGapMobileAtBaseline: 8,
+  briefSpecRowPaddingBlockMobileAtBaseline: 12,
+  briefPhoneMaxWidthAtBaseline: 280,
+  briefPhonePaddingInlineAtBaseline: 24,
   briefSpecLabelFontSizeAtBaseline: 11,
   briefSpecValueFontSizeAtBaseline: 14,
   phoneWidthAtBaseline: 204,
