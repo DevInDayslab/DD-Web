@@ -1,6 +1,7 @@
 import { heroFlanks } from "@/config/hero";
 import { serializeCssCustomProperties } from "@/lib/css-vars";
 import { heroMobileLayoutCssBlock } from "@/lib/hero-mobile-style";
+import { headerScrollMorphToCssVars } from "@/lib/header-scroll-morph-style";
 import { layoutToCssVars } from "@/lib/layout-style";
 import { scalabilityMobileLayoutCssBlock } from "@/lib/scalability-mobile-style";
 import { scalabilityLayoutToCssVars } from "@/lib/scalability-layout-style";
@@ -29,6 +30,7 @@ import { caseStudyNarrativeLayoutToCssVars } from "@/lib/case-study-narrative-la
 export function SiteLayoutStyle() {
   const rootVars = serializeCssCustomProperties({
     ...layoutToCssVars(),
+    ...headerScrollMorphToCssVars(),
     ...scalabilityLayoutToCssVars(),
     ...scalabilityPanelLayoutToCssVars(),
     ...workSectionLayoutToCssVars(),

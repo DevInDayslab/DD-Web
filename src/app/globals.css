@@ -25,9 +25,88 @@ body {
   font-family: var(--font-ibm-plex), ui-sans-serif, system-ui, sans-serif;
 }
 
+.site-header-shell {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-sizing: border-box;
+  width: 100%;
+  pointer-events: none;
+  /* padding-top animated from Header (pillTopInsetAtBaseline); prevents margin collapse */
+}
+
+.site-header-floating-bar {
+  box-sizing: border-box;
+  margin-inline: auto;
+  border: 1px solid transparent;
+  pointer-events: auto;
+  will-change: width, border-radius, box-shadow, transform;
+}
+
+.site-header-floating-bar[data-floating="true"] .site-header-nav-cluster {
+  box-shadow: none;
+}
+
+.site-header-floating-bar[data-floating="true"] .site-header-nav-link {
+  padding-block: var(--dd-header-pill-nav-link-padding-block);
+}
+
 .site-header-bar {
-  min-height: var(--dd-header-height);
-  padding-inline: var(--dd-header-edge-padding);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  height: var(--dd-header-bar-height, var(--dd-header-height));
+  min-height: var(--dd-header-bar-height, var(--dd-header-height));
+  max-height: var(--dd-header-bar-height, var(--dd-header-height));
+  padding-inline: var(--dd-header-bar-padding-inline, var(--dd-header-edge-padding));
+  padding-block: 0;
+}
+
+@media (min-width: 768px) {
+  .site-header-bar {
+    display: grid;
+    justify-content: normal;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+.site-header-brand-slot {
+  justify-self: start;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.site-header-actions-slot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  justify-self: end;
+  min-width: 0;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+
+.site-header-brand {
+  display: inline-flex;
+  transform-origin: left center;
+}
+
+.site-header-cta-pill {
+  box-sizing: border-box;
+  display: inline-flex;
+  height: var(--dd-header-cta-height, var(--dd-header-bar-height));
+  min-height: var(--dd-header-cta-height, var(--dd-header-bar-height));
+  max-height: var(--dd-header-cta-height, var(--dd-header-bar-height));
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--dd-header-cta-padding-inline, clamp(1.25rem, 2.8125vw, 2.25rem));
+  font-size: var(--dd-header-cta-font-size, clamp(0.75rem, 1.015625vw, 0.8125rem));
+  transform-origin: right center;
 }
 
 .site-header-mobile {
