@@ -292,7 +292,92 @@ export type CaseStudyNarrativeBlock =
   | CaseStudyTechStripBlock
   | CaseStudyLaunchBlock
   | CaseStudyInvigilSectionBlock
-  | CaseStudyBillingBabaSectionBlock;
+  | CaseStudyBillingBabaSectionBlock
+  | CaseStudyEntryTicketSectionBlock;
+
+/** EntryTicket — live web + native app narrative (see `entryticket-narrative.ts`). */
+export type EntryTicketSeqStep = {
+  id: string;
+  label: string;
+  sub?: string;
+  highlight?: boolean;
+};
+
+export type EntryTicketTeamColumn = {
+  id: string;
+  title: string;
+  bullets: readonly string[];
+};
+
+export type EntryTicketDesignSurface = {
+  id: string;
+  label: string;
+  tagline: string;
+};
+
+export type EntryTicketAppFeature = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type CaseStudyEntryTicketSectionBlock =
+  | {
+      type: "entryticket-section";
+      variant: "challenge-unified";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote: CaseStudyPullQuote;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "backend-sequence";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      steps: readonly EntryTicketSeqStep[];
+    }
+  | {
+      type: "entryticket-section";
+      variant: "team-handoff";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      left: EntryTicketTeamColumn;
+      right: EntryTicketTeamColumn;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "design-dual-surface";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      web: EntryTicketDesignSurface;
+      app: EntryTicketDesignSurface;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "app-features-ticket";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      features: readonly EntryTicketAppFeature[];
+    }
+  | {
+      type: "entryticket-section";
+      variant: "launch-live-banner";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      bannerLabel: string;
+    };
 
 /** Billing Baba — before/after rebuild narrative (see `billing-baba-narrative.ts`). */
 export type BillingBabaSplitList = {
