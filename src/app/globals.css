@@ -6094,6 +6094,615 @@ div.portfolio-grid-cell {
   color: var(--dd-case-study-narrative-color-headline);
 }
 
+/* --- Invigil case study: convergence diagram, ViERA tabs, investigation timeline, roles, devices, stats --- */
+
+.case-study-invigil-band {
+  box-sizing: border-box;
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  padding-block: clamp(28px, 5vw, 48px);
+  padding-inline: var(--dd-case-study-section-padding-inline);
+  background: var(--dd-case-study-narrative-color-quote);
+  border-block: 1px solid color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 35%, transparent);
+}
+
+.case-study-invigil-band-inner {
+  width: min(100%, var(--dd-case-study-narrative-max-width));
+  margin-inline: auto;
+}
+
+.case-study-invigil-band-kicker {
+  margin: 0 0 20px;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 55%, transparent);
+  text-align: center;
+}
+
+.case-study-invigil-converge {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: clamp(12px, 2.5vw, 24px);
+}
+
+.case-study-invigil-converge--compact .case-study-invigil-tile span {
+  font-size: 10px;
+}
+
+.case-study-invigil-converge--compact .case-study-invigil-layer-chip {
+  font-size: 10px;
+  padding: 5px 8px;
+}
+
+.case-study-invigil-product-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 8px;
+}
+
+@media (min-width: 640px) {
+  .case-study-invigil-product-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .case-study-invigil-product-cols {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+}
+
+.case-study-invigil-product-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.case-study-invigil-tile {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 6px;
+  border-radius: var(--dd-case-study-narrative-card-radius);
+  border: 1px solid color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 22%, transparent);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 8%, transparent);
+  color: var(--dd-case-study-narrative-surface-white);
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.case-study-invigil-tile span {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.case-study-invigil-product-col:hover .case-study-invigil-tile {
+  border-color: var(--dd-case-study-narrative-surface-white);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 35%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 50%, transparent);
+}
+
+.case-study-invigil-beam {
+  width: 3px;
+  flex: 1;
+  min-height: 28px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 35%, transparent) 0%,
+    var(--dd-case-study-narrative-color-user-accent) 55%,
+    color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 45%, transparent) 100%
+  );
+  opacity: 0.55;
+  transition: opacity 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.case-study-invigil-product-col:hover .case-study-invigil-beam {
+  opacity: 1;
+  filter: brightness(1.15);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 55%, transparent);
+}
+
+.case-study-invigil-converge:has(.case-study-invigil-product-col:hover) .case-study-invigil-layer-chip {
+  border-color: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 70%, var(--dd-case-study-narrative-surface-white));
+  color: var(--dd-case-study-narrative-surface-white);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 28%, transparent);
+}
+
+.case-study-invigil-core-stack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: calc(var(--dd-case-study-narrative-card-radius) + 2px);
+  border: 1px dashed color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 28%, transparent);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 6%, transparent);
+}
+
+.case-study-invigil-one-platform .case-study-invigil-core-stack {
+  border-color: var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-muted);
+}
+
+.case-study-invigil-one-platform .case-study-invigil-tile {
+  color: var(--dd-case-study-narrative-color-headline);
+  border-color: var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-bg);
+}
+
+.case-study-invigil-one-platform .case-study-invigil-product-col:hover .case-study-invigil-tile {
+  border-color: var(--dd-case-study-narrative-color-user-accent);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 12%, var(--dd-case-study-narrative-color-card-bg));
+  box-shadow: none;
+}
+
+.case-study-invigil-one-platform .case-study-invigil-beam {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 25%, transparent),
+    var(--dd-case-study-narrative-color-user-accent),
+    color-mix(in srgb, var(--dd-case-study-narrative-color-divider) 80%, transparent)
+  );
+}
+
+.case-study-invigil-one-platform .case-study-invigil-converge:has(.case-study-invigil-product-col:hover) .case-study-invigil-layer-chip {
+  border-color: var(--dd-case-study-narrative-color-user-accent);
+  color: var(--dd-case-study-narrative-color-headline);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 14%, var(--dd-case-study-narrative-color-card-bg));
+}
+
+.case-study-invigil-layer-chip {
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 35%, transparent);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 92%, transparent);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.case-study-invigil-one-platform .case-study-invigil-layer-chip {
+  border-color: var(--dd-case-study-narrative-color-card-border);
+  color: var(--dd-case-study-narrative-color-body);
+  background: var(--dd-case-study-narrative-color-card-bg);
+}
+
+/* ViERA: radio tabs (CSS-only) */
+.case-study-invigil-viera-panel-shell {
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: calc(var(--dd-case-study-narrative-card-radius) + 4px);
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 12%, var(--dd-case-study-narrative-color-card-bg)) 0%,
+    var(--dd-case-study-narrative-color-card-bg) 55%
+  );
+}
+
+.case-study-invigil-viera-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.case-study-invigil-viera-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.case-study-invigil-viera-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-bg);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dd-case-study-narrative-color-body);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.case-study-invigil-viera-panels {
+  position: relative;
+  min-height: 7.5rem;
+}
+
+.case-study-invigil-viera-panel {
+  display: none;
+}
+
+.case-study-invigil-viera-panel-title {
+  margin: 0 0 10px;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--dd-case-study-narrative-color-headline);
+}
+
+.case-study-invigil-viera-panel-body {
+  margin: 0;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--dd-case-study-narrative-body-size);
+  line-height: var(--dd-case-study-narrative-body-line-height);
+  color: var(--dd-case-study-narrative-color-body);
+}
+
+.case-study-invigil-viera-panel-shell:has(input[value="chatbot"]:checked) .case-study-invigil-viera-panel--chatbot,
+.case-study-invigil-viera-panel-shell:has(input[value="anchor"]:checked) .case-study-invigil-viera-panel--anchor,
+.case-study-invigil-viera-panel-shell:has(input[value="factcheck"]:checked) .case-study-invigil-viera-panel--factcheck,
+.case-study-invigil-viera-panel-shell:has(input[value="safety"]:checked) .case-study-invigil-viera-panel--safety {
+  display: block;
+}
+
+.case-study-invigil-viera-panel-shell:has(input[value="chatbot"]:checked) label[for$="-viera-chatbot"],
+.case-study-invigil-viera-panel-shell:has(input[value="anchor"]:checked) label[for$="-viera-anchor"],
+.case-study-invigil-viera-panel-shell:has(input[value="factcheck"]:checked) label[for$="-viera-factcheck"],
+.case-study-invigil-viera-panel-shell:has(input[value="safety"]:checked) label[for$="-viera-safety"] {
+  border-color: var(--dd-case-study-narrative-color-user-accent);
+  color: var(--dd-case-study-narrative-color-headline);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 14%, var(--dd-case-study-narrative-color-card-bg));
+}
+
+/* Investigation timeline */
+.case-study-invigil-timeline {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.case-study-invigil-timeline-step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px 20px;
+  padding-bottom: 22px;
+  border-left: 2px solid var(--dd-case-study-narrative-color-divider);
+  margin-left: 14px;
+  padding-left: 22px;
+}
+
+.case-study-invigil-timeline-step:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.case-study-invigil-timeline-marker {
+  grid-column: 1;
+  grid-row: 1;
+  margin-left: -36px;
+  margin-top: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  border: 2px solid var(--dd-case-study-narrative-color-user-accent);
+  background: var(--dd-case-study-narrative-color-card-bg);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--dd-case-study-narrative-color-user-accent);
+}
+
+.case-study-invigil-timeline-body {
+  grid-column: 2;
+}
+
+.case-study-invigil-timeline-title {
+  margin: 0 0 6px;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dd-case-study-narrative-color-headline);
+}
+
+.case-study-invigil-timeline-detail {
+  margin: 0;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--dd-case-study-narrative-body-size);
+  line-height: var(--dd-case-study-narrative-body-line-height);
+  color: var(--dd-case-study-narrative-color-body);
+}
+
+/* Roles matrix */
+.case-study-invigil-roles-shell {
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: calc(var(--dd-case-study-narrative-card-radius) + 4px);
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-bg);
+}
+
+.case-study-invigil-role-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.case-study-invigil-role-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.case-study-invigil-role-chip {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-muted);
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dd-case-study-narrative-color-body);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.case-study-invigil-role-details {
+  display: grid;
+  gap: 16px;
+}
+
+.case-study-invigil-role-detail {
+  display: none;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px 24px;
+  padding-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .case-study-invigil-role-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.case-study-invigil-role-column-label {
+  margin: 0 0 10px;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dd-case-study-narrative-color-index);
+}
+
+.case-study-invigil-role-list {
+  margin: 0;
+  padding-left: 18px;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: max(14px, calc(var(--dd-case-study-narrative-body-size) * 0.92));
+  line-height: 1.45;
+  color: var(--dd-case-study-narrative-color-body);
+}
+
+.case-study-invigil-role-list li {
+  margin-bottom: 6px;
+}
+
+.case-study-invigil-roles-shell:has(input[value="everyday"]:checked) .case-study-invigil-role-detail--everyday,
+.case-study-invigil-roles-shell:has(input[value="reporter"]:checked) .case-study-invigil-role-detail--reporter,
+.case-study-invigil-roles-shell:has(input[value="editor"]:checked) .case-study-invigil-role-detail--editor,
+.case-study-invigil-roles-shell:has(input[value="admin"]:checked) .case-study-invigil-role-detail--admin,
+.case-study-invigil-roles-shell:has(input[value="officer"]:checked) .case-study-invigil-role-detail--officer,
+.case-study-invigil-roles-shell:has(input[value="professional"]:checked) .case-study-invigil-role-detail--professional {
+  display: grid;
+}
+
+.case-study-invigil-roles-shell:has(input[value="everyday"]:checked) label[for$="-role-everyday"],
+.case-study-invigil-roles-shell:has(input[value="reporter"]:checked) label[for$="-role-reporter"],
+.case-study-invigil-roles-shell:has(input[value="editor"]:checked) label[for$="-role-editor"],
+.case-study-invigil-roles-shell:has(input[value="admin"]:checked) label[for$="-role-admin"],
+.case-study-invigil-roles-shell:has(input[value="officer"]:checked) label[for$="-role-officer"],
+.case-study-invigil-roles-shell:has(input[value="professional"]:checked) label[for$="-role-professional"] {
+  border-color: var(--dd-case-study-narrative-color-user-accent);
+  color: var(--dd-case-study-narrative-color-headline);
+  background: color-mix(in srgb, var(--dd-case-study-narrative-color-user-accent) 12%, var(--dd-case-study-narrative-color-card-bg));
+}
+
+/* Device frames cluster */
+.case-study-invigil-device-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+@media (min-width: 720px) {
+  .case-study-invigil-device-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 12px 10px;
+    align-items: end;
+  }
+
+  .case-study-invigil-device--android {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .case-study-invigil-device--ios {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  }
+
+  .case-study-invigil-device--tv {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .case-study-invigil-device--web {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+  }
+}
+
+.case-study-invigil-device {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.case-study-invigil-device-chrome {
+  height: 10px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  border-bottom: none;
+  background: linear-gradient(180deg, var(--dd-case-study-narrative-color-card-muted), var(--dd-case-study-narrative-color-card-bg));
+}
+
+.case-study-invigil-device--tv .case-study-invigil-device-chrome {
+  height: 14px;
+  border-radius: 6px 6px 0 0;
+}
+
+.case-study-invigil-device-screen {
+  padding: 16px 14px 18px;
+  border-radius: 0 0 var(--dd-case-study-narrative-card-radius) var(--dd-case-study-narrative-card-radius);
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-bg);
+  box-shadow: 0 10px 28px -18px color-mix(in srgb, var(--dd-case-study-narrative-color-quote) 55%, transparent);
+  min-height: 108px;
+}
+
+.case-study-invigil-device-label {
+  margin: 0 0 6px;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dd-case-study-narrative-color-user-accent);
+}
+
+.case-study-invigil-device-detail {
+  margin: 0;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: max(13px, calc(var(--dd-case-study-narrative-body-size) * 0.88));
+  line-height: 1.45;
+  color: var(--dd-case-study-narrative-color-body);
+}
+
+/* Results stats row */
+.case-study-invigil-results .case-study-invigil-stats {
+  margin-top: 32px;
+}
+
+.case-study-invigil-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  width: 100%;
+  max-width: 100%;
+  border-radius: calc(var(--dd-case-study-narrative-card-radius) + 6px);
+  overflow: hidden;
+  border: 1px solid var(--dd-case-study-narrative-color-card-border);
+  background: var(--dd-case-study-narrative-color-card-border);
+}
+
+@media (min-width: 640px) {
+  .case-study-invigil-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.case-study-invigil-stat {
+  padding: 22px 16px 24px;
+  background: var(--dd-case-study-narrative-color-quote);
+  text-align: center;
+}
+
+.case-study-invigil-stat-value {
+  margin: 0 0 8px;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(32px, 8vw, 44px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--dd-case-study-narrative-surface-white);
+}
+
+.case-study-invigil-stat-label {
+  margin: 0;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dd-case-study-narrative-surface-white) 62%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-study-invigil-tile,
+  .case-study-invigil-beam,
+  .case-study-invigil-layer-chip,
+  .case-study-invigil-viera-tab,
+  .case-study-invigil-role-chip {
+    transition: none;
+  }
+}
+
 .case-study-stack-strip {
   scroll-margin-top: 5.5rem;
   box-sizing: border-box;

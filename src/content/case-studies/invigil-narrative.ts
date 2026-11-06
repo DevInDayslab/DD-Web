@@ -1,36 +1,35 @@
 import type { CaseStudyNarrativeContent } from "@/types/case-study-narrative";
 
-/** Full-length text from the case study source material; see `materialPath` on the page. */
+/** Invigil case study: visuals via `invigil-section` blocks; copy matches source material. */
 export const invigilCaseStudyNarrative = {
   blocks: [
     {
       type: "prose",
       id: "context",
-      index: {
-        number: "01",
-        title: "Context"
-      },
+      index: { number: "01", title: "Context" },
       headline: "The most ambitious product in our portfolio.",
       paragraphs: [
-        "Invigil is the most ambitious product in our portfolio, and it's worth being direct about that rather than undersell it with a generic description. It's a civic media platform that combines what would normally be five or six separate apps into one: a news platform, a social feed with its own chat, short-form video (teasers), a stories-style format (posters), live TV where channels can broadcast, personal live streaming, live video conferencing, a public investigation portal, a buy-and-sell marketplace, and an AI layer (ViERA) that runs underneath several of these features at once. Few products attempt this much surface area in a single platform, and almost none attempt it while also trying to feel coherent rather than like several apps wearing the same logo."
+        "Invigil is the most ambitious product in our portfolio, and it's worth being direct about that rather than undersell it with a generic description. It's a civic media platform that combines what would normally be five or six separate apps into one: a news platform, a social feed with its own chat, short-form video (teasers), a stories-style format (posters), live TV where channels can broadcast, personal live streaming, live video conferencing, a public investigation portal, a buy-and-sell marketplace, and an AI layer (ViERA) that runs underneath several of these features at once. Few products attempt this much surface area in a single platform, and almost none attempt it while also trying to feel coherent rather than like several apps wearing the same logo.",
       ],
       pullQuote: {
         quote: "Few products attempt this much surface area in a single platform.",
-        attribution: "From the project notes"
-      }
+        attribution: "From the project notes",
+      },
+    },
+    {
+      type: "invigil-section",
+      variant: "six-products-band",
+      id: "six-products-band",
     },
     {
       type: "prose",
       id: "the-starting-point",
-      index: {
-        number: "02",
-        title: "The Starting Point"
-      },
+      index: { number: "02", title: "The Starting Point" },
       headline: "We refined the prototype's UI and built the real product underneath it.",
       paragraphs: [
         "Invigil didn't start as a blank page for us. The client had already worked with a previous developer who had produced a UI prototype, the visual design and screen structure, but hadn't been able to carry it through to a working product. By the time it reached us, what existed was a prototype: a UI without the engineering underneath it to make any of it real.",
-        "We made a deliberate choice early on: refine the existing UI rather than throw it out, while keeping its core structure intact, and put our actual effort into building the real product underneath it, the backend, the data model, the integrations, the functionality that turns a set of screens into a working platform. The UI itself is scheduled for a deeper redesign in the next phase, this version intentionally prioritized getting a functioning, launched product into the world over getting every pixel right on the first pass, which was the correct tradeoff for a platform at this stage."
-      ]
+        "We made a deliberate choice early on: refine the existing UI rather than throw it out, while keeping its core structure intact, and put our actual effort into building the real product underneath it, the backend, the data model, the integrations, the functionality that turns a set of screens into a working platform. The UI itself is scheduled for a deeper redesign in the next phase, this version intentionally prioritized getting a functioning, launched product into the world over getting every pixel right on the first pass, which was the correct tradeoff for a platform at this stage.",
+      ],
     },
     {
       type: "tech-strip",
@@ -46,117 +45,206 @@ export const invigilCaseStudyNarrative = {
         "Vahan integration",
         "ViERA AI layer",
         "Live broadcasting",
-        "Trust score"
-      ]
+        "Trust score",
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "one-platform",
       id: "the-hardest-problem-one-platform-not-six",
-      index: {
-        number: "03",
-        title: "The Hardest Problem: One Platform, Not Six"
-      },
+      index: { number: "03", title: "One Platform Not Six" },
       headline: "One platform, not six.",
       paragraphs: [
         "The genuinely hard problem on Invigil wasn't any single feature in isolation, a chat system, a live-streaming module, a marketplace, these all exist as solved problems elsewhere. The hard problem was making all of them live inside one coherent platform, sharing one identity system, one trust and moderation layer, and one backend, without the end result feeling like six different apps bolted together under a single name.",
-        "That meant building a backend architecture, in Python with FastAPI, designed from the start to support fundamentally different kinds of content and interaction (a news article, a live broadcast, a marketplace listing, an investigation case file, a chat message) through a shared, consistent set of underlying systems: one user identity and trust model that every module reads from, one moderation and safety layer that applies whether the content is a comment or a live stream, and one data layer that a reporter, an everyday user, and an investigation officer all interact with through different permissions rather than different, disconnected systems. Getting the architecture right here mattered more than any individual feature, because a mistake in that foundation would have surfaced as inconsistency everywhere, a trust score that meant something different on the marketplace than it did on the news feed, moderation that caught issues in chat but missed them in live video."
-      ]
+        "That meant building a backend architecture, in Python with FastAPI, designed from the start to support fundamentally different kinds of content and interaction (a news article, a live broadcast, a marketplace listing, an investigation case file, a chat message) through a shared, consistent set of underlying systems: one user identity and trust model that every module reads from, one moderation and safety layer that applies whether the content is a comment or a live stream, and one data layer that a reporter, an everyday user, and an investigation officer all interact with through different permissions rather than different, disconnected systems. Getting the architecture right here mattered more than any individual feature, because a mistake in that foundation would have surfaced as inconsistency everywhere, a trust score that meant something different on the marketplace than it did on the news feed, moderation that caught issues in chat but missed them in live video.",
+      ],
+      products: [
+        { id: "news", label: "News" },
+        { id: "social", label: "Social" },
+        { id: "live-tv", label: "Live TV" },
+        { id: "teasers", label: "Teasers" },
+        { id: "marketplace", label: "Marketplace" },
+        { id: "investigations", label: "Investigations" },
+      ],
+      sharedLayers: [
+        { id: "identity", label: "Identity" },
+        { id: "trust", label: "Trust" },
+        { id: "moderation", label: "Moderation" },
+        { id: "data", label: "Data" },
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "viera-panels",
       id: "viera-the-ai-layer",
-      index: {
-        number: "04",
-        title: "ViERA: The AI Layer"
-      },
+      index: { number: "04", title: "ViERA" },
       headline: "AI as infrastructure, not a chatbot bolted on.",
       paragraphs: [
-        "ViERA is Invigil's AI system, and it runs through several parts of the platform rather than existing as a single bolted-on chatbot feature. It includes a conversational chatbot, an AI news anchor capable of generating news presentation using anyone's provided audio and video, automated fact-checking functionality, and the safety and compliance layer that runs underneath content on the platform. Building this meant treating AI as infrastructure that several features depend on, chat, content generation, fact-checking, rather than as one isolated feature with its own separate pipeline, which is a materially different (and more demanding) integration problem than adding a single AI chat widget to an existing app."
-      ]
+        "ViERA is Invigil's AI system, and it runs through several parts of the platform rather than existing as a single bolted-on chatbot feature. It includes a conversational chatbot, an AI news anchor capable of generating news presentation using anyone's provided audio and video, automated fact-checking functionality, and the safety and compliance layer that runs underneath content on the platform. Building this meant treating AI as infrastructure that several features depend on, chat, content generation, fact-checking, rather than as one isolated feature with its own separate pipeline, which is a materially different (and more demanding) integration problem than adding a single AI chat widget to an existing app.",
+      ],
+      parts: [
+        {
+          id: "chatbot",
+          tabLabel: "Chatbot",
+          title: "Conversational layer",
+          body: "ViERA includes a conversational chatbot as part of the platform—not an isolated widget, but infrastructure other surfaces can rely on.",
+        },
+        {
+          id: "anchor",
+          tabLabel: "AI anchor",
+          title: "AI news anchor",
+          body: "An AI news anchor capable of generating news presentation using anyone's provided audio and video.",
+        },
+        {
+          id: "factcheck",
+          tabLabel: "Fact-checking",
+          title: "Automated fact-checking",
+          body: "Automated fact-checking functionality integrated with content, not bolted on as a separate review queue.",
+        },
+        {
+          id: "safety",
+          tabLabel: "Safety",
+          title: "Safety & compliance",
+          body: "The safety and compliance layer that runs underneath content on the platform, shared across modalities.",
+        },
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "investigation-timeline",
       id: "the-investigation-portal",
-      index: {
-        number: "05",
-        title: "The Investigation Portal"
-      },
+      index: { number: "05", title: "Investigation Portal" },
       headline: "A case workflow with no obvious precedent.",
       paragraphs: [
-        "One of Invigil's more unusual features is a public investigation portal: any user can raise a case, and investigation officers and other agents can work that case within the platform itself. This isn't a feature with an obvious precedent to borrow from, most social or news platforms don't have anything like a formal case-handling workflow built into them, which meant designing the roles, permissions, and workflow around it largely from first principles: who can raise a case, who can see it, how it moves between an officer and an agent, and how that entire workflow stays properly separated from the rest of the platform's more public, social-facing features while still living in the same app."
-      ]
+        "One of Invigil's more unusual features is a public investigation portal: any user can raise a case, and investigation officers and other agents can work that case within the platform itself. This isn't a feature with an obvious precedent to borrow from, most social or news platforms don't have anything like a formal case-handling workflow built into them, which meant designing the roles, permissions, and workflow around it largely from first principles: who can raise a case, who can see it, how it moves between an officer and an agent, and how that entire workflow stays properly separated from the rest of the platform's more public, social-facing features while still living in the same app.",
+      ],
+      steps: [
+        {
+          id: "raise",
+          title: "Case raised",
+          detail: "Any user can raise a case through the public investigation portal.",
+        },
+        {
+          id: "routed",
+          title: "Visible to the right actors",
+          detail: "Permissions determine who can see the case file as it enters the workflow.",
+        },
+        {
+          id: "officer-agent",
+          title: "Officer & agent",
+          detail: "Investigation officers and other agents work the case within the platform—same app, separated workflow.",
+        },
+        {
+          id: "contained",
+          title: "Separated from the social surface",
+          detail: "The workflow stays properly separated from more public, social-facing features while still living in the same app.",
+        },
+      ],
     },
     {
       type: "prose",
       id: "trust-safety-verification",
-      index: {
-        number: "06",
-        title: "Trust, Safety & Verification"
-      },
+      index: { number: "06", title: "Trust & Verification" },
       headline: "Trust built in as core infrastructure.",
       paragraphs: [
-        "Given the range of what Invigil does, verification and trust had to be built as core infrastructure, not an afterthought. The platform includes e-KYC functionality and integration with Vahan (India's vehicle registration database) for relevant verification needs, proper safety and security compliance throughout, and a trust score attached to every user's profile that reflects their standing on the platform. Combined with ViERA's fact-checking layer, this is what allows a platform that includes open user-generated content, live broadcasting, and a public investigation portal to function responsibly rather than becoming an unmoderated free-for-all."
-      ]
+        "Given the range of what Invigil does, verification and trust had to be built as core infrastructure, not an afterthought. The platform includes e-KYC functionality and integration with Vahan (India's vehicle registration database) for relevant verification needs, proper safety and security compliance throughout, and a trust score attached to every user's profile that reflects their standing on the platform. Combined with ViERA's fact-checking layer, this is what allows a platform that includes open user-generated content, live broadcasting, and a public investigation portal to function responsibly rather than becoming an unmoderated free-for-all.",
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "roles-matrix",
       id: "roles",
-      index: {
-        number: "07",
-        title: "Roles"
-      },
+      index: { number: "07", title: "Roles" },
       headline: "More roles than any other platform we've built.",
       paragraphs: [
-        "Invigil runs on a genuinely wide set of roles, more than any other platform in our portfolio: everyday users, reporters, editors, multiple tiers of admin, investigation officers, and vetted professionals, each with different permissions and different views into the platform depending on what they're actually there to do. Designing for this many distinct roles inside one coherent permission system, rather than effectively building a separate app per role, is part of what made the backend architecture decisions above so consequential."
-      ]
+        "Invigil runs on a genuinely wide set of roles, more than any other platform in our portfolio: everyday users, reporters, editors, multiple tiers of admin, investigation officers, and vetted professionals, each with different permissions and different views into the platform depending on what they're actually there to do. Designing for this many distinct roles inside one coherent permission system, rather than effectively building a separate app per role, is part of what made the backend architecture decisions above so consequential.",
+      ],
+      roles: [
+        {
+          id: "everyday",
+          label: "Everyday user",
+          canSee: ["Public feed & discovery", "Own profile & trust score", "Cases they raised"],
+          canDo: ["Post, comment, stream within policy", "Raise an investigation case", "Buy/sell in marketplace"],
+        },
+        {
+          id: "reporter",
+          label: "Reporter",
+          canSee: ["Editorial queues & assignments", "Source attachments (per org rules)", "Published and draft stories they own"],
+          canDo: ["File stories for review", "Coordinate with editors", "Operate under content policy"],
+        },
+        {
+          id: "editor",
+          label: "Editor",
+          canSee: ["Incoming reporter submissions", "Publication schedule", "Moderation escalations for editorial"],
+          canDo: ["Approve or send back stories", "Edit for publication", "Gate what goes live"],
+        },
+        {
+          id: "admin",
+          label: "Admin",
+          canSee: ["Org-wide configuration", "User trust & verification state", "Cross-module health signals"],
+          canDo: ["Configure roles & policies", "Emergency takedowns", "Manage integrations (e.g. e-KYC, Vahan)"],
+        },
+        {
+          id: "officer",
+          label: "Investigation officer",
+          canSee: ["Assigned investigation cases", "Case history & evidence trail", "Separated from public social graph where required"],
+          canDo: ["Move cases through workflow", "Collaborate with agents in-platform", "Apply investigation policy"],
+        },
+        {
+          id: "professional",
+          label: "Vetted professional",
+          canSee: ["Profession-gated surfaces (as defined)", "Trust-backed profile context"],
+          canDo: ["Operate under vetting rules", "Interact in scoped workflows"],
+        },
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "platform-frames",
       id: "platforms",
-      index: {
-        number: "08",
-        title: "Platforms"
-      },
+      index: { number: "08", title: "Platforms" },
       headline: "Four platforms, one consistent experience.",
       paragraphs: [
-        "Invigil runs across Android, iOS, Android TV (for the live TV and broadcast side of the platform), and a full web app, built to work as one consistent experience across all four rather than a mobile-first app with a TV and web app bolted on as afterthoughts."
-      ]
+        "Invigil runs across Android, iOS, Android TV (for the live TV and broadcast side of the platform), and a full web app, built to work as one consistent experience across all four rather than a mobile-first app with a TV and web app bolted on as afterthoughts.",
+      ],
+      devices: [
+        { id: "android", label: "Android", detail: "Phones & tablets · same trust & feed model" },
+        { id: "ios", label: "iOS", detail: "Feature parity with Android for core flows" },
+        { id: "tv", label: "Android TV", detail: "Live TV & broadcast-leaning experience" },
+        { id: "web", label: "Web", detail: "Full app · not a lightweight companion" },
+      ],
     },
     {
       type: "prose",
       id: "launch",
-      index: {
-        number: "09",
-        title: "Launch"
-      },
+      index: { number: "09", title: "Launch" },
       headline: "Shipped in a single launch, in about three months.",
       paragraphs: [
-        "Invigil launched in approximately 3 months from the project's start in August 2026, a genuinely fast timeline given the scope of what shipped, five to six distinct product categories, an AI layer, and a public investigation workflow, in a single launch rather than staged out over a much longer period."
-      ]
+        "Invigil launched in approximately 3 months from the project's start in August 2026, a genuinely fast timeline given the scope of what shipped, five to six distinct product categories, an AI layer, and a public investigation workflow, in a single launch rather than staged out over a much longer period.",
+      ],
     },
     {
-      type: "prose",
+      type: "invigil-section",
+      variant: "results-stats",
       id: "results",
-      index: {
-        number: "10",
-        title: "Results"
-      },
+      index: { number: "10", title: "Results" },
       headline: "Live today.",
-      paragraphs: [
-        "Invigil is live today at theinvigil.com."
-      ]
+      paragraphs: ["Invigil is live today at theinvigil.com."],
+      stats: [
+        { id: "live", label: "Launched", value: "Live" },
+        { id: "timeline", label: "About 3 months", value: "≈3 mo" },
+        { id: "team", label: "Engineers", value: "8" },
+        { id: "platforms", label: "Platforms", value: "4" },
+      ],
     },
     {
       type: "prose",
       id: "the-relationship-since",
-      index: {
-        number: "11",
-        title: "The Relationship Since"
-      },
+      index: { number: "11", title: "The Relationship Since" },
       headline: "An ongoing collaboration, with a redesign phase planned.",
       paragraphs: [
-        "This is an ongoing collaboration, not a one-off build. The current version intentionally prioritized getting a working, launched platform out before revisiting the UI in depth, and there's an active next phase planned, likely a substantial redesign pass on top of the product foundation now in place."
-      ]
-    }
-  ]
+        "This is an ongoing collaboration, not a one-off build. The current version intentionally prioritized getting a working, launched platform out before revisiting the UI in depth, and there's an active next phase planned, likely a substantial redesign pass on top of the product foundation now in place.",
+      ],
+    },
+  ],
 } as const satisfies CaseStudyNarrativeContent;

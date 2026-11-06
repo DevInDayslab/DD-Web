@@ -177,6 +177,111 @@ export type CaseStudyLaunchBlock = {
   viewports: readonly CaseStudyLaunchViewport[];
 };
 
+/** Invigil-only narrative sections — CSS-driven diagrams and panels (see `invigil-narrative.ts`). */
+export type InvigilProductTile = {
+  id: string;
+  label: string;
+};
+
+export type InvigilSharedLayer = {
+  id: string;
+  label: string;
+};
+
+export type InvigilVieraPart = {
+  id: string;
+  tabLabel: string;
+  title: string;
+  body: string;
+};
+
+export type InvigilInvestigationStep = {
+  id: string;
+  title: string;
+  detail: string;
+};
+
+export type InvigilRoleDefinition = {
+  id: string;
+  label: string;
+  canSee: readonly string[];
+  canDo: readonly string[];
+};
+
+export type InvigilDeviceFrame = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type InvigilResultStat = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type CaseStudyInvigilSectionBlock =
+  | {
+      type: "invigil-section";
+      variant: "six-products-band";
+      id: string;
+    }
+  | {
+      type: "invigil-section";
+      variant: "one-platform";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      products: readonly InvigilProductTile[];
+      sharedLayers: readonly InvigilSharedLayer[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "viera-panels";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      parts: readonly InvigilVieraPart[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "investigation-timeline";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      steps: readonly InvigilInvestigationStep[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "roles-matrix";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      roles: readonly InvigilRoleDefinition[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "platform-frames";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      devices: readonly InvigilDeviceFrame[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "results-stats";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      stats: readonly InvigilResultStat[];
+    };
+
 export type CaseStudyNarrativeBlock =
   | CaseStudyNarrativeProseBlock
   | CaseStudyReductionAuditBlock
@@ -185,7 +290,8 @@ export type CaseStudyNarrativeBlock =
   | CaseStudyCapabilityMatrixBlock
   | CaseStudyMatchmakingBlock
   | CaseStudyTechStripBlock
-  | CaseStudyLaunchBlock;
+  | CaseStudyLaunchBlock
+  | CaseStudyInvigilSectionBlock;
 
 export type CaseStudyNarrativeContent = {
   blocks: readonly CaseStudyNarrativeBlock[];

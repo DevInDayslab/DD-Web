@@ -1,8 +1,7 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { CaseStudyReductionCardView } from "@/components/case-study/case-study-reduction-card";
 import { CaseStudyReductionCompare } from "@/components/case-study/case-study-reduction-compare";
+import { CaseStudyInvigilSection } from "@/components/case-study/case-study-invigil-section";
 import { CaseStudyMatchmakingSection } from "@/components/case-study/case-study-matchmaking-section";
 import { CaseStudyTechStripSection } from "@/components/case-study/case-study-tech-strip-section";
 import { CaseStudyLaunchSection } from "@/components/case-study/case-study-launch-section";
@@ -61,6 +60,10 @@ function NarrativeToc({ blocks }: { blocks: readonly CaseStudyNarrativeBlock[] }
       continue;
     }
     if (block.type === "launch" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "invigil-section" && "index" in block && block.index) {
       entries.push({ id: block.id, index: block.index });
       continue;
     }
@@ -296,6 +299,9 @@ function NarrativeBlock({ block }: { block: CaseStudyNarrativeBlock }) {
           <CaseStudyLaunchSection block={block} />
         </div>
       );
+
+    case "invigil-section":
+      return <CaseStudyInvigilSection block={block} />;
 
     default:
       return null;
