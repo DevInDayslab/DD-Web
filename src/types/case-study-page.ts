@@ -27,10 +27,20 @@ export type CaseStudyStoreLink = {
   external?: boolean;
 };
 
+/** Optional hero accent (e.g. Turbo Supply 30-minute timer). */
+export type CaseStudyIntroHeroAccent =
+  | {
+      variant: "turbo-timer";
+      value: string;
+      unit: string;
+    };
+
 export type CaseStudyPageIntro = {
   breadcrumb: CaseStudyBreadcrumb;
   headlineLines: readonly string[];
   subhead: string;
+  /** When set, intro renders an extra visual (CSS-only) beside or under the headline. */
+  heroAccent?: CaseStudyIntroHeroAccent;
 };
 
 export type CaseStudyPageHero = {

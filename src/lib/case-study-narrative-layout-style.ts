@@ -61,6 +61,10 @@ export function caseStudyNarrativeLayoutToCssVars(): Record<string, string> {
       layout.narrativeReductionCardHeightAtBaseline,
       { minPx: 360, maxPx: layout.narrativeReductionCardHeightAtBaseline },
     ),
+    "--dd-case-study-reduction-compare-min-height": fluid(
+      layout.narrativeReductionCompareMinHeightAtBaseline,
+      { minPx: 260, maxPx: layout.narrativeReductionCompareMinHeightAtBaseline },
+    ),
     "--dd-case-study-narrative-section-padding": fluid(
       layout.narrativeSectionPaddingBlockAtBaseline,
       { minPx: 56, maxPx: layout.narrativeSectionPaddingBlockAtBaseline },

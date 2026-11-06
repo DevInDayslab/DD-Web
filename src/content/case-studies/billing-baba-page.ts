@@ -61,7 +61,7 @@ export const billingBabaCaseStudyPage = {
     portraitVideo: {}
   },
   placeholders: {
-    portraitVideo: "Billing Baba walkthrough video — phone preview"
+    portraitVideo: "Walkthrough coming soon",
   },
   narrative: billingBabaCaseStudyNarrative,
   footer: {

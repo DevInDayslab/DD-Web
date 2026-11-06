@@ -61,7 +61,7 @@ export const entryTicketCaseStudyPage = {
     portraitVideo: {}
   },
   placeholders: {
-    portraitVideo: "EntryTicket walkthrough video — phone preview"
+    portraitVideo: "Walkthrough coming soon",
   },
   narrative: entryTicketCaseStudyNarrative,
   footer: {

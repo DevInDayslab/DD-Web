@@ -4,7 +4,7 @@ import type {
   CaseStudyReductionWireframeV2,
 } from "@/types/case-study-narrative";
 
-function ReductionMockupV1({ wireframe }: { wireframe: CaseStudyReductionWireframeV1 }) {
+export function ReductionMockupV1({ wireframe }: { wireframe: CaseStudyReductionWireframeV1 }) {
   return (
     <div className="case-study-reduction-mockup case-study-reduction-mockup--v1" aria-hidden>
       <div className="case-study-reduction-mockup-screen">
@@ -45,7 +45,7 @@ function ReductionMockupV1({ wireframe }: { wireframe: CaseStudyReductionWirefra
   );
 }
 
-function ReductionMockupV2({ wireframe }: { wireframe: CaseStudyReductionWireframeV2 }) {
+export function ReductionMockupV2({ wireframe }: { wireframe: CaseStudyReductionWireframeV2 }) {
   return (
     <div className="case-study-reduction-mockup case-study-reduction-mockup--v2" aria-hidden>
       <div className="case-study-reduction-mockup-screen">

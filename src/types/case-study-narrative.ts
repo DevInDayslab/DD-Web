@@ -42,12 +42,18 @@ export type CaseStudyReductionCard = {
   wireframe: CaseStudyReductionWireframeV1 | CaseStudyReductionWireframeV2;
 };
 
+export type CaseStudyReductionPresentation = "grid" | "compare";
+
 export type CaseStudyReductionAuditBlock = {
   type: "reduction-audit";
   id: string;
+  /** Section label for in-page TOC */
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   caption: string;
   cards: readonly [CaseStudyReductionCard, CaseStudyReductionCard];
+  /** `compare` = V1/V2 slider (client); default `grid` = two cards */
+  presentation?: CaseStudyReductionPresentation;
 };
 
 export type CaseStudyDiagramNode = {
@@ -79,6 +85,8 @@ export type CaseStudyDiagramTier =
 export type CaseStudyPlatformRolesBlock = {
   type: "platform-roles";
   id: string;
+  /** Optional section index for TOC (e.g. 05 Platform approach) */
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   headline: string;
   paragraphs: readonly string[];
@@ -92,6 +100,7 @@ export type CaseStudyPlatformRolesBlock = {
 export type CaseStudyPlatformSplitBlock = {
   type: "platform-split";
   id: string;
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   headline: string;
   paragraphs: readonly string[];
@@ -137,6 +146,8 @@ export type CaseStudyMatchmakingBlock = {
 export type CaseStudyTechStripBlock = {
   type: "tech-strip";
   id: string;
+  /** Optional section label for in-page TOC (e.g. stack strip as 03) */
+  index?: CaseStudySectionIndex;
   ariaLabel?: string;
   items: readonly string[];
 };
@@ -166,6 +177,111 @@ export type CaseStudyLaunchBlock = {
   viewports: readonly CaseStudyLaunchViewport[];
 };
 
+/** Invigil-only narrative sections — CSS-driven diagrams and panels (see `invigil-narrative.ts`). */
+export type InvigilProductTile = {
+  id: string;
+  label: string;
+};
+
+export type InvigilSharedLayer = {
+  id: string;
+  label: string;
+};
+
+export type InvigilVieraPart = {
+  id: string;
+  tabLabel: string;
+  title: string;
+  body: string;
+};
+
+export type InvigilInvestigationStep = {
+  id: string;
+  title: string;
+  detail: string;
+};
+
+export type InvigilRoleDefinition = {
+  id: string;
+  label: string;
+  canSee: readonly string[];
+  canDo: readonly string[];
+};
+
+export type InvigilDeviceFrame = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type InvigilResultStat = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type CaseStudyInvigilSectionBlock =
+  | {
+      type: "invigil-section";
+      variant: "six-products-band";
+      id: string;
+    }
+  | {
+      type: "invigil-section";
+      variant: "one-platform";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      products: readonly InvigilProductTile[];
+      sharedLayers: readonly InvigilSharedLayer[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "viera-panels";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      parts: readonly InvigilVieraPart[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "investigation-timeline";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      steps: readonly InvigilInvestigationStep[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "roles-matrix";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      roles: readonly InvigilRoleDefinition[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "platform-frames";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      devices: readonly InvigilDeviceFrame[];
+    }
+  | {
+      type: "invigil-section";
+      variant: "results-stats";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      stats: readonly InvigilResultStat[];
+    };
+
 export type CaseStudyNarrativeBlock =
   | CaseStudyNarrativeProseBlock
   | CaseStudyReductionAuditBlock
@@ -174,7 +290,249 @@ export type CaseStudyNarrativeBlock =
   | CaseStudyCapabilityMatrixBlock
   | CaseStudyMatchmakingBlock
   | CaseStudyTechStripBlock
-  | CaseStudyLaunchBlock;
+  | CaseStudyLaunchBlock
+  | CaseStudyInvigilSectionBlock
+  | CaseStudyBillingBabaSectionBlock
+  | CaseStudyEntryTicketSectionBlock
+  | CaseStudyTurboSectionBlock;
+
+/** Turbo Supply — quick-commerce hardware narrative (see `turbosupply-narrative.ts`). */
+export type TurboProblemCompareColumn = {
+  id: string;
+  title: string;
+  body: string;
+};
+
+export type TurboSearchMock = {
+  partName: string;
+  spec: string;
+  size: string;
+  rating: string;
+};
+
+export type CaseStudyTurboSectionBlock =
+  | {
+      type: "turbo-section";
+      variant: "problem-compare";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote?: CaseStudyPullQuote;
+      left: TurboProblemCompareColumn;
+      right: TurboProblemCompareColumn;
+    }
+  | {
+      type: "turbo-section";
+      variant: "search-mock";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      mock: TurboSearchMock;
+    }
+  | {
+      type: "turbo-section";
+      variant: "platforms-dual";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+    }
+  | {
+      type: "turbo-section";
+      variant: "results-banner";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      bannerLabel: string;
+    };
+
+/** EntryTicket — live web + native app narrative (see `entryticket-narrative.ts`). */
+export type EntryTicketSeqStep = {
+  id: string;
+  label: string;
+  sub?: string;
+  highlight?: boolean;
+};
+
+export type EntryTicketTeamColumn = {
+  id: string;
+  title: string;
+  bullets: readonly string[];
+};
+
+export type EntryTicketDesignSurface = {
+  id: string;
+  label: string;
+  tagline: string;
+};
+
+export type EntryTicketAppFeature = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type CaseStudyEntryTicketSectionBlock =
+  | {
+      type: "entryticket-section";
+      variant: "challenge-unified";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote: CaseStudyPullQuote;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "backend-sequence";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      steps: readonly EntryTicketSeqStep[];
+    }
+  | {
+      type: "entryticket-section";
+      variant: "team-handoff";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      left: EntryTicketTeamColumn;
+      right: EntryTicketTeamColumn;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "design-dual-surface";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      web: EntryTicketDesignSurface;
+      app: EntryTicketDesignSurface;
+    }
+  | {
+      type: "entryticket-section";
+      variant: "app-features-ticket";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      features: readonly EntryTicketAppFeature[];
+    }
+  | {
+      type: "entryticket-section";
+      variant: "launch-live-banner";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      bannerLabel: string;
+    };
+
+/** Billing Baba — before/after rebuild narrative (see `billing-baba-narrative.ts`). */
+export type BillingBabaSplitList = {
+  title: string;
+  items: readonly string[];
+};
+
+export type BillingBabaTimelineStep = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type BillingBabaFeatureTile = {
+  id: string;
+  title: string;
+  detail: string;
+};
+
+export type BillingBabaPlatformOrb = {
+  id: string;
+  label: string;
+};
+
+export type BillingBabaGlossaryTerm = {
+  id: string;
+  term: string;
+  definition: string;
+};
+
+export type BillingBabaResultStat = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type CaseStudyBillingBabaSectionBlock =
+  | {
+      type: "billing-baba-section";
+      variant: "previous-attempt";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote?: CaseStudyPullQuote;
+      promised: BillingBabaSplitList;
+      delivered: BillingBabaSplitList;
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "rebuild-timeline";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      struckLabel: string;
+      timeline: readonly BillingBabaTimelineStep[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "feature-grid";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      features: readonly BillingBabaFeatureTile[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "flutter-hub";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      hubLabel: string;
+      hubSublabel?: string;
+      platforms: readonly BillingBabaPlatformOrb[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "domain-glossary";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      terms: readonly BillingBabaGlossaryTerm[];
+      /** Exact substrings to wrap with `<mark>` in the given paragraph (copy unchanged). */
+      paragraphHighlights?: readonly {
+        paragraphIndex: number;
+        phrases: readonly string[];
+      }[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "results-strip";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      stats: readonly BillingBabaResultStat[];
+    };
 
 export type CaseStudyNarrativeContent = {
   blocks: readonly CaseStudyNarrativeBlock[];
@@ -198,6 +556,7 @@ export type CaseStudyNarrativeLayoutConfig = {
   narrativeQuoteFontSizeAtBaseline: number;
   narrativeEditorialQuoteSizeAtBaseline: number;
   narrativeEditorialQuoteMaxWidthAtBaseline: number;
+  narrativeReductionCompareMinHeightAtBaseline: number;
   narrativeCardRadiusAtBaseline: number;
   narrativeReductionCardHeightAtBaseline: number;
   narrativeReductionCardWidthAtBaseline: number;

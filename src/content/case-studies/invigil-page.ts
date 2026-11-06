@@ -61,7 +61,7 @@ export const invigilCaseStudyPage = {
     portraitVideo: {}
   },
   placeholders: {
-    portraitVideo: "Invigil walkthrough video — phone preview"
+    portraitVideo: "Walkthrough coming soon",
   },
   narrative: invigilCaseStudyNarrative,
   footer: {
