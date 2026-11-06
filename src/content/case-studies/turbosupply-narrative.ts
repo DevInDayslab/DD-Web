@@ -44,11 +44,11 @@ export const turboSupplyCaseStudyNarrative = {
         "On top of that, the buyer on this app isn't the same as a typical quick-commerce shopper. It's often someone mid-job, on-site, who already knows exactly what part they need and wants to find it fast, not browse. The app had to be built around that kind of purposeful, specific search behavior rather than the more exploratory browsing pattern grocery delivery apps are designed around.",
       ],
       mock: {
-        /** Illustrative UI labels only (not from source copy). */
-        partName: "Compression elbow",
-        spec: "15 mm · potable · WRAS",
-        size: "Single unit",
-        rating: "4.7 · 312 trade reviews",
+        /** Illustrative listing only; wording echoes The Challenge (not a real SKU). */
+        partName: "Pipe fitting",
+        spec: "Diameter match · load rating · category",
+        size: "Parts & fittings",
+        rating: "Find the exact match first",
       },
     },
     {
