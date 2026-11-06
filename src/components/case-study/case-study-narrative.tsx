@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
 import { CaseStudyReductionCardView } from "@/components/case-study/case-study-reduction-card";
+import { CaseStudyReductionCompare } from "@/components/case-study/case-study-reduction-compare";
+import { CaseStudyScrollRevealCallout } from "@/components/case-study/case-study-scroll-reveal-callout";
 import { CaseStudyMatchmakingSection } from "@/components/case-study/case-study-matchmaking-section";
 import { CaseStudyTechStripSection } from "@/components/case-study/case-study-tech-strip-section";
 import { CaseStudyLaunchSection } from "@/components/case-study/case-study-launch-section";
@@ -32,6 +34,71 @@ function SectionIndex({ index }: { index: CaseStudySectionIndex }) {
   );
 }
 
+function NarrativeToc({ blocks }: { blocks: readonly CaseStudyNarrativeBlock[] }) {
+  const entries: { id: string; index: CaseStudySectionIndex }[] = [];
+
+  for (const block of blocks) {
+    if (block.type === "prose" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "tech-strip" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "reduction-audit" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "platform-split" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "platform-roles" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "matchmaking" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "launch" && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+  }
+
+  if (entries.length === 0) {
+    return null;
+  }
+
+  return (
+    <nav className="case-study-narrative-toc" aria-label="Case study sections">
+      <p className="case-study-narrative-toc-label">In this case study</p>
+      <ol className="case-study-narrative-toc-list">
+        {entries.map((item) => (
+          <li key={item.id}>
+            <a className="case-study-narrative-toc-link" href={`#narrative-${item.id}`}>
+              <span className="case-study-narrative-toc-num">{item.index.number}</span>
+              <span className="case-study-narrative-toc-title">{item.index.title}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+function ProseParagraphs({ paragraphs }: { paragraphs: readonly string[] }) {
+  return (
+    <>
+      {paragraphs.map((paragraph, paragraphIndex) => (
+        <p key={paragraphIndex}>{paragraph}</p>
+      ))}
+    </>
+  );
+}
+
 function EditorialIntroBlock({
   prose,
   reduction,
@@ -46,49 +113,42 @@ function EditorialIntroBlock({
   return (
     <section
       className="case-study-narrative-section case-study-narrative-editorial"
-      aria-labelledby={`narrative-${prose.id}`}
+      id={`narrative-${prose.id}`}
+      aria-labelledby={`narrative-${prose.id}-headline`}
     >
       <div className="case-study-narrative-editorial-column">
         <CaseStudyScrollReveal delay={baseDelay}>
           <SectionIndex index={prose.index} />
-          <h2 id={`narrative-${prose.id}`} className="case-study-narrative-editorial-headline">
+          <h2 id={`narrative-${prose.id}-headline`} className="case-study-narrative-editorial-headline">
             {prose.headline}
           </h2>
           <div className="case-study-narrative-editorial-prose">
-            {prose.paragraphs.map((paragraph, paragraphIndex) => (
-              <p key={paragraphIndex}>{paragraph}</p>
-            ))}
+            <ProseParagraphs paragraphs={prose.paragraphs} />
           </div>
         </CaseStudyScrollReveal>
 
         {prose.pullQuote ? (
-          <CaseStudyScrollReveal
-            className="case-study-narrative-editorial-quote-wrap"
-            delay={baseDelay + 0.08}
-          >
+          <CaseStudyScrollRevealCallout className="case-study-narrative-editorial-quote-wrap">
             <blockquote className="case-study-narrative-editorial-quote">
               <p>{prose.pullQuote.quote}</p>
               <footer>{prose.pullQuote.attribution}</footer>
             </blockquote>
-          </CaseStudyScrollReveal>
+          </CaseStudyScrollRevealCallout>
         ) : null}
 
-        <div className="case-study-narrative-editorial-audit" aria-labelledby={`narrative-${reduction.id}`}>
-          <CaseStudyScrollReveal delay={baseDelay + 0.12}>
-            <p id={`narrative-${reduction.id}`} className="case-study-narrative-editorial-audit-eyebrow">
-              {reduction.eyebrow}
-            </p>
-          </CaseStudyScrollReveal>
+        <div
+          className="case-study-narrative-editorial-audit"
+          aria-labelledby={`narrative-${reduction.id}`}
+        >
+          <p id={`narrative-${reduction.id}`} className="case-study-narrative-editorial-audit-eyebrow">
+            {reduction.eyebrow}
+          </p>
           <div className="case-study-reduction-grid">
-            {reduction.cards.map((card, cardIndex) => (
-              <CaseStudyScrollReveal key={card.id} delay={baseDelay + 0.14 + cardIndex * 0.06}>
-                <CaseStudyReductionCardView card={card} />
-              </CaseStudyScrollReveal>
+            {reduction.cards.map((card) => (
+              <CaseStudyReductionCardView key={card.id} card={card} />
             ))}
           </div>
-          <CaseStudyScrollReveal delay={baseDelay + 0.22}>
-            <p className="case-study-narrative-editorial-audit-caption">{reduction.caption}</p>
-          </CaseStudyScrollReveal>
+          <p className="case-study-narrative-editorial-audit-caption">{reduction.caption}</p>
         </div>
       </div>
     </section>
@@ -101,113 +161,153 @@ function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock;
   switch (block.type) {
     case "prose":
       return (
-        <section className="case-study-narrative-section" aria-labelledby={`narrative-${block.id}`}>
+        <section
+          className="case-study-narrative-section"
+          id={`narrative-${block.id}`}
+          aria-labelledby={`narrative-${block.id}-headline`}
+        >
           <CaseStudyScrollReveal delay={baseDelay}>
             <SectionIndex index={block.index} />
-            <h2 id={`narrative-${block.id}`} className="case-study-narrative-headline">
+            <h2 id={`narrative-${block.id}-headline`} className="case-study-narrative-headline">
               {block.headline}
             </h2>
             <div className="case-study-narrative-prose">
-              {block.paragraphs.map((paragraph, paragraphIndex) => (
-                <p key={paragraphIndex}>{paragraph}</p>
-              ))}
+              <ProseParagraphs paragraphs={block.paragraphs} />
             </div>
           </CaseStudyScrollReveal>
           {block.pullQuote ? (
-            <CaseStudyScrollReveal className="case-study-narrative-quote-wrap" delay={baseDelay + 0.1}>
+            <CaseStudyScrollRevealCallout className="case-study-narrative-quote-wrap">
               <blockquote className="case-study-narrative-quote">
                 <p>{block.pullQuote.quote}</p>
                 <footer>{block.pullQuote.attribution}</footer>
               </blockquote>
-            </CaseStudyScrollReveal>
+            </CaseStudyScrollRevealCallout>
           ) : null}
         </section>
       );
 
-    case "reduction-audit":
+    case "reduction-audit": {
+      const headingId = `narrative-${block.id}-eyebrow`;
+      const presentation = block.presentation ?? "grid";
       return (
-        <section className="case-study-narrative-section" aria-labelledby={`narrative-${block.id}`}>
-          <CaseStudyScrollReveal delay={baseDelay}>
-            <p id={`narrative-${block.id}`} className="case-study-narrative-eyebrow">
-              {block.eyebrow}
+        <section
+          className="case-study-narrative-section"
+          id={`narrative-${block.id}`}
+          aria-labelledby={block.index ? `narrative-${block.id}-index` : headingId}
+        >
+          {block.index ? (
+            <p id={`narrative-${block.id}-index`} className="case-study-narrative-index">
+              <span>{block.index.number}</span>
+              <span className="case-study-narrative-index-sep" aria-hidden>
+                /
+              </span>
+              <span>{block.index.title}</span>
             </p>
-          </CaseStudyScrollReveal>
-          <div className="case-study-reduction-grid">
-            {block.cards.map((card, cardIndex) => (
-              <CaseStudyScrollReveal key={card.id} delay={baseDelay + cardIndex * 0.08}>
-                <CaseStudyReductionCardView card={card} />
-              </CaseStudyScrollReveal>
-            ))}
-          </div>
-          <CaseStudyScrollReveal delay={baseDelay + 0.15}>
-            <p className="case-study-narrative-caption">{block.caption}</p>
-          </CaseStudyScrollReveal>
+          ) : null}
+          {presentation === "compare" ? (
+            <>
+              <p id={headingId} className="case-study-narrative-eyebrow">
+                {block.eyebrow}
+              </p>
+              <CaseStudyReductionCompare v1={block.cards[0]} v2={block.cards[1]} />
+              <p className="case-study-narrative-caption case-study-narrative-caption--compare">
+                {block.caption}
+              </p>
+            </>
+          ) : (
+            <>
+              <p id={headingId} className="case-study-narrative-eyebrow">
+                {block.eyebrow}
+              </p>
+              <div className="case-study-reduction-grid">
+                {block.cards.map((card) => (
+                  <CaseStudyReductionCardView key={card.id} card={card} />
+                ))}
+              </div>
+              <p className="case-study-narrative-caption">{block.caption}</p>
+            </>
+          )}
         </section>
       );
+    }
 
     case "platform-roles":
-      return <CaseStudyPlatformRolesSection block={block} revealDelay={baseDelay} />;
+      return (
+        <div className="case-study-narrative-section-anchor" id={`narrative-${block.id}`}>
+          <CaseStudyPlatformRolesSection block={block} />
+        </div>
+      );
 
     case "platform-split":
       return (
-        <section className="case-study-narrative-section case-study-platform-split" aria-labelledby={`narrative-${block.id}`}>
+        <section
+          className="case-study-narrative-section case-study-platform-split"
+          id={`narrative-${block.id}`}
+          aria-labelledby={`narrative-${block.id}-headline`}
+        >
           <div className="case-study-platform-copy">
-            <CaseStudyScrollReveal delay={baseDelay}>
-              <p id={`narrative-${block.id}`} className="case-study-narrative-eyebrow">
-                {block.eyebrow}
-              </p>
-              <h2 className="case-study-narrative-headline">{block.headline}</h2>
-              <div className="case-study-narrative-prose">
-                {block.paragraphs.map((paragraph, paragraphIndex) => (
-                  <p key={paragraphIndex}>{paragraph}</p>
-                ))}
-              </div>
-            </CaseStudyScrollReveal>
+            {block.index ? <SectionIndex index={block.index} /> : null}
+            <p className="case-study-narrative-eyebrow">{block.eyebrow}</p>
+            <h2 id={`narrative-${block.id}-headline`} className="case-study-narrative-headline">
+              {block.headline}
+            </h2>
+            <div className="case-study-narrative-prose">
+              <ProseParagraphs paragraphs={block.paragraphs} />
+            </div>
           </div>
-          <CaseStudyScrollReveal className="case-study-platform-diagram" delay={baseDelay + 0.1}>
+          <div className="case-study-platform-diagram">
             <CaseStudySystemDiagram
               headerLeft={block.diagramHeaderLeft}
               headerRight={block.diagramHeaderRight}
               tiers={block.tiers}
             />
-          </CaseStudyScrollReveal>
+          </div>
         </section>
       );
 
     case "capability-matrix":
       return (
         <section className="case-study-narrative-section" aria-labelledby={`narrative-${block.id}`}>
-          <CaseStudyScrollReveal delay={baseDelay}>
-            <p id={`narrative-${block.id}`} className="case-study-narrative-eyebrow">
-              {block.eyebrow}
-            </p>
-          </CaseStudyScrollReveal>
+          <p id={`narrative-${block.id}`} className="case-study-narrative-eyebrow">
+            {block.eyebrow}
+          </p>
           <div className="case-study-capability-matrix">
-            {block.rows.map((row, rowIndex) => (
-              <CaseStudyScrollReveal
+            {block.rows.map((row) => (
+              <div
                 key={row.id}
                 className={`case-study-capability-row case-study-capability-row--${row.tone}`}
-                delay={baseDelay + rowIndex * 0.06}
               >
                 <p className="case-study-capability-label">
                   <span className="case-study-capability-dot" aria-hidden />
                   {row.label}
                 </p>
                 <p className="case-study-narrative-body-sm">{row.body}</p>
-              </CaseStudyScrollReveal>
+              </div>
             ))}
           </div>
         </section>
       );
 
     case "matchmaking":
-      return <CaseStudyMatchmakingSection block={block} revealDelay={baseDelay} />;
+      return (
+        <div className="case-study-narrative-section-anchor" id={`narrative-${block.id}`}>
+          <CaseStudyMatchmakingSection block={block} />
+        </div>
+      );
 
     case "tech-strip":
-      return <CaseStudyTechStripSection block={block} revealDelay={baseDelay} />;
+      return (
+        <div className="case-study-narrative-section-anchor" id={`narrative-${block.id}`}>
+          <CaseStudyTechStripSection block={block} />
+        </div>
+      );
 
     case "launch":
-      return <CaseStudyLaunchSection block={block} revealDelay={baseDelay} />;
+      return (
+        <div className="case-study-narrative-section-anchor" id={`narrative-${block.id}`}>
+          <CaseStudyLaunchSection block={block} />
+        </div>
+      );
 
     default:
       return null;
@@ -240,5 +340,10 @@ export function CaseStudyNarrative({ content }: CaseStudyNarrativeProps) {
     blockIndex += 1;
   }
 
-  return <div className="case-study-narrative">{nodes}</div>;
+  return (
+    <div className="case-study-narrative">
+      <NarrativeToc blocks={content.blocks} />
+      {nodes}
+    </div>
+  );
 }

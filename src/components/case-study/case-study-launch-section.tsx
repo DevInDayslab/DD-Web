@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
 import type {
   CaseStudyLaunchBlock,
   CaseStudyLaunchStoreBadge,
@@ -75,17 +74,16 @@ function LaunchStoreBadge({ badge }: { badge: CaseStudyLaunchStoreBadge }) {
 
 type CaseStudyLaunchSectionProps = {
   block: CaseStudyLaunchBlock;
-  revealDelay: number;
 };
 
-export function CaseStudyLaunchSection({ block, revealDelay }: CaseStudyLaunchSectionProps) {
+export function CaseStudyLaunchSection({ block }: CaseStudyLaunchSectionProps) {
   return (
     <section
       className="case-study-launch-section"
       aria-labelledby={`narrative-${block.id}-headline`}
     >
       <div className="case-study-launch-inner">
-        <CaseStudyScrollReveal className="case-study-launch-hero" delay={revealDelay}>
+        <div className="case-study-launch-hero">
           <SectionIndex index={block.index} />
           <h2 id={`narrative-${block.id}-headline`} className="case-study-launch-headline">
             {block.headline}
@@ -96,15 +94,11 @@ export function CaseStudyLaunchSection({ block, revealDelay }: CaseStudyLaunchSe
               <LaunchStoreBadge key={badge.id} badge={badge} />
             ))}
           </div>
-        </CaseStudyScrollReveal>
+        </div>
 
         <div className="case-study-launch-viewports">
-          {block.viewports.map((viewport, viewportIndex) => (
-            <CaseStudyScrollReveal
-              key={viewport.id}
-              className="case-study-launch-viewport"
-              delay={revealDelay + 0.1 + viewportIndex * 0.06}
-            >
+          {block.viewports.map((viewport) => (
+            <div key={viewport.id} className="case-study-launch-viewport">
               <header className="case-study-launch-viewport-header">
                 <span>{viewport.screenLabel}</span>
                 <span>{viewport.title}</span>
@@ -118,7 +112,7 @@ export function CaseStudyLaunchSection({ block, revealDelay }: CaseStudyLaunchSe
                   <span>{viewport.placeholderLabel}</span>
                 </div>
               </div>
-            </CaseStudyScrollReveal>
+            </div>
           ))}
         </div>
       </div>

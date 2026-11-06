@@ -42,12 +42,18 @@ export type CaseStudyReductionCard = {
   wireframe: CaseStudyReductionWireframeV1 | CaseStudyReductionWireframeV2;
 };
 
+export type CaseStudyReductionPresentation = "grid" | "compare";
+
 export type CaseStudyReductionAuditBlock = {
   type: "reduction-audit";
   id: string;
+  /** Section label for in-page TOC */
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   caption: string;
   cards: readonly [CaseStudyReductionCard, CaseStudyReductionCard];
+  /** `compare` = V1/V2 slider (client); default `grid` = two cards */
+  presentation?: CaseStudyReductionPresentation;
 };
 
 export type CaseStudyDiagramNode = {
@@ -79,6 +85,8 @@ export type CaseStudyDiagramTier =
 export type CaseStudyPlatformRolesBlock = {
   type: "platform-roles";
   id: string;
+  /** Optional section index for TOC (e.g. 05 Platform approach) */
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   headline: string;
   paragraphs: readonly string[];
@@ -92,6 +100,7 @@ export type CaseStudyPlatformRolesBlock = {
 export type CaseStudyPlatformSplitBlock = {
   type: "platform-split";
   id: string;
+  index?: CaseStudySectionIndex;
   eyebrow: string;
   headline: string;
   paragraphs: readonly string[];
@@ -137,6 +146,8 @@ export type CaseStudyMatchmakingBlock = {
 export type CaseStudyTechStripBlock = {
   type: "tech-strip";
   id: string;
+  /** Optional section label for in-page TOC (e.g. stack strip as 03) */
+  index?: CaseStudySectionIndex;
   ariaLabel?: string;
   items: readonly string[];
 };
@@ -198,6 +209,7 @@ export type CaseStudyNarrativeLayoutConfig = {
   narrativeQuoteFontSizeAtBaseline: number;
   narrativeEditorialQuoteSizeAtBaseline: number;
   narrativeEditorialQuoteMaxWidthAtBaseline: number;
+  narrativeReductionCompareMinHeightAtBaseline: number;
   narrativeCardRadiusAtBaseline: number;
   narrativeReductionCardHeightAtBaseline: number;
   narrativeReductionCardWidthAtBaseline: number;

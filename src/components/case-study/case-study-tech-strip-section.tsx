@@ -1,15 +1,26 @@
-import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
-import type { CaseStudyTechStripBlock } from "@/types/case-study-narrative";
+import type { CaseStudySectionIndex, CaseStudyTechStripBlock } from "@/types/case-study-narrative";
+
+function SectionIndex({ index }: { index: CaseStudySectionIndex }) {
+  return (
+    <p className="case-study-narrative-index">
+      <span>{index.number}</span>
+      <span className="case-study-narrative-index-sep" aria-hidden>
+        /
+      </span>
+      <span>{index.title}</span>
+    </p>
+  );
+}
 
 type CaseStudyTechStripSectionProps = {
   block: CaseStudyTechStripBlock;
-  revealDelay: number;
 };
 
-export function CaseStudyTechStripSection({ block, revealDelay }: CaseStudyTechStripSectionProps) {
+export function CaseStudyTechStripSection({ block }: CaseStudyTechStripSectionProps) {
   return (
     <section className="case-study-stack-strip" aria-label={block.ariaLabel ?? "Technical stack"}>
-      <CaseStudyScrollReveal className="case-study-stack-strip-inner" delay={revealDelay}>
+      <div className="case-study-stack-strip-inner">
+        {block.index ? <SectionIndex index={block.index} /> : null}
         <ul className="case-study-stack-strip-list">
           {block.items.map((item, itemIndex) => (
             <li key={`${itemIndex}-${item}`} className="case-study-stack-strip-item">
@@ -17,7 +28,7 @@ export function CaseStudyTechStripSection({ block, revealDelay }: CaseStudyTechS
             </li>
           ))}
         </ul>
-      </CaseStudyScrollReveal>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,3 @@
-import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
 import type { CaseStudyMatchmakingBlock, CaseStudySectionIndex } from "@/types/case-study-narrative";
 
 function SectionIndex({ index }: { index: CaseStudySectionIndex }) {
@@ -15,17 +14,16 @@ function SectionIndex({ index }: { index: CaseStudySectionIndex }) {
 
 type CaseStudyMatchmakingSectionProps = {
   block: CaseStudyMatchmakingBlock;
-  revealDelay: number;
 };
 
-export function CaseStudyMatchmakingSection({ block, revealDelay }: CaseStudyMatchmakingSectionProps) {
+export function CaseStudyMatchmakingSection({ block }: CaseStudyMatchmakingSectionProps) {
   return (
     <section
       className="case-study-matchmaking-chapter"
       aria-labelledby={`narrative-${block.id}-headline`}
     >
       <div className="case-study-matchmaking-chapter-column">
-        <CaseStudyScrollReveal className="case-study-matchmaking-intro" delay={revealDelay}>
+        <div className="case-study-matchmaking-intro">
           <SectionIndex index={block.index} />
           <h2 id={`narrative-${block.id}-headline`} className="case-study-matchmaking-headline">
             {block.headline}
@@ -35,21 +33,15 @@ export function CaseStudyMatchmakingSection({ block, revealDelay }: CaseStudyMat
               <p key={paragraphIndex}>{paragraph}</p>
             ))}
           </div>
-        </CaseStudyScrollReveal>
+        </div>
 
         <div className="case-study-matchmaking-pipeline">
-          <CaseStudyScrollReveal delay={revealDelay + 0.08}>
-            <p className="case-study-matchmaking-pipeline-eyebrow">{block.pipelineEyebrow}</p>
-          </CaseStudyScrollReveal>
+          <p className="case-study-matchmaking-pipeline-eyebrow">{block.pipelineEyebrow}</p>
           <div className="case-study-matchmaking-pipeline-grid">
-            {block.pipelineCards.map((card, cardIndex) => {
+            {block.pipelineCards.map((card) => {
               const isHighlight = card.variant === "highlight";
               return (
-                <CaseStudyScrollReveal
-                  key={card.id}
-                  className="case-study-matchmaking-pipeline-grid-cell"
-                  delay={revealDelay + 0.1 + cardIndex * 0.05}
-                >
+                <div key={card.id} className="case-study-matchmaking-pipeline-grid-cell">
                   <article
                     className={`case-study-matchmaking-pipeline-card${
                       isHighlight ? " case-study-matchmaking-pipeline-card--highlight" : ""
@@ -68,13 +60,11 @@ export function CaseStudyMatchmakingSection({ block, revealDelay }: CaseStudyMat
                       {card.description}
                     </p>
                   </article>
-                </CaseStudyScrollReveal>
+                </div>
               );
             })}
           </div>
-          <CaseStudyScrollReveal delay={revealDelay + 0.2}>
-            <p className="case-study-matchmaking-pipeline-footer">{block.pipelineFooter}</p>
-          </CaseStudyScrollReveal>
+          <p className="case-study-matchmaking-pipeline-footer">{block.pipelineFooter}</p>
         </div>
       </div>
     </section>

@@ -24,7 +24,8 @@ export const caseStudyNarrativeThemeColors = {
   userAccent: "#436084",
   adminAccent: "#14181C",
   highlightAccent: "#436084",
-  diagramCoreBorder: "#436084",
+  /** Match `cardBorder` so the core sits inside the diagram panel with a single frame, not a nested dark ring. */
+  diagramCoreBorder: "#E4E2DD",
   diagramCoreBackground: "#FFFFFF",
   placeholder: "#A0A0A0",
   techStripBackground: "#FFFFFF",

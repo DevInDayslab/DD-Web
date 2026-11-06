@@ -21,6 +21,8 @@ export const caseStudyNarrativeLayout = {
   narrativeQuoteFontSizeAtBaseline: 32,
   narrativeEditorialQuoteSizeAtBaseline: 38,
   narrativeEditorialQuoteMaxWidthAtBaseline: 576,
+  /** Min height for V1/V2 compare slider panel (baseline px). */
+  narrativeReductionCompareMinHeightAtBaseline: 360,
   narrativeCardRadiusAtBaseline: 2,
   narrativeReductionCardHeightAtBaseline: 403,
   narrativeReductionCardWidthAtBaseline: 332,
