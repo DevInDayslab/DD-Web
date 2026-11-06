@@ -27,7 +27,6 @@ const REVEAL_SELECTOR = [
   ".contact-page-crosslink-intro",
   ".contact-page-crosslink-card",
   ".cp2-bottom",
-  ".case-study-narrative-section",
   ".ab-reveal",
 ].join(",");
 

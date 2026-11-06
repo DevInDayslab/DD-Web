@@ -1,10 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
 import { CaseStudyReductionCardView } from "@/components/case-study/case-study-reduction-card";
 import { CaseStudyReductionCompare } from "@/components/case-study/case-study-reduction-compare";
-import { CaseStudyScrollRevealCallout } from "@/components/case-study/case-study-scroll-reveal-callout";
 import { CaseStudyMatchmakingSection } from "@/components/case-study/case-study-matchmaking-section";
 import { CaseStudyTechStripSection } from "@/components/case-study/case-study-tech-strip-section";
 import { CaseStudyLaunchSection } from "@/components/case-study/case-study-launch-section";
@@ -102,14 +100,10 @@ function ProseParagraphs({ paragraphs }: { paragraphs: readonly string[] }) {
 function EditorialIntroBlock({
   prose,
   reduction,
-  blockIndex,
 }: {
   prose: CaseStudyNarrativeProseBlock;
   reduction: CaseStudyReductionAuditBlock;
-  blockIndex: number;
 }) {
-  const baseDelay = blockIndex * 0.05;
-
   return (
     <section
       className="case-study-narrative-section case-study-narrative-editorial"
@@ -117,23 +111,21 @@ function EditorialIntroBlock({
       aria-labelledby={`narrative-${prose.id}-headline`}
     >
       <div className="case-study-narrative-editorial-column">
-        <CaseStudyScrollReveal delay={baseDelay}>
-          <SectionIndex index={prose.index} />
-          <h2 id={`narrative-${prose.id}-headline`} className="case-study-narrative-editorial-headline">
-            {prose.headline}
-          </h2>
-          <div className="case-study-narrative-editorial-prose">
-            <ProseParagraphs paragraphs={prose.paragraphs} />
-          </div>
-        </CaseStudyScrollReveal>
+        <SectionIndex index={prose.index} />
+        <h2 id={`narrative-${prose.id}-headline`} className="case-study-narrative-editorial-headline">
+          {prose.headline}
+        </h2>
+        <div className="case-study-narrative-editorial-prose">
+          <ProseParagraphs paragraphs={prose.paragraphs} />
+        </div>
 
         {prose.pullQuote ? (
-          <CaseStudyScrollRevealCallout className="case-study-narrative-editorial-quote-wrap">
+          <div className="case-study-narrative-editorial-quote-wrap">
             <blockquote className="case-study-narrative-editorial-quote">
               <p>{prose.pullQuote.quote}</p>
               <footer>{prose.pullQuote.attribution}</footer>
             </blockquote>
-          </CaseStudyScrollRevealCallout>
+          </div>
         ) : null}
 
         <div
@@ -155,9 +147,7 @@ function EditorialIntroBlock({
   );
 }
 
-function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock; blockIndex: number }) {
-  const baseDelay = blockIndex * 0.05;
-
+function NarrativeBlock({ block }: { block: CaseStudyNarrativeBlock }) {
   switch (block.type) {
     case "prose":
       return (
@@ -166,22 +156,20 @@ function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock;
           id={`narrative-${block.id}`}
           aria-labelledby={`narrative-${block.id}-headline`}
         >
-          <CaseStudyScrollReveal delay={baseDelay}>
-            <SectionIndex index={block.index} />
-            <h2 id={`narrative-${block.id}-headline`} className="case-study-narrative-headline">
-              {block.headline}
-            </h2>
-            <div className="case-study-narrative-prose">
-              <ProseParagraphs paragraphs={block.paragraphs} />
-            </div>
-          </CaseStudyScrollReveal>
+          <SectionIndex index={block.index} />
+          <h2 id={`narrative-${block.id}-headline`} className="case-study-narrative-headline">
+            {block.headline}
+          </h2>
+          <div className="case-study-narrative-prose">
+            <ProseParagraphs paragraphs={block.paragraphs} />
+          </div>
           {block.pullQuote ? (
-            <CaseStudyScrollRevealCallout className="case-study-narrative-quote-wrap">
+            <div className="case-study-narrative-quote-wrap">
               <blockquote className="case-study-narrative-quote">
                 <p>{block.pullQuote.quote}</p>
                 <footer>{block.pullQuote.attribution}</footer>
               </blockquote>
-            </CaseStudyScrollRevealCallout>
+            </div>
           ) : null}
         </section>
       );
@@ -316,7 +304,6 @@ function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock;
 
 export function CaseStudyNarrative({ content }: CaseStudyNarrativeProps) {
   const nodes: ReactNode[] = [];
-  let blockIndex = 0;
 
   for (let index = 0; index < content.blocks.length; index += 1) {
     const block = content.blocks[index];
@@ -324,20 +311,13 @@ export function CaseStudyNarrative({ content }: CaseStudyNarrativeProps) {
 
     if (block.type === "prose" && next?.type === "reduction-audit") {
       nodes.push(
-        <EditorialIntroBlock
-          key={`${block.id}-${next.id}`}
-          prose={block}
-          reduction={next}
-          blockIndex={blockIndex}
-        />,
+        <EditorialIntroBlock key={`${block.id}-${next.id}`} prose={block} reduction={next} />,
       );
-      blockIndex += 1;
       index += 1;
       continue;
     }
 
-    nodes.push(<NarrativeBlock key={block.id} block={block} blockIndex={blockIndex} />);
-    blockIndex += 1;
+    nodes.push(<NarrativeBlock key={block.id} block={block} />);
   }
 
   return (
