@@ -1,4 +1,4 @@
-import { billingBabaCaseStudyPage } from "@/content/case-studies/billing-baba-page";
+import { billingBabaCaseStudyPage } from "@/content/case-studies/billing-baba";
 import { daterCaseStudyPage } from "@/content/case-studies/dater-page";
 import { entryTicketCaseStudyPage } from "@/content/case-studies/entryticket-page";
 import { invigilCaseStudyPage } from "@/content/case-studies/invigil";

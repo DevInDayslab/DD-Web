@@ -291,7 +291,109 @@ export type CaseStudyNarrativeBlock =
   | CaseStudyMatchmakingBlock
   | CaseStudyTechStripBlock
   | CaseStudyLaunchBlock
-  | CaseStudyInvigilSectionBlock;
+  | CaseStudyInvigilSectionBlock
+  | CaseStudyBillingBabaSectionBlock;
+
+/** Billing Baba — before/after rebuild narrative (see `billing-baba-narrative.ts`). */
+export type BillingBabaSplitList = {
+  title: string;
+  items: readonly string[];
+};
+
+export type BillingBabaTimelineStep = {
+  id: string;
+  label: string;
+  detail: string;
+};
+
+export type BillingBabaFeatureTile = {
+  id: string;
+  title: string;
+  detail: string;
+};
+
+export type BillingBabaPlatformOrb = {
+  id: string;
+  label: string;
+};
+
+export type BillingBabaGlossaryTerm = {
+  id: string;
+  term: string;
+  definition: string;
+};
+
+export type BillingBabaResultStat = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type CaseStudyBillingBabaSectionBlock =
+  | {
+      type: "billing-baba-section";
+      variant: "previous-attempt";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote?: CaseStudyPullQuote;
+      promised: BillingBabaSplitList;
+      delivered: BillingBabaSplitList;
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "rebuild-timeline";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      struckLabel: string;
+      timeline: readonly BillingBabaTimelineStep[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "feature-grid";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      features: readonly BillingBabaFeatureTile[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "flutter-hub";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      hubLabel: string;
+      hubSublabel?: string;
+      platforms: readonly BillingBabaPlatformOrb[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "domain-glossary";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      terms: readonly BillingBabaGlossaryTerm[];
+      /** Exact substrings to wrap with `<mark>` in the given paragraph (copy unchanged). */
+      paragraphHighlights?: readonly {
+        paragraphIndex: number;
+        phrases: readonly string[];
+      }[];
+    }
+  | {
+      type: "billing-baba-section";
+      variant: "results-strip";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      stats: readonly BillingBabaResultStat[];
+    };
 
 export type CaseStudyNarrativeContent = {
   blocks: readonly CaseStudyNarrativeBlock[];
