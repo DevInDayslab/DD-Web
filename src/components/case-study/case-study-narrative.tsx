@@ -3,6 +3,7 @@ import { CaseStudyReductionCardView } from "@/components/case-study/case-study-r
 import { CaseStudyReductionCompare } from "@/components/case-study/case-study-reduction-compare";
 import { CaseStudyBillingBabaSection } from "@/components/case-study/case-study-billing-baba-section";
 import { CaseStudyEntryTicketSection } from "@/components/case-study/case-study-entryticket-section";
+import { CaseStudyTurboSection } from "@/components/case-study/case-study-turbo-section";
 import { CaseStudyInvigilSection } from "@/components/case-study/case-study-invigil-section";
 import { CaseStudyMatchmakingSection } from "@/components/case-study/case-study-matchmaking-section";
 import { CaseStudyTechStripSection } from "@/components/case-study/case-study-tech-strip-section";
@@ -74,6 +75,10 @@ function NarrativeToc({ blocks }: { blocks: readonly CaseStudyNarrativeBlock[] }
       continue;
     }
     if (block.type === "entryticket-section" && "index" in block && block.index) {
+      entries.push({ id: block.id, index: block.index });
+      continue;
+    }
+    if (block.type === "turbo-section" && "index" in block && block.index) {
       entries.push({ id: block.id, index: block.index });
       continue;
     }
@@ -318,6 +323,9 @@ function NarrativeBlock({ block }: { block: CaseStudyNarrativeBlock }) {
 
     case "entryticket-section":
       return <CaseStudyEntryTicketSection block={block} />;
+
+    case "turbo-section":
+      return <CaseStudyTurboSection block={block} />;
 
     default:
       return null;

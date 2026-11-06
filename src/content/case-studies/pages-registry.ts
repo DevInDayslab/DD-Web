@@ -2,7 +2,7 @@ import { billingBabaCaseStudyPage } from "@/content/case-studies/billing-baba";
 import { daterCaseStudyPage } from "@/content/case-studies/dater-page";
 import { entryTicketCaseStudyPage } from "@/content/case-studies/entryticket";
 import { invigilCaseStudyPage } from "@/content/case-studies/invigil";
-import { turboSupplyCaseStudyPage } from "@/content/case-studies/turbosupply-page";
+import { turboSupplyCaseStudyPage } from "@/content/case-studies/turbosupply";
 import type { CaseStudyPageContent } from "@/types/case-study-page";
 
 /** Order here is the order of the sitemap and the previous/next links. */

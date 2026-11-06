@@ -35,7 +35,15 @@ export function CaseStudyBriefSection({
           {brief.specRows.map((row) => (
             <div key={row.id} className="case-study-spec-row">
               <dt className="case-study-spec-label">{row.label}</dt>
-              <dd className="case-study-spec-value">
+              <dd
+                className={
+                  row.valueTone === "muted"
+                    ? "case-study-spec-value case-study-spec-value--muted"
+                    : row.valueTone === "accent"
+                      ? "case-study-spec-value case-study-spec-value--accent"
+                      : "case-study-spec-value"
+                }
+              >
                 {row.href ? (
                   <Link href={row.href} className="case-study-spec-link">
                     {row.value}

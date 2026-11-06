@@ -293,7 +293,61 @@ export type CaseStudyNarrativeBlock =
   | CaseStudyLaunchBlock
   | CaseStudyInvigilSectionBlock
   | CaseStudyBillingBabaSectionBlock
-  | CaseStudyEntryTicketSectionBlock;
+  | CaseStudyEntryTicketSectionBlock
+  | CaseStudyTurboSectionBlock;
+
+/** Turbo Supply — quick-commerce hardware narrative (see `turbosupply-narrative.ts`). */
+export type TurboProblemCompareColumn = {
+  id: string;
+  title: string;
+  body: string;
+};
+
+export type TurboSearchMock = {
+  partName: string;
+  spec: string;
+  size: string;
+  rating: string;
+};
+
+export type CaseStudyTurboSectionBlock =
+  | {
+      type: "turbo-section";
+      variant: "problem-compare";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      pullQuote?: CaseStudyPullQuote;
+      left: TurboProblemCompareColumn;
+      right: TurboProblemCompareColumn;
+    }
+  | {
+      type: "turbo-section";
+      variant: "search-mock";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      mock: TurboSearchMock;
+    }
+  | {
+      type: "turbo-section";
+      variant: "platforms-dual";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+    }
+  | {
+      type: "turbo-section";
+      variant: "results-banner";
+      id: string;
+      index: CaseStudySectionIndex;
+      headline: string;
+      paragraphs: readonly string[];
+      bannerLabel: string;
+    };
 
 /** EntryTicket — live web + native app narrative (see `entryticket-narrative.ts`). */
 export type EntryTicketSeqStep = {
