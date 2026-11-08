@@ -13,7 +13,7 @@ export const pricingSectionContent = {
       id: "mvp",
       tabLabel: "MVP Build",
       title: "MVP Build",
-      durationBadge: "~2–3 Weeks",
+      durationBadge: "~3–4 Weeks",
       features: [
         "End-to-end UI/UX & development for the complete MVP",
         "One integrated payment/subscription setup",
@@ -33,7 +33,7 @@ export const pricingSectionContent = {
       id: "full-product",
       tabLabel: "Full Product",
       title: "Full Product",
-      durationBadge: "6–8 Weeks",
+      durationBadge: "8–12 Weeks",
       features: [
         "Full feature set and multiple user roles",
         "Custom marketing landing page",

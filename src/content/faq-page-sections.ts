@@ -292,7 +292,7 @@ export const faqPageSections = [
         id: "how-much-does-devindays-charge-to-build-an-app",
         question: "How much does DevInDays charge to build an app?",
         answer:
-          "MVP Build starts from $3,950 and typically takes 2-3 weeks. Full Product starts from $13,900 and takes 6-8 weeks. Custom projects are scoped individually, so we'd love to get on a call and give you an honest quote.",
+          "MVP Build starts from $3,950 and typically takes 3-4 weeks. Full Product starts from $13,900 and takes 8-12 weeks. Custom projects are scoped individually, so we'd love to get on a call and give you an honest quote.",
       },
       {
         id: "what-s-included-in-the-mvp-build-price",
