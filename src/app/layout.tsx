@@ -10,7 +10,7 @@ import { fontHeadline, fontMono, fontUi } from "@/config/fonts";
 import { site } from "@/config/site";
 import { theme } from "@/config/theme";
 import { buildRootMetadata } from "@/lib/metadata";
-import { organizationJsonLd } from "@/lib/schema";
+import { founderJsonLd, organizationJsonLd } from "@/lib/schema";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <ThemeStyle theme={theme} />
           <SiteLayoutStyle />
           <SiteMotion />
-          <JsonLd data={organizationJsonLd(site)} />
+          <JsonLd data={[organizationJsonLd(site), founderJsonLd(site)]} />
           <SiteHeader />
           {children}
           <SiteFooter />

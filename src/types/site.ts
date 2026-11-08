@@ -62,13 +62,22 @@ export type VideoConfig = {
   provider: "cloudflare-stream" | "mux";
 };
 
+export type FounderConfig = {
+  name: string;
+  jobTitle: string;
+  sameAs: string[];
+};
+
 export type SiteConfig = {
   name: string;
   legalName: string;
   url: string;
+  /** BCP 47 tag used for <html lang> and hreflang, for example "en-US". */
   locale: string;
   defaultOgImage: string;
-  keywords: string[];
+  /** Countries the studio actively takes projects from, for structured data. */
+  servesCountries: string[];
+  founder: FounderConfig;
   metadata: {
     title: string;
     description: string;

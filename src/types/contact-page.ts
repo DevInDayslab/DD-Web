@@ -139,6 +139,7 @@ export type ContactPageContent = {
     title: string;
     description: string;
     path: string;
+    ogImage?: string;
   };
   hero: ContactPageHeroContent;
   split: ContactPageSplitContent;

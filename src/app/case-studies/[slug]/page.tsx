@@ -45,8 +45,12 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyDetailPag
           ]),
           caseStudyJsonLd(site, {
             name: content.intro.breadcrumb.projectName,
+            headline: content.intro.headlineLines.join(" "),
             description: content.meta.description,
             path: content.meta.path,
+            imagePath: content.meta.ogImage ?? site.defaultOgImage,
+            industry: content.intro.breadcrumb.industry,
+            liveUrl: content.footer.liveHref,
           }),
         ]}
       />

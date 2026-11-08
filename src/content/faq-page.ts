@@ -49,10 +49,11 @@ const faqPageCategories: readonly FaqPageCategorySection[] = faqCategoryDefiniti
 
 export const faqPageContent = {
   meta: {
-    title: "FAQ",
+    title: "App Development FAQ: Cost, Timeline & IP",
     description:
-      "Scope, pricing, process, and what happens after launch. Answers you can check before the first call.",
+      "Answers to what clients ask before hiring an app development studio: pricing, timelines, who owns the code, how the process works and what happens after launch.",
     path: "/faq",
+    ogImage: "/og/faq.png",
   },
   hero: {
     eyebrow: "FAQ",

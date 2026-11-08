@@ -1,6 +1,11 @@
 # DevInDays
 
-> DevInDays is a custom software development studio based in Delhi, India, building mobile and web products for founders and businesses. MVP Build from $3,950, Full Product from $13,900, custom builds scoped individually. Full IP and source code ownership on every project. 30-day minimum post-launch support included.
+> DevInDays is a founder-led custom app development studio. It designs and builds iOS, Android and web products for startups, founders and growing businesses, end to end: product design, engineering, launch and post-launch support. Pricing is published: MVP Build from $3,950 (about 2-3 weeks), Full Product from $13,900 (about 6-8 weeks), custom builds scoped individually. Clients own 100% of the IP and source code. Every project includes at least 30 days of post-launch engineering support.
+
+## Company
+- Founder: Raghav Kaushik, personally involved in scope, architecture and product decisions on every project.
+- Based in Delhi, India. Works remotely with clients worldwide.
+- Stack: Swift and SwiftUI, Kotlin, Flutter, Node.js, PostgreSQL, AWS.
 
 ## Services
 - MVP Build: a complete, working product, end-to-end UI/UX design and development, one integrated payment/subscription setup, production-grade authentication, App Store/Google Play submission, full IP ownership, 30 days of post-launch support.

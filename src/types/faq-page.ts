@@ -40,6 +40,7 @@ export type FaqPageContent = {
     title: string;
     description: string;
     path: string;
+    ogImage?: string;
   };
   hero: FaqPageHeroContent;
   sections: readonly FaqPageCategorySection[];

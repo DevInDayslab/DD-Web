@@ -9,10 +9,11 @@ export const daterCaseStudyPage = {
   slug: "dater",
   materialPath,
   meta: {
-    title: "Dater · Case Study",
+    title: "Dating App Development Case Study: Dater",
     description:
-      "A dating app built around a feed, not a swipe. Native iOS and Android, built end-to-end, from matchmaking logic to trust and safety.",
+      "How we built Dater, a native iOS and Android dating app around a feed instead of swipes, with custom matchmaking, trust and safety, and subscriptions.",
     path: "/case-studies/dater",
+    ogImage: "/og/dater.png",
   },
   intro: {
     breadcrumb: {

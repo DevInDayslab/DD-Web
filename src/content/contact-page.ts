@@ -3,9 +3,11 @@ import type { ContactPageContent } from "@/types/contact-page";
 
 export const contactPageContent = {
   meta: {
-    title: "Contact",
-    description: "Book a call or send a message. Tell us what you're building.",
+    title: "Contact: Book a 30-Minute Call with the Founder",
+    description:
+      "Book a 30-minute call with the founder or send a message about your app. You get an honest read on fit, scope and timeline within 48 hours.",
     path: "/contact",
+    ogImage: "/og/contact.png",
   },
   hero: {
     eyebrow: "Contact",

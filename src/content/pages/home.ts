@@ -6,5 +6,6 @@ export const homePage = {
     title: site.metadata.title,
     description: site.metadata.description,
     path: "/",
+    ogImage: "/og/home.png",
   },
 } satisfies PageCopy;

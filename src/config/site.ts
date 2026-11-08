@@ -5,20 +5,18 @@ export const site: SiteConfig = {
   name: "DevInDays",
   legalName: "DevInDays",
   url: env.siteUrl || "https://www.devindays.com",
-  locale: "en",
-  defaultOgImage: "/og.png",
-  keywords: [
-    "app development agency",
-    "custom software development",
-    "mobile app development",
-    "MVP development",
-    "iOS and Android apps",
-    "Delhi software studio",
-  ],
+  locale: "en-US",
+  defaultOgImage: "/og/home.png",
+  servesCountries: ["US", "CA", "GB", "AU", "IE", "DE", "NL", "NZ"],
+  founder: {
+    name: "Raghav Kaushik",
+    jobTitle: "Founder",
+    sameAs: ["https://www.linkedin.com/in/raghav-kaushik-718058301/"],
+  },
   metadata: {
-    title: "DevInDays — Custom App & Software Development Studio",
+    title: "App Development Agency for Startups | DevInDays",
     description:
-      "DevInDays is a custom software studio in Delhi building mobile and web products for founders and businesses. MVP Build from $3,950, Full Product from $13,900. Full IP and source code ownership on every project.",
+      "Custom iOS, Android and web app development for founders and businesses. MVPs from $3,950, full products from $13,900, and you own 100% of the code.",
   },
   contact: {
     email: "",

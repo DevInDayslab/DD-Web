@@ -8,7 +8,7 @@ import { getAllCaseStudyPages } from "@/content/case-studies/pages-registry";
 import { founderSectionContent } from "@/content/founder-section";
 import type { AboutCaseRow } from "@/types/about-page";
 import { buildPageMetadata } from "@/lib/metadata";
-import { breadcrumbJsonLd } from "@/lib/schema";
+import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/schema";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = buildPageMetadata(aboutPageContent.meta);
@@ -36,10 +36,17 @@ export default function AboutPage() {
   return (
     <main className="ab-main">
       <JsonLd
-        data={breadcrumbJsonLd(site, [
-          { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
-        ])}
+        data={[
+          breadcrumbJsonLd(site, [
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+          aboutPageJsonLd(site, {
+            name: aboutPageContent.meta.title,
+            description: aboutPageContent.meta.description,
+            path: aboutPageContent.meta.path,
+          }),
+        ]}
       />
       <AboutPageView content={aboutPageContent} caseRows={caseRows} hasPortrait={hasPortrait} />
     </main>

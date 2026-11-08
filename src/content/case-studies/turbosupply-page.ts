@@ -8,9 +8,11 @@ export const turboSupplyCaseStudyPage = {
   slug: "turbosupply",
   materialPath: "src/content/material/case-studies/devindays-case-study-turbosupply.md",
   meta: {
-    title: "Turbo Supply · Case Study",
-    description: "30-minute delivery for the hardware businesses actually run on. Android and iOS apps built so a tradesperson can order exactly what the job needs, when it needs it.",
-    path: "/case-studies/turbosupply"
+    title: "Quick Commerce App Case Study: Turbo Supply",
+    description:
+      "How we built Turbo Supply, a 30-minute hardware delivery app for Android and iOS, in four weeks with a team of three engineers.",
+    path: "/case-studies/turbosupply",
+    ogImage: "/og/turbosupply.png",
   },
   intro: {
     breadcrumb: {

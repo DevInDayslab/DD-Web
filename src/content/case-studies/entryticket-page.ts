@@ -8,9 +8,11 @@ export const entryTicketCaseStudyPage = {
   slug: "entryticket",
   materialPath: "src/content/material/case-studies/devindays-case-study-entryticket.md",
   meta: {
-    title: "EntryTicket · Case Study",
-    description: "A native app for a platform that already worked, built to fit it exactly. iOS and Android on top of an existing PHP backend, in sync with a live website the whole way through.",
-    path: "/case-studies/entryticket"
+    title: "Ticketing App Case Study: EntryTicket",
+    description:
+      "How we built a native iOS and Android app for EntryTicket on top of its live PHP backend in three weeks, so a seat booked on mobile is gone on web instantly.",
+    path: "/case-studies/entryticket",
+    ogImage: "/og/entryticket.png",
   },
   intro: {
     breadcrumb: {

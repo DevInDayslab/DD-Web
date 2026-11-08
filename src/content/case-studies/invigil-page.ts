@@ -8,9 +8,11 @@ export const invigilCaseStudyPage = {
   slug: "invigil",
   materialPath: "src/content/material/case-studies/devindays-case-study-invigil.md",
   meta: {
-    title: "Invigil · Case Study",
-    description: "A civic media platform that had to be six products at once, without feeling like six products stapled together. News, social, live TV, an AI newsroom and an investigation portal on one backend.",
-    path: "/case-studies/invigil"
+    title: "Civic Media Platform Case Study: Invigil",
+    description:
+      "How we built Invigil: news, social, live TV, an AI newsroom and an investigation portal on one backend, shipped across mobile, TV and web in about three months.",
+    path: "/case-studies/invigil",
+    ogImage: "/og/invigil.png",
   },
   intro: {
     breadcrumb: {

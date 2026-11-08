@@ -8,9 +8,11 @@ export const billingBabaCaseStudyPage = {
   slug: "billing-baba",
   materialPath: "src/content/material/case-studies/devindays-case-study-billingbaba.md",
   meta: {
-    title: "Billing Baba · Case Study",
-    description: "A billing platform rebuilt from zero, after the first build never got finished. Android, iOS, macOS and Windows, one real product across every platform a business runs on.",
-    path: "/case-studies/billing-baba"
+    title: "Billing Software Case Study: Billing Baba",
+    description:
+      "How we rebuilt Billing Baba from zero after a first build was never finished: invoicing, inventory, tax and reporting on Android, iOS, macOS and Windows.",
+    path: "/case-studies/billing-baba",
+    ogImage: "/og/billing-baba.png",
   },
   intro: {
     breadcrumb: {

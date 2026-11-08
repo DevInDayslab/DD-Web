@@ -2,10 +2,11 @@ import type { AboutPageContent } from "@/types/about-page";
 
 export const aboutPageContent = {
   meta: {
-    title: "About",
+    title: "About: A Founder-Led App Development Studio",
     description:
-      "DevInDays is a small software studio in Delhi. The founder is hands-on in every project, a dedicated team builds it, and you own all of it.",
+      "DevInDays is a small, founder-led software studio. One person accountable from scope to launch, a dedicated team building your app, and you own all the code.",
     path: "/about",
+    ogImage: "/og/about.png",
   },
   hero: {
     eyebrow: "About",

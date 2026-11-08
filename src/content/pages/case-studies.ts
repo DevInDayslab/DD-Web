@@ -3,9 +3,10 @@ import type { PageCopy } from "@/types";
 
 export const caseStudiesPage = {
   meta: {
-    title: "Case Studies",
+    title: "App Development Case Studies",
     description:
-      "Explore products we've engineered across dating, delivery, civic media, wellness, and more.",
+      "Real products we have built and launched: dating, delivery, ticketing, billing and civic media apps across iOS, Android and web.",
     path: "/case-studies",
+    ogImage: "/og/case-studies.png",
   },
 } satisfies PageCopy;
