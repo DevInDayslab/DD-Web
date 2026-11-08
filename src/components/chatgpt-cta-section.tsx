@@ -1,4 +1,5 @@
 import { ChatGptMarkIcon } from "@/components/chatgpt-mark-icon";
+import { site } from "@/config/site";
 import { buildChatGptUrl } from "@/lib/chatgpt";
 import type { ChatGptCtaSectionContent } from "@/types/chatgpt-cta-section";
 
@@ -8,7 +9,8 @@ type ChatGptCtaSectionProps = {
 
 export function ChatGptCtaSection({ content }: ChatGptCtaSectionProps) {
   const { headline } = content;
-  const chatGptHref = buildChatGptUrl(content.chatGptPrompt);
+  const siteAddress = site.url.replace(/\/+$/, "");
+  const chatGptHref = buildChatGptUrl(content.chatGptPrompt.replaceAll("{site}", siteAddress));
 
   return (
     <section className="chatgpt-cta-section" aria-labelledby="chatgpt-cta-headline">
