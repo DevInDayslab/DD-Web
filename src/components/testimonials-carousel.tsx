@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { TestimonialCardText } from "@/components/testimonial-card-text";
 import { TestimonialCardVideo } from "@/components/testimonial-card-video";
 import type { TestimonialCard, TestimonialsSectionContent } from "@/types/testimonials-section";
@@ -30,30 +30,120 @@ function ArrowIcon({ direction }: { direction: "left" | "right" }) {
   );
 }
 
+/** Moves the scroll position instantly: no smooth scrolling and no snapping for that one frame. */
+function jump(el: HTMLElement, left: number) {
+  el.style.scrollBehavior = "auto";
+  el.style.scrollSnapType = "none";
+  el.scrollLeft = left;
+  requestAnimationFrame(() => {
+    el.style.scrollBehavior = "";
+    el.style.scrollSnapType = "";
+  });
+}
+
+/** Enough repeats that the loop always has cards ahead of and behind the visible ones. */
+function repeatCount(cardCount: number): number {
+  return Math.max(5, Math.ceil(14 / Math.max(1, cardCount)) | 1);
+}
+
 export function TestimonialsCarousel({ content }: TestimonialsCarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
+  const normalizeTimer = useRef<number | null>(null);
+  const cards = content.cards;
+  const copies = useMemo(() => repeatCount(cards.length), [cards.length]);
+  const homeCopy = Math.floor(copies / 2);
 
-  const updateEdges = useCallback(() => {
+  /** Width of one full set of cards, measured from the layout so uneven card widths are fine. */
+  const measureSet = useCallback((): number => {
+    const el = viewportRef.current;
+    if (!el || cards.length === 0) {
+      return 0;
+    }
+    const items = el.querySelectorAll<HTMLElement>(".testimonials-carousel-item");
+    const first = items[0];
+    const next = items[cards.length];
+    return first && next ? next.offsetLeft - first.offsetLeft : 0;
+  }, [cards.length]);
+
+  // Start in the middle set, so there is always something to scroll toward on both sides.
+  useLayoutEffect(() => {
+    const el = viewportRef.current;
+    const setWidth = measureSet();
+    if (el && setWidth > 0) {
+      jump(el, setWidth * homeCopy);
+    }
+  }, [measureSet, homeCopy]);
+
+  // Repeats are for looking at, not for assistive tech or tabbing through twice.
+  useEffect(() => {
     const el = viewportRef.current;
     if (!el) {
       return;
     }
-    setCanScrollPrev(el.scrollLeft > 4);
-    setCanScrollNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
-  }, []);
+    el.querySelectorAll<HTMLElement>('.testimonials-carousel-item[data-repeat="true"]').forEach((item) => {
+      item.setAttribute("aria-hidden", "true");
+      item
+        .querySelectorAll<HTMLElement>("a, button, input, [tabindex]")
+        .forEach((node) => node.setAttribute("tabindex", "-1"));
+    });
+  }, [copies, cards]);
+
+  // When scrolling settles, slide back into the home set by one whole set. The cards look identical, so nothing visibly moves.
+  const normalize = useCallback(() => {
+    const el = viewportRef.current;
+    const setWidth = measureSet();
+    if (!el || setWidth <= 0) {
+      return;
+    }
+    const low = setWidth * homeCopy;
+    const high = setWidth * (homeCopy + 1);
+    let target = el.scrollLeft;
+    while (target < low - 2) {
+      target += setWidth;
+    }
+    while (target >= high - 2) {
+      target -= setWidth;
+    }
+    if (Math.abs(target - el.scrollLeft) > 1) {
+      jump(el, target);
+    }
+  }, [measureSet, homeCopy]);
+
+  const handleScroll = () => {
+    if (normalizeTimer.current !== null) {
+      window.clearTimeout(normalizeTimer.current);
+    }
+    normalizeTimer.current = window.setTimeout(normalize, 140);
+  };
+
+  useEffect(
+    () => () => {
+      if (normalizeTimer.current !== null) {
+        window.clearTimeout(normalizeTimer.current);
+      }
+    },
+    [],
+  );
+
+  // Browsers that report when scrolling stops get a second, exact trigger.
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) {
+      return;
+    }
+    el.addEventListener("scrollend", normalize);
+    return () => el.removeEventListener("scrollend", normalize);
+  }, [normalize]);
 
   useEffect(() => {
-    updateEdges();
     const el = viewportRef.current;
     if (!el) {
       return;
     }
-    const observer = new ResizeObserver(updateEdges);
+    const observer = new ResizeObserver(() => normalize());
     observer.observe(el);
     return () => observer.disconnect();
-  }, [updateEdges, content.cards.length]);
+  }, [normalize]);
 
   const scrollByCard = (direction: -1 | 1) => {
     const el = viewportRef.current;
@@ -68,20 +158,25 @@ export function TestimonialsCarousel({ content }: TestimonialsCarouselProps) {
 
   return (
     <div className="testimonials-carousel" aria-label={content.carouselAriaLabel} role="region">
-      <div ref={viewportRef} className="testimonials-carousel-viewport" onScroll={updateEdges}>
+      <div ref={viewportRef} className="testimonials-carousel-viewport" onScroll={handleScroll}>
         <div className="testimonials-carousel-segment">
-          {content.cards.map((card) => (
-            <div key={card.id} className="testimonials-carousel-item">
-              <TestimonialCarouselCard card={card} />
-            </div>
-          ))}
+          {Array.from({ length: copies }, (_, copyIndex) =>
+            cards.map((card) => (
+              <div
+                key={`${copyIndex}-${card.id}`}
+                className="testimonials-carousel-item"
+                data-repeat={copyIndex === homeCopy ? undefined : "true"}
+              >
+                <TestimonialCarouselCard card={card} />
+              </div>
+            )),
+          )}
         </div>
       </div>
       <button
         type="button"
         className="testimonials-carousel-button testimonials-carousel-button-prev"
         aria-label="Previous testimonial"
-        disabled={!canScrollPrev}
         onClick={() => scrollByCard(-1)}
       >
         <ArrowIcon direction="left" />
@@ -90,7 +185,6 @@ export function TestimonialsCarousel({ content }: TestimonialsCarouselProps) {
         type="button"
         className="testimonials-carousel-button testimonials-carousel-button-next"
         aria-label="Next testimonial"
-        disabled={!canScrollNext}
         onClick={() => scrollByCard(1)}
       >
         <ArrowIcon direction="right" />

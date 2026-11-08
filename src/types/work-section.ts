@@ -8,7 +8,7 @@ export type WorkFeaturedCaseStudy = {
   category: string;
   title: string;
   body: string;
-  tags: readonly string[];
+  points: readonly string[];
   ctaLabel: string;
   ctaHref?: string;
   slug: string;

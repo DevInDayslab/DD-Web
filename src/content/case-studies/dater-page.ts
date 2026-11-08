@@ -53,9 +53,14 @@ export const daterCaseStudyPage = {
         value: "Founder-led, with a team of 4 engineers",
       },
       {
+        id: "engagement",
+        label: "Engagement",
+        value: "Ongoing, improving and scaling the product",
+      },
+      {
         id: "live",
         label: "Live",
-        value: "dater.social",
+        value: "Dater.social",
         href: "https://dater.social",
       },
     ],
@@ -67,7 +72,7 @@ export const daterCaseStudyPage = {
   narrative: daterCaseStudyNarrative,
   footer: {
     archiveEyebrow: "Project archive",
-    liveLabel: "Live at dater.social ↗",
+    liveLabel: "Live at Dater.social ↗",
     liveHref: "https://dater.social",
     liveExternal: true,
     bookCallLabel: site.booking.label,

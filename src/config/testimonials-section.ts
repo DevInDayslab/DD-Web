@@ -3,7 +3,7 @@ import type { TestimonialsSectionLayoutConfig } from "@/types/testimonials-secti
 export const testimonialsSectionLayout = {
   widthAtBaseline: 1560,
   maxWidthAtBaseline: 1560,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   paddingInlineAtBaseline: 40,
   headerGapAtBaseline: 64,
   titleFontSizeAtBaseline: 32,

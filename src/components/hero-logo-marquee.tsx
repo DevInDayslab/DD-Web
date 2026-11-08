@@ -29,6 +29,8 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const segmentRef = useRef<HTMLDivElement>(null);
   const [segmentWidth, setSegmentWidth] = useState(0);
+  // Stays false until the tiles have been laid out on the curve, so the flat server markup is never shown.
+  const [ready, setReady] = useState(false);
   // How far through one segment the track has travelled (0 to 1). Kept outside the effect so a
   // re-measure, resize or hot reload continues from the same spot instead of snapping back to the start.
   const phaseRef = useRef(0);
@@ -145,7 +147,13 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
     intersectionObserver.observe(viewport);
 
     frame = requestAnimationFrame(tick);
+    // Reveal only if this run survives two frames. A change of layout mode (the media query settles right
+    // after mount) re-runs the effect and cancels this, so the first visible frame is already curved.
+    let revealFrame = requestAnimationFrame(() => {
+      revealFrame = requestAnimationFrame(() => setReady(true));
+    });
     return () => {
+      cancelAnimationFrame(revealFrame);
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
@@ -182,7 +190,12 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
   );
 
   return (
-    <div className="hero-marquee" aria-label={content.ariaLabel} role="region">
+    <div
+      className="hero-marquee"
+      aria-label={content.ariaLabel}
+      role="region"
+      data-ready={ready ? "" : undefined}
+    >
       <div className="hero-marquee-frame">
         <div ref={viewportRef} className="hero-marquee-viewport">
           <div ref={trackRef} className="hero-marquee-track">

@@ -4,7 +4,7 @@ export const chatgptCtaSectionLayout = {
   widthAtBaseline: 960,
   minHeightAtBaseline: 374,
   paddingInlineAtBaseline: 40,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   paddingAtBaseline: 64,
   innerGapAtBaseline: 56,
   borderRadiusAtBaseline: 32,

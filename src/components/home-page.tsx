@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HomeHero } from "@/components/home-hero";
 import { JsonLd } from "@/components/json-ld";
 import { site } from "@/config/site";
@@ -35,6 +36,14 @@ export function HomePage() {
       <FounderSection content={founderSectionContent} />
       <PricingSection content={pricingSectionContent} />
       <FaqSection content={faqSectionContent} />
+      <div className="home-mobile-faq-link">
+        <p className="home-mobile-faq-title">Still have questions?</p>
+        <p className="home-mobile-faq-text">Pricing, timelines, ownership and how we work are all answered.</p>
+        <Link href="/faq" className="home-mobile-faq-button">
+          Read the FAQ
+          <span aria-hidden>→</span>
+        </Link>
+      </div>
     </div>
   );
 }

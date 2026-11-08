@@ -49,12 +49,17 @@ export const invigilCaseStudyPage = {
       {
         id: "team",
         label: "Team",
-        value: "8 engineers"
+        value: "8 engineers",
+      },
+      {
+        id: "engagement",
+        label: "Engagement",
+        value: "Ongoing, improving and scaling the product",
       },
       {
         id: "live",
         label: "Live",
-        value: "theinvigil.com",
+        value: "Theinvigil.com",
         href: "https://theinvigil.com"
       }
     ],
@@ -66,7 +71,7 @@ export const invigilCaseStudyPage = {
   narrative: invigilCaseStudyNarrative,
   footer: {
     archiveEyebrow: "Project archive",
-    liveLabel: "Live at theinvigil.com ↗",
+    liveLabel: "Live at Theinvigil.com ↗",
     liveHref: "https://theinvigil.com",
     liveExternal: true,
     bookCallLabel: site.booking.label,

@@ -2,7 +2,7 @@ import type { FaqSectionLayoutConfig } from "@/types/faq-section";
 
 export const faqSectionLayout = {
   maxWidthAtBaseline: 800,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   paddingInlineAtBaseline: 32,
   titleMaxWidthAtBaseline: 560,
   titleFontSizeAtBaseline: 40,

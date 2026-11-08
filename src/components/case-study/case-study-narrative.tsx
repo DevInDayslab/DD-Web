@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { CaseStudyScrollReveal } from "@/components/case-study/case-study-scroll-reveal";
 import { CaseStudyReductionCardView } from "@/components/case-study/case-study-reduction-card";
 import { CaseStudyMatchmakingSection } from "@/components/case-study/case-study-matchmaking-section";
@@ -8,6 +8,11 @@ import { CaseStudyTechStripSection } from "@/components/case-study/case-study-te
 import { CaseStudyLaunchSection } from "@/components/case-study/case-study-launch-section";
 import { CaseStudyPlatformRolesSection } from "@/components/case-study/case-study-platform-roles-section";
 import { CaseStudySystemDiagram } from "@/components/case-study/case-study-system-diagram";
+import {
+  CaseStudyOptionsSection,
+  CaseStudyStatsSection,
+  CaseStudyStepsSection,
+} from "@/components/case-study/case-study-visual-blocks";
 import type {
   CaseStudyNarrativeBlock,
   CaseStudyNarrativeContent,
@@ -19,6 +24,51 @@ import type {
 type CaseStudyNarrativeProps = {
   content: CaseStudyNarrativeContent;
 };
+
+/** On phones only the first paragraph shows; the rest opens with "Read more". Desktop shows everything. */
+function ProseParagraphs({
+  paragraphs,
+  collapsible,
+}: {
+  paragraphs: readonly string[];
+  collapsible: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const hasMore = collapsible && paragraphs.length > 1;
+
+  return (
+    <div className="case-study-narrative-prose" data-open={open ? "" : undefined}>
+      {paragraphs.map((paragraph, paragraphIndex) => (
+        <p
+          key={paragraphIndex}
+          className={hasMore && paragraphIndex > 0 ? "cs-prose-more" : undefined}
+        >
+          {paragraph}
+        </p>
+      ))}
+      {hasMore ? (
+        <button
+          type="button"
+          className="cs-readmore"
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span>{open ? "Show less" : "Read more"}</span>
+          <svg viewBox="0 0 16 16" className="cs-readmore-icon" aria-hidden>
+            <path
+              d="M4 6l4 4 4-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      ) : null}
+    </div>
+  );
+}
 
 function SectionIndex({ index }: { index: CaseStudySectionIndex }) {
   return (
@@ -101,26 +151,29 @@ function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock;
   switch (block.type) {
     case "prose":
       return (
-        <section className="case-study-narrative-section" aria-labelledby={`narrative-${block.id}`}>
-          <CaseStudyScrollReveal delay={baseDelay}>
+        <section
+          className={`case-study-narrative-section case-study-narrative-section--split${block.id === "results" ? " case-study-narrative-section--results" : ""}`}
+          aria-labelledby={`narrative-${block.id}`}
+        >
+          <CaseStudyScrollReveal className="cs-prose-head" delay={baseDelay}>
             <SectionIndex index={block.index} />
             <h2 id={`narrative-${block.id}`} className="case-study-narrative-headline">
               {block.headline}
             </h2>
-            <div className="case-study-narrative-prose">
-              {block.paragraphs.map((paragraph, paragraphIndex) => (
-                <p key={paragraphIndex}>{paragraph}</p>
-              ))}
-            </div>
           </CaseStudyScrollReveal>
-          {block.pullQuote ? (
-            <CaseStudyScrollReveal className="case-study-narrative-quote-wrap" delay={baseDelay + 0.1}>
-              <blockquote className="case-study-narrative-quote">
-                <p>{block.pullQuote.quote}</p>
-                <footer>{block.pullQuote.attribution}</footer>
-              </blockquote>
+          <div className="cs-prose-body">
+            <CaseStudyScrollReveal delay={baseDelay}>
+              <ProseParagraphs paragraphs={block.paragraphs} collapsible={block.id !== "results"} />
             </CaseStudyScrollReveal>
-          ) : null}
+            {block.pullQuote ? (
+              <CaseStudyScrollReveal className="case-study-narrative-quote-wrap" delay={baseDelay + 0.1}>
+                <blockquote className="case-study-narrative-quote">
+                  <p>{block.pullQuote.quote}</p>
+                  <footer>{block.pullQuote.attribution}</footer>
+                </blockquote>
+              </CaseStudyScrollReveal>
+            ) : null}
+          </div>
         </section>
       );
 
@@ -202,6 +255,15 @@ function NarrativeBlock({ block, blockIndex }: { block: CaseStudyNarrativeBlock;
 
     case "matchmaking":
       return <CaseStudyMatchmakingSection block={block} revealDelay={baseDelay} />;
+
+    case "stats":
+      return <CaseStudyStatsSection block={block} />;
+
+    case "options":
+      return <CaseStudyOptionsSection block={block} />;
+
+    case "steps":
+      return <CaseStudyStepsSection block={block} />;
 
     case "tech-strip":
       return <CaseStudyTechStripSection block={block} revealDelay={baseDelay} />;

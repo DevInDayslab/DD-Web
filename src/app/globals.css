@@ -10294,7 +10294,7 @@ p {
     order: 4;
   }
 
-  .work-featured-tags-block {
+  .work-pills {
     order: 5;
   }
 
@@ -10424,5 +10424,2282 @@ p {
 
   .testimonials-carousel-viewport {
     padding-bottom: 0;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Case study pages: line art, download badges, richer intro
+   --------------------------------------------------------------- */
+.case-study-intro {
+  position: relative;
+}
+
+.case-study-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw) 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(11, 18, 32, 0.1) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(90deg, transparent 35%, #000 100%), linear-gradient(180deg, #000 55%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+.case-study-intro-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+}
+
+@media (min-width: 960px) {
+  .case-study-intro-inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 48px;
+  }
+}
+
+.cs-intro-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cs-intro-art {
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+  color: var(--dd-color-accent, #1b4dff);
+  opacity: 0.9;
+}
+
+@media (max-width: 959px) {
+  .cs-intro-art {
+    max-width: 300px;
+    justify-self: start;
+    margin-top: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cs-line-art-draw > * {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: cs-line-draw 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .cs-line-art-draw > *:nth-child(2) { animation-delay: 0.08s; }
+  .cs-line-art-draw > *:nth-child(3) { animation-delay: 0.16s; }
+  .cs-line-art-draw > *:nth-child(4) { animation-delay: 0.24s; }
+  .cs-line-art-draw > *:nth-child(5) { animation-delay: 0.32s; }
+  .cs-line-art-draw > *:nth-child(6) { animation-delay: 0.4s; }
+  .cs-line-art-draw > *:nth-child(7) { animation-delay: 0.48s; }
+  .cs-line-art-draw > *:nth-child(8) { animation-delay: 0.56s; }
+  .cs-line-art-draw > *:nth-child(n + 9) { animation-delay: 0.64s; }
+}
+
+@keyframes cs-line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.cs-divider,
+.cs-line-divider {
+  display: block;
+  width: 100%;
+  height: 24px;
+  color: #b9c0cb;
+}
+
+/* Download card in the brief */
+.cs-download-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border: 1px solid #dfe3e9;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.cs-download-eyebrow {
+  margin: 0;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5c6269;
+}
+
+.cs-download-title {
+  margin: 0 0 10px;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #0b1220;
+}
+
+.cs-store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-store-badge {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 8px 14px;
+  border-radius: 12px;
+  background: #0b1220;
+  color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cs-store-badge:hover {
+  transform: translateY(-2px);
+  background: #1b2740;
+  box-shadow: 0 10px 22px rgba(11, 18, 32, 0.22);
+}
+
+.cs-store-badge:focus-visible {
+  outline: 2px solid var(--dd-color-accent, #1b4dff);
+  outline-offset: 3px;
+}
+
+.cs-store-badge-icon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+
+.cs-store-badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.cs-store-badge-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+.cs-store-badge-label {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cs-footer-download {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding: 28px 32px;
+  border-radius: 24px;
+  background: #0b1220;
+  color: #ffffff;
+}
+
+.cs-footer-download .case-study-page-footer-archive-eyebrow {
+  color: #aab3c2;
+}
+
+.cs-footer-download-title {
+  margin: 6px 0 0;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.1;
+}
+
+.cs-footer-download .cs-store-badge {
+  background: #ffffff;
+  color: #0b1220;
+}
+
+.cs-footer-download .cs-store-badge:hover {
+  background: #eef1f6;
+}
+
+/* Section index gets a hairline tail */
+.case-study-narrative-index {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.case-study-narrative-index::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  max-width: 120px;
+  background: repeating-linear-gradient(90deg, #b9c0cb 0 4px, transparent 4px 8px);
+}
+
+.case-study-spec-row:first-child {
+  border-top: 0;
+}
+
+/* ---- Round 2: calmer tech stack, refined download card ---- */
+.case-study-stack-strip {
+  background: transparent;
+  border-top: 1px solid var(--dd-case-study-narrative-color-divider);
+  border-bottom: 0;
+}
+
+.case-study-stack-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px 28px;
+  width: min(100%, var(--dd-case-study-page-max-width));
+  padding-inline: var(--dd-case-study-section-padding-inline);
+}
+
+.case-study-stack-strip-label {
+  margin: 0;
+  flex: none;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5c6269;
+}
+
+.case-study-stack-strip-list {
+  flex: 1 1 320px;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.case-study-stack-strip-item {
+  padding: 7px 12px;
+  border: 1px solid #d9dee5;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  color: #2a3038;
+}
+
+.case-study-stack-strip-item:not(:first-child)::before {
+  content: none;
+}
+
+/* Download card */
+.cs-download-card {
+  gap: 0;
+  padding: 24px;
+  border-color: #d9dee5;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff, #f8f9fb);
+}
+
+.cs-download-title {
+  margin: 4px 0 18px;
+  font-size: 28px;
+}
+
+.cs-store-badges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .cs-store-badges {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cs-store-badge {
+  position: relative;
+  width: 100%;
+  min-height: 54px;
+  gap: 12px;
+  padding: 8px 14px;
+  border: 1px solid #0b1220;
+  border-radius: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.cs-store-badge::after {
+  content: "↗";
+  margin-inline-start: auto;
+  font-size: 15px;
+  opacity: 0.45;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .cs-store-badge:hover {
+    transform: none;
+    box-shadow: none;
+    background: #ffffff;
+    color: #0b1220;
+  }
+
+  .cs-store-badge:hover::after {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+}
+
+.cs-store-badge:active {
+  transform: scale(0.98);
+}
+
+.cs-footer-download .cs-store-badges {
+  width: min(100%, 360px);
+}
+
+.cs-footer-download .cs-store-badge {
+  border-color: #ffffff;
+}
+
+@media (hover: hover) {
+  .cs-footer-download .cs-store-badge:hover {
+    background: transparent;
+    color: #ffffff;
+  }
+}
+
+.cs-download-card {
+  container-type: inline-size;
+}
+
+@container (max-width: 460px) {
+  .cs-store-badges {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cs-store-badge-eyebrow {
+  white-space: nowrap;
+}
+
+.case-study-stack-strip {
+  padding-inline: 0;
+}
+
+/* ---- Round 3: structure, spacing and type rhythm ---- */
+.cs-intro-art {
+  max-width: 360px;
+  justify-self: end;
+  margin-inline-end: 24px;
+}
+
+@media (max-width: 959px) {
+  .cs-intro-art {
+    max-width: 240px;
+    justify-self: start;
+    margin-inline-end: 0;
+  }
+}
+
+.case-study-brief-media {
+  justify-content: center;
+}
+
+.case-study-intro-title,
+.case-study-narrative-headline,
+.case-study-narrative-editorial-headline {
+  text-wrap: balance;
+}
+
+.case-study-narrative-prose p,
+.case-study-narrative-editorial-prose p,
+.case-study-intro-subhead {
+  text-wrap: pretty;
+}
+
+.case-study-narrative-prose p,
+.case-study-narrative-editorial-prose p {
+  color: #2f353c;
+}
+
+.case-study-spec-label {
+  color: #5c6269;
+}
+
+/* ---- Store badges: no arrow, springy hover ---- */
+.cs-store-badge::after {
+  content: none;
+}
+
+.cs-store-badge {
+  --cs-spring: cubic-bezier(0.34, 1.7, 0.5, 1);
+  transition:
+    transform 0.45s var(--cs-spring),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.45s var(--cs-spring);
+}
+
+.cs-store-badge-icon {
+  transition: transform 0.5s var(--cs-spring);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .cs-store-badge:hover {
+    transform: scale(1.035) translateY(-2px);
+    box-shadow: 0 10px 20px -8px rgba(11, 18, 32, 0.35);
+  }
+
+  .cs-store-badge:hover .cs-store-badge-icon {
+    transform: scale(1.18) rotate(-6deg);
+  }
+}
+
+.cs-store-badge:active {
+  transform: scale(0.95);
+  transition-duration: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-store-badge,
+  .cs-store-badge-icon {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* ---- Narrative: split layout + visual blocks ---- */
+.cs-stats {
+  width: min(100%, var(--dd-case-study-narrative-max-width));
+  margin-inline: auto;
+  padding: 56px 0 8px;
+}
+
+.cs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  margin: 0;
+  border-block: 1px solid #d9dee5;
+}
+
+.cs-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+  padding: 28px 24px 28px 0;
+}
+
+.cs-stat + .cs-stat {
+  padding-inline-start: 24px;
+  border-inline-start: 1px solid #d9dee5;
+}
+
+.cs-stat-value {
+  margin: 0;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-size: clamp(36px, 4.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #0b1220;
+  font-variant-numeric: tabular-nums;
+}
+
+.cs-stat-label {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #5c6269;
+}
+
+@media (max-width: 640px) {
+  .cs-stat + .cs-stat {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+  .cs-stat {
+    border-top: 1px solid #d9dee5;
+    padding-block: 20px;
+  }
+  .cs-stat:first-child {
+    border-top: 0;
+  }
+}
+
+/* Prose: heading left, text right on wide screens */
+@media (min-width: 1024px) {
+  .case-study-narrative-section--split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 64px;
+    width: min(100%, 1120px);
+    align-items: start;
+  }
+
+  .case-study-narrative-section--split .cs-prose-head {
+    position: sticky;
+    top: 112px;
+  }
+
+  .case-study-narrative-section--split .case-study-narrative-headline {
+    margin-top: 16px;
+    font-size: clamp(30px, 2.8vw, 38px);
+  }
+
+  .case-study-narrative-section--split .case-study-narrative-prose {
+    margin-top: 0;
+  }
+}
+
+.case-study-narrative-section--split .case-study-narrative-prose p:first-child {
+  font-size: calc(var(--dd-case-study-narrative-body-size) * 1.12);
+  line-height: 1.5;
+  color: #0b1220;
+}
+
+.case-study-narrative-section--split .case-study-narrative-quote-wrap {
+  margin-top: 40px;
+  padding: 4px 0 4px 24px;
+  border-top: 0;
+  border-inline-start: 3px solid #0b1220;
+}
+
+/* Options (three paths) */
+.cs-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-option {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border: 1px dashed #b9c0cb;
+  border-radius: 20px;
+  background: transparent;
+}
+
+.cs-option--good {
+  border: 1px solid #0b1220;
+  background: #0b1220;
+  color: #ffffff;
+}
+
+.cs-option-tag {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5c6269;
+}
+
+.cs-option--good .cs-option-tag {
+  color: #aab3c2;
+}
+
+.cs-option-title {
+  margin: 0;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.cs-option-body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4a5159;
+}
+
+.cs-option--good .cs-option-body {
+  color: #d5dae3;
+}
+
+/* Steps */
+.cs-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.cs-step {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 24px 8px 0;
+  border-top: 1px solid #0b1220;
+}
+
+.cs-step + .cs-step {
+  padding-inline-start: 24px;
+}
+
+.cs-step-number {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: #5c6269;
+}
+
+.cs-step-title {
+  margin: 0 0 8px;
+  font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.cs-step-body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4a5159;
+}
+
+.cs-steps {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 900px) {
+  .cs-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .cs-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cs-step:nth-child(2n + 1) {
+  padding-inline-start: 0;
+}
+
+@media (min-width: 900px) {
+  .cs-step:nth-child(2n + 1) {
+    padding-inline-start: 24px;
+  }
+  .cs-step:first-child {
+    padding-inline-start: 0;
+  }
+}
+
+.cs-step-title {
+  text-wrap: balance;
+}
+
+/* ---- Site-wide text selection ---- */
+::selection {
+  background: #11161b;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.cs-option--good ::selection,
+.site-footer ::selection {
+  background: #ffffff;
+  color: #11161b;
+}
+
+input::selection,
+textarea::selection {
+  background: #11161b;
+  color: #ffffff;
+}
+
+:root {
+  caret-color: #11161b;
+}
+
+/* ---- Results: plain editorial close, no panel ---- */
+.case-study-narrative-section--results {
+  margin-top: 24px;
+  border-top: 1px solid #11161b;
+}
+
+.case-study-narrative-section--results .case-study-narrative-headline {
+  font-size: clamp(34px, 3.6vw, 48px);
+}
+
+/* ---- Download row: hairlines, no card ---- */
+.cs-footer-download {
+  overflow: visible;
+  margin-bottom: 0;
+  padding: 32px 0;
+  border: 0;
+  border-bottom: 1px solid var(--dd-case-study-color-footer-nav-divider, #d9dee5);
+  border-radius: 0;
+  background: transparent;
+}
+
+.cs-footer-download::before {
+  content: none;
+}
+
+.cs-footer-download .cs-footer-download-title {
+  color: #11161b;
+}
+
+.cs-footer-download .case-study-page-footer-archive-eyebrow {
+  color: #5c6269;
+}
+
+.cs-footer-download .cs-store-badge {
+  border-color: #11161b;
+  background: #11161b;
+  color: #ffffff;
+}
+
+@media (hover: hover) {
+  .cs-footer-download .cs-store-badge:hover {
+    background: #ffffff;
+    color: #11161b;
+  }
+}
+
+.cs-footer-download {
+  margin-bottom: 32px;
+  border-top: 1px solid var(--dd-case-study-color-footer-nav-divider, #d9dee5);
+}
+
+/* Hero logo marquee: hidden until JS has curved the tiles (no flat first frame). */
+.hero-marquee-viewport {
+  opacity: 0;
+  animation: hero-marquee-failsafe 0.01s 2.5s forwards;
+}
+
+.hero-marquee[data-ready] .hero-marquee-viewport {
+  opacity: 1;
+  animation: none;
+  transition: opacity 0.5s ease;
+}
+
+@keyframes hero-marquee-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Work card: highlights list (replaces the tag pills) */
+.work-featured-points {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--dd-work-color-tags-divider, #d9dee5);
+}
+
+.work-featured-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--dd-work-color-tags-divider, #e3e6eb);
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #2f353c;
+  text-wrap: pretty;
+}
+
+.work-featured-point-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  padding: 2px;
+  border-radius: 50%;
+  background: #11161b;
+  color: #ffffff;
+}
+
+/* Work card highlights as a spec sheet: label ····· value */
+.work-featured-points {
+  border-top: 0;
+}
+
+.work-featured-point {
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 0;
+  font-size: 15px;
+}
+
+.work-featured-point-label {
+  flex: none;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #5c6269;
+}
+
+.work-featured-point-leader {
+  flex: 1 1 16px;
+  min-width: 12px;
+  align-self: end;
+  margin-bottom: 5px;
+  border-bottom: 1.5px dotted #aab1bb;
+}
+
+.work-featured-point-value {
+  flex: none;
+  max-width: 70%;
+  text-align: end;
+  font-weight: 500;
+  color: #11161b;
+}
+
+@media (max-width: 767px) {
+  .work-featured-point-value {
+    max-width: 62%;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-featured-point {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 0;
+    border-bottom: 1px dotted #aab1bb;
+  }
+
+  .work-featured-point-leader {
+    display: none;
+  }
+
+  .work-featured-point-value {
+    max-width: 100%;
+    text-align: start;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+}
+
+/* Work card highlights: numbered editorial rows */
+.work-featured-points {
+  display: block;
+  border-top: 1px solid #11161b;
+}
+
+.work-featured-point,
+.work-featured-point:first-child {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0;
+  padding: 12px 0;
+  border-bottom: 1px solid #dfe3e9;
+  font-size: 16px;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: #11161b;
+}
+
+.work-featured-point-index {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #5c6269;
+  transition: color 0.15s ease;
+}
+
+.work-featured-point-text {
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .work-featured-point:hover .work-featured-point-index {
+    color: #11161b;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-featured-point {
+    padding: 11px 0;
+    border-bottom: 1px solid #dfe3e9;
+  }
+}
+
+/* Work card highlights: plain hairline rows, no markers */
+.work-featured-point,
+.work-featured-point:first-child {
+  display: block;
+}
+
+.work-featured-point-index {
+  display: none;
+}
+
+/* Work card: pills, refined (no divider line) */
+.work-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: #f0f2f5;
+  box-shadow: inset 0 0 0 1px rgba(17, 22, 27, 0.06);
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: #2f353c;
+  white-space: nowrap;
+}
+
+.work-pill::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: none;
+  border-radius: 50%;
+  background: #11161b;
+  opacity: 0.55;
+}
+
+/* Work card pills v3: outlined, first one solid. No dots, no grey fill. */
+.work-pill {
+  gap: 0;
+  padding: 6px 13px;
+  border: 1px solid rgba(17, 22, 27, 0.22);
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: #11161b;
+}
+
+.work-pill::before {
+  content: none;
+}
+
+.work-pill:first-child {
+  border-color: #11161b;
+  background: #11161b;
+  color: #ffffff;
+}
+
+/* Work card: only the words fade, and every project occupies the same block so nothing shifts */
+.work-featured-copy-text {
+  position: relative;
+  width: 100%;
+}
+
+.work-featured-copy-text-inner {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .work-featured-body {
+    min-height: calc(var(--dd-work-featured-body-line-height) * 4);
+  }
+
+  .work-pills {
+    min-height: 68px;
+    align-content: flex-start;
+  }
+}
+
+.work-featured-copy-head,
+.work-featured-copy-body {
+  position: relative;
+  width: 100%;
+}
+
+.work-featured-cta-icon {
+  width: 10px;
+  height: 10px;
+}
+
+/* Booking flow on phones: start at the top instead of floating in the middle */
+@media (max-width: 767px) {
+  .qf-shell {
+    margin: 0 auto;
+    padding-top: 76px;
+  }
+
+  .qf-shell--wide {
+    padding-top: 64px;
+  }
+}
+
+/* =========================================================
+   Phone home page: a short path, in the order a visitor decides.
+   hero, work, tools, pricing, testimonials, founder, FAQ link.
+   Desktop is untouched.
+   ========================================================= */
+.home-mobile-faq-link {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .home-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-page > .hero-section { order: 1; }
+  .home-page > .work-section { order: 2; }
+  .home-page > .tools-section { order: 3; }
+  .home-page > .pricing-section { order: 4; }
+  .home-page > .chatgpt-cta-section { order: 5; }
+  .home-page > .testimonials-section { order: 6; }
+  .home-page > .home-mobile-faq-link { order: 7; }
+
+  /* Left out on phones: the long pitch, the ChatGPT card and the inline FAQ. */
+  .home-page > .scalability-section,
+  .home-page > .founder-section,
+  .home-page > .faq-section {
+    display: none;
+  }
+
+  .home-page > .work-section {
+    margin-top: 56px;
+  }
+
+  .home-page > .tools-section,
+  .home-page > .pricing-section,
+  .home-page > .testimonials-section,
+  .home-page > .chatgpt-cta-section {
+    margin-top: 72px;
+  }
+
+  .home-page > section:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .home-mobile-faq-link {
+    display: block;
+    margin: 48px 0 72px;
+    text-align: center;
+    font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+  }
+
+  .home-mobile-faq-link a {
+    color: #11161b;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* Work: less to read per project; the recording slot stays. */
+  .work-pills {
+    display: none;
+  }
+
+  /* Founder: the portrait, the opening line and one paragraph. The rest lives on About. */
+  .founder-section-body ~ .founder-section-body {
+    display: none;
+  }
+
+  /* Pricing: the price card leads, then the scope. */
+  .pricing-tier-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .pricing-tier-layout .pricing-price-card {
+    order: -1;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .pricing-tier-layout .pricing-tier-scope-slot {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   Phone gutters: use the width. 12px outside cards, 16px inside.
+   ========================================================= */
+@media (max-width: 767px) {
+  /* Hero */
+  .hero-subtitle {
+    padding-inline: 0;
+  }
+
+  /* Work */
+  .work-section,
+  .tools-section {
+    padding-inline: 12px;
+  }
+
+  .work-section-inner {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .work-section-showcase {
+    padding-inline: 0;
+  }
+
+  .work-featured-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .work-featured-phone {
+    width: min(100%, 220px);
+    height: auto;
+    aspect-ratio: 9 / 16;
+  }
+
+  /* Pricing */
+  .pricing-section-inner {
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: 12px;
+  }
+
+  .pricing-surface-measure {
+    padding: 16px;
+  }
+
+  .pricing-price-card {
+    padding: 22px;
+  }
+
+  /* Testimonials: wider cards with the next one peeking */
+  .testimonials-section-inner {
+    padding-inline: 12px;
+  }
+
+  .testimonials-carousel {
+    margin-inline: -12px;
+  }
+
+  .testimonials-carousel-segment {
+    padding-inline-start: 12px;
+  }
+
+  .testimonials-carousel-item {
+    width: calc(100vw - 44px);
+    max-width: 360px;
+  }
+
+  /* Founder */
+  .founder-section-inner {
+    width: 100%;
+    margin-inline: 0;
+    padding-inline: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-section-inner,
+  .pricing-section-inner,
+  .founder-section-inner,
+  .testimonials-section-inner,
+  .tools-section-inner,
+  .work-featured-card-host,
+  .work-section-showcase {
+    width: 100%;
+    max-width: none;
+  }
+
+  .work-featured-card,
+  .pricing-surface {
+    width: 100%;
+    max-width: none;
+  }
+
+  .pricing-section-inner,
+  .founder-section-inner {
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial-card {
+    width: 100%;
+    max-width: none;
+  }
+
+  .work-featured-phone {
+    width: min(100%, 190px);
+  }
+}
+
+/* Inner pages on phones: 16px gutters and no stray narrow columns */
+@media (max-width: 767px) {
+  .ab {
+    padding-inline: 16px;
+  }
+
+  .contact-page {
+    padding-inline: 16px;
+  }
+
+  .case-study-page {
+    padding-inline: 16px;
+  }
+
+  .case-study-brief-copy,
+  .cs-stats {
+    width: 100%;
+    max-width: none;
+  }
+
+  .faq-page {
+    padding-inline: 16px;
+  }
+
+  .faq-page-hero {
+    padding-inline: 0;
+  }
+
+  .faq-page-hero-copy,
+  .faq-page-results {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* ---- Phone: closing FAQ block + tighter price card ---- */
+@media (max-width: 767px) {
+  .home-mobile-faq-link {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 56px 12px 56px;
+    padding: 28px 20px;
+    border: 1px solid #dfe3e9;
+    border-radius: 24px;
+    background: #ffffff;
+    text-align: left;
+  }
+
+  .home-mobile-faq-title {
+    margin: 0;
+    font-family: var(--font-instrument-serif), ui-serif, Georgia, serif;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: #11161b;
+  }
+
+  .home-mobile-faq-text {
+    margin: 10px 0 22px;
+    font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #5c6269;
+  }
+
+  .home-mobile-faq-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    border-radius: 999px;
+    background: #11161b;
+    font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .home-mobile-faq-button:active {
+    transform: scale(0.98);
+  }
+
+  .home-mobile-faq-link a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  /* Price card: label, price and its one-line subtitle stay together; the button follows. */
+  .pricing-tier-layout .pricing-price-card {
+    gap: 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  .pricing-tier-layout .pricing-price {
+    margin-top: 14px;
+  }
+
+  .pricing-tier-layout .pricing-price-subtitle {
+    margin-top: 6px;
+  }
+
+  .pricing-tier-layout .pricing-cta {
+    margin-top: 24px;
+  }
+}
+
+/* Phone order: heading, recording, description, button. Each text block is a real box so it can fade. */
+@media (max-width: 767px) {
+  .work-featured-copy-head {
+    order: 1;
+  }
+
+  .work-featured-phone {
+    order: 2;
+  }
+
+  .work-featured-copy-body {
+    order: 3;
+  }
+
+  .work-featured-cta {
+    order: 4;
+  }
+
+  .work-featured-copy-head .work-featured-copy-text-inner {
+    gap: 8px;
+  }
+
+  .work-featured-badge {
+    margin-bottom: 0;
+  }
+}
+
+/* ---- Case studies index ---- */
+.portfolio-grid-cell-text {
+  display: contents;
+}
+
+.portfolio-grid-cell-mark {
+  display: none;
+}
+
+/* =========================================================
+   Case study pages on phones: readable type, a sensible order, even rhythm.
+   The page tokens scale type down with the viewport; these set honest floors.
+   ========================================================= */
+@media (max-width: 767px) {
+  /* Small labels: never below 12px */
+  .case-study-breadcrumb,
+  .case-study-narrative-index,
+  .case-study-narrative-eyebrow,
+  .case-study-spec-label,
+  .case-study-page-footer-archive-eyebrow,
+  .case-study-page-footer-sibling-link {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* Intro */
+  .case-study-intro {
+    padding-block: 28px 8px;
+  }
+
+  .case-study-intro-title {
+    font-size: 38px;
+    line-height: 1.08;
+  }
+
+  .case-study-intro-subhead {
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .case-study-intro::before {
+    display: none;
+  }
+
+  .cs-intro-art {
+    max-width: 200px;
+    margin-top: 4px;
+  }
+
+  /* Brief: recording first, then where to get the app, then the facts */
+  .case-study-brief {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-block: 16px 48px;
+  }
+
+  .case-study-brief-media {
+    order: -1;
+  }
+
+  .case-study-phone-shell {
+    width: min(100%, 250px);
+    height: auto;
+    aspect-ratio: 9 / 18.5;
+    padding: 10px;
+    border-radius: 36px;
+  }
+
+  .case-study-spec-row {
+    padding-block: 12px;
+  }
+
+  .case-study-spec-value {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .cs-download-card {
+    padding: 20px;
+  }
+
+  .cs-download-title {
+    font-size: 26px;
+  }
+
+  /* Story */
+  .cs-stats {
+    padding-top: 32px;
+  }
+
+  .cs-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cs-stat,
+  .cs-stat + .cs-stat {
+    padding: 18px 12px 18px 0;
+    border-inline-start: 0;
+    border-top: 1px solid #d9dee5;
+  }
+
+  .cs-stat:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .cs-stat:nth-child(even) {
+    padding-inline-start: 16px;
+    border-inline-start: 1px solid #d9dee5;
+  }
+
+  .cs-stat-value {
+    font-size: 32px;
+  }
+
+  .case-study-narrative-section {
+    padding-block: 44px;
+  }
+
+  .case-study-narrative-headline,
+  .case-study-narrative-section--split .case-study-narrative-headline {
+    margin-top: 12px;
+    font-size: 28px;
+    line-height: 1.12;
+  }
+
+  .case-study-narrative-prose {
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .case-study-narrative-prose p,
+  .case-study-narrative-editorial-prose p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .case-study-narrative-section--split .case-study-narrative-prose p:first-child {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .case-study-narrative-quote p,
+  .case-study-narrative-editorial-quote p {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .case-study-narrative-quote-wrap {
+    margin-top: 28px;
+  }
+
+  .cs-option,
+  .cs-step {
+    padding: 18px;
+  }
+
+  .cs-step,
+  .cs-step + .cs-step,
+  .cs-step:nth-child(2n + 1) {
+    padding: 18px 0 8px;
+  }
+
+  .cs-option-title,
+  .cs-step-title {
+    font-size: 24px;
+  }
+
+  .cs-option-body,
+  .cs-step-body {
+    font-size: 15px;
+  }
+
+  .case-study-narrative-section--results {
+    margin-top: 8px;
+  }
+
+  /* Footer */
+  .case-study-page-footer {
+    padding-block: 24px 32px;
+  }
+
+  .cs-footer-download {
+    padding-block: 24px;
+  }
+
+  .cs-footer-download-title {
+    font-size: 26px;
+  }
+}
+
+/* Read more: phones show the first paragraph, the rest opens on request */
+.cs-readmore {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .case-study-narrative-prose .cs-prose-more {
+    display: none;
+  }
+
+  .case-study-narrative-prose[data-open] .cs-prose-more {
+    display: block;
+  }
+
+  .cs-readmore {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 6px;
+    min-height: 44px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #11161b;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cs-readmore:focus-visible {
+    outline: 2px solid #11161b;
+    outline-offset: 3px;
+  }
+
+  .cs-readmore-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .case-study-narrative-prose[data-open] .cs-readmore-icon {
+    transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .cs-readmore-icon {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   Project case study on phones: a staged hero, a compact fact sheet,
+   a scrolling stack strip and tile navigation.
+   ========================================================= */
+.cs-stage-art {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* Hero: one stage. The recording stands in front of the line drawing. */
+  .cs-intro-art {
+    display: none;
+  }
+
+  .case-study-brief-media {
+    position: relative;
+    padding-block: 8px;
+  }
+
+  .cs-stage-art {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 0;
+    width: min(112%, 430px);
+    transform: translate(-50%, -50%);
+    color: #11161b;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .case-study-phone-shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Breadcrumb as a chip */
+  .case-study-breadcrumb {
+    padding: 6px 12px;
+    border: 1px solid #d9dee5;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #2f353c;
+  }
+
+  /* Fact sheet: two columns of label over value */
+  .case-study-spec-table {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+    border-top: 1px solid #11161b;
+  }
+
+  .case-study-spec-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 0;
+    border-top: 0;
+    border-bottom: 1px solid #dfe3e9;
+  }
+
+  .case-study-spec-row[data-spec="services"],
+  .case-study-spec-row[data-spec="client"],
+  .case-study-spec-row[data-spec="engagement"] {
+    grid-column: 1 / -1;
+  }
+
+  .case-study-spec-value {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* Download: badges side by side where they fit */
+  .cs-store-badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .cs-download-card .cs-store-badge {
+    min-height: 50px;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .cs-download-card .cs-store-badge-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cs-download-card .cs-store-badge-label {
+    font-size: 15px;
+  }
+
+  .cs-download-card .cs-store-badge-eyebrow {
+    font-size: 9px;
+  }
+
+  /* Story: hairlines between chapters keep the rhythm even */
+  .case-study-narrative-section + .case-study-narrative-section {
+    border-top: 1px solid #dfe3e9;
+  }
+
+  /* Stack strip: one scrolling row with an edge cue */
+  .case-study-stack-strip-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-inline: 0;
+  }
+
+  .case-study-stack-strip-list {
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+
+  .case-study-stack-strip-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case-study-stack-strip-item {
+    flex: none;
+  }
+
+  /* Previous / next as two tiles */
+  .case-study-page-footer-siblings {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 24px;
+  }
+
+  .case-study-page-footer-siblings-divider {
+    display: none;
+  }
+
+  .case-study-page-footer-sibling-link {
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 14px 16px;
+    border: 1px solid #dfe3e9;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #11161b;
+  }
+
+  .case-study-page-footer-sibling-spacer {
+    display: none;
+  }
+}
+
+@container (max-width: 290px) {
+  .cs-store-badges {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Phone case study: the line drawing sits right-aligned under the intro; fact sheet pairs only timeline and team */
+@media (max-width: 767px) {
+  .cs-stage-art {
+    display: none;
+  }
+
+  .cs-intro-art {
+    display: block;
+    justify-self: end;
+    width: 150px;
+    max-width: 150px;
+    margin: 4px 4px 0 0;
+  }
+
+  .case-study-intro-inner {
+    gap: 8px;
+  }
+
+  .case-study-spec-row[data-spec="industry"],
+  .case-study-spec-row[data-spec="live"] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Plain breadcrumb: long names wrap cleanly instead of sitting in a squeezed pill */
+  .case-study-breadcrumb {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--dd-case-study-color-breadcrumb);
+  }
+
+  /* The stack strip is full bleed, so its content needs the page gutter back */
+  .case-study-stack-strip-inner {
+    padding-inline: 16px;
+  }
+
+  .case-study-stack-strip-list {
+    padding-inline-end: 24px;
+  }
+}
+
+/* Phone: "Built with" is a label over one row of pills, nothing stretches it. No previous/next links. */
+@media (max-width: 767px) {
+  .case-study-stack-strip-inner {
+    gap: 12px;
+  }
+
+  .case-study-stack-strip-label,
+  .case-study-stack-strip-list {
+    flex: none;
+  }
+
+  .case-study-stack-strip {
+    padding-block: 28px;
+  }
+
+  .case-study-page-footer-siblings {
+    display: none;
+  }
+}
+
+/* Testimonial with a real video */
+.testimonial-card-video-bg[style] {
+  background-size: cover;
+  background-position: center 18%;
+}
+
+.testimonial-card-video-bg[style]::before {
+  display: none;
+}
+
+.tvd-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(10, 14, 18, 0.78);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  overscroll-behavior: contain;
+  animation: tvd-fade 0.2s ease-out;
+}
+
+@keyframes tvd-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.tvd-panel {
+  display: flex;
+  width: min(
+    100%,
+    var(--tvd-max-width, 380px),
+    calc((100dvh - 170px) * var(--tvd-ratio-num, 0.5625))
+  );
+  max-height: 100%;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+.tvd-stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #000000;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.tvd-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--tvd-ratio, 9 / 16);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.tvd-video::cue {
+  background: rgba(10, 14, 18, 0.72);
+  color: #ffffff;
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.tvd-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.tvd-stage::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(10, 14, 18, 0.7), transparent);
+}
+
+.tvd-icon-button,
+.tvd-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tvd-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #11161b;
+}
+
+.tvd-close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.tvd-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.92);
+  transition: transform 0.15s ease;
+}
+
+.tvd-play:active {
+  transform: translate(-50%, -50%) scale(0.96);
+}
+
+.tvd-play-icon {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-style: solid;
+  border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent #11161b;
+}
+
+.tvd-controls {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 14px;
+}
+
+.tvd-seek {
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.tvd-seek::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #ffffff var(--tvd-progress, 0%),
+    rgba(255, 255, 255, 0.3) var(--tvd-progress, 0%)
+  );
+}
+
+.tvd-seek::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tvd-seek::-moz-range-progress {
+  height: 3px;
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.tvd-seek::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  -webkit-appearance: none;
+}
+
+.tvd-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.tvd-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tvd-time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.tvd-controls-right {
+  display: flex;
+  gap: 6px;
+}
+
+.tvd-pill {
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tvd-pill[aria-pressed="true"] {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #11161b;
+}
+
+.tvd-close:focus-visible,
+.tvd-play:focus-visible,
+.tvd-pill:focus-visible,
+.tvd-seek:focus-visible,
+.tvd-meta a:focus-visible,
+.tvd-transcript-toggle:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.tvd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+  color: #ffffff;
+}
+
+.tvd-meta-name {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.tvd-meta-name span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.tvd-meta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.tvd-meta-links a,
+.tvd-transcript-toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.tvd-transcript-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 18dvh;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.tvd-transcript-body p {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tvd-backdrop {
+    animation: none;
+  }
+}
+
+/* Phone: a portrait video card is narrower and about one and a half text cards tall, not a full screen */
+@media (max-width: 767px) {
+  .testimonials-carousel-item:has(.testimonial-card-video[data-orientation="portrait"]) {
+    width: 250px;
+  }
+
+}
+
+/* Phone: every testimonial card is the same height, so nothing leaves a gap below it.
+   A video card shows a cover-crop of its video; the full shape plays in the player. */
+@media (max-width: 767px) {
+  .testimonials-carousel-segment {
+    align-items: stretch;
+  }
+
+  .testimonials-carousel-item {
+    height: auto;
+  }
+
+  .testimonial-card,
+  .testimonial-card-video[data-orientation] {
+    height: 380px;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .chatgpt-cta-section {
+    padding-inline: 12px;
+  }
+
+  .chatgpt-cta-section > *,
+  .chatgpt-cta-card {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .chatgpt-cta-section-inner {
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+
+  .chatgpt-cta-card {
+    margin-inline: 0;
+  }
+}
+
+/* Phone home page rhythm: one gap after the hero, one scale of section headings */
+@media (max-width: 767px) {
+  .home-page > .scalability-section + .work-section {
+    margin-top: 56px;
+  }
+
+  .home-page > .testimonials-section {
+    margin-top: 96px;
+  }
+
+  .work-section-title,
+  .tools-section-headline,
+  .pricing-section-title,
+  .testimonials-section-title {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+
+  .tools-section {
+    padding-top: 0;
+  }
+
+  .tools-section-inner,
+  .tools-section-headline {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .work-section-headline {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+}
+
+/* Switching pricing tiers changes the card's height. Without this, the browser nudges the scroll
+   position to keep a section below it still, and the card's top edge moves. */
+.home-page {
+  overflow-anchor: none;
+}
+
+/* About on phones: the headline of each idea, without the paragraph behind it. Everything stays on desktop. */
+@media (max-width: 767px) {
+  /* Letter: the opening and one paragraph */
+  .ab-letter-copy .ab-body ~ .ab-body {
+    display: none;
+  }
+
+  /* What we build: groups with their first few items */
+  .ab-build-intro .ab-body {
+    display: none;
+  }
+
+  .ab-chips li:nth-child(n + 4) {
+    display: none;
+  }
+
+  /* What we believe: the four statements alone */
+  .ab-belief-body {
+    display: none;
+  }
+
+  /* Selected work: name and industry per project */
+  .ab-work-head .ab-body,
+  .ab-case-headline {
+    display: none;
   }
 }

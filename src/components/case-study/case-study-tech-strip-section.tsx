@@ -10,6 +10,7 @@ export function CaseStudyTechStripSection({ block, revealDelay }: CaseStudyTechS
   return (
     <section className="case-study-stack-strip" aria-label={block.ariaLabel ?? "Technical stack"}>
       <CaseStudyScrollReveal className="case-study-stack-strip-inner" delay={revealDelay}>
+        <p className="case-study-stack-strip-label">Built with</p>
         <ul className="case-study-stack-strip-list">
           {block.items.map((item, itemIndex) => (
             <li key={`${itemIndex}-${item}`} className="case-study-stack-strip-item">

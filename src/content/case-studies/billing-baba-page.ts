@@ -49,12 +49,17 @@ export const billingBabaCaseStudyPage = {
       {
         id: "team",
         label: "Team",
-        value: "Led by Ishu, with 6 additional engineers"
+        value: "Led by Ishu, with 6 additional engineers",
+      },
+      {
+        id: "engagement",
+        label: "Engagement",
+        value: "Ongoing, improving and scaling the product",
       },
       {
         id: "live",
         label: "Live",
-        value: "billingbaba.com",
+        value: "Billingbaba.com",
         href: "https://billingbaba.com"
       }
     ],
@@ -66,7 +71,7 @@ export const billingBabaCaseStudyPage = {
   narrative: billingBabaCaseStudyNarrative,
   footer: {
     archiveEyebrow: "Project archive",
-    liveLabel: "Live at billingbaba.com ↗",
+    liveLabel: "Live at Billingbaba.com ↗",
     liveHref: "https://billingbaba.com",
     liveExternal: true,
     bookCallLabel: site.booking.label,

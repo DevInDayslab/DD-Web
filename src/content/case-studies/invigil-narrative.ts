@@ -4,6 +4,15 @@ import type { CaseStudyNarrativeContent } from "@/types/case-study-narrative";
 export const invigilCaseStudyNarrative = {
   blocks: [
     {
+      type: "stats",
+      id: "at-a-glance",
+      items: [
+        { value: "~3 months", label: "Start to launch" },
+        { value: "8", label: "Engineers" },
+        { value: "Aug 2026", label: "Project start" }
+      ]
+    },
+    {
       type: "prose",
       id: "context",
       index: {
@@ -141,9 +150,10 @@ export const invigilCaseStudyNarrative = {
         number: "10",
         title: "Results"
       },
-      headline: "Live today.",
+      headline: "A full platform, live from the first release.",
       paragraphs: [
-        "Invigil is live today at theinvigil.com."
+        "Invigil is live at Theinvigil.com. Its product categories, the AI layer and the public investigation workflow all launched together in a single release, rather than being staged out over a much longer timeline.",
+        "The foundation is in place and the collaboration continues, with the next phase building on top of it."
       ]
     },
     {

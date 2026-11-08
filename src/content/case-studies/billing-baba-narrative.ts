@@ -4,6 +4,14 @@ import type { CaseStudyNarrativeContent } from "@/types/case-study-narrative";
 export const billingBabaCaseStudyNarrative = {
   blocks: [
     {
+      type: "stats",
+      id: "at-a-glance",
+      items: [
+        { value: "6 months", label: "Build" },
+        { value: "7", label: "People on the team" }
+      ]
+    },
+    {
       type: "prose",
       id: "context",
       index: {
@@ -101,14 +109,27 @@ export const billingBabaCaseStudyNarrative = {
     },
     {
       type: "prose",
-      id: "results",
+      id: "ongoing-engagement",
       index: {
         number: "07",
+        title: "Ongoing"
+      },
+      headline: "Still working together, to improve and scale it.",
+      paragraphs: [
+        "Launch wasn't the end of the engagement. We continue to work with the Billing Baba team on an ongoing basis, improving the platform and scaling it as the business grows, so it keeps pace with how its customers use it."
+      ]
+    },
+    {
+      type: "prose",
+      id: "results",
+      index: {
+        number: "08",
         title: "Results"
       },
-      headline: "Live and in active use.",
+      headline: "In daily use, on every platform.",
       paragraphs: [
-        "Billing Baba is live and in active use today."
+        "Billing Baba is live and in active use. Invoicing, inventory, tax handling, multi-user access and reporting all work natively across every platform, replacing the partial, wrapped-web version the client was left with before.",
+        "We keep working with the team to improve the platform and scale it alongside their customers."
       ]
     }
   ]

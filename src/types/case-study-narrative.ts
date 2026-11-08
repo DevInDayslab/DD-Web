@@ -166,7 +166,38 @@ export type CaseStudyLaunchBlock = {
   viewports: readonly CaseStudyLaunchViewport[];
 };
 
+export type CaseStudyStatsBlock = {
+  type: "stats";
+  id: string;
+  items: readonly { value: string; label: string }[];
+};
+
+export type CaseStudyOptionsBlock = {
+  type: "options";
+  id: string;
+  eyebrow: string;
+  headline: string;
+  items: readonly {
+    id: string;
+    tag: string;
+    title: string;
+    body: string;
+    tone: "muted" | "good";
+  }[];
+};
+
+export type CaseStudyStepsBlock = {
+  type: "steps";
+  id: string;
+  eyebrow: string;
+  headline: string;
+  items: readonly { title: string; body: string }[];
+};
+
 export type CaseStudyNarrativeBlock =
+  | CaseStudyStatsBlock
+  | CaseStudyOptionsBlock
+  | CaseStudyStepsBlock
   | CaseStudyNarrativeProseBlock
   | CaseStudyReductionAuditBlock
   | CaseStudyPlatformRolesBlock

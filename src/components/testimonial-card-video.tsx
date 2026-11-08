@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { TestimonialVideoDialog } from "@/components/testimonial-video-dialog";
 import type { TestimonialVideoCard } from "@/types/testimonials-section";
 
 type TestimonialCardVideoProps = {
@@ -10,6 +11,8 @@ type TestimonialCardVideoProps = {
 export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
   // No video files yet: tapping play says so instead of doing nothing.
   const [showSoon, setShowSoon] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const video = card.video;
 
   useEffect(() => {
     if (!showSoon) {
@@ -20,8 +23,16 @@ export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
   }, [showSoon]);
 
   return (
-    <article className="testimonial-card testimonial-card-video">
-      <div className="testimonial-card-video-bg" aria-hidden />
+    <article
+      className="testimonial-card testimonial-card-video"
+      data-orientation={video ? (video.height > video.width ? "portrait" : "landscape") : undefined}
+      style={video ? { ["--tcv-ratio" as string]: `${video.width} / ${video.height}` } : undefined}
+    >
+      <div
+        className="testimonial-card-video-bg"
+        aria-hidden
+        style={video ? { backgroundImage: `url(${video.posterSrc})` } : undefined}
+      />
       <div className="testimonial-card-video-overlay" aria-hidden />
       <header className="testimonial-video-header">
         <span className="testimonial-video-badge">{card.badgeLabel}</span>
@@ -32,7 +43,7 @@ export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
           type="button"
           className="testimonial-video-play"
           aria-label={card.playButtonAriaLabel}
-          onClick={() => setShowSoon(true)}
+          onClick={() => (video ? setPlaying(true) : setShowSoon(true))}
         >
           <span className="testimonial-video-play-icon" aria-hidden />
         </button>
@@ -50,6 +61,9 @@ export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
           <span className="testimonial-video-title">{card.title}</span>
         </div>
       </footer>
+      {playing && video ? (
+        <TestimonialVideoDialog card={{ ...card, video }} onClose={() => setPlaying(false)} />
+      ) : null}
     </article>
   );
 }

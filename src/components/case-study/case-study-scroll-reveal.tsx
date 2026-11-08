@@ -13,7 +13,7 @@ type CaseStudyScrollRevealProps = {
 export function CaseStudyScrollReveal({
   children,
   className = "",
-  delay = 0,
+  delay: _delay = 0,
 }: CaseStudyScrollRevealProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -24,14 +24,10 @@ export function CaseStudyScrollReveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2, margin: "0px 0px -8% 0px" }}
-      transition={{
-        duration: 0.55,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
     >
       {children}
     </motion.div>

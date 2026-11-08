@@ -20,6 +20,19 @@ export type TestimonialVideoCard = {
   name: string;
   title: string;
   playButtonAriaLabel: string;
+  /** Where to see the product the client is talking about. */
+  links?: readonly { label: string; href: string }[];
+  /** When present the card plays a real video, with captions and a transcript. */
+  video?: {
+    src: string;
+    posterSrc: string;
+    captionsSrc: string;
+    captionsLanguage: string;
+    /** Pixel size of the file, so the card can match its shape. */
+    width: number;
+    height: number;
+    transcript: readonly string[];
+  };
 };
 
 export type TestimonialCard = TestimonialTextCard | TestimonialVideoCard;

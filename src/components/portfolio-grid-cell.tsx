@@ -1,9 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { PortfolioGridItem, PortfolioPageLabels } from "@/types/portfolio-page";
 
 type PortfolioGridCellProps = {
   item: PortfolioGridItem;
   labels: PortfolioPageLabels;
+};
+
+const markById: Record<string, string> = {
+  dater: "/logos/marks/dater.png",
+  invigil: "/logos/marks/invigil.png",
+  "billing-baba": "/logos/marks/billing-baba.png",
+  "entry-ticket": "/logos/marks/entry-ticket.png",
+  "turbo-supply": "/logos/marks/turbosupply.png",
+  myndfe: "/logos/marks/myndfe.png",
+  homeyfixit: "/logos/marks/homeyfixit.png",
+  sailor: "/logos/marks/sailor.png",
+  trustai: "/logos/marks/trustai.png",
 };
 
 function cellLabel(item: PortfolioGridItem, labels: PortfolioPageLabels): string {
@@ -27,12 +40,27 @@ export function PortfolioGridCell({ item, labels }: PortfolioGridCellProps) {
     .filter(Boolean)
     .join(" ");
 
+  const mark = markById[item.id];
+
   const body = (
     <>
       {!isMore ? (
-        <span className="portfolio-grid-cell-title">{item.title}</span>
+        <span className="portfolio-grid-cell-mark" aria-hidden>
+          {mark ? (
+            <Image src={mark} alt="" width={44} height={44} className="portfolio-grid-cell-mark-img" />
+          ) : (
+            <span className="portfolio-grid-cell-mark-letter">{item.title.charAt(0)}</span>
+          )}
+        </span>
       ) : null}
-      <span className="portfolio-grid-cell-label">{cellLabel(item, labels)}</span>
+      {!isMore ? (
+        <span className="portfolio-grid-cell-text">
+          <span className="portfolio-grid-cell-title">{item.title}</span>
+          <span className="portfolio-grid-cell-label">{cellLabel(item, labels)}</span>
+        </span>
+      ) : (
+        <span className="portfolio-grid-cell-label">{cellLabel(item, labels)}</span>
+      )}
     </>
   );
 

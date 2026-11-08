@@ -4,6 +4,16 @@ import type { CaseStudyNarrativeContent } from "@/types/case-study-narrative";
 export const entryTicketCaseStudyNarrative = {
   blocks: [
     {
+      type: "stats",
+      id: "at-a-glance",
+      items: [
+        { value: "3 weeks", label: "Build to launch" },
+        { value: "4", label: "Engineers, led by Ishu" },
+        { value: "2", label: "Native platforms: iOS and Android" },
+        { value: "PHP", label: "Existing backend we built on top of" }
+      ]
+    },
+    {
       type: "prose",
       id: "context",
       index: {
@@ -127,9 +137,10 @@ export const entryTicketCaseStudyNarrative = {
         number: "09",
         title: "Results"
       },
-      headline: "Live today.",
+      headline: "Published, and a natural fit for the platform.",
       paragraphs: [
-        "EntryTicket's mobile app is live today."
+        "EntryTicket's mobile app is live. Consumers can discover events, book tickets and carry them on their phone to the door, in a native experience that matches the existing platform.",
+        "It was built in 3 weeks alongside the in-house team, on top of the existing backend and in sync with the live website, with no re-platforming."
       ]
     }
   ]

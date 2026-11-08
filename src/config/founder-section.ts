@@ -2,7 +2,7 @@ import type { FounderSectionLayoutConfig } from "@/types/founder-section";
 
 export const founderSectionLayout = {
   maxWidthAtBaseline: 1160,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   paddingInlineAtBaseline: 32,
   paddingBlockAtBaseline: 80,
   columnGapAtBaseline: 56,

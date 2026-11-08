@@ -54,7 +54,7 @@ export const entryTicketCaseStudyPage = {
       {
         id: "live",
         label: "Live",
-        value: "entryticket.in",
+        value: "Entryticket.in",
         href: "https://entryticket.in"
       }
     ],
@@ -66,7 +66,7 @@ export const entryTicketCaseStudyPage = {
   narrative: entryTicketCaseStudyNarrative,
   footer: {
     archiveEyebrow: "Project archive",
-    liveLabel: "Live at entryticket.in ↗",
+    liveLabel: "Live at Entryticket.in ↗",
     liveHref: "https://entryticket.in",
     liveExternal: true,
     bookCallLabel: site.booking.label,

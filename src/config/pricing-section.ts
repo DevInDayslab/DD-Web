@@ -3,7 +3,7 @@ import type { PricingSectionLayoutConfig } from "@/types/pricing-section";
 export const pricingSectionLayout = {
   widthAtBaseline: 1080,
   maxWidthAtBaseline: 1080,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   paddingInlineAtBaseline: 32,
   headerMaxWidthAtBaseline: 576,
   titleFontSizeAtBaseline: 48,

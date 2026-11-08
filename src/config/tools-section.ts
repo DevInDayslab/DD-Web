@@ -2,7 +2,7 @@ import type { ToolsSectionLayoutConfig } from "@/types/tools-section";
 
 export const toolsSectionLayout = {
   widthAtBaseline: 1280,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   eyebrowMaxWidthAtBaseline: 480,
   eyebrowFontSizeAtBaseline: 12,
   eyebrowLineHeightAtBaseline: 14,

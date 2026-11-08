@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { QualifierCta } from "@/components/project-qualifier/qualifier-cta";
+import { CaseStudyStoreBadges } from "@/components/case-study/case-study-store-badges";
 import type { CaseStudyPageFooter, CaseStudyPageFooterNavLink } from "@/types/case-study-page";
 
 type CaseStudyPageFooterSectionProps = {
   footer: CaseStudyPageFooter;
+  slug: string;
+  appName: string;
 };
 
 function SiblingNavLink({
@@ -39,13 +41,21 @@ function SiblingNavLink({
   );
 }
 
-export function CaseStudyPageFooterSection({ footer }: CaseStudyPageFooterSectionProps) {
+export function CaseStudyPageFooterSection({ footer, slug, appName }: CaseStudyPageFooterSectionProps) {
   const liveLinkProps = footer.liveExternal
     ? { target: "_blank" as const, rel: "noopener noreferrer" as const }
     : {};
 
   return (
     <footer className="case-study-page-footer" aria-label="Case study footer">
+      <div className="cs-footer-download">
+        <div>
+          <p className="case-study-page-footer-archive-eyebrow">Download this app</p>
+          <p className="cs-footer-download-title">Take {appName} for a spin.</p>
+        </div>
+        <CaseStudyStoreBadges slug={slug} appName={appName} fallbackHref={footer.liveHref} />
+      </div>
+
       <div className="case-study-page-footer-archive">
         <div className="case-study-page-footer-live">
           <p className="case-study-page-footer-archive-eyebrow">{footer.archiveEyebrow}</p>
@@ -57,17 +67,6 @@ export function CaseStudyPageFooterSection({ footer }: CaseStudyPageFooterSectio
             <p className="case-study-page-footer-live-link">{footer.liveLabel}</p>
           )}
         </div>
-        <QualifierCta
-          href={footer.bookCallHref}
-          label={footer.bookCallLabel}
-          className="case-study-page-footer-cta"
-          ariaLabel={footer.bookCallAriaLabel}
-        >
-          <span>{footer.bookCallLabel}</span>
-          <span className="case-study-page-footer-cta-arrow" aria-hidden>
-            →
-          </span>
-        </QualifierCta>
       </div>
 
       <nav className="case-study-page-footer-siblings" aria-label="Other case studies">

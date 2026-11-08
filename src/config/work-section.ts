@@ -2,7 +2,7 @@ import type { WorkSectionLayoutConfig } from "@/types/work-section";
 
 export const workSectionLayout = {
   widthAtBaseline: 757,
-  marginTopAtBaseline: 160,
+  marginTopAtBaseline: 104,
   headerMaxWidthAtBaseline: 544,
   headerGapAtBaseline: 8,
   headlineFontSizeAtBaseline: 48,

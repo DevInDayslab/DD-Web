@@ -4,6 +4,16 @@ import type { CaseStudyNarrativeContent } from "@/types/case-study-narrative";
 export const daterCaseStudyNarrative = {
   blocks: [
     {
+      type: "stats",
+      id: "at-a-glance",
+      items: [
+        { value: "~2.5 months", label: "Version 1" },
+        { value: "1 month", label: "Focused version 2 pass" },
+        { value: "4", label: "Engineers" },
+        { value: "2", label: "Native platforms: iOS and Android" }
+      ]
+    },
+    {
       type: "prose",
       id: "context",
       index: {
@@ -140,15 +150,40 @@ export const daterCaseStudyNarrative = {
       ]
     },
     {
+      type: "steps",
+      id: "built-to-scale",
+      eyebrow: "Scale",
+      headline: "Load-tested on the live system, and built to grow.",
+      items: [
+        { title: "Tested on production", body: "We put the live platform under heavy, realistic load, with simulated users following genuine app journeys." },
+        { title: "Fast and stable", body: "Screens stayed quick and nothing failed, even well past the traffic we expect, on lean infrastructure." },
+        { title: "Growth is a settings change", body: "The code is already built for bigger and multiple servers, so scaling up means configuration, not a rebuild." },
+        { title: "Watched around the clock", body: "The backend records its own health every minute, so each upgrade is planned before it is needed." }
+      ]
+    },
+    {
+      type: "prose",
+      id: "ongoing-engagement",
+      index: {
+        number: "10",
+        title: "Ongoing"
+      },
+      headline: "Still working together, to improve and scale it.",
+      paragraphs: [
+        "Launch wasn't the end of the engagement. We continue to work with the Dater team on an ongoing basis, improving the product, monitoring its health and planning each stage of scale ahead of time, so the platform is ready before growth needs it."
+      ]
+    },
+    {
       type: "prose",
       id: "results",
       index: {
-        number: "10",
+        number: "11",
         title: "Results"
       },
-      headline: "Live and operating.",
+      headline: "Live on both stores, and ready to grow.",
       paragraphs: [
-        "Dater is live today on both platforms."
+        "Dater is live on the App Store and Google Play, with its premium tier and subscriptions working from day one. The matchmaking feed, trust and safety checks and real-time chat the build was designed around are all running in production.",
+        "We load-tested the live platform and it held up comfortably on lean infrastructure, with a clear plan for each stage of growth. The work continues: we keep improving the product and scaling it alongside the team."
       ]
     }
   ]

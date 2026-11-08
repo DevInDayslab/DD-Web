@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { WorkCaseMarquee } from "@/components/work-case-marquee";
 import { WorkFeaturedCardContent } from "@/components/work-featured-card";
 import type { WorkFeaturedCaseStudy, WorkSectionContent } from "@/types/work-section";
@@ -19,8 +19,7 @@ type WorkSectionShowcaseProps = {
 };
 
 /** Same feel as the pricing tiers: the card stays put, its content blur-fades, and the height morphs. */
-const contentFadeSeconds = 0.2;
-const heightMorphSeconds = 0.5;
+const heightMorphSeconds = 0.6;
 const heightEase = [0.22, 1, 0.36, 1] as const;
 
 export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSectionShowcaseProps) {
@@ -87,21 +86,10 @@ export function WorkSectionShowcase({ content, phonePlaceholderLabel }: WorkSect
           }
         >
           <div ref={stageRef} className="work-featured-card-stage">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.div
-                key={activeCaseStudy.id}
-                className="work-featured-card-motion"
-                initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
-                transition={{ duration: reducedMotion ? 0 : contentFadeSeconds, ease: "easeInOut" }}
-              >
-                <WorkFeaturedCardContent
-                  caseStudy={activeCaseStudy}
-                  phonePlaceholderLabel={phonePlaceholderLabel}
-                />
-              </motion.div>
-            </AnimatePresence>
+            <WorkFeaturedCardContent
+              caseStudy={activeCaseStudy}
+              phonePlaceholderLabel={phonePlaceholderLabel}
+            />
           </div>
         </motion.article>
       </div>

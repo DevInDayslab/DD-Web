@@ -15,7 +15,11 @@ export const workSectionContent = {
       title: "Dater",
       body:
         "A dating app built around a feed, not a swipe. Native iOS and Android with a custom matchmaking engine, AI-backed verification, and subscriptions live from day one.",
-      tags: ["Native iOS + Android", "Matchmaking Engine", "Trust & Safety"],
+      points: [
+        "Native iOS + Android",
+        "Matchmaking Engine",
+        "Trust & Safety",
+      ],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/dater",
       slug: "dater",
@@ -27,7 +31,11 @@ export const workSectionContent = {
       title: "EntryTicket",
       body:
         "A native app for a platform that already worked. Built on the live PHP backend in three weeks, so a seat booked on mobile is gone on web instantly.",
-      tags: ["Flutter", "iOS + Android", "PHP Integration"],
+      points: [
+        "Flutter",
+        "iOS + Android",
+        "PHP Integration",
+      ],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/entryticket",
       slug: "entryticket",
@@ -39,7 +47,11 @@ export const workSectionContent = {
       title: "Turbo Supply",
       body:
         "30-minute hardware delivery for the trades. Order exactly what the job needs instead of stocking a warehouse. Live on Android and iOS, built in four weeks.",
-      tags: ["Flutter", "iOS + Android", "Node.js Backend"],
+      points: [
+        "Flutter",
+        "iOS + Android",
+        "Node.js Backend",
+      ],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/turbosupply",
       slug: "turbosupply",
@@ -51,7 +63,11 @@ export const workSectionContent = {
       title: "Billing Baba",
       body:
         "A billing platform rebuilt from zero after the first build never got finished. One Flutter codebase, running natively on Android, iOS, macOS and Windows.",
-      tags: ["Flutter", "iOS + Android", "macOS + Windows"],
+      points: [
+        "Flutter",
+        "iOS + Android",
+        "macOS + Windows",
+      ],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/billing-baba",
       slug: "billing-baba",
@@ -63,7 +79,11 @@ export const workSectionContent = {
       title: "InViGiL",
       body:
         "Six products on one backend: news, social, live TV, an AI newsroom and an investigation portal. Shipped across mobile, TV and web in about three months.",
-      tags: ["Web + Mobile + TV", "FastAPI Backend", "AI Layer"],
+      points: [
+        "Web + Mobile + TV",
+        "FastAPI Backend",
+        "AI Layer",
+      ],
       ctaLabel: "View case study",
       ctaHref: "/case-studies/invigil",
       slug: "invigil",

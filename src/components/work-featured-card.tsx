@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { WorkFeaturedCaseStudy } from "@/types/work-section";
 
 type WorkFeaturedCardContentProps = {
@@ -11,6 +14,9 @@ export function WorkFeaturedCardContent({
   caseStudy,
   phonePlaceholderLabel,
 }: WorkFeaturedCardContentProps) {
+  const reducedMotion = useReducedMotion();
+  const fade = reducedMotion ? 0 : 0.32;
+
   const ctaInner = (
     <>
       <span>{caseStudy.ctaLabel}</span>
@@ -31,20 +37,46 @@ export function WorkFeaturedCardContent({
   return (
     <div className="work-featured-card-main">
       <div className="work-featured-card-copy">
-        <p className="work-featured-badge">{caseStudy.category}</p>
-        <h3 id={`work-featured-title-${caseStudy.id}`} className="work-featured-title">
-          {caseStudy.title}
-        </h3>
-        <p className="work-featured-body">{caseStudy.body}</p>
+        {/* Only the words change between projects, so only they fade. The CTA and phone stay put.
+            Two blocks (heading, description) so the phone can sit between them on small screens. */}
+        <div className="work-featured-copy-head">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={caseStudy.id}
+              className="work-featured-copy-text-inner"
+              initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
+              transition={{ duration: fade, ease: "easeInOut" }}
+            >
+              <p className="work-featured-badge">{caseStudy.category}</p>
+              <h3 id={`work-featured-title-${caseStudy.id}`} className="work-featured-title">
+                {caseStudy.title}
+              </h3>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        <div className="work-featured-tags-block">
-          <ul className="work-featured-tags">
-            {caseStudy.tags.map((tag) => (
-              <li key={tag}>
-                <span className="work-featured-tag">{tag}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="work-featured-copy-body">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={caseStudy.id}
+              className="work-featured-copy-text-inner"
+              initial={reducedMotion ? false : { opacity: 0, filter: "blur(6px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={reducedMotion ? undefined : { opacity: 0, filter: "blur(6px)" }}
+              transition={{ duration: fade, ease: "easeInOut", delay: reducedMotion ? 0 : 0.04 }}
+            >
+              <p className="work-featured-body">{caseStudy.body}</p>
+              <ul className="work-pills" aria-label={`${caseStudy.title} built with`}>
+                {caseStudy.points.map((point) => (
+                  <li key={point} className="work-pill">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {caseStudy.ctaHref ? (

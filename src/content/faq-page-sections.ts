@@ -100,7 +100,7 @@ export const faqPageSections = [
         id: "which-of-your-products-are-publicly-available",
         question: "Which of your products are publicly available?",
         answer:
-          "A few you can check right now: [Dater](https://dater.social), [Sailor](https://sailordeliveryservices.com), [HomeyFixIt](https://homeyfixit.com), [MakeMyJodi](https://www.makemyjodi.com), [Billing Baba](https://billingbaba.com), and [Invigil](https://theinvigil.com). Myndfe is on a public waitlist at [myndfe.com](https://myndfe.com). The full, current list with every verified link lives on [case studies](/case-studies), that's the right place for it, not a growing link list here.",
+          "A few you can check right now: [Dater](https://dater.social), [Sailor](https://sailordeliveryservices.com), [HomeyFixIt](https://homeyfixit.com), [MakeMyJodi](https://www.makemyjodi.com), [Billing Baba](https://billingbaba.com), and [Invigil](https://theinvigil.com). Myndfe is on a public waitlist at [Myndfe.com](https://myndfe.com). The full, current list with every verified link lives on [case studies](/case-studies), that's the right place for it, not a growing link list here.",
       },
       {
         id: "how-many-products-has-devindays-delivered",

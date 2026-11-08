@@ -5,6 +5,38 @@ export const testimonialsSectionContent = {
   carouselAriaLabel: "Client testimonials",
   cards: [
     {
+      kind: "video",
+      id: "myndfe",
+      badgeLabel: "VIDEO STORY",
+      duration: "0:50",
+      quote: "Thank you for converting my vision to a full-fledged application.",
+      name: "Aman",
+      title: "Founder, Myndfe",
+      playButtonAriaLabel: "Play Aman’s video story",
+      links: [
+        { label: "Myndfe.com", href: "https://myndfe.com" },
+        {
+          label: "Google Play",
+          href: "https://play.google.com/store/apps/details?id=com.myndfe.app&hl=en_IN",
+        },
+        { label: "App Store", href: "https://apps.apple.com/in/app/myndfe/id6822183055" },
+      ],
+      video: {
+        src: "/testimonials/myndfe.mp4",
+        posterSrc: "/testimonials/myndfe-poster.jpg",
+        captionsSrc: "/testimonials/myndfe.en.vtt",
+        captionsLanguage: "en",
+        width: 576,
+        height: 1024,
+        transcript: [
+          "Thank you DevInDays team for making my application a reality. Thank you for converting my vision to a full-fledged application.",
+          "I remember the day when Raghav called me and he asked me what's my requirement. At that time I had the vision. I had the UI and design of my application. They converted it into a full-fledged application. They helped me, and especially Raghav.",
+          "Thank you so much for helping me, not just with creating the app but also for helping me late at night, when I was just thinking and overthinking about whether my business would work or not. Thank you for giving me confidence.",
+          "And once again, thank you DevInDays team for making my application live.",
+        ],
+      },
+    },
+    {
       kind: "text",
       id: "julian-davies",
       rating: 5,
