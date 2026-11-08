@@ -37,7 +37,7 @@ const PAGES = [
   {
     file: "about",
     eyebrow: "About DevInDays",
-    title: "A small studio that stays accountable.",
+    title: "A founder-led studio that stays accountable.",
     sub: "Founder-led app development. One person accountable from first scope to launch and after.",
   },
   {

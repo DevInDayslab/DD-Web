@@ -34,7 +34,7 @@ export const faqPageSections = [
         id: "what-kind-of-projects-are-not-a-good-fit-for-devindays",
         question: "What kind of projects are not a good fit for DevInDays?",
         answer:
-          "We're honest about this: large enterprise software for organizations with their own internal engineering teams, and highly regulated products that need compliance work we haven't done before, aren't a good fit for us. We'd rather tell you that upfront than take on something we can't do justice to.",
+          "Work that is mostly procurement, vendor onboarding and integration programs inside a very large organization, and products that need a specific regulatory certification we haven't delivered before, are better served by a different kind of team, and we'll tell you that on the first call. Size on its own isn't the issue: we've built large internal tools and compliance-sensitive systems for established organizations. What matters is whether we can do your project properly.",
       },
       {
         id: "does-devindays-build-multi-sided-platforms-and-marketplaces",
@@ -70,7 +70,7 @@ export const faqPageSections = [
         id: "what-does-devindays-not-specialize-in",
         question: "What does DevInDays not specialize in?",
         answer:
-          "We're not set up to be an enterprise systems integrator for large organizations with heavy procurement and compliance requirements. We're best suited to founders and businesses who want a small, accountable team to take a defined product, from an idea or an existing codebase, through to launch.",
+          "We aren't a systems integrator that runs multi-year procurement programs. We're best suited to founders and businesses who want a dedicated, accountable team to take a defined product, from an idea or an existing codebase, through to launch and keep improving it afterwards.",
       },
       {
         id: "does-devindays-guarantee-that-my-app-will-succeed",
@@ -214,7 +214,19 @@ export const faqPageSections = [
         id: "who-actually-works-on-my-project",
         question: "Who actually works on my project?",
         answer:
-          "Our founder is personally involved in the architecture and scope decisions on every project we take on, and a small, dedicated team of engineers handles the actual build.",
+          "Our founder is personally involved in the architecture and scope decisions on every project we take on, and a dedicated team of engineers handles the actual build.",
+      },
+      {
+        id: "what-does-a-project-look-like-from-first-call-to-launch",
+        question: "What does a project look like from the first call to launch?",
+        answer:
+          "It starts with a 30-minute call with our founder. If it's a good fit, you get a scoped feature list, a realistic timeline and a fixed quote. Before work begins, you sign a contract covering scope, payment terms and IP transfer, with payment split 30% to start, 40% at a build milestone and 30% on delivery. During the build you get a working build at least weekly and a weekly check-in, we tell you early if anything threatens the schedule, and any change to scope is priced and agreed before we start on it. We then submit to the App Store and Google Play, and your post-launch support period begins.",
+      },
+      {
+        id: "what-happens-if-someone-on-the-team-is-unavailable-or-leaves-mid-project",
+        question: "What happens if someone on the team is unavailable or leaves mid-project?",
+        answer:
+          "Your project doesn't depend on a single person. Our founder is across the architecture and scope decisions on every project, you see working builds at least weekly, and the product comes with documentation and the full source code, so another engineer on the team can pick up where someone left off. If anything puts the schedule at risk, we tell you early instead of working around it quietly.",
       },
       {
         id: "can-devindays-work-alongside-our-existing-team",

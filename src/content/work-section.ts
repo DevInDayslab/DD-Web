@@ -26,6 +26,38 @@ export const workSectionContent = {
       materialPath: "src/content/material/case-studies/devindays-case-study-dater.md",
     },
     {
+      id: "invigil",
+      category: "CIVIC MEDIA",
+      title: "InViGiL",
+      body:
+        "Six products on one backend: news, social, live TV, an AI newsroom and an investigation portal. Shipped across mobile, TV and web in about three months.",
+      points: [
+        "Web + Mobile + TV",
+        "FastAPI Backend",
+        "AI Layer",
+      ],
+      ctaLabel: "View case study",
+      ctaHref: "/case-studies/invigil",
+      slug: "invigil",
+      materialPath: "src/content/material/case-studies/devindays-case-study-invigil.md",
+    },
+    {
+      id: "billing-baba",
+      category: "BILLING PLATFORM",
+      title: "Billing Baba",
+      body:
+        "A billing platform rebuilt from zero after the first build never got finished. One Flutter codebase, running natively on Android, iOS, macOS and Windows.",
+      points: [
+        "Flutter",
+        "iOS + Android",
+        "macOS + Windows",
+      ],
+      ctaLabel: "View case study",
+      ctaHref: "/case-studies/billing-baba",
+      slug: "billing-baba",
+      materialPath: "src/content/material/case-studies/devindays-case-study-billingbaba.md",
+    },
+    {
       id: "entry-ticket",
       category: "EVENT TICKETING",
       title: "EntryTicket",
@@ -57,38 +89,6 @@ export const workSectionContent = {
       slug: "turbosupply",
       materialPath: "src/content/material/case-studies/devindays-case-study-turbosupply.md",
     },
-    {
-      id: "billing-baba",
-      category: "BILLING PLATFORM",
-      title: "Billing Baba",
-      body:
-        "A billing platform rebuilt from zero after the first build never got finished. One Flutter codebase, running natively on Android, iOS, macOS and Windows.",
-      points: [
-        "Flutter",
-        "iOS + Android",
-        "macOS + Windows",
-      ],
-      ctaLabel: "View case study",
-      ctaHref: "/case-studies/billing-baba",
-      slug: "billing-baba",
-      materialPath: "src/content/material/case-studies/devindays-case-study-billingbaba.md",
-    },
-    {
-      id: "invigil",
-      category: "CIVIC MEDIA",
-      title: "InViGiL",
-      body:
-        "Six products on one backend: news, social, live TV, an AI newsroom and an investigation portal. Shipped across mobile, TV and web in about three months.",
-      points: [
-        "Web + Mobile + TV",
-        "FastAPI Backend",
-        "AI Layer",
-      ],
-      ctaLabel: "View case study",
-      ctaHref: "/case-studies/invigil",
-      slug: "invigil",
-      materialPath: "src/content/material/case-studies/devindays-case-study-invigil.md",
-    },
   ],
   marqueeAriaLabel: "Case study highlights",
   marqueeLogos: {
@@ -117,9 +117,10 @@ export const workSectionContent = {
   },
   marqueeTiles: [
     { id: "dater", logoKey: "dater", caseStudyId: "dater" },
+    { id: "invigil", logoKey: "invigil", caseStudyId: "invigil" },
+    { id: "billing-baba", logoKey: "billingBaba", caseStudyId: "billing-baba" },
     { id: "entry-ticket", logoKey: "entryTicket", caseStudyId: "entry-ticket" },
     { id: "turbo-supply", logoKey: "turboSupply", caseStudyId: "turbo-supply" },
-    { id: "billing-baba", logoKey: "billingBaba", caseStudyId: "billing-baba" },
   ],
 } as const satisfies WorkSectionContent;
 

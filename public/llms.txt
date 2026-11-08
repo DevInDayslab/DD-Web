@@ -21,10 +21,10 @@
 - [All case studies](https://www.devindays.com/case-studies/): Full portfolio index.
 
 ## FAQ
-- [Frequently Asked Questions](https://www.devindays.com/faq/): 63 questions covering fit and scope, technical capabilities, process, pricing, launch, and ownership. Organized under four sections: Fit & Proof, Capabilities & Process, Pricing & Engagement, and Launch & Ownership.
+- [Frequently Asked Questions](https://www.devindays.com/faq/): 65 questions covering fit and scope, technical capabilities, process, pricing, launch, and ownership. Organized under four sections: Fit & Proof, Capabilities & Process, Pricing & Engagement, and Launch & Ownership.
 
 ## About
-- [About DevInDays](https://www.devindays.com/about/): A small software studio in Delhi. The founder, Raghav, is involved in scope and architecture on every project; a dedicated team builds it and the client owns all IP and source code.
+- [About DevInDays](https://www.devindays.com/about/): A founder-led software studio in Delhi. The founder, Raghav, is involved in scope and architecture on every project; a dedicated team builds it and the client owns all IP and source code.
 
 ## Contact
 - [Contact DevInDays](https://www.devindays.com/contact/): Book a 30-minute call directly with the founder, or send a message.
