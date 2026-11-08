@@ -12703,3 +12703,19 @@ textarea::selection {
     display: none;
   }
 }
+
+/* Very narrow phones: keep the headline on two lines so it never runs into the subtitle */
+@media (max-width: 359px) {
+  .home-page .hero-section {
+    --dd-hero-headline-size: 29px;
+    --dd-hero-headline-line-height: 40px;
+    --dd-hero-headline-tracking: -0.5px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* The stage already insets the headline; a second inset made it wrap to three lines on 360px phones. */
+  .hero-headline {
+    padding-inline: 0;
+  }
+}
