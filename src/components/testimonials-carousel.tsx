@@ -153,7 +153,8 @@ export function TestimonialsCarousel({ content }: TestimonialsCarouselProps) {
     const item = el.querySelector<HTMLElement>(".testimonials-carousel-item");
     const gap = parseFloat(getComputedStyle(el.firstElementChild as Element).columnGap) || 0;
     const step = (item?.offsetWidth ?? el.clientWidth * 0.5) + gap;
-    el.scrollBy({ left: direction * step, behavior: "smooth" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: direction * step, behavior: reduced ? "auto" : "smooth" });
   };
 
   return (

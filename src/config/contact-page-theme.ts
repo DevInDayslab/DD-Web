@@ -1,6 +1,6 @@
 export const contactPageThemeColors = {
   pageBackground: "#F2F3F5",
-  eyebrow: "#6B7177",
+  eyebrow: "#5C6269",
   headline: "#14181C",
   subhead: "#555B61",
   divider: "rgba(20, 24, 28, 0.08)",
@@ -12,7 +12,7 @@ export const contactPageThemeColors = {
   surfaceMuted: "#F2F3F5",
   placeholder: "#7C838A",
   placeholderMuted: "rgba(117, 119, 123, 0.5)",
-  optionalLabel: "#6B7177",
+  optionalLabel: "#5C6269",
   buttonPrimary: "#14181C",
   buttonPrimaryText: "#FFFFFF",
   slotSelected: "#14181C",

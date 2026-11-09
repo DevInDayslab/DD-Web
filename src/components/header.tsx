@@ -85,6 +85,7 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
   const menuLabel = menuOpen ? copy.menuCloseLabel : copy.menuOpenLabel;
 
   const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
 
   useEffect(() => {
@@ -106,6 +107,27 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
       cancelAnimationFrame(frame);
     };
   }, []);
+
+  // Escape closes the open menu and returns focus to its button; growing past the phone layout closes it too.
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const query = window.matchMedia("(min-width: 768px)");
+    const onChange = () => query.matches && setMenuOpen(false);
+    window.addEventListener("keydown", onKeyDown);
+    query.addEventListener("change", onChange);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      query.removeEventListener("change", onChange);
+    };
+  }, [menuOpen]);
 
   // Both states use pixel widths, which transition reliably; percentage-to-min() does not.
   useEffect(() => {
@@ -155,6 +177,7 @@ export function Header({ brand, items, cta, copy }: HeaderProps) {
           <div className="site-header-actions ml-auto flex shrink-0 items-center gap-3 md:justify-self-end">
             <CtaLink cta={cta} className={`${ctaClassName} site-header-bar-cta`} />
             <button
+              ref={menuButtonRef}
               type="button"
               className="inline-flex h-[var(--dd-header-height)] max-h-11 min-h-11 w-11 items-center justify-center rounded-full text-foreground md:hidden"
               aria-expanded={menuOpen}

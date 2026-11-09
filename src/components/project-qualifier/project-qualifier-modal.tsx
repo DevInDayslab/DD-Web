@@ -206,6 +206,34 @@ export function ProjectQualifierModal() {
     );
   }, [budgetRange, currentStep, phase]);
 
+  // While the flow is open, the page behind it cannot take focus, and focus lands inside the dialog.
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const dialog = document.querySelector<HTMLElement>(".qf-root");
+    const behind = Array.from(document.body.children).filter(
+      (element): element is HTMLElement =>
+        element instanceof HTMLElement &&
+        element !== dialog &&
+        !element.matches("script, style, link, next-route-announcer") &&
+        !element.hasAttribute("inert"),
+    );
+    behind.forEach((element) => {
+      element.inert = true;
+    });
+    if (dialog && !dialog.contains(document.activeElement)) {
+      dialog.focus({ preventScroll: true });
+    }
+    return () => {
+      behind.forEach((element) => {
+        element.inert = false;
+      });
+      previouslyFocused?.focus?.({ preventScroll: true });
+    };
+  }, [isOpen]);
+
   // Lock page scroll while the flow is open.
   useEffect(() => {
     if (!isOpen) {
@@ -489,6 +517,7 @@ export function ProjectQualifierModal() {
       {isOpen ? (
         <motion.div
           className="qf-root"
+          tabIndex={-1}
           role="dialog"
           aria-modal="true"
           aria-labelledby={dialogTitleId}

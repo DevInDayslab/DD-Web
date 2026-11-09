@@ -1,7 +1,7 @@
 export const workThemeColors = {
   headline: "#14181C",
   subtitle: "rgba(20, 24, 28, 0.75)",
-  badge: "rgba(110, 114, 118, 0.8)",
+  badge: "#5C6269",
   featuredCardBackground: "#FFFFFF",
   featuredCardBorder: "#EAEAEA",
   featuredCardShadow: "var(--dd-shadow-sm)",

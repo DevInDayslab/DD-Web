@@ -93,24 +93,24 @@ export const workSectionContent = {
   marqueeAriaLabel: "Case study highlights",
   marqueeLogos: {
     dater: {
-      src: "/logos/marks/dater.png",
+      src: "/logos/marks/dater.webp",
       alt: "Dater",
     },
     entryTicket: {
-      src: "/logos/marks/entry-ticket.png",
+      src: "/logos/marks/entry-ticket.webp",
       fill: true,
       alt: "EntryTicket",
     },
     turboSupply: {
-      src: "/logos/marks/turbosupply.png",
+      src: "/logos/marks/turbosupply.webp",
       alt: "TurboSupply",
     },
     billingBaba: {
-      src: "/logos/marks/billing-baba.png",
+      src: "/logos/marks/billing-baba.webp",
       alt: "Billing Baba",
     },
     invigil: {
-      src: "/logos/marks/invigil.png",
+      src: "/logos/marks/invigil.webp",
       fill: true,
       alt: "InViGiL",
     },

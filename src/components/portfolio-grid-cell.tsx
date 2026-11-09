@@ -8,15 +8,15 @@ type PortfolioGridCellProps = {
 };
 
 const markById: Record<string, string> = {
-  dater: "/logos/marks/dater.png",
-  invigil: "/logos/marks/invigil.png",
-  "billing-baba": "/logos/marks/billing-baba.png",
-  "entry-ticket": "/logos/marks/entry-ticket.png",
-  "turbo-supply": "/logos/marks/turbosupply.png",
-  myndfe: "/logos/marks/myndfe.png",
-  homeyfixit: "/logos/marks/homeyfixit.png",
-  sailor: "/logos/marks/sailor.png",
-  trustai: "/logos/marks/trustai.png",
+  dater: "/logos/marks/dater.webp",
+  invigil: "/logos/marks/invigil.webp",
+  "billing-baba": "/logos/marks/billing-baba.webp",
+  "entry-ticket": "/logos/marks/entry-ticket.webp",
+  "turbo-supply": "/logos/marks/turbosupply.webp",
+  myndfe: "/logos/marks/myndfe.webp",
+  homeyfixit: "/logos/marks/homeyfixit.webp",
+  sailor: "/logos/marks/sailor.webp",
+  trustai: "/logos/marks/trustai.webp",
 };
 
 function cellLabel(item: PortfolioGridItem, labels: PortfolioPageLabels): string {

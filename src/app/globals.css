@@ -3041,8 +3041,10 @@ body {
   transition: background-color 0.15s ease;
 }
 
-.faq-page-search-clear:hover {
-  background: #dfe2e5;
+@media (hover: hover) {
+  .faq-page-search-clear:hover {
+    background: #dfe2e5;
+  }
 }
 
 .faq-page-search-clear:focus-visible {
@@ -4435,11 +4437,18 @@ a.portfolio-grid-cell {
   cursor: pointer;
 }
 
-a.portfolio-grid-cell:hover,
+@media (hover: hover) {
+  a.portfolio-grid-cell:hover {
+    background: var(--dd-portfolio-color-cell-hover-bg);
+    box-shadow: var(--dd-portfolio-shadow-cell-hover);
+  }
+}
+
 a.portfolio-grid-cell:focus-visible {
   background: var(--dd-portfolio-color-cell-hover-bg);
   box-shadow: var(--dd-portfolio-shadow-cell-hover);
-  outline: none;
+  outline: 2px solid #14181c;
+  outline-offset: -4px;
 }
 
 div.portfolio-grid-cell {
@@ -6537,9 +6546,11 @@ p {
   text-decoration: none;
 }
 
-.faq-page-empty-contact:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+@media (hover: hover) {
+  .faq-page-empty-contact:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 /* ---------- Form success ---------- */
@@ -6628,10 +6639,12 @@ p {
   text-decoration: none;
 }
 
-.contact-page-success-link:hover,
-.contact-page-success-reset:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+@media (hover: hover) {
+  .contact-page-success-link:hover,
+  .contact-page-success-reset:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
 .contact-page-success-reset {
@@ -7624,9 +7637,11 @@ p {
   text-decoration: none;
 }
 
-.cp2-detail-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+@media (hover: hover) {
+  .cp2-detail-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
 }
 
 .cp2-copy {
@@ -8330,8 +8345,10 @@ p {
   cursor: pointer;
 }
 
-.qf-skip:hover {
-  color: #14181c;
+@media (hover: hover) {
+  .qf-skip:hover {
+    color: #14181c;
+  }
 }
 
 .qf-error {
@@ -8720,8 +8737,10 @@ p {
   cursor: pointer;
 }
 
-.qf-hint-back:hover {
-  color: #14181c;
+@media (hover: hover) {
+  .qf-hint-back:hover {
+    color: #14181c;
+  }
 }
 
 .qf-hint-keys {
@@ -8954,8 +8973,10 @@ p {
   transition: background-color 0.15s ease;
 }
 
-.bp-month-nav button:hover:not(:disabled) {
-  background: #f2f3f5;
+@media (hover: hover) {
+  .bp-month-nav button:hover:not(:disabled) {
+    background: #f2f3f5;
+  }
 }
 
 .bp-month-nav button:disabled {
@@ -10569,10 +10590,12 @@ p {
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cs-store-badge:hover {
-  transform: translateY(-2px);
-  background: #1b2740;
-  box-shadow: 0 10px 22px rgba(11, 18, 32, 0.22);
+@media (hover: hover) {
+  .cs-store-badge:hover {
+    transform: translateY(-2px);
+    background: #1b2740;
+    box-shadow: 0 10px 22px rgba(11, 18, 32, 0.22);
+  }
 }
 
 .cs-store-badge:focus-visible {
@@ -10633,8 +10656,10 @@ p {
   color: #0b1220;
 }
 
-.cs-footer-download .cs-store-badge:hover {
-  background: #eef1f6;
+@media (hover: hover) {
+  .cs-footer-download .cs-store-badge:hover {
+    background: #eef1f6;
+  }
 }
 
 /* Section index gets a hairline tail */
@@ -12718,4 +12743,132 @@ textarea::selection {
   .hero-headline {
     padding-inline: 0;
   }
+}
+
+/* The dialog container takes focus when it opens; it should not draw a ring around the whole screen. */
+.qf-root:focus {
+  outline: none;
+}
+
+/* =========================================================
+   Touch accuracy, with no visual change: small controls get an invisible hit area
+   out to roughly 44px. Only on touch screens, so mouse users and layouts are untouched.
+   ========================================================= */
+@media (pointer: coarse) {
+  .site-header-brand,
+  .cp2-copy,
+  .cp2-detail-link,
+  .contact-page-crosslink-link,
+  .case-study-spec-link,
+  .case-study-page-footer-live-link,
+  .ab-link,
+  .faq-page-hero-category,
+  .qf-progress-nav {
+    position: relative;
+  }
+
+  .site-footer-nav-link::after,
+  .site-footer-social-link::after,
+  .site-header-brand::after,
+  .cp2-copy::after,
+  .cp2-detail-link::after,
+  .contact-page-crosslink-link::after,
+  .case-study-spec-link::after,
+  .case-study-page-footer-live-link::after,
+  .ab-link::after,
+  .faq-page-hero-category::after,
+  .pricing-tab::after,
+  .qf-progress-nav::after,
+  .testimonials-carousel-button::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+  }
+
+  .site-footer-nav-link::after,
+  .site-footer-social-link::after {
+    inset: -14px -8px;
+  }
+
+  .case-study-spec-link::after,
+  .cp2-detail-link::after,
+  .ab-link::after,
+  .contact-page-crosslink-link::after {
+    inset: -12px 0;
+  }
+
+  .pricing-tab::after {
+    inset: -7px 0;
+  }
+
+  .testimonials-carousel-button::after {
+    inset: -2px;
+  }
+
+  /* The quote attribution was 10px. */
+  .case-study-narrative-quote footer,
+  .case-study-narrative-editorial-quote footer {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .case-study-narrative-quote footer,
+  .case-study-narrative-editorial-quote footer {
+    font-size: 12px;
+  }
+
+  .portfolio-grid-cell-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .portfolio-grid-cell--more .portfolio-grid-cell-label {
+    font-size: 12px;
+  }
+}
+
+/* Work showcase: the case-study button reads as a link, and tile logos never outgrow their tile. */
+.work-featured-cta {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.work-featured-cta .work-featured-cta-icon {
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (hover: hover) {
+  .work-featured-cta:hover {
+    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--dd-work-color-cta-bg) 88%, #5c6269);
+    box-shadow: 0 6px 16px rgb(17 22 27 / 0.18);
+  }
+
+  .work-featured-cta:hover .work-featured-cta-icon {
+    transform: translate(1.5px, -1.5px);
+  }
+}
+
+.work-featured-cta:active {
+  transform: scale(0.96);
+}
+
+.work-featured-cta:focus-visible {
+  outline: 2px solid var(--dd-work-color-headline);
+  outline-offset: 3px;
+}
+
+.work-marquee-tile {
+  overflow: hidden;
+}
+
+.work-marquee-tile-logo:not(.work-marquee-tile-logo--fill) {
+  max-width: min(var(--dd-work-marquee-tile-logo-max), 62%);
+  max-height: min(var(--dd-work-marquee-tile-logo-max), 62%);
 }

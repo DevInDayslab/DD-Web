@@ -1,8 +1,32 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TestimonialVideoDialog } from "@/components/testimonial-video-dialog";
 import type { TestimonialVideoCard } from "@/types/testimonials-section";
+
+const warmed = new Set<string>();
+
+/**
+ * Starts fetching a video before anyone taps play, so a first visit doesn't wait on the whole file.
+ * Skipped on Save-Data and very slow connections. Each file is only warmed once, even though the carousel repeats its cards.
+ */
+function warmVideo(src: string) {
+  if (warmed.has(src)) {
+    return;
+  }
+  const connection = (navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  }).connection;
+  if (connection?.saveData || connection?.effectiveType === "slow-2g" || connection?.effectiveType === "2g") {
+    return;
+  }
+  warmed.add(src);
+  const element = document.createElement("video");
+  element.preload = "auto";
+  element.muted = true;
+  element.src = src;
+  element.load();
+}
 
 type TestimonialCardVideoProps = {
   card: TestimonialVideoCard;
@@ -13,6 +37,34 @@ export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
   const [showSoon, setShowSoon] = useState(false);
   const [playing, setPlaying] = useState(false);
   const video = card.video;
+  const articleRef = useRef<HTMLElement>(null);
+
+  // Warm the video once the card is near the screen, or as soon as someone points at it.
+  useEffect(() => {
+    const element = articleRef.current;
+    const src = video?.src;
+    if (!element || !src) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          warmVideo(src);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observer.observe(element);
+    const onIntent = () => warmVideo(src);
+    element.addEventListener("pointerdown", onIntent, { passive: true });
+    element.addEventListener("pointerenter", onIntent, { passive: true });
+    return () => {
+      observer.disconnect();
+      element.removeEventListener("pointerdown", onIntent);
+      element.removeEventListener("pointerenter", onIntent);
+    };
+  }, [video?.src]);
 
   useEffect(() => {
     if (!showSoon) {
@@ -24,6 +76,7 @@ export function TestimonialCardVideo({ card }: TestimonialCardVideoProps) {
 
   return (
     <article
+      ref={articleRef}
       className="testimonial-card testimonial-card-video"
       data-orientation={video ? (video.height > video.width ? "portrait" : "landscape") : undefined}
       style={video ? { ["--tcv-ratio" as string]: `${video.width} / ${video.height}` } : undefined}

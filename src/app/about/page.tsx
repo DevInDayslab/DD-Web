@@ -14,11 +14,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = buildPageMetadata(aboutPageContent.meta);
 
 const caseLogos: Record<string, string> = {
-  dater: "/logos/marks/dater.png",
-  invigil: "/logos/marks/invigil.png",
-  "billing-baba": "/logos/marks/billing-baba.png",
-  entryticket: "/logos/marks/entry-ticket.png",
-  turbosupply: "/logos/marks/turbosupply.png",
+  dater: "/logos/marks/dater.webp",
+  invigil: "/logos/marks/invigil.webp",
+  "billing-baba": "/logos/marks/billing-baba.webp",
+  entryticket: "/logos/marks/entry-ticket.webp",
+  turbosupply: "/logos/marks/turbosupply.webp",
 };
 
 export default function AboutPage() {

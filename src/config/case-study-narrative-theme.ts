@@ -6,7 +6,7 @@ export const caseStudyNarrativeThemeColors = {
   surfaceWhite: "#FFFFFF",
   /** Topology panel uses page surface; inner nodes stay white. */
   diagramPanelBackground: "#F2F3F5",
-  index: "#A0A0A0",
+  index: "#5C6269",
   headline: "#000000",
   body: "#44474A",
   editorialBody: "#3A3E45",
@@ -19,7 +19,7 @@ export const caseStudyNarrativeThemeColors = {
   cardBackgroundMuted: "#F2F3F5",
   cardBorder: "#E4E2DD",
   quote: "#14181C",
-  quoteAttribution: "#A0A0A0",
+  quoteAttribution: "#5C6269",
   labelMono: "#44474A",
   userAccent: "#436084",
   adminAccent: "#14181C",

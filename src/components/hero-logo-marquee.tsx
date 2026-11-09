@@ -149,10 +149,23 @@ export function HeroLogoMarquee({ layout, content }: HeroLogoMarqueeProps) {
     frame = requestAnimationFrame(tick);
     // Reveal only if this run survives two frames. A change of layout mode (the media query settles right
     // after mount) re-runs the effect and cancels this, so the first visible frame is already curved.
+    let cancelled = false;
     let revealFrame = requestAnimationFrame(() => {
-      revealFrame = requestAnimationFrame(() => setReady(true));
+      revealFrame = requestAnimationFrame(() => {
+        // Show the strip once its logos have decoded, so they arrive together instead of popping in one by one.
+        // On a slow first visit, stop waiting after a moment and show what is there.
+        const images = Array.from(viewport.querySelectorAll<HTMLImageElement>("img"));
+        const decoded = Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+        const timeout = new Promise<void>((resolve) => window.setTimeout(resolve, 1800));
+        void Promise.race([decoded, timeout]).then(() => {
+          if (!cancelled) {
+            setReady(true);
+          }
+        });
+      });
     });
     return () => {
+      cancelled = true;
       cancelAnimationFrame(revealFrame);
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();

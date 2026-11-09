@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { StatusIllustration } from "@/components/status-illustration";
 import { notFoundPage } from "@/content/pages/not-found";
+
+export const metadata: Metadata = {
+  title: notFoundPage.meta.title,
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (

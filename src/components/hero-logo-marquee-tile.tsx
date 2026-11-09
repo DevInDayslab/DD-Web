@@ -100,6 +100,9 @@ export function HeroLogoMarqueeTile({
                 }
           }
           draggable={false}
+          // The strip is the first thing on the page: fetch these immediately instead of waiting to scroll near them.
+          priority={presentationKey.startsWith("a-")}
+          loading="eager"
         />
       </div>
     </div>

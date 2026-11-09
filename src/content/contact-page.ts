@@ -37,12 +37,12 @@ export const contactPageContent = {
   trust: {
     label: "Products we've shipped",
     logos: [
-      { src: "/logos/marks/dater.png", alt: "Dater" },
-      { src: "/logos/marks/invigil.png", alt: "InViGiL" },
-      { src: "/logos/marks/billing-baba.png", alt: "Billing Baba" },
-      { src: "/logos/marks/entry-ticket.png", alt: "EntryTicket" },
-      { src: "/logos/marks/turbosupply.png", alt: "Turbo Supply" },
-      { src: "/logos/marks/homeyfixit.png", alt: "HomeyFixIt" },
+      { src: "/logos/marks/dater.webp", alt: "Dater" },
+      { src: "/logos/marks/invigil.webp", alt: "InViGiL" },
+      { src: "/logos/marks/billing-baba.webp", alt: "Billing Baba" },
+      { src: "/logos/marks/entry-ticket.webp", alt: "EntryTicket" },
+      { src: "/logos/marks/turbosupply.webp", alt: "Turbo Supply" },
+      { src: "/logos/marks/homeyfixit.webp", alt: "HomeyFixIt" },
     ],
   },
   split: {

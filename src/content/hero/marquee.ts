@@ -4,60 +4,60 @@ export const heroMarqueeContent = {
   ariaLabel: "Products we have built",
   logos: {
     dater: {
-      src: "/logos/marks/dater.png",
+      src: "/logos/marks/dater.webp",
       alt: "Dater",
     },
     invigil: {
-      src: "/logos/marks/invigil.png",
+      src: "/logos/marks/invigil.webp",
       alt: "InViGiL",
       fill: true,
     },
     billingBaba: {
-      src: "/logos/marks/billing-baba.png",
+      src: "/logos/marks/billing-baba.webp",
       alt: "Billing Baba",
     },
     turboSupply: {
-      src: "/logos/marks/turbosupply.png",
+      src: "/logos/marks/turbosupply.webp",
       alt: "Turbo Supply",
     },
     entryTicket: {
-      src: "/logos/marks/entry-ticket.png",
+      src: "/logos/marks/entry-ticket.webp",
       alt: "EntryTicket",
       fill: true,
     },
     navNirvana: {
-      src: "/logos/marks/navnirvana.png",
+      src: "/logos/marks/navnirvana.webp",
       alt: "NavNirvana",
     },
     myndfe: {
-      src: "/logos/marks/myndfe.png",
+      src: "/logos/marks/myndfe.webp",
       alt: "Myndfe",
       fill: true,
     },
     homeyFixIt: {
-      src: "/logos/marks/homeyfixit.png",
+      src: "/logos/marks/homeyfixit.webp",
       alt: "HomeyFixIt",
     },
     makeMyJodi: {
-      src: "/logos/marks/makemyjodi.png",
+      src: "/logos/marks/makemyjodi.webp",
       alt: "MakeMyJodi",
       fill: true,
     },
     sailor: {
-      src: "/logos/marks/sailor.png",
+      src: "/logos/marks/sailor.webp",
       alt: "Sailor",
     },
     krexhe: {
-      src: "/logos/marks/krexhe.png",
+      src: "/logos/marks/krexhe.webp",
       alt: "Krexhe",
     },
     tecxi: {
-      src: "/logos/marks/tecxi.png",
+      src: "/logos/marks/tecxi.webp",
       alt: "TecXi",
       fill: true,
     },
     trustAi: {
-      src: "/logos/marks/trustai.png",
+      src: "/logos/marks/trustai.webp",
       alt: "TrustAI",
     },
   },

@@ -8,7 +8,7 @@ export const caseStudyPageThemeColors = {
   previewBorder: "#E4E2DD",
   previewPlaceholder: "rgba(255, 255, 255, 0.35)",
   briefDivider: "#EAEAEA",
-  specLabel: "#A0A0A0",
+  specLabel: "#5C6269",
   specValue: "#14181C",
   phoneShell: "#0E1013",
   footerNavLink: "#44474A",
